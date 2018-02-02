@@ -1,3 +1,14 @@
 index:
     path: /
     controller: App\Controller\FrontController::startPage
+contact:
+    path: /contact
+    controller: App\Controller\FrontController::contactPage
+login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+logout:
+    path: /logout
+admin_login:
+    path: /admin/login
+    controller: App\Controller\SecurityController::adminLogin
