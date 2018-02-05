@@ -224,7 +224,7 @@ margin: 35px auto;
     border-color: #3472f7;
 }
 .wizard-card.ct-wizard-orange .picture:hover{
-    border-color: #FDC600;
+    border-color: #242a6d;
 }
 .wizard-card.ct-wizard-red .picture:hover{
     border-color: #ff3b30;
@@ -281,7 +281,7 @@ margin: 35px auto;
     background-color: #3472f7;
 }
 .wizard-card.ct-wizard-orange .nav-pills > li.active a{
-    background-color: #FDC600;
+    background-color: #242a6d;
 }
 .wizard-card.ct-wizard-red .nav-pills > li.active a{
     background-color: #ff3b30;
@@ -343,7 +343,7 @@ margin: 35px auto;
     border-color: #05ae0e;
 }
 .wizard-card.ct-wizard-orange .choice:hover .icon, .wizard-card.ct-wizard-orange .choice.active .icon{
-    border-color: #FDC600;
+    border-color: #242a6d;
 }
 .wizard-card.ct-wizard-red .choice:hover .icon, .wizard-card.ct-wizard-red .choice.active .icon{
     border-color: #ff3b30;
