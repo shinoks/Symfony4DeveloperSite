@@ -26,3 +26,12 @@ admin_start:
 admin_users:
     path: /admin/users
     controller: App\Controller\AdminController::users
+admin_articles:
+    path: /admin/articles
+    controller: App\Controller\AdminController::articles
+admin_article_show:
+    path: /admin/article/{id}
+    controller: App\Controller\AdminController::articleShow
+admin_article_edit:
+    path: /admin/article/edit/{id}
+    controller: App\Controller\AdminController::articleEdit
