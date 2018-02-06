@@ -4,25 +4,44 @@ security:
             entity:
                 class: App\Entity\User
                 property: username
+        admin_entity:
+            entity:
+                class: App\Entity\Admin
+                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        admin:
+            pattern: ^/admin
+            http_basic: ~
+            provider: admin_entity
+            anonymous: ~
+            form_login:
+                login_path: /admin/login
+                check_path: /admin/login
+                target_path_parameter: /admin/start
+            logout:
+                path:   /admin/logout
+                target: /admin/
         main:
             pattern: ^/
             http_basic: ~
             provider: user_entity
             anonymous: ~
             form_login:
-                login_path: login
-                check_path: login
+                login_path: /login
+                check_path: /login
             logout:
                 path:   /logout
                 target: /
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
     encoders:
         App\Entity\User:
+            algorithm: bcrypt
+        App\Entity\Admin:
             algorithm: bcrypt
 

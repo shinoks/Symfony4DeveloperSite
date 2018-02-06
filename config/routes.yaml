@@ -12,3 +12,17 @@ logout:
 admin_login:
     path: /admin/login
     controller: App\Controller\SecurityController::adminLogin
+administrator:
+    path: /administrator
+    controller: App\Controller\SecurityController::adminLogin
+admin_logout:
+    path: /admin/logout
+admin:
+    path: /admin
+    controller: App\Controller\AdminController::startPage
+admin_start:
+    path: /admin/start
+    controller: App\Controller\AdminController::startPage
+admin_users:
+    path: /admin/users
+    controller: App\Controller\AdminController::users
