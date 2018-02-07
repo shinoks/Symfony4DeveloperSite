@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -27,10 +29,26 @@ class Article
     private $text;
 
     /**
+     * @ORM\Column(type="text")
+     */
+    private $shortText;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
      * @ORM\JoinColumn(nullable=true)
      */
     private $category;
+
+    /**
+     * @ORM\Column(type="string",nullable=true)
+
+     */
+    private $image;
 
     /**
      * @ORM\Column(name="is_active", type="boolean")
@@ -40,6 +58,7 @@ class Article
     public function __construct()
     {
         $this->isActive = true;
+        $this->created = new \DateTime("now");
     }
     /**
      * @return mixed
@@ -92,7 +111,55 @@ class Article
     /**
      * @return mixed
      */
-    public function getisActive()
+    public function getShortText()
+    {
+        return $this->shortText;
+    }
+
+    /**
+     * @param mixed $shortText
+     */
+    public function setShortText($shortText)
+    {
+        $this->shortText = $shortText;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param mixed $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage(File $image = null)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsActive()
     {
         return $this->isActive;
     }

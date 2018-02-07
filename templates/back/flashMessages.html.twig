@@ -1,0 +1,14 @@
+{% if session is defined %}
+    {% for type, messages in session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="sufee-alert alert with-close alert-{{ type }} alert-dismissable fade show">
+                {{ message }}
+                <button class="close" type="button" data-dismiss="alert" aria-label="Zamknij">
+                                <span aria-hidden="true">
+                                    x
+                                </span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}

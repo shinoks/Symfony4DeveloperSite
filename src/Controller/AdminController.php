@@ -8,14 +8,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Session\Session;
 use App\Form\ArticleType;
 
 class AdminController extends Controller
 {
+    private $session;
+
+    public function __construct()
+    {
+        $this->session = new Session();
+    }
+
     /**
      * @return Response
      */
@@ -49,6 +53,7 @@ class AdminController extends Controller
             'article'=> $article
         ));
     }
+
     /**
      * @return Response
      */
@@ -56,25 +61,64 @@ class AdminController extends Controller
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->find($id);
+        if($article){
+            $form = $this->createForm(ArticleType::class, $article);
 
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $article = $form->getData();
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($article);
+                $em->flush();
+
+                $this->session->getFlashBag()->add('success', 'Artykuł został zmieniony');
+
+                return $this->render('back/article_edit.html.twig',array(
+                    'article'=> $article,
+                    'form'=> $form->createView(),
+                    'session'=>$this->session
+                ));
+            }
+
+            return $this->render('back/article_edit.html.twig',array(
+                'article'=> $article,
+                'form'=> $form->createView()
+            ));
+        }else {
+            $session = new Session();
+
+            $session->getFlashBag()->add('danger', 'Artykuł nie został znaleziony');
+
+            return $this->redirectToRoute('admin_articles');
+        }
+
+    }
+
+    /**
+     * @return Response
+     */
+    public function articleNew(Request $request){
+
+        $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
 
         $form->handleRequest($request);
-$info = '';
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $article = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
 
-            $info = 'ok';
+            $this->session->getFlashBag()->add('success', 'Artykuł został zmieniony');
+
+            return $this->redirectToRoute('admin_article_edit',array('id'=>$article->getId()));
         }
 
-        return $this->render('back/article_edit.html.twig',array(
-            'article'=> $article,
-            'form'=> $form->createView(),
-            'info' => $info
+        return $this->render('back/article_new.html.twig',array(
+                'form'=> $form->createView()
         ));
     }
 
@@ -83,12 +127,14 @@ $info = '';
      */
     public function articles()
     {
+        $session = new Session();
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
             ->findAll();
 
         return $this->render('back/articles.html.twig',array(
-            'articles'=> $articles
+            'articles'=> $articles,
+            'session'=>$session
         ));
     }
 

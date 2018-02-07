@@ -29,6 +29,9 @@ admin_users:
 admin_articles:
     path: /admin/articles
     controller: App\Controller\AdminController::articles
+admin_article_new:
+    path: /admin/article/new
+    controller: App\Controller\AdminController::articleNew
 admin_article_show:
     path: /admin/article/{id}
     controller: App\Controller\AdminController::articleShow

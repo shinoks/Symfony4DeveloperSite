@@ -1,0 +1,46 @@
+{% block text_widget %}
+    <div class="form-group">
+        {% set type = type|default('text') %}
+        <div class="input-group">
+            <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        </div>
+    </div>
+{% endblock %}
+
+{% block textarea_widget %}
+    <div class="form-group">
+        <div class="input-group">
+            <textarea class="form-control" {{ block('widget_attributes') }}> {% if value is not empty %}{{ value }}{% endif %}</textarea>
+        </div>
+    </div>
+{% endblock %}
+
+{% block choice_widget %}
+    <div class="form-group">
+        <select class="form-control" {{ block('widget_attributes') }}>
+            {%- if preferred_choices|length > 0 -%}
+                {% set options = preferred_choices %}
+                {{- block('choice_widget_options') -}}
+                {%- if choices|length > 0 and separator is not none -%}
+                    <option disabled="disabled">{{ separator }}</option>
+                {%- endif -%}
+            {%- endif -%}
+            {%- set options = choices -%}
+            {{- block('choice_widget_options') -}}
+        </select>
+    </div>
+{% endblock %}
+
+
+{% block submit_widget %}
+    <div class="form-group">
+
+        {% set type = type|default('submit') %}
+
+        <button class="btn btn-primary btn-sm" {{ block('button_attributes') }}>
+            <i class="fa fa-dot-circle-o"></i>
+            Zapisz
+        </button>
+    </div>
+
+{% endblock %}
