@@ -9,3 +9,7 @@ login:
     controller: App\Controller\SecurityController::login
 logout:
     path: /logout
+
+front_article:
+    resource: "front/article.yml"
+    prefix: /article

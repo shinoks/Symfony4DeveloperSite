@@ -44,7 +44,7 @@ class AdminController extends Controller
     {
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
-            ->findAll();
+            ->find($id);
 
         return $this->render('back/article_show.html.twig',array(
             'article'=> $article
@@ -117,6 +117,41 @@ class AdminController extends Controller
         return $this->render('back/article_new.html.twig',array(
                 'form'=> $form->createView()
         ));
+    }
+
+    /**
+     * @return Response
+     */
+    public function articleDisable($id, $status)    {
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->find($id);
+        $article->setIsActive($status);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($article);
+        $em->flush();
+
+        $this->session->getFlashBag()->add('success', 'Artykuł został wyłączony');
+
+        return $this->redirectToRoute('admin_articles');
+    }
+
+    /**
+     * @return Response
+     */
+    public function articleDelete($id)    {
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($article);
+        $em->flush();
+
+        $this->session->getFlashBag()->add('success', 'Artykuł został usunięty');
+
+        return $this->redirectToRoute('admin_articles');
     }
 
     /**
@@ -227,6 +262,41 @@ class AdminController extends Controller
 
             return $this->redirectToRoute('admin_categories');
         }
+    }
+
+    /**
+     * @return Response
+     */
+    public function categoryDisable($id, $status)    {
+        $category = $this->getDoctrine()
+            ->getRepository(Category::class)
+            ->find($id);
+        $category->setIsActive($status);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($category);
+        $em->flush();
+
+        $this->session->getFlashBag()->add('success', 'Katgoria została wyłączona');
+
+        return $this->redirectToRoute('admin_categories');
+    }
+
+    /**
+     * @return Response
+     */
+    public function categoryDelete($id)    {
+        $category = $this->getDoctrine()
+            ->getRepository(Category::class)
+            ->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($category);
+        $em->flush();
+
+        $this->session->getFlashBag()->add('success', 'Kategoria został usunięty');
+
+        return $this->redirectToRoute('admin_categories');
     }
 
     /**
