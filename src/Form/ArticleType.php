@@ -25,7 +25,8 @@ class ArticleType extends AbstractType
         ))
         ->add('image', FileType::class, array(
             'label' => 'Obrazek główny artykułu',
-            'required' => false
+            'required' => false,
+            'data_class' => null
         ))
         ->add('save', SubmitType::class, array('label' => 'Zapisz'));
     }

@@ -1,0 +1,12 @@
+admin_categories:
+    path: /
+    controller: App\Controller\AdminController::categories
+admin_category_new:
+    path: /new
+    controller: App\Controller\AdminController::categoryNew
+admin_category_show:
+    path: /{id}
+    controller: App\Controller\AdminController::categoryShow
+admin_category_edit:
+    path: /edit/{id}
+    controller: App\Controller\AdminController::categoryEdit

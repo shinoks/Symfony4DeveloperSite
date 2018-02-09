@@ -24,7 +24,7 @@ class Category
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="text")
      */
     private $description;
 
@@ -42,8 +42,8 @@ class Category
 
     public function __construct()
     {
-        $this->articles = new ArrayCollection();
         $this->isActive = true;
+        $this->articles = new ArrayCollection();
     }
 
     /**
@@ -100,14 +100,6 @@ class Category
     public function getArticles()
     {
         return $this->articles;
-    }
-
-    /**
-     * @param mixed $articles
-     */
-    public function setArticles($articles)
-    {
-        $this->articles = $articles;
     }
 
     /**

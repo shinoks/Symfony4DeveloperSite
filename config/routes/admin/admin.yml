@@ -1,0 +1,15 @@
+admin_admins:
+    path: /
+    controller: App\Controller\AdminController::admins
+
+admin_admin_new:
+    path: /new
+    controller: App\Controller\AdminController::adminNew
+
+admin_admin_edit:
+    path: /edit/{id}
+    controller: App\Controller\AdminController::adminEdit
+
+admin_admin_disable:
+    path: /disable/{id}/{status}
+    controller: App\Controller\AdminController::adminDisable

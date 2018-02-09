@@ -34,9 +34,19 @@ class Admin implements AdvancedUserInterface, \Serializable
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $lastName;
+
+    /**
      * @ORM\Column(type="json_array")
      */
-    private $roles = array();
+    private $roles;
 
     /**
      * @ORM\Column(name="is_active", type="boolean")
@@ -46,6 +56,14 @@ class Admin implements AdvancedUserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = true;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -67,7 +85,7 @@ class Admin implements AdvancedUserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -101,9 +119,53 @@ class Admin implements AdvancedUserInterface, \Serializable
         return null;
     }
 
+    /**
+     * @return mixed
+     */
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param mixed $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param mixed $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
     }
 
     /**
@@ -118,11 +180,11 @@ class Admin implements AdvancedUserInterface, \Serializable
      * @param mixed $roles
      * @return mixed
      */
-    public function setRoles($roles)
+    public function setRoles(array $roles)
     {
         $this->roles = $roles;
 
-        return $this;
+        return array_unique($this->roles);
     }
 
     public function eraseCredentials()
@@ -154,7 +216,10 @@ class Admin implements AdvancedUserInterface, \Serializable
         return serialize(array(
             $this->id,
             $this->username,
+            $this->firstName,
+            $this->lastName,
             $this->password,
+            $this->email,
             $this->isActive
         ));
     }
@@ -165,7 +230,10 @@ class Admin implements AdvancedUserInterface, \Serializable
         list (
             $this->id,
             $this->username,
+            $this->firstName,
+            $this->lastName,
             $this->password,
+            $this->email,
             $this->isActive
             ) = unserialize($serialized);
     }

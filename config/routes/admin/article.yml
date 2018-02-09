@@ -1,0 +1,12 @@
+admin_articles:
+    path: /
+    controller: App\Controller\AdminController::articles
+admin_article_new:
+    path: /new
+    controller: App\Controller\AdminController::articleNew
+admin_article_show:
+    path: /{id}
+    controller: App\Controller\AdminController::articleShow
+admin_article_edit:
+    path: /edit/{id}
+    controller: App\Controller\AdminController::articleEdit

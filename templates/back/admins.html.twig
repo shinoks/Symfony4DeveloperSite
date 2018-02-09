@@ -15,7 +15,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Artykuły - Lista</h1>
+                        <h1>Administratorzy - Lista</h1>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li class="active">Artykuły > Lista Artykułów</li>
+                            <li class="active">Administratorzy > Lista administratorów</li>
                         </ol>
                     </div>
                 </div>
@@ -38,19 +38,23 @@
                     <thead>
                         <tr>
                             <td>Id</td>
-                            <td>Nazwa</td>
-                            <td>Kategoria</td>
+                            <td>Imię i Nazwisko</td>
+                            <td>Email</td>
                             <td>Wyłącz</td>
                             <td>Usuń</td>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for article in articles %}
+                        {% for admin in admins %}
                             <tr>
-                                <td>{{ article.id }}</td>
-                                <td><a href="{{ path('admin_article_edit',{ 'id':article.id }) }}">{{ article.name }}</a></td>
-                                <td>{{ article.category.name }}</td>
-                                <td><a href="#" class="btn btn-warning">Wyłącz</td>
+                                <td>{{ admin.id }}</td>
+                                <td><a href="{{ path('admin_admin_edit',{ 'id':admin.id }) }}">{{ admin.firstName }} {{ admin.lastName }}</a></td>
+                                <td>{{ admin.email }}</td>
+                                {% if admin.isActive == 1 %}
+                                    <td><a href="{{ path('admin_admin_disable', { 'id':admin.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</td>
+                                {% else %}
+                                    <td><a href="{{ path('admin_admin_disable', { 'id':admin.id,'status':1 }) }}" class="btn btn-success">Włącz</td>
+                                {% endif %}
                                 <td><a href="#" class="btn btn-danger">Usuń</td>
                             </tr>
                         {% endfor %}

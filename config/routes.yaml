@@ -1,40 +1,7 @@
-index:
-    path: /
-    controller: App\Controller\FrontController::startPage
-contact:
-    path: /contact
-    controller: App\Controller\FrontController::contactPage
-login:
-    path: /login
-    controller: App\Controller\SecurityController::login
-logout:
-    path: /logout
-admin_login:
-    path: /admin/login
-    controller: App\Controller\SecurityController::adminLogin
-administrator:
-    path: /administrator
-    controller: App\Controller\SecurityController::adminLogin
-admin_logout:
-    path: /admin/logout
 admin:
-    path: /admin
-    controller: App\Controller\AdminController::startPage
-admin_start:
-    path: /admin/start
-    controller: App\Controller\AdminController::startPage
-admin_users:
-    path: /admin/users
-    controller: App\Controller\AdminController::users
-admin_articles:
-    path: /admin/articles
-    controller: App\Controller\AdminController::articles
-admin_article_new:
-    path: /admin/article/new
-    controller: App\Controller\AdminController::articleNew
-admin_article_show:
-    path: /admin/article/{id}
-    controller: App\Controller\AdminController::articleShow
-admin_article_edit:
-    path: /admin/article/edit/{id}
-    controller: App\Controller\AdminController::articleEdit
+    resource: "routes/admin.yml"
+    prefix: /admin
+
+front:
+    resource: "routes/front.yml"
+    prefix: /

@@ -1,20 +1,5 @@
 {% extends 'back/base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="https://cdn.ckeditor.com/4.8.0/full/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace( 'article_text' );
-        CKEDITOR.replace( 'article_shortText' );
-    </script>
-
-{% endblock %}
-
-
 {% block body %}
 
     {% include 'back/leftPanel.html.twig' %}
@@ -29,7 +14,7 @@
         <div class="col-sm-4">
             <div class="page-header float-left">
                 <div class="page-title">
-                    <h1>Edycja Artykułów</h1>
+                    <h1>Nowy admin</h1>
                 </div>
             </div>
         </div>
@@ -37,14 +22,14 @@
             <div class="page-header float-right">
                 <div class="page-title">
                     <ol class="breadcrumb text-right">
-                        <li class="active">Artykuły > Edycja Artykułów</li>
+                        <li class="active">Admini > Nowy admin</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
 
-    {% include 'back/flashMessages.html.twig' %}
+        {% include 'back/flashMessages.html.twig' %}
 
     <div class="card">
         <div class="card-body">

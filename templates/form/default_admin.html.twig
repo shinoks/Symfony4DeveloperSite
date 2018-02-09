@@ -7,6 +7,24 @@
     </div>
 {% endblock %}
 
+{% block email_widget %}
+    <div class="form-group">
+        {% set type = type|default('email') %}
+        <div class="input-group">
+            <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        </div>
+    </div>
+{% endblock %}
+
+{% block password_widget %}
+    <div class="form-group">
+        {% set type = type|default('password') %}
+        <div class="input-group">
+            <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} placeholder="*********"/>
+        </div>
+    </div>
+{% endblock %}
+
 {% block textarea_widget %}
     <div class="form-group">
         <div class="input-group">
@@ -28,6 +46,17 @@
             {%- set options = choices -%}
             {{- block('choice_widget_options') -}}
         </select>
+    </div>
+{% endblock %}
+
+
+{% block file_widget %}
+    <div class="form-group">
+        {% set type = type|default('file') %}
+        <div class="input-group">
+            <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        </div>
+        {% if form.vars.data is not empty %}<img class="img-thumbnail" style="width:200px; height:200px;" src="{{ asset(form.vars.data) }}"/>{% endif %}
     </div>
 {% endblock %}
 

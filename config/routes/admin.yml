@@ -1,0 +1,24 @@
+admin_login:
+    path: /login
+    controller: App\Controller\SecurityController::adminLogin
+admin_logout:
+    path: /logout
+admin:
+    path: /
+    controller: App\Controller\AdminController::startPage
+
+admin_user:
+    resource: "admin/user.yml"
+    prefix: /user
+
+admin_admin:
+    resource: "admin/admin.yml"
+    prefix: /admin
+
+admin_article:
+    resource: "admin/article.yml"
+    prefix: /article
+
+admin_category:
+    resource: "admin/category.yml"
+    prefix: /category
