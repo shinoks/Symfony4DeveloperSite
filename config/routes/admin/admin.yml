@@ -13,3 +13,7 @@ admin_admin_edit:
 admin_admin_disable:
     path: /disable/{id}/{status}
     controller: App\Controller\AdminController::adminDisable
+
+admin_admin_delete:
+    path: /delete/{id}
+    controller: App\Controller\AdminController::adminDelete

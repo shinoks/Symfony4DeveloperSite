@@ -34,6 +34,16 @@ class User implements AdvancedUserInterface, \Serializable
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=60, nullable=true)
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", length=60, nullable=true)
+     */
+    private $lastName;
+
+    /**
      * @ORM\Column(type="json_array")
      */
     private $roles = array();
@@ -46,14 +56,20 @@ class User implements AdvancedUserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = true;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid('', true));
     }
 
     /**
      * @return mixed
      */
-    public function getUsername()
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsername(): ?string
     {
         return $this->username;
     }
@@ -69,7 +85,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -80,6 +96,38 @@ class User implements AdvancedUserInterface, \Serializable
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param mixed $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param mixed $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
     }
 
     /**
@@ -100,12 +148,18 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function getSalt()
     {
-        // you *may* need a real salt depending on your encoder
-        // see section on salt below
         return null;
     }
 
-    public function getPassword()
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -122,11 +176,11 @@ class User implements AdvancedUserInterface, \Serializable
      * @param mixed $roles
      * @return mixed
      */
-    public function setRoles($roles)
+    public function setRoles(array $roles)
     {
         $this->roles = $roles;
 
-        return $this;
+        return $this->roles;
     }
 
     public function eraseCredentials()
@@ -159,9 +213,9 @@ class User implements AdvancedUserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
+            $this->firstName,
+            $this->lastName,
             $this->isActive
-            // see section on salt below
-            // $this->salt,
         ));
     }
 
@@ -172,9 +226,9 @@ class User implements AdvancedUserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
+            $this->firstName,
+            $this->lastName,
             $this->isActive
-            // see section on salt below
-            // $this->salt
             ) = unserialize($serialized);
     }
 }
