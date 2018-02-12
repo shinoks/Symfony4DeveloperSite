@@ -1,12 +1,19 @@
 Username: Użytkownik
+username: Użytkownik
+password: Hasło
 Password: Hasło
+email: Email
 Email: Email
+first name: Imię
 First name: Imię
+last name: Nazwisko
 Last name: Nazwisko
 login: Logowanie
+Login: Logowanie
 logout: Wyloguj
+Logout: Wyloguj
 register: Zarejestruj się
-do_not_have_an_accout: Nie posiadasz konta?
+do_not_have_an_account: Nie posiadasz konta?
 account: Konto
 youre_logged_on: Jesteś zalogowany jako
 user_registration: Rejestracja użytkownika

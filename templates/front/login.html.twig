@@ -9,32 +9,32 @@
 
             {% if app.user %}
                 <div class="col-md-12">
-                    {{ youre_logged_on|trans }} {{ app.user.username }}<br/>
-                    <a href="{{ path('logout') }}" class="btn btn-success">{{ logout|trans }}</a>
+                    {{ 'youre_logged_on'|trans }} {{ app.user.username }}<br/>
+                    <a href="{{ path('logout') }}" class="btn btn-success">{{ 'logout'|trans }}</a>
                 </div>
             {%  else %}
             <div class="col-md-12">
                 <div class="box-for overflow">
                     <div class="col-md-12 col-xs-12 login-blocks">
-                        <h2>{{ login|trans }} : </h2>
+                        <h2>{{ 'login'|trans }} : </h2>
                         {% if error %}
                             <div   class="bg-warning">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                         {% endif %}
                         <form action="{{ path('login') }}" method="post">
                             <div class="form-group">
-                                <label for="username">{{ username|trans }}:</label>
+                                <label for="username">{{ 'username'|trans }}:</label>
                                 <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" />
                             </div>
                             <div class="form-group">
-                                <label for="password">{{ password|trans }}:</label>
+                                <label for="password">{{ 'password'|trans }}:</label>
                                 <input class="form-control"type="password" id="password" name="_password" />
                             </div>
                             <input type="hidden" name="_target_path" value="/" />
 
-                            <button type="submit" class="btn btn-default">{{ login|trans }}</button>
+                            <button type="submit" class="btn btn-default">{{ 'login'|trans }}</button>
                         </form>
                         <br/>
-                        {{ do_not_have_an_account|trans }} <a href="{{ path('register') }}" class="btn btn-success">{{ register|trans }}</a>
+                        {{ 'do_not_have_an_account'|trans }} <a href="{{ path('register') }}" class="btn btn-success">{{ 'register'|trans }}</a>
                     </div>
                 </div>
             </div>
