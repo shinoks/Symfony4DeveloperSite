@@ -24,7 +24,7 @@
                         </div>
                         <p class="intro">{{ article.shortText|raw }}</p>
                         <p class="read-more">
-                            <a href="{{ path('front_article_show',{'id':article.id}) }}" class="btn btn-default btn-border">więcej ...</a>
+                            <a href="{{ path('front_article_show',{'id':article.id}) }}" class="btn btn-default btn-border">{{ read_more|trans }} ...</a>
                         </p>
                     </section>
                 {% endfor %}

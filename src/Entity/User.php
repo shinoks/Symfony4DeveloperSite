@@ -180,7 +180,7 @@ class User implements AdvancedUserInterface, \Serializable
     {
         $this->roles = $roles;
 
-        return $this->roles;
+        return array_unique($this->roles);
     }
 
     public function eraseCredentials()

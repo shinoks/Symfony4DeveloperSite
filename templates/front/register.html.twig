@@ -1,0 +1,34 @@
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+    <!-- register-area -->
+    <div class="register-area" style="background-color: rgb(249, 249, 249);">
+        <div class="container">
+
+            {% include 'front/flashMessages.html.twig' %}
+
+            {% if app.user %}
+                <div class="col-md-12">
+                    {{ youre_logged_on|trans }} {{ app.user.username }}<br/>
+                    <a href="{{ path('logout') }}" class="btn btn-success">{{ logout|trans }}</a>
+                </div>
+            {%  else %}
+                <div class="col-md-12">
+                    <div class="box-for overflow">
+                        <div class="col-md-12 col-xs-12 login-blocks">
+                            <h2>{{ user_registration|trans }} : </h2>
+
+                            {% form_theme form 'form/default_user.html.twig' %}
+
+                            {{ form_start(form) }}
+                            {{ form_widget(form) }}
+
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+

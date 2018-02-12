@@ -16,7 +16,7 @@ class UserType extends AbstractType
     {
         $builder
         ->add('username',TextType::class)
-        ->add('password',PasswordType::class, array('required' => false,'empty_data'=> $builder->getData()->getPassword()))
+        ->add('password',PasswordType::class, ['required' => false,'empty_data'=> $builder->getData()->getPassword()])
         ->add('email',EmailType::class)
         ->add('firstName',TextType::class)
         ->add('lastName',TextType::class)
@@ -26,8 +26,8 @@ class UserType extends AbstractType
                 'choices' => [
         'Użytkownik' => 'ROLE_USER'
         ]])
-        ->add('isActive',CheckboxType::class, array('required' => false ))
+        ->add('isActive',CheckboxType::class, ['required' => false ])
 
-        ->add('save', SubmitType::class, array('label' => 'Zapisz'));
+        ->add('save', SubmitType::class);
     }
 }

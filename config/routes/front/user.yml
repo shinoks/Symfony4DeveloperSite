@@ -1,0 +1,7 @@
+front_articles:
+    path: /
+    controller: App\Controller\FrontController::articles
+
+front_article_show:
+    path: /{id}
+    controller: App\Controller\FrontController::articleShow

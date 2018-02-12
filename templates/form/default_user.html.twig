@@ -1,0 +1,66 @@
+{% block text_widget %}
+    <div class="form-group">
+        {% set type = type|default('text') %}
+        <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </div>
+{% endblock %}
+
+{% block email_widget %}
+    <div class="form-group">
+        {% set type = type|default('email') %}
+        <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+
+    </div>
+{% endblock %}
+
+{% block password_widget %}
+    <div class="form-group">
+        {% set type = type|default('password') %}
+        <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} placeholder="*********"/>
+    </div>
+{% endblock %}
+
+{% block textarea_widget %}
+    <div class="form-group">
+        <textarea class="form-control" {{ block('widget_attributes') }}> {% if value is not empty %}{{ value }}{% endif %}</textarea>
+    </div>
+{% endblock %}
+
+{% block choice_widget %}
+    <div class="form-group">
+        <select class="form-control" {{ block('widget_attributes') }}>
+            {%- if preferred_choices|length > 0 -%}
+                {% set options = preferred_choices %}
+                {{- block('choice_widget_options') -}}
+                {%- if choices|length > 0 and separator is not none -%}
+                    <option disabled="disabled">{{ separator }}</option>
+                {%- endif -%}
+            {%- endif -%}
+            {%- set options = choices -%}
+            {{- block('choice_widget_options') -}}
+        </select>
+    </div>
+{% endblock %}
+
+
+{% block file_widget %}
+    <div class="form-group">
+        {% set type = type|default('file') %}
+        <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        {% if form.vars.data is not empty %}<img class="img-thumbnail" style="width:200px; height:200px;" src="{{ asset(form.vars.data) }}"/>{% endif %}
+    </div>
+{% endblock %}
+
+
+{% block submit_widget %}
+    <div class="form-group">
+
+        {% set type = type|default('submit') %}
+
+        <button class="btn btn-primary btn-sm" {{ block('button_attributes') }}>
+            <i class="fa fa-dot-circle-o"></i>
+            Zapisz
+        </button>
+    </div>
+
+{% endblock %}
