@@ -52,10 +52,7 @@ class ArticleController extends Controller
 
                 $this->session->getFlashBag()->add('success', 'Artykuł został zmieniony');
 
-                return $this->render('back/article_edit.html.twig',array(
-                    'article'=> $article,
-                    'form'=> $form->createView()
-                ));
+                return $this->redirectToRoute('admin_article_edit',['id'=> $id]);
             }
 
             return $this->render('back/article_edit.html.twig',array(

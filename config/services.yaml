@@ -2,7 +2,9 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: pl
-    file_directory: '/public/uploads/files'
+    public_dir: 'public_html'
+    file_directory: '../%public_dir%/uploads/files'
+    image_directory: 'uploads/files'
 
 services:
     # default configuration for services in *this* file
@@ -30,6 +32,7 @@ services:
     App\Service\FileUploader:
         arguments:
             $targetDir: '%file_directory%'
+            $imageDir: '%image_directory%'
     App\EventListener\ImageUploadListener:
         tags:
             - { name: doctrine.event_listener, event: prePersist }

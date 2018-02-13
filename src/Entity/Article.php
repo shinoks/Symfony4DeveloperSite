@@ -151,7 +151,7 @@ class Article
     /**
      * @param mixed $image
      */
-    public function setImage(File $image = null)
+    public function setImage(File $image)
     {
         $this->image = $image;
     }

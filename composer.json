@@ -65,6 +65,7 @@
         "symfony": {
             "id": "01C5AJ8QX83D7XP5VRE2HACSXJ",
             "allow-contrib": false
-        }
+        },
+        "public-dir": "public_html"
     }
 }
