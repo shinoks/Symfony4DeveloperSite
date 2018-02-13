@@ -5,7 +5,7 @@ admin_logout:
     path: /logout
 admin:
     path: /
-    controller: App\Controller\AdminController::startPage
+    controller: App\Controller\Admin\DefaultController::index
 
 admin_user:
     resource: "admin/user.yml"

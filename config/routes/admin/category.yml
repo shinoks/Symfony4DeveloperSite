@@ -1,23 +1,23 @@
 admin_categories:
     path: /
-    controller: App\Controller\AdminController::categories
+    controller: App\Controller\Admin\CategoryController::categories
 
 admin_category_new:
     path: /new
-    controller: App\Controller\AdminController::categoryNew
+    controller: App\Controller\Admin\CategoryController::new
 
 admin_category_show:
     path: /{id}
-    controller: App\Controller\AdminController::categoryShow
+    controller: App\Controller\Admin\CategoryController::show
 
 admin_category_edit:
     path: /edit/{id}
-    controller: App\Controller\AdminController::categoryEdit
+    controller: App\Controller\Admin\CategoryController::edit
 
 admin_category_disable:
     path: /disable/{id}/{status}
-    controller: App\Controller\AdminController::categoryDisable
+    controller: App\Controller\Admin\CategoryController::disable
 
 admin_category_delete:
     path: /delete/{id}
-    controller: App\Controller\AdminController::categoryDelete
+    controller: App\Controller\Admin\CategoryController::delete

@@ -1,5 +1,5 @@
-{% if session is defined %}
-    {% for type, messages in session.flashbag.all() %}
+{% if app.session is defined %}
+    {% for type, messages in app.session.flashbag.all() %}
         {% for message in messages %}
             <div class="alert-success alert with-close alert-{{ type }} alert-dismissable show">
                 {{ message }}

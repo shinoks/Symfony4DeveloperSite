@@ -1,17 +1,10 @@
-Username: Użytkownik
 username: Użytkownik
 password: Hasło
-Password: Hasło
 email: Email
-Email: Email
 first name: Imię
-First name: Imię
 last name: Nazwisko
-Last name: Nazwisko
 login: Logowanie
-Login: Logowanie
 logout: Wyloguj
-Logout: Wyloguj
 register: Zarejestruj się
 do_not_have_an_account: Nie posiadasz konta?
 account: Konto
@@ -21,3 +14,4 @@ home: Start
 page: Strona
 read_more: Czytaj więcej
 contact: Kontakt
+about_us: O nas

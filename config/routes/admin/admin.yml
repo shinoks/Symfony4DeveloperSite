@@ -1,19 +1,19 @@
 admin_admins:
     path: /
-    controller: App\Controller\AdminController::admins
+    controller: App\Controller\Admin\AdminController::admins
 
 admin_admin_new:
     path: /new
-    controller: App\Controller\AdminController::adminNew
+    controller: App\Controller\Admin\AdminController::new
 
 admin_admin_edit:
     path: /edit/{id}
-    controller: App\Controller\AdminController::adminEdit
+    controller: App\Controller\Admin\AdminController::edit
 
 admin_admin_disable:
     path: /disable/{id}/{status}
-    controller: App\Controller\AdminController::adminDisable
+    controller: App\Controller\Admin\AdminController::disable
 
 admin_admin_delete:
     path: /delete/{id}
-    controller: App\Controller\AdminController::adminDelete
+    controller: App\Controller\Admin\AdminController::delete
