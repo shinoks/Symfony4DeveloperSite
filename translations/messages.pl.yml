@@ -1,8 +1,8 @@
 username: Użytkownik
 password: Hasło
 email: Email
-first name: Imię
-last name: Nazwisko
+first_name: Imię
+last_name: Nazwisko
 login: Logowanie
 logout: Wyloguj
 register: Zarejestruj się
@@ -15,3 +15,20 @@ page: Strona
 read_more: Czytaj więcej
 contact: Kontakt
 about_us: O nas
+dashboard: Panel startowy
+config: Konfiguracja
+users: Użytkownicy
+admins: Admini
+edit_config: Edycja konfiguracji
+title: Tytuł
+phone: Telefon
+address: Adres
+page_title: Tytuł strony
+yours_account: Twoje konto
+name: Nazwa
+description: Opis
+edit: Edytuj
+short_text: Krótki opis
+text: Opis
+category: Kategoria
+main_image: Obrazek główny

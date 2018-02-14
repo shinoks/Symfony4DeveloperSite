@@ -11,8 +11,12 @@ logout:
     path: /logout
 register:
     path: /register
-    controller: App\Controller\FrontController::userRegister
+    controller: App\Controller\UserController::register
 
 front_article:
     resource: "front/article.yml"
     prefix: /article
+
+front_user:
+    resource: "front/user.yml"
+    prefix: /user

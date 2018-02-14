@@ -1,0 +1,7 @@
+admin_config:
+    path: /
+    controller: App\Controller\Admin\ConfigController::index
+
+admin_config_edit:
+    path: /edit
+    controller: App\Controller\Admin\ConfigController::edit

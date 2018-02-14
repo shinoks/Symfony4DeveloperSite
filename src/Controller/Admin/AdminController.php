@@ -10,14 +10,17 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Form\AdminType;
+use App\Service\Config;
 
 class AdminController extends Controller
 {
     private $session;
+    private $config;
 
     public function __construct()
     {
         $this->session = new Session();
+        $this->config = new Config();
     }
 
     /**
@@ -42,7 +45,7 @@ class AdminController extends Controller
             ->findAll();
 
         return $this->render('back/admins.html.twig',array(
-            'admins'=> $admins
+            'admins'=> $admins,
         ));
     }
 

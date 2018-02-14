@@ -10,9 +10,7 @@
             </div>
         </div>
     </div>
-    <!-- End page header -->
 
-    <!-- property area -->
     <div class="content-area recent-property padding-top-40" style="background-color: #FFF;">
         <div class="container">
             <div class="row">
@@ -21,11 +19,7 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <h3><i class="fa fa-map-marker"></i> Address</h3>
-                                <p>13/25 shibuia
-                                    <br>Tokyo
-                                    <br>45Y 73J
-                                    <br>
-                                    <strong>Japan</strong>
+                                <p>{{ config.config.address }}
                                 </p>
                             </div>
                             <!-- /.col-sm-4 -->
@@ -34,7 +28,7 @@
                                 <p class="text-muted">This number is toll free if calling from
                                     Great Britain otherwise we advise you to use the electronic
                                     form of communication.</p>
-                                <p><strong>+33 555 444 333</strong></p>
+                                <p><strong>{{ config.config.address }}</strong></p>
                             </div>
                             <!-- /.col-sm-4 -->
                             <div class="col-sm-4">

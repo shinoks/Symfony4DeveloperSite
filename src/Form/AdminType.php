@@ -15,20 +15,21 @@ class AdminType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('username',TextType::class)
-        ->add('password',PasswordType::class, array('required' => false,'empty_data'=> $builder->getData()->getPassword()))
-        ->add('email',EmailType::class)
-        ->add('firstName',TextType::class)
-        ->add('lastName',TextType::class)
+        ->add('username',TextType::class,['label'=>'username'])
+        ->add('password',PasswordType::class, ['label'=>'password','required' => false,'empty_data'=> $builder->getData()->getPassword()])
+        ->add('email',EmailType::class,['label'=>'email'])
+        ->add('firstName',TextType::class,['label'=>'first_name'])
+        ->add('lastName',TextType::class,['label'=>'last_name'])
         ->add('roles',ChoiceType::class, [
-        'multiple' => true,
-                'expanded' => true,
-                'choices' => [
-        'Admin' => 'ROLE_ADMIN',
-        'Manager' => 'ROLE_MANAGER',
-        ]])
-        ->add('isActive',CheckboxType::class, array('required' => false ))
+            'label'=>'roles',
+            'multiple' => true,
+                    'expanded' => true,
+                    'choices' => [
+            'Admin' => 'ROLE_ADMIN',
+            'Manager' => 'ROLE_MANAGER',
+            ]])
+        ->add('isActive',CheckboxType::class, ['label'=>'is_active','required' => false ])
 
-        ->add('save', SubmitType::class, array('label' => 'Zapisz'));
+        ->add('save', SubmitType::class, ['label' => 'Zapisz']);
     }
 }

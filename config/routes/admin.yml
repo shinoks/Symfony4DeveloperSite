@@ -22,3 +22,7 @@ admin_article:
 admin_category:
     resource: "admin/category.yml"
     prefix: /category
+
+admin_config:
+    resource: "admin/config.yml"
+    prefix: /config

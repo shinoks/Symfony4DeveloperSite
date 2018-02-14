@@ -1,0 +1,31 @@
+{% set title = 'account'|trans %}
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+    {% include 'front/top.html.twig' %}
+
+    <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
+        <div class="container">
+            <div class="row">
+                <div class="blog-lst col-md-12 pl0">
+                    <div class="profile-header">
+                        <h3>
+                            <b>{{ 'yours_account'|trans }}</b><br/>
+                        </h3>
+                    </div>
+                    <div class="">
+                        <label>{{ 'first_name'|trans }}:</label>
+                        {{ app.user.firstName }}<br/>
+                        <label>{{ 'last_name'|trans }}:</label>
+                        {{ app.user.lastName }}<br/>
+                        <label>{{ 'email'|trans }}:</label>
+                        {{ app.user.email }}<br/>
+                    </div>
+                    <a class="btn btn-default btn-border" href="{{ path('front_user_account_edit') }}">{{ 'edit'|trans }}</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

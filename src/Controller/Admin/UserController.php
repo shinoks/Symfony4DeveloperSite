@@ -56,7 +56,7 @@ class UserController extends Controller
                 $this->session->getFlashBag()->add('success', 'Użytkownik został zmieniony');
 
                 return $this->render('back/user_edit.html.twig',array(
-                    'admin'=> $user,
+                    'user'=> $user,
                     'form'=> $form->createView()
                 ));
             }
