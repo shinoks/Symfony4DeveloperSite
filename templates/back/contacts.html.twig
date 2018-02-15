@@ -1,0 +1,78 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/leftPanel.html.twig' %}
+
+    <div id="right-panel" class="right-panel">
+
+        {% include 'back/header.html.twig' %}
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>{{ 'contact_forms'|trans }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">{{ 'contact_forms'|trans }}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'back/flashMessages.html.twig' %}
+
+        <div class="content mt-3">
+            <div class="animated fade-in">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>{{ 'title'|trans }}</th>
+                            <th>{{ 'message'|trans }}</th>
+                            <th>{{ 'user'|trans }}</th>
+                            <th>{{ 'sender'|trans }}</th>
+                            <th>{{ 'post_date'|trans }}</th>
+                            <th>{{ 'delete'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in contacts %}
+                            <tr>
+                                <td>
+                                    {{ contact.id }}
+                                    {% if contact.readed == 1 %}
+                                        <span class="badge badge-light">Przeczytana</span>
+                                    {% else %}
+                                        <span class="badge badge-info">Nie przeczytana</span>
+                                    {% endif %}
+                                </td>
+                                <td><a href="{{ path('admin_contact_show',{ 'id':contact.id }) }}">{{ contact.title }}</a></td>
+                                <td>{{ contact.message[0:50] }} ...</td>
+                                <td>{% if contact.sender is not empty %}
+                                        <a href="{{ path('admin_user_show',{'id':contact.sender.id}) }}">{{ contact.sender.firstName }} {{ contact.sender.lastName }}</a>
+                                    {% else %}
+                                        {{ 'user_not_logged'|trans }}
+                                    {% endif %}
+                                </td>
+                                <td>{{ contact.send }}</td>
+                                <td>{{ contact.created|date('d-m-y H:i:s') }}</td>
+                                <td><a href="{{ path('admin_contact_delete', { 'id':contact.id }) }}" class="btn btn-danger">{{ 'delete'|trans }}</a></td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+{% endblock %}

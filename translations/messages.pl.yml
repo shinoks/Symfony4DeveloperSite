@@ -32,3 +32,12 @@ short_text: Krótki opis
 text: Opis
 category: Kategoria
 main_image: Obrazek główny
+message: Wiadomość
+contact_form: Formularz kontaktowy
+contact_forms: Formularze kontaktowe
+user: Użytkownik
+sender: Nadawca
+post_date: Data wysłania
+delete: Usuń
+user_not_logged: Użytkownik niezalogowany
+user_data: Dane użytkownika

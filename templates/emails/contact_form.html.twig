@@ -1,0 +1,17 @@
+<html>
+<head></head>
+<body>
+    <div>
+        <h3>{{ contact.title }}</h3>
+
+        <div>
+            <label>{{ 'message'|trans }}</label>
+            {{ contact.message }}
+        </div>
+        <br/>
+        <span style="font-size:8px">
+            Wiadomość została wysłana ze strony {{ config.config.title }}
+        </span>
+    </div>
+</body>
+</html>
