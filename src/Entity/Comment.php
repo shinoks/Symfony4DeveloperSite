@@ -115,7 +115,7 @@ class Comment
     /**
      * @return mixed
      */
-    public function getUser(): ?object
+    public function getUser()
     {
         return $this->user;
     }
