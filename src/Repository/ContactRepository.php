@@ -13,16 +13,23 @@ class ContactRepository extends ServiceEntityRepository
         parent::__construct($registry, Contact::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function findAllDesc()
     {
         return $this->createQueryBuilder('c')
-            ->where('c.something = :value')->setParameter('value', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('c.created', 'DESC')
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
+
+    public function CountAllNotReaded()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('count(c.id)')
+            ->where('c.readed = :value')->setParameter('value', 0)
+            ->orderBy('c.created', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

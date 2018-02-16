@@ -1,15 +1,14 @@
 <?php
 namespace App\Controller;
 
+use App\Form\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
-use App\Entity\Article;
 use App\Entity\Comment;
-use App\Form\CommentType;
 
-class ArticleController extends Controller
+class CommentController extends Controller
 {
     private $session;
 
@@ -19,28 +18,27 @@ class ArticleController extends Controller
     }
 
     /**
-     * @return Response
+     * @param $event
+     * @param $eventId
+     * @return null|object
      */
-    public function index()
+    public function showEventComments($event, $eventId): ?object
     {
-        $articles = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->findAll();
+        $comments = $this->getDoctrine()
+            ->getRepository(Comment::class)
+            ->findBy(['event'=>$event,'eventId'=>$eventId]);
 
-        return $this->render('front/articles.html.twig',array(
-            'articles'=> $articles
-        ));
+        return $comments;
     }
 
-    /**
-     * @return Response
-     */
-    public function show($id,Request $request)
-    {
-        $article = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->find($id);
 
+    /**
+     * @param Request $request
+     * @param $route
+     * @return bool
+     */
+    public function add(Request $request, $route)
+    {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
 
@@ -54,9 +52,7 @@ class ArticleController extends Controller
 
             $this->session->getFlashBag()->add('success', 'Komentarz został́ dodany');
         }
-        return $this->render('front/article_show.html.twig',array(
-            'article'=> $article
-        ));
+        return true;
     }
 
 }

@@ -60,7 +60,8 @@ class DefaultController extends Controller
                 ->find(1);
 
             $message = (new \Swift_Message('Formularz kontaktowy:'.$contact->getTitle()))
-                ->setFrom($contact->getSend())
+                ->setFrom($config->getEmail())
+                ->setReplyTo($contact->getSend())
                 ->setTo($config->getEmail())
                 ->setBody(
                     $this->renderView(

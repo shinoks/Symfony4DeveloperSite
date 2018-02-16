@@ -30,3 +30,7 @@ admin_config:
 admin_contact:
     resource: "admin/contacts.yml"
     prefix: /contacts
+
+admin_comment:
+    resource: "admin/comments.yml"
+    prefix: /comments

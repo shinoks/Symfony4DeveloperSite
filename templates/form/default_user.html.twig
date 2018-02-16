@@ -5,6 +5,13 @@
     </div>
 {% endblock %}
 
+{% block integer_widget %}
+    <div class="form-group">
+        {% set type = type|default('text') %}
+        <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </div>
+{% endblock %}
+
 {% block email_widget %}
     <div class="form-group">
         {% set type = type|default('email') %}

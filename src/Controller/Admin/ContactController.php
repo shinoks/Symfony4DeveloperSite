@@ -5,6 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Entity\Contact;
+use App\Repository\ContactRepository;
 
 class ContactController extends Controller
 {
@@ -22,7 +23,7 @@ class ContactController extends Controller
     {
         $contacts = $this->getDoctrine()
             ->getRepository(Contact::class)
-            ->findAll();
+            ->findAllDesc();
 
         return $this->render('back/contacts.html.twig',array(
             'contacts'=> $contacts

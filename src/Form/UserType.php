@@ -5,6 +5,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -18,6 +19,7 @@ class UserType extends AbstractType
         ->add('username',TextType::class,['label'=>'username'])
         ->add('password',PasswordType::class, ['label'=>'password','required' => false,'empty_data'=> $builder->getData()->getPassword()])
         ->add('email',EmailType::class,['label'=>'email'])
+        ->add('phone',TelType::class,['label'=>'phone'])
         ->add('firstName',TextType::class,['label'=>'first_name'])
         ->add('lastName',TextType::class,['label'=>'last_name'])
         ->add('roles',ChoiceType::class, [

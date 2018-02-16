@@ -48,7 +48,11 @@
                     </li>
                     <li class="list-group-item">
                         <b>{{ 'user_data'|trans }}:</b>
-                        {{ contact.sender.firstName }} {{ contact.sender.lastName }}
+                        {% if contact.sender is not empty %}
+                            {{ contact.sender.firstName }} {{ contact.sender.lastName }}
+                        {% else %}
+                            {{ 'user_not_logged'|trans }} - {{ contact.send }}
+                        {% endif %}
                     </li>
                     <li class="list-group-item">
                         <b>{{ 'message'|trans }}:</b><br/>

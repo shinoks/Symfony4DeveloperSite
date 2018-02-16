@@ -6,7 +6,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://cdn.ckeditor.com/4.8.0/full/ckeditor.js"></script>
+    <script src="{{ asset('admin/ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace( 'article_text' );
         CKEDITOR.replace( 'article_shortText' );

@@ -1,0 +1,77 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/leftPanel.html.twig' %}
+
+    <div id="right-panel" class="right-panel">
+
+        {% include 'back/header.html.twig' %}
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>{{ 'comments'|trans }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">{{ 'comments'|trans }}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'back/flashMessages.html.twig' %}
+
+        <div class="content mt-3">
+            <div class="animated fade-in">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>{{ 'event'|trans }}</th>
+                            <th>{{ 'nickname'|trans }}</th>
+                            <th>{{ 'comment'|trans }}</th>
+                            <th>{{ 'post_date'|trans }}</th>
+                            <th>{{ 'delete'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for comment in comments %}
+                            <tr>
+                                <td>
+                                    {{ comment.id }}
+                                    {% if comment.accepted == 1 %}
+                                        <span class="badge badge-light">{{ 'accepted'|trans }}</span>
+                                    {% else %}
+                                        <span class="badge badge-info">{{ 'not_accepted'|trans }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ comment.event }}</td>
+                                <td>
+                                    {% if comment.user is not empty %}
+                                        <a href="{{ path('admin_user_show',{ 'id':comment.user.id }) }}">{{ comment.nickname }}</a>
+                                    {% else %}
+                                        {{ 'user_not_logged'|trans }} - {{ comment.nickname }}
+                                    {% endif %}
+                                </td>
+                                <td>{{ comment.comment[0:50] }} ...</td>
+                                <td>{{ comment.created|date('d-m-y H:i:s') }}</td>
+                                <td><a href="{{ path('admin_contact_delete', { 'id':contact.id }) }}" class="btn btn-danger">{{ 'delete'|trans }}</a></td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+{% endblock %}

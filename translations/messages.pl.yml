@@ -41,3 +41,15 @@ post_date: Data wysłania
 delete: Usuń
 user_not_logged: Użytkownik niezalogowany
 user_data: Dane użytkownika
+reply: Odpowiedz
+event: Wydarzenie
+event_name: Nazwa wydarzenia
+nickname: Przydomek
+comment: Komentarz
+comments: Komentarze
+offer_list: Lista ofert
+make_an_offer: Złóż ofertę
+make_a_loan_offer: Złóż ofertę pożyczki
+ammount: Kwota
+on_period: Na okres
+loan_settlement: Sposób rozliczania odsetek

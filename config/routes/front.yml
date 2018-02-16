@@ -20,3 +20,7 @@ front_article:
 front_user:
     resource: "front/user.yml"
     prefix: /user
+
+front_offer:
+    resource: "front/offer.yml"
+    prefix: /offer
