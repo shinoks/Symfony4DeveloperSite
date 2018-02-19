@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Offer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,8 +46,7 @@ class UserController extends Controller
         }
 
         return $this->render('front/register.html.twig',array(
-            'form' => $form->createView(),
-            'session' => $this->session
+            'form' => $form->createView()
         ));
     }
 
@@ -55,16 +55,16 @@ class UserController extends Controller
      */
     public function account()
     {
-        return $this->render('front/account.html.twig',array(
-            'session' => $this->session
-        ));
+
+        return $this->render('front/account.html.twig',array());
 
     }
 
     /**
      * @return Response
      */
-    public function edit(Request $request, UserPasswordEncoderInterface $passwordEncoder)    {
+    public function edit(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
         $user = $this->getDoctrine()
             ->getRepository(User::class)
             ->find($this->getUser());

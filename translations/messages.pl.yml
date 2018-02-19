@@ -53,12 +53,19 @@ make_a_loan_offer: Złóż ofertę pożyczki
 ammount: Kwota
 on_period: Na okres
 loan_settlement: Sposób rozliczania odsetek
-oferts: Oferty
-oferts_list: Lista Ofert
+offerts: Oferty
+offerts_list: Lista Ofert
 created: Utworzono
 offer_number: Numer oferty
 interest: Odsetki
 period: Czas trwania
 settlement: Spłata odsetek
 month: msc
-status: status
+status: Status
+investor_zone: Strefa inwestora
+sublease_zone: Strefa inwestycji
+realizations: Realizacje
+news: Aktualności
+proposal: Wniosek
+show: Pokaż
+offer: Oferta

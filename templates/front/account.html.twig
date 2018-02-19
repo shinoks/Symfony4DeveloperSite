@@ -36,12 +36,33 @@
                         </div>
                         <div id="menu1" class="tab-pane fade">
                             <div class="profile-header">
-                            <h3>
-                                <b>{{ 'offer_list'|trans }}</b><br/>
-                            </h3>
+                            <h2>{{ 'offer_list'|trans }}</h2>
                             </div>
                             <div class="">
-                                Text
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>{{ 'offer_number'|trans }}</th>
+                                            <th>{{ 'ammount'|trans }}</th>
+                                            <th>{{ 'interest'|trans }}</th>
+                                            <th>{{ 'period'|trans }}</th>
+                                            <th>{{ 'settlement'|trans }}</th>
+                                            <th>{{ 'status'|trans }}</th>
+                                        </tr>
+                                    </thead>
+                                {% for offer in app.user.offers %}
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ offer.offerNumber }}</td>
+                                            <td>{{ offer.ammount }}</td>
+                                            <td>{{ offer.interest }}</td>
+                                            <td>{{ offer.period }}</td>
+                                            <td>{{ offer.settlement }}</td>
+                                            <td>{{ offer.status }}</td>
+                                        </tr>
+                                    </tbody>
+                                {% endfor %}
+                                </table>
                             </div>
                         </div>
                         <div id="menu2" class="tab-pane fade">
@@ -51,7 +72,7 @@
                                 </h3>
                             </div>
                             <div class="">
-                                <a class="btn btn-succes" href="{{ path('front_offer_new') }}">{{ 'make_an_offer'|trans }}</a>
+                                <a class="btn btn-warning" href="{{ path('front_offer_new') }}">{{ 'proposal'|trans }}</a>
                             </div>
                         </div>
                     </div>

@@ -60,6 +60,11 @@ class User implements AdvancedUserInterface, \Serializable
     private $isActive;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="user")
+     */
+    private $offers;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
      */
     private $comments;
@@ -67,6 +72,7 @@ class User implements AdvancedUserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = true;
+        $this->offers = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
@@ -209,6 +215,14 @@ class User implements AdvancedUserInterface, \Serializable
         $this->roles = $roles;
 
         return array_unique($this->roles);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOffers()
+    {
+        return $this->offers;
     }
 
     /**
