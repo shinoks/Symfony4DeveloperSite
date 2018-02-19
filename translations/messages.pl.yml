@@ -57,6 +57,8 @@ oferts: Oferty
 oferts_list: Lista Ofert
 created: Utworzono
 offer_number: Numer oferty
-intrest: Odsetki
+interest: Odsetki
 period: Czas trwania
-settlement:
+settlement: Spłata odsetek
+month: msc
+status: status

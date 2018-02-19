@@ -3,10 +3,12 @@ namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Form\ArticleType;
+use App\Service\FileUploader;
 
 class ArticleController extends Controller
 {
@@ -38,13 +40,19 @@ class ArticleController extends Controller
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->find($id);
+
+        $imageOld = $article->getImage();
         if($article){
             $form = $this->createForm(ArticleType::class, $article);
 
+            $article->setImage(new File($imageOld));
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $article = $form->getData();
+                if(!$article->getImage()){
+                    $article->setImage(new File($imageOld));
+                }
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($article);
@@ -52,7 +60,7 @@ class ArticleController extends Controller
 
                 $this->session->getFlashBag()->add('success', 'Artykuł został zmieniony');
 
-                return $this->redirectToRoute('admin_article_edit',['id'=> $id]);
+                return $this->redirectToRoute('admin_article_edit',['id'=>$id]);
             }
 
             return $this->render('back/article_edit.html.twig',array(
