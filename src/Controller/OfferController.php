@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\OfferStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +24,9 @@ class OfferController extends Controller
     public function new(Request $request){
 
         $offer = new Offer();
+        $offerStatus = $this->getDoctrine()
+            ->getRepository(OfferStatus::class)
+            ->find(1);
         $form = $this->createForm(OfferType::class, $offer);
 
         $form->handleRequest($request);
@@ -38,7 +42,7 @@ class OfferController extends Controller
                     $offer->setInterest(10);
                 break;
             }
-            $offer->setStatus('Oferta');
+            $offer->setStatus($offerStatus);
             $em = $this->getDoctrine()->getManager();
             $em->persist($offer);
             $em->flush();

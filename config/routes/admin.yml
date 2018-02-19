@@ -35,6 +35,10 @@ admin_offer:
     resource: "admin/offer.yml"
     prefix: /offer
 
+admin_offer_statuses:
+    resource: "admin/offer_status.yml"
+    prefix: /offer_status
+
 admin_comment:
     resource: "admin/comments.yml"
     prefix: /comments

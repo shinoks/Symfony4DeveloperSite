@@ -61,7 +61,7 @@
                                 <td>{{ offer.interest }} %</td>
                                 <td>{{ offer.period }} {{ 'month'|trans }}</td>
                                 <td>{{ offer.settlement }} {{ 'month'|trans }}</td>
-                                <td>{{ offer.status }} </td>
+                                <td>{{ offer.status.name }} </td>
                                 {% if offer.isActive == 1 %}
                                     <td><a href="{{ path('admin_offer_disable', { 'id':offer.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
                                 {% else %}

@@ -53,7 +53,8 @@ class Offer
     private $settlement;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\ManyToOne(targetEntity="App\Entity\OfferStatus", inversedBy="offerts")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $status;
 
@@ -219,6 +220,5 @@ class Offer
     {
         $this->isActive = $isActive;
     }
-
 
 }
