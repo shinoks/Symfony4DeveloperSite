@@ -31,6 +31,10 @@ admin_contact:
     resource: "admin/contacts.yml"
     prefix: /contacts
 
+admin_offer:
+    resource: "admin/offer.yml"
+    prefix: /offer
+
 admin_comment:
     resource: "admin/comments.yml"
     prefix: /comments

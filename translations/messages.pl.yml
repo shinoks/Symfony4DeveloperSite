@@ -53,3 +53,10 @@ make_a_loan_offer: Złóż ofertę pożyczki
 ammount: Kwota
 on_period: Na okres
 loan_settlement: Sposób rozliczania odsetek
+oferts: Oferty
+oferts_list: Lista Ofert
+created: Utworzono
+offer_number: Numer oferty
+intrest: Odsetki
+period: Czas trwania
+settlement: 

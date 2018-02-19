@@ -46,12 +46,11 @@
                         <li><i class="fa fa-plus-square"></i><a href="{{ path('admin_category_new') }}">Dodaj kategorię</a></li>
                     </ul>
                 </li>
-                <h3 class="menu-title">Inwestycje</h3><!-- /.menu-title -->
+                <h3 class="menu-title">{{ 'offerts'|trans }}</h3><!-- /.menu-title -->
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa la-file-text-o"></i>Inwestorzy</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa la-file-text-o"></i>{{ 'offerts'|trans }}</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-bars"></i><a href="ui-buttons.html">Lista inwestorów</a></li>
-                        <li><i class="fa fa-plus-square"></i><a href="ui-badges.html">Dodaj inwestora</a></li>
+                        <li><i class="fa fa-bars"></i><a href="{{ path('admin_offerts') }}">{{ 'offerts_list' }}</a></li>
                     </ul>
                 </li>
 

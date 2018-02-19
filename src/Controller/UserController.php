@@ -39,7 +39,7 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
             $this->session = new Session();
-            $this->session->getFlashBag()->add('success', 'Użytkownik został utworzony');
+            $this->session->getFlashBag()->add('success', 'Zostałeś zarejestrowany');
 
             return $this->redirectToRoute('login');
         }

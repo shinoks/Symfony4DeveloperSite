@@ -57,17 +57,23 @@ class Offer
      */
     private $status;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive;
+
     public function __construct()
     {
         $this->created = new \DateTime("now");
+        $this->isActive= 1;
     }
 
     /**
-     * @param mixed $id
+     * @return mixed
      */
-    public function setId($id)
+    public function getId()
     {
-        $this->id = $id;
+        return $this->id;
     }
 
     /**
@@ -197,4 +203,22 @@ class Offer
     {
         $this->status = $status;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getisActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+    }
+
+
 }
