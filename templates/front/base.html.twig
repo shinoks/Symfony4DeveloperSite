@@ -14,8 +14,9 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
         <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
@@ -33,14 +34,14 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     {% endblock %}
+
 </head>
 <body>
-{% include 'front/header.html.twig' %}
+{% include 'front/addons/header.html.twig' %}
 
-{% block body %}
+{% block body %}{% endblock %}
 
-{% endblock %}
-{% include 'front/footer.html.twig' %}
+{% include 'front/addons/footer.html.twig' %}
 
 {% block javascripts %}
     <script src="{{ asset('js/modernizr-2.6.2.min.js') }}"></script>
