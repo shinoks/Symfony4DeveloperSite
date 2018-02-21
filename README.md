@@ -25,9 +25,10 @@ Symfony4 site with:
 
 ```sh
 $ git clone https://github.com/shinoks/eliteInvestments.git
-$ bin/console doctrine:migrations:migrate
+$ bin/console doctrine:schema:update --force
 $ bin/console cache:clear
 $ bin/console cache:warmup
 ```
 # TODO
 Fixtures for admin account
+Fixtures for config

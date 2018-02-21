@@ -16,19 +16,19 @@
                 <li class="active">
                     <a href="{{ path('admin') }}"> <i class="menu-icon fa fa-dashboard"></i>{{ 'dashboard'|trans }} </a>
                 </li>
-                <li class="active">
+                <li class="">
                     <a href="{{ path('admin_config') }}"> <i class="menu-icon fa fa-cog"></i>{{ 'config'|trans }} </a>
                 </li>
-                <li class="active">
+                <li class="">
                     <a href="{{ path('admin_users') }}"> <i class="menu-icon fa fa-users"></i>{{ 'users'|trans }} </a>
                 </li>
-                <li class="active">
+                <li class="">
                     <a href="{{ path('admin_admins') }}"> <i class="menu-icon fa fa-users"></i>{{ 'admins'|trans }} </a>
                 </li>
-                <li class="active">
+                <li class="">
                     <a href="{{ path('admin_contacts') }}"> <i class="menu-icon fa ti-email"></i>{{ 'contact_forms'|trans }} </a>
                 </li>
-                <li class="active">
+                <li class="">
                     <a href="{{ path('admin_comments') }}"> <i class="menu-icon fa ti-email"></i>{{ 'comments'|trans }} </a>
                 </li>
                 <h3 class="menu-title">{{ 'offerts'|trans }}</h3><!-- /.menu-title -->
@@ -40,6 +40,10 @@
                     </ul>
                 </li>
                 <h3 class="menu-title">CMS</h3><!-- /.menu-title -->
+
+                <li class="">
+                    <a href="{{ path('file_manager',{'conf':'default'}) }}"> <i class="menu-icon fa ti-files"></i>Zarządzanie plikami </a>
+                </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file-o"></i>Artykuły</a>
                     <ul class="sub-menu children dropdown-menu">
