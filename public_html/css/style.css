@@ -1515,9 +1515,6 @@ Asside widgets CSS
     position: relative;
 }
 .testimonial .item .client-face {
-    position: absolute;
-    top: 112px;
-    right: 146px;
     text-align: center;
 }
 .client-face > img {
