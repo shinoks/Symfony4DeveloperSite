@@ -33,10 +33,22 @@
                 </li>
                 <h3 class="menu-title">{{ 'offerts'|trans }}</h3><!-- /.menu-title -->
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa la-file-text-o"></i>{{ 'offerts'|trans }}</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="menu-icon fa la-file-text-o"></i>{{ 'offerts'|trans }}
+                    </a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-bars"></i><a href="{{ path('admin_offerts') }}">{{ 'offerts_list'|trans }}</a></li>
                         <li><i class="fa fa-bars"></i><a href="{{ path('admin_offer_statuses') }}">{{ 'offer_statuses'|trans }}</a></li>
+                    </ul>
+                </li>
+                <h3 class="menu-title">{{ 'realizations'|trans }}</h3>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="menu-icon fa la-file-text-o"></i>{{ 'realizations'|trans }}
+                    </a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-bars"></i><a href="{{ path('admin_realizations') }}">{{ 'realizations_list'|trans }}</a></li>
+                        <li><i class="fa fa-bars"></i><a href="{{ path('admin_realization_new') }}">{{ 'realization_new'|trans }}</a></li>
                     </ul>
                 </li>
                 <h3 class="menu-title">CMS</h3><!-- /.menu-title -->

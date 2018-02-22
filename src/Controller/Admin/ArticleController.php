@@ -44,8 +44,9 @@ class ArticleController extends Controller
         $imageOld = $article->getImage();
         if($article){
             $form = $this->createForm(ArticleType::class, $article);
-
-            $article->setImage(new File($imageOld));
+            if($imageOld){
+                $article->setImage(new File($imageOld));
+            }
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {

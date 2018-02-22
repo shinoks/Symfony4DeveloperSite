@@ -43,6 +43,10 @@ admin_file_manager:
     resource: "admin/file_manager.yml"
     prefix: /file_manager
 
+admin_realization:
+    resource: "admin/realization.yml"
+    prefix: /realization
+
 admin_comment:
     resource: "admin/comments.yml"
     prefix: /comments
