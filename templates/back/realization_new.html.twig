@@ -66,6 +66,27 @@
                 {{ form_label(form.mainImage) }}
                 {{ form_widget(form.mainImage) }}
 
+                <div class="card" id="additionalImages">
+                    <div class="card-header">
+                        <strong class="card-title">{{ 'additional_images'|trans }}</strong>
+                    </div>
+                    <div class="card-body">
+                        <ul id="additionalImages-fields-list" class="list-unstyled"
+                            data-prototype="{{ form_widget(form.additionalImages.vars.prototype)|e }}"
+                            data-widget-tags="{{ '<li></li>'|e }}">
+                            {% for additionalImage in form.additionalImages %}
+                                <li class="basic-collection">
+                                    {{ form_errors(additionalImage) }}
+                                    {{ form_widget(additionalImage) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <a href="#additionalImages"
+                           class="add-another-widget btn btn-primary"
+                           data-list="additionalImages">{{ 'add_another_value'|trans }}</a>
+                    </div>
+                </div>
+
                 {{ form_label(form.sellingPrice) }}
                 {{ form_widget(form.sellingPrice) }}
 
