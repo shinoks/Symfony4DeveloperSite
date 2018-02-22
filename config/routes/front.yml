@@ -24,3 +24,7 @@ front_user:
 front_offer:
     resource: "front/offer.yml"
     prefix: /offer
+
+front_realization:
+    resource: "front/realization.yml"
+    prefix: /realization

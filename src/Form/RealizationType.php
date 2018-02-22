@@ -24,9 +24,21 @@ class RealizationType extends AbstractType
         ->add('name',TextType::class,['label'=>'name'])
         ->add('mainImage', TextType::class, array(
                 'label' => 'main_image',
-                'required' => false,
-                'data_class' => null
+                'required' => false
             ))
+        ->add('additionalImages',CollectionType::class,[
+                'entry_type'    => TextType::class,
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'delete_empty' => true,
+                'prototype'    => true,
+                'by_reference' => false,
+                'required' => false,
+                'attr'         => [
+                    'class' => "additionalImages-collection",
+                    'placeholder' => '/uploads/files/nazwapliku.jpg'
+                ],
+            ])
         ->add('sellingPrice',IntegerType::class,['label'=>'selling_price'])
         ->add('currency',ChoiceType::class,[
             'label'=>'currency',

@@ -1,0 +1,7 @@
+front_realizations:
+    path: /
+    controller: App\Controller\RealizationController::index
+
+front_realization_show:
+    path: /{id}
+    controller: App\Controller\RealizationController::show

@@ -1,0 +1,90 @@
+{% set title = 'realizations'|trans %}
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+    {% include 'front/addons/top.html.twig' %}
+
+    <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="properties-area recent-property" style="background-color: #FFF;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-3 p0 padding-top-40">
+                                    <div class="blog-asside-right pr0">
+                                        <div class="panel panel-default sidebar-menu wow fadeInRight animated">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">{{ 'recommended'|trans }}</h3>
+                                            </div>
+                                            <div class="panel-body recent-property-widget">
+                                                <ul>
+                                                    {% for realization in realizations %}
+                                                        <li>
+                                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                                                                <a href="{{ path('front_realization_show',{'id':realization.id}) }}">
+                                                                    <img src="{{ asset(realization.mainImage) }}" style="width:50px">
+                                                                </a>
+                                                                <span class="property-seeker">
+                                                                    <b class="b-1">{{ realization.city }}</b>
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                                                <h6> <a href="{{ path('front_realization_show',{'id':realization.id}) }}">{{ realization.name }} </a></h6>
+                                                                <span class="property-price">{{ realization.sellingPrice }} {{ realization.currency }}</span>
+                                                            </div>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-9 pr0 properties-page">
+                                    <div class="col-md-12 clear">
+                                        <div class="col-xs-2 layout-switcher pull-right">
+                                            <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
+                                            <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>
+                                        </div><!--/ .layout-switcher-->
+                                    </div>
+
+                                    <div class="col-md-12 clear">
+                                        <div id="list-type" class="proerty-th">
+                                            {% for realization in realizations %}
+                                                <div class="col-sm-6 col-md-4 p0">
+                                                    <div class="box-two proerty-item">
+                                                        <div class="item-thumb">
+                                                            <a href="{{ path('front_realization_show',{'id':realization.id}) }}" >
+                                                                <img src="{{ asset(realization.mainImage) }}">
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="item-entry overflow">
+                                                            <h5><a href="{{ path('front_realization_show',{'id':realization.id}) }}"> {{ realization.name }} </a></h5>
+                                                            <div class="dot-hr"></div>
+                                                            <span class="pull-left"><b> {{ 'volume'|trans }} :</b> {{ realization.volume }} </span>
+                                                            <span class="proerty-price pull-right"> {{ realization.sellingPrice }} {{ realization.currency }}</span>
+                                                            <p style="display: none;">{{ realization.description[0:50]|striptags }} ...</p>
+                                                            <div class="property-icon">
+                                                                <img src="{{ asset('img/icon/bed.png') }}">(5)|
+                                                                <img src="{{ asset('img/icon/shawer.png') }}">(2)|
+                                                                <img src="{{ asset('img/icon/cars.png') }}">(1)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
