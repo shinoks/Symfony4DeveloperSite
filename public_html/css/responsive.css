@@ -166,14 +166,12 @@
         top: 5%;
     }
     .slider-area{
-        height:440px; 
     }
 
     .home-area-1 { 
         padding-top: 65px;
     }
     #bg-slider .item img {
-        height: 440px;
     }
     .slider .owl-pagination {
         bottom: 165px;
@@ -469,13 +467,11 @@
         top: 5%;
     }
     .slider-area{
-        height:440px;        
     }
     .content-area { 
         padding-top: 100px;
     }
     #bg-slider .item img {
-        height: 440px;
     }
     .slider .owl-pagination {
         bottom: 165px;
@@ -633,7 +629,6 @@
     }
 
     .slider-area{
-        height:440px; 
     }    
     .content-area { 
         padding-top: 15px;
@@ -643,7 +638,6 @@
     }
 
     #bg-slider .item img {
-        height: 440px;
     }
     .slider .owl-pagination {
         bottom: 165px;
@@ -739,10 +733,9 @@
         margin-left: 0px;
     }
     .slider-area{
-        height: 540px;
     }
     #bg-slider .item img {
-        height: 540px;
+
     }
     .tab-content ul li {
         height: 160px;
