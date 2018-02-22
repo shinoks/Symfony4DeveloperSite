@@ -17,11 +17,13 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="image wow fadeInLeft animated">
-                            <a href="{{ path('front_article_show',{'id':article.id}) }}">
-                                <img src="{{ asset(article.image) }}" class="img-responsive" alt="Example blog post alt">
-                            </a>
-                        </div>
+                        {% if article.image is not null %}
+                            <div class="image wow fadeInLeft animated">
+                                <a href="{{ path('front_article_show',{'id':article.id}) }}">
+                                    <img src="{{ asset(article.image) }}" class="img-responsive" alt=""/>
+                                </a>
+                            </div>
+                        {% endif %}
                         <p class="intro">{{ article.shortText|raw }}</p>
                         <p class="read-more">
                             <a href="{{ path('front_article_show',{'id':article.id}) }}" class="btn btn-default btn-border">{{ 'read_more'|trans }} ...</a>
