@@ -1,5 +1,10 @@
 {% extends 'back/base.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% endblock %}
 {% block body %}
 
     {% include 'back/leftPanel.html.twig' %}
@@ -56,12 +61,12 @@
                                 <td><a href="{{ path('admin_realization_edit',{ 'id':realization.id }) }}">{{ realization.name }}</a></td>
                                 <td>{% if realization.mainImage is not empty %}
                                         <a href="#" data-toggle="modal" data-target="#image_{{ realization.id }}">
-                                            <img class="img-thumbnail" style="width:50px; height:50px;" src="{{ asset(realization.Mmage) }}"/>
+                                            <img class="img-thumbnail" style="width:50px; height:50px;" src="{{ asset(realization.mainImage) }}"/>
                                         </a>
                                         <div class="modal fade" id="image_{{ realization.id }}" aria-hidden="true">
-                                            <img class="img-thumbnail" style="max-height:800px;" src="{{ asset(realization.image) }}"/>
+                                            <img class="img-thumbnail" style="max-height:800px;" src="{{ asset(realization.mainImage) }}"/>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">{{ 'close'|trans }}</button>
+                                                <button id="close" type="button" class="btn btn-primary" data-dismiss="#image_{{ realization.id }}">{{ 'close'|trans }}</button>
                                             </div>
                                         </div>
                                     {% endif %}

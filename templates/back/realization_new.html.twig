@@ -8,33 +8,16 @@
     {{ parent() }}
     <script src="https://cdn.ckeditor.com/4.8.0/full/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace( 'article_text' );
-        CKEDITOR.replace( 'article_shortText' );
+        CKEDITOR.replace( 'realization_description' );
     </script>
-
     <script>
-        jQuery('.add-another-collection-widget').click(function (e) {
-                e.preventDefault();
-                var list = jQuery(jQuery(this).attr('data-list'));
-                // Try to find the counter of the list
-                var counter = list.data('widget-counter') | list.children().length;
-                // If the counter does not exist, use the length of the list
-                if (!counter) { counter = list.children().length; }
-
-                // grab the prototype template
-                var newWidget = list.attr('data-prototype');
-                // replace the "__name__" used in the id and name of the prototype
-                // with a number that's unique to your emails
-                // end name attribute looks like name="contact[emails][2]"
-                newWidget = newWidget.replace(/__name__/g, counter);
-                // Increase the counter
-                counter++;
-                // And store it, the length cannot be used if deleting widgets is allowed
-                list.data(' widget-counter', counter);
-
-                // create a new list element and add it to the list
-                var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
-                newElem.appendTo(list);
+        jQuery('.add-another-widget').click(function () {
+            var name = jQuery(this).attr('data-list');
+            var counter = jQuery("."+ name +"-collection").length;
+            counter = counter+1;
+            jQuery('#'+ name +'-fields-list').append('<li class="'+ name +'-collection">' +
+                '<input class="form-control" id="realization_'+ name +'_roles" name="realization['+ name +']['+ counter +']" type="text">'
+                + '</li>');
         });
     </script>
 {% endblock %}
@@ -48,104 +31,145 @@
 
     <div id="right-panel" class="right-panel">
 
-    {% include 'back/header.html.twig' %}
+        {% include 'back/header.html.twig' %}
 
-    <div class="breadcrumbs">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
-                <div class="page-title">
-                    <h1>Nowy artykuł</h1>
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>{{ 'realization_new'|trans }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">{{ 'realizations'|trans }} > {{ 'realization_new'|trans }}</li>
+                        </ol>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active">Artykuły > Nowy artykuł</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
 
         {% include 'back/flashMessages.html.twig' %}
 
-    <div class="card">
-        <div class="card-body">
-            {% form_theme form 'form/default_admin.html.twig' %}
+        <div class="card">
+            <div class="card-body">
+                {% form_theme form 'form/default_admin.html.twig' %}
 
-            {{ form_start(form) }}
+                {{ form_start(form) }}
 
-            {{ form_label(form.name) }}
-            {{ form_widget(form.name) }}
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name) }}
 
-            {{ form_label(form.mainImage) }}
-            {{ form_widget(form.mainImage) }}
+                {{ form_label(form.mainImage) }}
+                {{ form_widget(form.mainImage) }}
 
-            {{ form_label(form.sellingPrice) }}
-            {{ form_widget(form.sellingPrice) }}
+                {{ form_label(form.sellingPrice) }}
+                {{ form_widget(form.sellingPrice) }}
 
-            {{ form_label(form.currency) }}
-            {{ form_widget(form.currency) }}
+                {{ form_label(form.currency) }}
+                {{ form_widget(form.currency) }}
 
-            {{ form_label(form.volume) }}
-            {{ form_widget(form.volume) }}
+                {{ form_label(form.volume) }}
+                {{ form_widget(form.volume) }}
 
-            {{ form_label(form.city) }}
-            {{ form_widget(form.city) }}
+                {{ form_label(form.city) }}
+                {{ form_widget(form.city) }}
 
-            {{ form_label(form.rooms) }}
-            {{ form_widget(form.rooms) }}
-
-            <ul id="email-fields-list"
-                data-prototype="{{ form_widget(form.default.vars.prototype)|e }}"
-                data-widget-tags="{{ '<li></li>'|e }}">
-                {% for defaultField in form.default %}
-                    <li>
-                        {{ form_errors(defaultField) }}
-                        {{ form_widget(defaultField) }}
-                    </li>
-                {% endfor %}
-            </ul>
-
-            <a href="#"
-               class="add-another-collection-widget"
-               data-list="#email-field-list">Add another value</a>
-
-            <ul id="media-fields-list"
-                data-prototype="{{ form_widget(form.media.vars.prototype)|e }}"
-                data-widget-tags="{{ '<li></li>'|e }}">
-                {% for media in form.media %}
-                    <li>
-                        {{ form_errors(media) }}
-                        {{ form_row(media) }}
-                    </li>
-                {% endfor %}
-            </ul>
-
-            <a href="#"
-               class="add-another-collection-widget"
-               data-list="#media-field-list">Add another media value</a>
-
-            {{ form_label(form.security) }}
-            {{ form_errors(form.security) }}
-
-            <ul>
-                {% for securityField in form.security %}
-                    <li>
-                        {{ form_errors(securityField) }}
-                        {{ form_widget(securityField) }}
-                    </li>
-                {% endfor %}
-            </ul>
+                {{ form_label(form.rooms) }}
+                {{ form_widget(form.rooms) }}
 
 
+                <div class="card" id="basic">
+                    <div class="card-header">
+                        <strong class="card-title">{{ 'default'|trans }}</strong>
+                    </div>
+                    <div class="card-body">
+                        <ul id="basic-fields-list" class="list-unstyled"
+                            data-prototype="{{ form_widget(form.basic.vars.prototype)|e }}"
+                            data-widget-tags="{{ '<li></li>'|e }}">
+                            {% for basic in form.basic %}
+                                <li class="basic-collection">
+                                    {{ form_errors(basic) }}
+                                    {{ form_widget(basic) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <a href="#basic"
+                           class="add-another-widget btn btn-primary"
+                           data-list="basic">{{ 'add_another_value'|trans }}</a>
+                    </div>
+                </div>
 
-            {{ form_widget(form) }}
+                <div class="card" id="media">
+                    <div class="card-header">
+                        <strong class="card-title">{{ 'media'|trans }}</strong>
+                    </div>
+                    <div class="card-body">
+                        <ul id="media-fields-list" class="list-unstyled"
+                            data-prototype="{{ form_widget(form.media.vars.prototype)|e }}"
+                            data-widget-tags="{{ '<li></li>'|e }}">
+                            {% for media in form.media %}
+                                <li class="media-collection">
+                                    {{ form_errors(media) }}
+                                    {{ form_widget(media) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <a href="#media"
+                           class="add-another-widget btn btn-primary"
+                           data-list="media">{{ 'add_another_value'|trans }}</a>
+                    </div>
+                </div>
 
-            {{ form_end(form) }}
+                <div class="card" id="security">
+                    <div class="card-header">
+                        <strong class="card-title">{{ 'security'|trans }}</strong>
+                    </div>
+                    <div class="card-body">
+                        <ul id="security-fields-list" class="list-unstyled"
+                            data-prototype="{{ form_widget(form.security.vars.prototype)|e }}"
+                            data-widget-tags="{{ '<li></li>'|e }}">
+                            {% for security in form.security %}
+                                <li class="security-collection">
+                                    {{ form_errors(security) }}
+                                    {{ form_widget(security) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <a href="#security"
+                           class="add-another-widget btn btn-primary"
+                           data-list="security">{{ 'add_another_value'|trans }}</a>
+                    </div>
+                </div>
+
+                <div class="card" id="additionalInfo">
+                    <div class="card-header">
+                        <strong class="card-title">{{ 'additional_info'|trans }}</strong>
+                    </div>
+                    <div class="card-body">
+                        <ul id="additionalInfo-fields-list" class="list-unstyled"
+                            data-prototype="{{ form_widget(form.additionalInfo.vars.prototype)|e }}"
+                            data-widget-tags="{{ '<li></li>'|e }}">
+                            {% for additionalInfo in form.additionalInfo %}
+                                <li class="additionalInfo-collection">
+                                    {{ form_errors(additionalInfo) }}
+                                    {{ form_widget(additionalInfo) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <a href="#additionalInfo"
+                           class="add-another-widget btn btn-primary"
+                           data-list="additionalInfo">{{ 'add_another_value'|trans }}</a>
+                    </div>
+                </div>
+
+                {{ form_widget(form) }}
+
+                {{ form_end(form) }}
+            </div>
         </div>
-    </div>
     </div>
 {% endblock %}
