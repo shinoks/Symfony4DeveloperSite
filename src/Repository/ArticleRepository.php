@@ -14,10 +14,10 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
 
-    public function findByOnStartPage($value)
+    public function findAllOnStartPage()
     {
         return $this->createQueryBuilder('a')
-            ->where('a.onStartPage = :value')->setParameter('value', $value)
+            ->where('a.onStartPage = 1')
             ->orderBy('a.created', 'DESC')
             ->getQuery()
             ->getResult()

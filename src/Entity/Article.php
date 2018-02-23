@@ -51,7 +51,7 @@ class Article
     private $image;
 
     /**
-     * @ORM\Column(name="on_start_page", type="boolean")
+     * @ORM\Column(type="boolean")
      */
     private $onStartPage;
 
