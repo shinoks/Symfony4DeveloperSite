@@ -1091,11 +1091,8 @@ page-header
         no-repeat scroll center top / cover;
     color:#FFF;
     position: relative;
-    min-height: 140px;
 }
 .page-head-content {
-    padding-top: 52px;
-    padding-bottom: 52px;
 }
 .page-head-content .page-title {
     margin: 0px;
