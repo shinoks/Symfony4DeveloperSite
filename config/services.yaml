@@ -41,7 +41,7 @@ services:
         arguments: ['@doctrine.orm.entity_manager']
 
 artgris_file_manager:
-    web_dir: public_html
+    web_dir: "%public_dir%"
     conf:
         default:
-            dir: "/uploads/files"
+            dir: "%file_directory%"
