@@ -64,11 +64,13 @@
                 {{ form_widget(form.name) }}
 
                 {{ form_label(form.mainImage) }}
+                <span style="font-size:11px;">{{ 'image_miniature'|trans }} 304x248px</span>
                 {{ form_widget(form.mainImage) }}
 
                 <div class="card" id="additionalImages">
                     <div class="card-header">
                         <strong class="card-title">{{ 'additional_images'|trans }}</strong>
+                        <span style="font-size:11px;">dla 3+ dodatkowych obrazków aktywuje się slider</span>
                     </div>
                     <div class="card-body">
                         <ul id="additionalImages-fields-list" class="list-unstyled"
@@ -187,7 +189,8 @@
                     </div>
                 </div>
 
-                {{ form_widget(form) }}
+                {{ form_widget(form.description) }}
+                {{ form_widget(form.save) }}
 
                 {{ form_end(form) }}
             </div>

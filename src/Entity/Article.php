@@ -51,12 +51,18 @@ class Article
     private $image;
 
     /**
+     * @ORM\Column(name="on_start_page", type="boolean")
+     */
+    private $onStartPage;
+
+    /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
 
     public function __construct()
     {
+        $this->onStartPage = false;
         $this->isActive = true;
         $this->created = new \DateTime("now");
     }
@@ -154,6 +160,22 @@ class Article
     public function setImage(File $image = null)
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOnStartPage()
+    {
+        return $this->onStartPage;
+    }
+
+    /**
+     * @param mixed $onStartPage
+     */
+    public function setOnStartPage($onStartPage)
+    {
+        $this->onStartPage = $onStartPage;
     }
 
     /**

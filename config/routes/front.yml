@@ -28,3 +28,11 @@ front_offer:
 front_realization:
     resource: "front/realization.yml"
     prefix: /realization
+
+front_about_us:
+    resource: "front/about_us.yml"
+    prefix: /about_us
+
+front_news:
+    resource: "front/news.yml"
+    prefix: /news

@@ -115,7 +115,33 @@ class ArticleController extends Controller
         $em->persist($article);
         $em->flush();
 
-        $this->session->getFlashBag()->add('success', 'Artykuł został wyłączony');
+        if($status == 1){
+            $this->session->getFlashBag()->add('success', 'Artykuł został włączony');
+        }else {
+            $this->session->getFlashBag()->add('success', 'Artykuł został wyłączony');
+        }
+
+        return $this->redirectToRoute('admin_articles');
+    }
+
+    /**
+     * @return Response
+     */
+    public function onStartPage($id, $status)    {
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->find($id);
+        $article->setOnStartPage($status);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($article);
+        $em->flush();
+
+        if($status == 1){
+            $this->session->getFlashBag()->add('success', 'Artykuł będzie wyświetlany na stronie głównej');
+        }else {
+            $this->session->getFlashBag()->add('success', 'Artykuł nie będzie wyświetlany na stronie głównej');
+        }
 
         return $this->redirectToRoute('admin_articles');
     }

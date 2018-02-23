@@ -18,6 +18,10 @@ admin_article_disable:
     path: /disable/{id}/{status}
     controller: App\Controller\Admin\ArticleController::disable
 
+admin_article_on_start_page:
+    path: /on_start_page/{id}/{status}
+    controller: App\Controller\Admin\ArticleController::onStartPage
+
 admin_article_delete:
     path: /delete/{id}
     controller: App\Controller\Admin\ArticleController::delete

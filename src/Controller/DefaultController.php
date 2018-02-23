@@ -25,7 +25,7 @@ class DefaultController extends Controller
     {
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
-            ->findBy(array(),array('created'=>'DESC'),3);
+            ->findBy(['onStartPage'=>1],['created'=>'DESC'],3);
 
         return $this->render('front/start.html.twig',array(
             'articles' => $articles,
