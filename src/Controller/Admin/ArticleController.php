@@ -116,9 +116,9 @@ class ArticleController extends Controller
         $em->flush();
 
         if($status == 1){
-            $this->session->getFlashBag()->add('success', 'Artykuł został włączony');
+            $this->session->getFlashBag()->add('success', 'Artykuł został włączony ze strony głównej');
         }else {
-            $this->session->getFlashBag()->add('success', 'Artykuł został wyłączony');
+            $this->session->getFlashBag()->add('success', 'Artykuł został wyłączony ze strony głównej');
         }
 
         return $this->redirectToRoute('admin_articles');

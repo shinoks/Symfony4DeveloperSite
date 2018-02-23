@@ -46,7 +46,6 @@
                             <th>Kategoria</th>
                             <th>Data utworzenia</th>
                             <th>Strona główna</th>
-                            <th>Wyłącz</th>
                             <th>Usuń</th>
                         </tr>
                     </thead>
@@ -69,11 +68,6 @@
                                 </td>
                                 <td>{{ article.category.name }}</td>
                                 <td>{{ article.created|date('d-m-Y H:i:s') }}</td>
-                                {% if article.start == 1 %}
-                                    <td><a href="{{ path('admin_article_start', { 'id':article.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
-                                {% else %}
-                                    <td><a href="{{ path('admin_article_start', { 'id':article.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
-                                {% endif %}
                                 {% if article.isActive == 1 %}
                                     <td><a href="{{ path('admin_article_disable', { 'id':article.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
                                 {% else %}

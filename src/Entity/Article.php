@@ -51,10 +51,6 @@ class Article
     private $image;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $xyz;
-    /**
      *
      * @ORM\Column(name="start", type="boolean")
      */
@@ -67,8 +63,7 @@ class Article
 
     public function __construct()
     {
-        $this->start = 0;
-        $this->isActive = true;
+        $this->isActive = 0;
         $this->created = new \DateTime("now");
     }
     /**
@@ -214,22 +209,4 @@ class Article
     {
         $this->category = $category;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getXyz()
-    {
-        return $this->xyz;
-    }
-
-    /**
-     * @param mixed $xyz
-     */
-    public function setXyz($xyz)
-    {
-        $this->xyz = $xyz;
-    }
-
-
 }
