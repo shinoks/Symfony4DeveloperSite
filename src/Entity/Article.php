@@ -51,9 +51,9 @@ class Article
     private $image;
 
     /**
-     * @ORM\Column(name="start_page", type="boolean")
+     * @ORM\Column(name="start", type="boolean")
      */
-    private $startPage;
+    private $start;
 
     /**
      * @ORM\Column(name="is_active", type="boolean")
@@ -62,7 +62,7 @@ class Article
 
     public function __construct()
     {
-        $this->startPage = 0;
+        $this->start = 0;
         $this->isActive = true;
         $this->created = new \DateTime("now");
     }
@@ -165,17 +165,17 @@ class Article
     /**
      * @return mixed
      */
-    public function getStartPage()
+    public function getStart()
     {
-        return $this->startPage;
+        return $this->start;
     }
 
     /**
-     * @param mixed $startPage
+     * @param mixed $start
      */
-    public function setStartPage($startPage)
+    public function setStart($start)
     {
-        $this->startPage = $startPage;
+        $this->start = $start;
     }
 
     /**

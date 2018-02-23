@@ -127,11 +127,11 @@ class ArticleController extends Controller
     /**
      * @return Response
      */
-    public function startPage($id, $status)    {
+    public function start($id, $status)    {
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->find($id);
-        $article->setStartPage($status);
+        $article->setStart($status);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($article);

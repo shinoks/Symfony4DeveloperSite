@@ -16,7 +16,7 @@ class ArticleRepository extends ServiceEntityRepository
     public function findAllStartPage()
     {
         return $this->createQueryBuilder('a')
-            ->where('a.startPage = 1')
+            ->where('a.start = 1')
             ->orderBy('a.created', 'DESC')
             ->getQuery()
             ->getResult()
