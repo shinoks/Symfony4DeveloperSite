@@ -50,7 +50,7 @@ class Article
     private $image;
 
     /**
-     * @ORM\Column(name="start", type="boolean")
+     * @ORM\Column(name="start", type="boolean", nullable=true)
      */
     private $start;
 
@@ -155,7 +155,7 @@ class Article
     /**
      * @param mixed $image
      */
-    public function setImage(File $image = null)
+    public function setImage($image = null)
     {
         $this->image = $image;
     }
