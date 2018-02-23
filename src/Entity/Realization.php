@@ -28,6 +28,12 @@ class Realization
     private $mainImage;
 
     /**
+     * @ORM\Column(type="string",nullable=true)
+
+     */
+    private $folderWithImages;
+
+    /**
      * @ORM\Column(type="json_array",nullable=true)
      */
     private $additionalImages;
@@ -130,6 +136,22 @@ class Realization
     public function setMainImage($mainImage)
     {
         $this->mainImage = $mainImage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFolderWithImages()
+    {
+        return $this->folderWithImages;
+    }
+
+    /**
+     * @param mixed $folderWithImages
+     */
+    public function setFolderWithImages($folderWithImages)
+    {
+        $this->folderWithImages = $folderWithImages;
     }
 
     /**

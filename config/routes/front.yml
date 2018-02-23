@@ -36,3 +36,11 @@ front_about_us:
 front_news:
     resource: "front/news.yml"
     prefix: /news
+
+front_sublease_zone:
+    resource: "front/sublease_zone.yml"
+    prefix: /sublease_zone
+
+front_investor_zone:
+    resource: "front/investor_zone.yml"
+    prefix: /investor_zone

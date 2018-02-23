@@ -1,0 +1,7 @@
+front_sublease_zone:
+    path: /
+    controller: App\Controller\SubleaseZoneController::index
+
+front_sublease_zone_show:
+    path: /{id}
+    controller: App\Controller\SubleaseZoneController::show

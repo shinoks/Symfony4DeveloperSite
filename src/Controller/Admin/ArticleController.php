@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Finder\Finder;
 use App\Form\ArticleType;
 use App\Service\FileUploader;
 
@@ -40,6 +41,7 @@ class ArticleController extends Controller
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->find($id);
+
 
         $imageOld = $article->getImage();
         if($article){

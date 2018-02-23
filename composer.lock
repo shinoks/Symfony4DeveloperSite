@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "90e21bf0536cc3d9db26444f4fe5c319",
+    "content-hash": "bd4978219697f335ffd1573ea4be740a",
     "packages": [
         {
             "name": "artgris/filemanager-bundle",
