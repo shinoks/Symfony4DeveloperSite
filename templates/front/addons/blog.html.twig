@@ -24,10 +24,14 @@
                                 </a>
                             </div>
                         {% endif %}
+                        {% if article.shortText is not empty %}
                         <p class="intro">{{ article.shortText|raw }}</p>
                         <p class="read-more">
                             <a href="{{ path('front_article_show',{'id':article.id}) }}" class="btn btn-default btn-border">{{ 'read_more'|trans }} ...</a>
                         </p>
+                        {% else %}
+                            <p class="intro">{{ article.text|raw }}</p>
+                        {% endif %}
                     </section>
                 {% endfor %}
             </div>

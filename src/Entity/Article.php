@@ -29,9 +29,9 @@ class Article
     private $text;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $shortText;
+    private $shortText = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -46,12 +46,10 @@ class Article
 
     /**
      * @ORM\Column(type="string",nullable=true)
-
      */
     private $image;
 
     /**
-     *
      * @ORM\Column(name="start", type="boolean")
      */
     private $start;

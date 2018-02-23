@@ -20,7 +20,7 @@ class ArticleType extends AbstractType
     {
         $builder
         ->add('name',TextType::class,['label'=>'name'])
-        ->add('shortText',TextareaType::class,['label'=>'short_text'])
+        ->add('shortText',TextareaType::class,['label'=>'short_text', 'required' => false])
         ->add('text',TextareaType::class,['label'=>'text'])
         ->add('category', EntityType::class, array(
             'label'=>'category',
