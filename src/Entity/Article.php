@@ -51,7 +51,7 @@ class Article
     private $image;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(name="is_active", type="boolean")
      */
     private $onStartPage;
 
@@ -62,7 +62,7 @@ class Article
 
     public function __construct()
     {
-        $this->onStartPage = false;
+        $this->onStartPage = 0;
         $this->isActive = true;
         $this->created = new \DateTime("now");
     }
