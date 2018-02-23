@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use App\Entity\Contact;
 
 class DefaultController extends Controller
@@ -25,7 +26,7 @@ class DefaultController extends Controller
     {
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
-            ->findBy(array('onStartPage'=>1),array('created'=>'DESC'),3);
+            ->findByOnStartPage(1);
 
         return $this->render('front/start.html.twig',array(
             'articles' => $articles,
