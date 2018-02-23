@@ -100,4 +100,29 @@ realization_edit: Edycja realizacji
 recommended: Polecane
 image_miniature: Miniaturka obrazku
 additional_images: Dodatkowe obrazki
-
+select-all: Zaznacz wszystko
+input:
+    default: Podstawowy
+table:
+    name: Nazwa
+    data: Data
+    size: Wielkość
+    dimension: Wymiary
+    actions: Akcje
+size:
+    kb: Kb
+    mb: Mb
+file:
+    add:
+        success: Plik dodany poprawnie
+button:
+    save: Zapisz
+    tree: Drzewo
+    refresh: Odśwież
+    cancle: Anuluj
+    add:
+        files: Plik
+        folder: Folder
+    delete:
+        selected: Usuń wybrane
+        action: Akcje
