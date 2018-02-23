@@ -1,7 +1,4 @@
-:Location /*.php
-Use php71
-:Location
-
+AddType application/x-httpd-php71 .php
 
 DirectoryIndex index.php
 Header set Access-Control-Allow-Origin "*"
