@@ -45,14 +45,14 @@ class ArticleController extends Controller
         if($article){
             $form = $this->createForm(ArticleType::class, $article);
             if($imageOld){
-                $article->setImage(new File($imageOld));
+                $article->setImage($imageOld);
             }
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $article = $form->getData();
                 if(!$article->getImage()){
-                    $article->setImage(new File($imageOld));
+                    $article->setImage($imageOld);
                 }
 
                 $em = $this->getDoctrine()->getManager();
@@ -127,11 +127,11 @@ class ArticleController extends Controller
     /**
      * @return Response
      */
-    public function onStartPage($id, $status)    {
+    public function startPage($id, $status)    {
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->find($id);
-        $article->setOnStartPage($status);
+        $article->setStartPage($status);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($article);

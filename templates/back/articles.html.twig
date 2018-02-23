@@ -69,10 +69,10 @@
                                 </td>
                                 <td>{{ article.category.name }}</td>
                                 <td>{{ article.created|date('d-m-Y H:i:s') }}</td>
-                                {% if article.onStartPage == 1 %}
-                                    <td><a href="{{ path('admin_article_on_start_page', { 'id':article.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                                {% if article.startPage == 1 %}
+                                    <td><a href="{{ path('admin_article_start_page', { 'id':article.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
                                 {% else %}
-                                    <td><a href="{{ path('admin_article_on_start_page', { 'id':article.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                                    <td><a href="{{ path('admin_article_start_page', { 'id':article.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
                                 {% endif %}
                                 {% if article.isActive == 1 %}
                                     <td><a href="{{ path('admin_article_disable', { 'id':article.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
