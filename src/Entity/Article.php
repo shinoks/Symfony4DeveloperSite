@@ -51,6 +51,11 @@ class Article
     private $image;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $xyz;
+    /**
+     *
      * @ORM\Column(name="start", type="boolean")
      */
     private $start;
@@ -208,6 +213,22 @@ class Article
     public function setCategory($category)
     {
         $this->category = $category;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getXyz()
+    {
+        return $this->xyz;
+    }
+
+    /**
+     * @param mixed $xyz
+     */
+    public function setXyz($xyz)
+    {
+        $this->xyz = $xyz;
     }
 
 
