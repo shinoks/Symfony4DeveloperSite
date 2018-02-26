@@ -77,7 +77,7 @@
                             data-prototype="{{ form_widget(form.additionalImages.vars.prototype)|e }}"
                             data-widget-tags="{{ '<li></li>'|e }}">
                             {% for additionalImage in form.additionalImages %}
-                                <li class="basic-collection">
+                                <li class="additionalImages-collection">
                                     {{ form_errors(additionalImage) }}
                                     {{ form_widget(additionalImage) }}
                                 </li>
