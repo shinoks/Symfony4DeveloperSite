@@ -4,3 +4,4 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         config: '@App\Service\Config'
+        news: '@App\Service\News'
