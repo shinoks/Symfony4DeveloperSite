@@ -62,7 +62,7 @@
                                     <div class="single-property-wrapper">
                                         <div class="single-property-header">
                                             <h1 class="property-title pull-left">{{ realization.name }}</h1>
-                                            <span class="property-price pull-right">{{ realization.sellingPrice }} {{ realization.currency }} </span>
+                                            <span class="property-price pull-right">{{ realization.sellingPrice|number_format(0,'.',' ') }} {{ realization.currency }} </span>
                                         </div>
 
                                         <div class="entry-meta clearfix ">

@@ -102,6 +102,9 @@ image_miniature: Miniaturka obrazku
 additional_images: Dodatkowe obrazki
 select-all: Zaznacz wszystko
 yardage: Metraż
+latest_added_realizations: Ostatnie realizacje
+cant_decide: Nie możesz wybrać?
+all_realizations: Wszystkie realizacje
 input:
     default: Podstawowy
 table:

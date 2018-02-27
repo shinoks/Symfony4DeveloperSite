@@ -13,16 +13,14 @@ class RealizationRepository extends ServiceEntityRepository
         parent::__construct($registry, Realization::class);
     }
 
-    /*
-    public function findBySomething($value)
+
+    public function findLatestRealizations($value)
     {
         return $this->createQueryBuilder('r')
-            ->where('r.something = :value')->setParameter('value', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('r.id', 'DESC')
+            ->setMaxResults($value)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 }

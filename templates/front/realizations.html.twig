@@ -31,7 +31,7 @@
                                                             </div>
                                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                                 <h6> <a href="{{ path('front_realization_show',{'id':realization.id}) }}">{{ realization.name }} </a></h6>
-                                                                <span class="property-price">{{ realization.sellingPrice }} {{ realization.currency }}</span>
+                                                                <span class="property-price">{{ realization.sellingPrice|number_format(0,'.',' ') }} {{ realization.currency }}</span>
                                                             </div>
                                                         </li>
                                                     {% endfor %}
@@ -64,11 +64,8 @@
                                                             <h5><a href="{{ path('front_realization_show',{'id':realization.id}) }}"> {{ realization.name }} </a></h5>
                                                             <div class="dot-hr"></div>
                                                             <span class="pull-left"><b> {{ 'rooms'|trans }}</b> ({{ realization.rooms }})|<b>m2</b> ({{ realization.yardage }}) </span>
-                                                            <span class="proerty-price pull-right"> {{ realization.sellingPrice }} {{ realization.currency }}</span>
+                                                            <span class="proerty-price pull-right"> {{ realization.sellingPrice|number_format(0,'.',' ') }} {{ realization.currency }}</span>
                                                             <p style="display: none;">{{ realization.description[0:50]|striptags }} ...</p>
-                                                            <div class="property-icon">
-
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

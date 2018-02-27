@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Entity\Contact;
+use App\Entity\Realization;
 
 class DefaultController extends Controller
 {
@@ -28,8 +29,13 @@ class DefaultController extends Controller
             ->getRepository(Article::class)
             ->findAllStartPage();
 
+        $latestRealizations = $this->getDoctrine()
+            ->getRepository(Realization::class)
+            ->findLatestRealizations(7);
+
         return $this->render('front/start.html.twig',array(
             'articles' => $articles,
+            'latestRealizations' => $latestRealizations,
             'session' => $this->session
         ));
     }
