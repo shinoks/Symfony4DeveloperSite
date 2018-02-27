@@ -1355,7 +1355,7 @@ Asside widgets CSS
 }
 
 .page-title {
-    padding-top: 55px;
+    padding-top: 15px;
 }
 .page-title h5{
     font-weight: 300;
@@ -1503,7 +1503,7 @@ Asside widgets CSS
 
 .testimonial{
     position: relative;
-    margin-top: 50px; 
+    margin-top: 10px;
 }
 .testimonial .item {
     padding-bottom: 67px;
