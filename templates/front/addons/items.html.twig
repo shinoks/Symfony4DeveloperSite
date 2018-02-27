@@ -20,8 +20,8 @@
                             <h5><a href="{{ path('front_realization_show',{'id':realization.id}) }}" >{{ realization.name }} </a></h5>
                             <div class="dot-hr"></div>
                             <span class="pull-left"><b>{{ 'rooms'|trans }}</b> {{ realization.rooms }}
-                                |<b>{{ 'yardage'|trans }}</b> {{ realization.yardage }} | </span>
-                            <span class="proerty-price pull-right">{{ realization.sellingPrice|number_format(0,'.',' ') }}</span>
+                                |<b>{{ 'yardage'|trans }}</b> {{ realization.yardage }} </span>
+                            <span class="proerty-price pull-right">{{ realization.sellingPrice|number_format(0,'.',' ') }} {{ realization.currency }}</span>
                         </div>
                     </div>
                 </div>
