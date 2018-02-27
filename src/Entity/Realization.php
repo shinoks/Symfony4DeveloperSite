@@ -64,6 +64,11 @@ class Realization
     private $rooms;
 
     /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $yardage;
+
+    /**
      * @ORM\Column(type="json_array",nullable=true)
      */
     private $basic;
@@ -232,6 +237,22 @@ class Realization
     public function setRooms($rooms)
     {
         $this->rooms = $rooms;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getYardage()
+    {
+        return $this->yardage;
+    }
+
+    /**
+     * @param mixed $yardage
+     */
+    public function setYardage($yardage)
+    {
+        $this->yardage = $yardage;
     }
 
     /**

@@ -1103,7 +1103,7 @@ page-header
     letter-spacing: 2px;
 }
 .content-area{
-    background-color: #FCFCFC; padding-bottom: 55px;
+    background-color: #FCFCFC;
 }
 .layout-switcher a{
     font-size: 25px;
@@ -1768,10 +1768,8 @@ proerty-th-list
 } 
 .proerty-th-list .col-md-4 .item-thumb img {
     opacity: 0.7;
-    height: 230px;
     vertical-align: middle;
     border: 0px none;
-    width: 100%;
     padding-right: 25px;
 }
 
@@ -1995,7 +1993,6 @@ single property page
     margin-top: -35px;
 }
 .single-property-header {
-    padding-bottom: 25px;
     position: relative;
     clear: both;
     overflow: hidden;

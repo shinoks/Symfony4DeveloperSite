@@ -63,13 +63,11 @@
                                                         <div class="item-entry overflow">
                                                             <h5><a href="{{ path('front_realization_show',{'id':realization.id}) }}"> {{ realization.name }} </a></h5>
                                                             <div class="dot-hr"></div>
-                                                            <span class="pull-left"><b> {{ 'volume'|trans }} :</b> {{ realization.volume }} </span>
+                                                            <span class="pull-left"><b> {{ 'rooms'|trans }}</b> ({{ realization.rooms }})|<b>m2</b> ({{ realization.yardage }}) </span>
                                                             <span class="proerty-price pull-right"> {{ realization.sellingPrice }} {{ realization.currency }}</span>
                                                             <p style="display: none;">{{ realization.description[0:50]|striptags }} ...</p>
                                                             <div class="property-icon">
-                                                                <img src="{{ asset('img/icon/bed.png') }}">(5)|
-                                                                <img src="{{ asset('img/icon/shawer.png') }}">(2)|
-                                                                <img src="{{ asset('img/icon/cars.png') }}">(1)
+
                                                             </div>
                                                         </div>
                                                     </div>

@@ -65,34 +65,26 @@
                                             <span class="property-price pull-right">{{ realization.sellingPrice }} {{ realization.currency }} </span>
                                         </div>
 
-                                        <div class="property-meta entry-meta clearfix ">
+                                        <div class="entry-meta clearfix ">
 
                                             <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
-                                                <span class="property-info-icon icon-tag">
-                                                    <img src="{{ asset('img/icon/sale-orange.png') }}">
+                                                <span class="property-info icon-area">
+                                                    <img src="{{ asset('img/icon/room-orange.png') }}">
                                                 </span>
                                                 <span class="property-info-entry">
+                                                    <span class="property-info-label">{{ 'rooms'|trans }}</span>
+                                                    <span class="property-info-value">{{ realization.rooms }}</span>
                                                 </span>
                                             </div>
 
                                             <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
-                                            <span class="property-info icon-area">
-                                                <img src="{{ asset('img/icon/room-orange.png') }}">
-                                            </span>
-                                            <span class="property-info-entry">
-                                                <span class="property-info-label">{{ 'rooms'|trans }}</span>
-                                                <span class="property-info-value">{{ realization.rooms }}</span>
-                                            </span>
-                                            </div>
-
-                                            <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
-                                            <span class="property-info-icon icon-garage">
-                                                <img src="{{ asset('img/icon/cars-orange.png') }}">
-                                            </span>
-                                                        <span class="property-info-entry">
-                                                <span class="property-info-label">{{ 'city'|trans }}</span>
-                                                <span class="property-info-value">{{ realization.city }}</span>
-                                            </span>
+                                                <span class="property-info-icon icon-garage">
+                                                    <img src="{{ asset('img/icon/cars-orange.png') }}">
+                                                </span>
+                                                <span class="property-info-entry">
+                                                    <span class="property-info-label">{{ 'city'|trans }}</span>
+                                                    <span class="property-info-value">{{ realization.city }}</span>
+                                                </span>
                                             </div>
 
 

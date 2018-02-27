@@ -101,6 +101,7 @@ recommended: Polecane
 image_miniature: Miniaturka obrazku
 additional_images: Dodatkowe obrazki
 select-all: Zaznacz wszystko
+yardage: Metraż
 input:
     default: Podstawowy
 table:
