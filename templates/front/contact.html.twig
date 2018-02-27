@@ -18,30 +18,20 @@
                     <div class="" id="contact1">
                         <div class="row">
                             <div class="col-sm-4">
-                                <h3><i class="fa fa-map-marker"></i> Address</h3>
-                                <p>{{ config.config.address }}
-                                </p>
+                                <h4><i class="fa fa-map-marker"></i> {{ 'address'|trans }}</h4>
+                                <p>{{ config.config.address }}</p>
                             </div>
                             <!-- /.col-sm-4 -->
                             <div class="col-sm-4">
-                                <h3><i class="fa fa-phone"></i> Call center</h3>
-                                <p class="text-muted">This number is toll free if calling from
-                                    Great Britain otherwise we advise you to use the electronic
-                                    form of communication.</p>
-                                <p><strong>{{ config.config.address }}</strong></p>
+                                <h4><i class="fa fa-phone"></i> {{ 'call_us'|trans }}</h4>
+                                <p>{{ config.config.phone }}</p>
                             </div>
                             <!-- /.col-sm-4 -->
                             <div class="col-sm-4">
-                                <h3><i class="fa fa-envelope"></i> Electronic support</h3>
-                                <p class="text-muted">Please feel free to write an email to us or to use our electronic ticketing system.</p>
-                                <ul>
-                                    <li><strong><a href="mailto:">info@company.com</a></strong>   </li>
-                                    <li><strong><a href="#">Ticketio</a></strong> - our ticketing support platform</li>
-                                </ul>
+                                <h4><i class="fa fa-envelope"></i> {{ 'write_to_us'|trans }}</h4>
+                                {{ config.config.email }}
                             </div>
-                            <!-- /.col-sm-4 -->
                         </div>
-                        <!-- /.row -->
                         <hr>
 
                         <hr>

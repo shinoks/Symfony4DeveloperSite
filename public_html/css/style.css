@@ -719,9 +719,9 @@ label small{
 }
 .navbar-default .navbar-nav > li > a::after {
     background-color: #242a6d;
-    bottom: -24px;
+    bottom: -6px;
     content: "";
-    height: 5px;
+    height: 1px;
     left: 0;
     position: absolute;
     transition: all 0.2s ease 0s;
@@ -786,6 +786,7 @@ label small{
     box-shadow: none;
     border-left: none;
     border-right: none;
+    z-index: 100;
 }
 .nav-tabs > li > a{
     color: #666;

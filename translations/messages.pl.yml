@@ -105,6 +105,7 @@ yardage: Metraż
 latest_added_realizations: Ostatnie realizacje
 cant_decide: Nie możesz wybrać?
 all_realizations: Wszystkie realizacje
+write_to_us: Napisz do nas
 input:
     default: Podstawowy
 table:
