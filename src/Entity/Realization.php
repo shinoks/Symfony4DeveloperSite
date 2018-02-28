@@ -83,6 +83,11 @@ class Realization
     private $additionalInfo;
 
     /**
+     * @ORM\Column(type="json_array",nullable=true)
+     */
+    private $additionalImages;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
