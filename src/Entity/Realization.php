@@ -29,7 +29,6 @@ class Realization
 
     /**
      * @ORM\Column(type="string",nullable=true)
-
      */
     private $folderWithImages;
 
@@ -77,11 +76,6 @@ class Realization
      * @ORM\Column(type="json_array",nullable=true)
      */
     private $security;
-
-    /**
-     * @ORM\Column(type="json_array",nullable=true)
-     */
-    private $additionalInfo;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -296,22 +290,6 @@ class Realization
     public function setSecurity(array $security)
     {
         $this->security = $security;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAdditionalInfo()
-    {
-        return $this->additionalInfo;
-    }
-
-    /**
-     * @param mixed $additionalInfo
-     */
-    public function setAdditionalInfo(array $additionalInfo)
-    {
-        $this->additionalInfo = $additionalInfo;
     }
 
     /**
