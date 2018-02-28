@@ -1,0 +1,70 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/leftPanel.html.twig' %}
+
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        {% include 'back/header.html.twig' %}
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>{{ 'offer_statuses'|trans }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">{{ 'offer_statuses'|trans }}</li>
+                        </ol>
+                        <div class="page-header float-right">
+                            <a href="{{ path('admin_offer_status_new') }}"><i class="fa fa-user-plus text-dark"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'back/flashMessages.html.twig' %}
+
+        <div class="content mt-3">
+            <div class="animated fade-in">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Nazwa</th>
+                            <th>Wyłącz</th>
+                            <th>Usuń</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for offerStatus in offerStatuses %}
+                            <tr>
+                                <td>{{ offerStatus.id }}</td>
+                                <td><a href="{{ path('admin_offer_status_edit',{ 'id':offerStatus.id }) }}">{{ offerStatus.name }}</a></td>
+                                {% if offerStatus.isActive == 1 %}
+                                    <td><a href="{{ path('admin_offer_status_disable', { 'id':offerStatus.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                                {% else %}
+                                    <td><a href="{{ path('admin_offer_status_disable', { 'id':offerStatus.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                                {% endif %}
+                                <td><a href="{{ path('admin_offer_status_delete', { 'id':offerStatus.id }) }}" class="btn btn-danger">Usuń</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+        <!--/.col-->
+
+{% endblock %}
+

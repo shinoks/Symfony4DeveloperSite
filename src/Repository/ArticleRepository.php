@@ -13,16 +13,14 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function findAllStartPage()
     {
         return $this->createQueryBuilder('a')
-            ->where('a.something = :value')->setParameter('value', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+            ->where('a.isActive = 1')
+            ->orderBy('a.created', 'DESC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 }

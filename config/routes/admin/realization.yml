@@ -1,0 +1,23 @@
+admin_realizations:
+    path: /
+    controller: App\Controller\Admin\RealizationController::index
+
+admin_realization_new:
+    path: /new
+    controller: App\Controller\Admin\RealizationController::new
+
+admin_realization_show:
+    path: /{id}
+    controller: App\Controller\Admin\RealizationController::show
+
+admin_realization_edit:
+    path: /edit/{id}
+    controller: App\Controller\Admin\RealizationController::edit
+
+admin_realization_disable:
+    path: /disable/{id}/{status}
+    controller: App\Controller\Admin\RealizationController::disable
+
+admin_realization_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\RealizationController::delete

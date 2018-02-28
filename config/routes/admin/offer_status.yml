@@ -1,0 +1,23 @@
+admin_offer_statuses:
+    path: /
+    controller: App\Controller\Admin\OfferStatusController::index
+
+admin_offer_status_new:
+    path: /new
+    controller: App\Controller\Admin\OfferStatusController::new
+
+admin_offer_status_show:
+    path: /{id}
+    controller: App\Controller\Admin\OfferStatusController::show
+
+admin_offer_status_edit:
+    path: /edit/{id}
+    controller: App\Controller\Admin\OfferStatusController::edit
+
+admin_offer_status_disable:
+    path: /disable/{id}/{status}
+    controller: App\Controller\Admin\OfferStatusController::disable
+
+admin_offer_status_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\OfferStatusController::delete

@@ -29,9 +29,9 @@ class Article
     private $text;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $shortText;
+    private $shortText = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -46,9 +46,13 @@ class Article
 
     /**
      * @ORM\Column(type="string",nullable=true)
-
      */
     private $image;
+
+    /**
+     * @ORM\Column(name="start", type="boolean", nullable=true)
+     */
+    private $start;
 
     /**
      * @ORM\Column(name="is_active", type="boolean")
@@ -57,7 +61,7 @@ class Article
 
     public function __construct()
     {
-        $this->isActive = true;
+        $this->isActive = 0;
         $this->created = new \DateTime("now");
     }
     /**
@@ -151,9 +155,25 @@ class Article
     /**
      * @param mixed $image
      */
-    public function setImage(File $image)
+    public function setImage($image = null)
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStart()
+    {
+        return $this->start;
+    }
+
+    /**
+     * @param mixed $start
+     */
+    public function setStart($start)
+    {
+        $this->start = $start;
     }
 
     /**
@@ -187,6 +207,4 @@ class Article
     {
         $this->category = $category;
     }
-
-
 }

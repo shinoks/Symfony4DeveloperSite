@@ -1,0 +1,42 @@
+<div class="content-area home-area-1 recent-property" style="background-color: #FCFCFC;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                <h2>{{ 'latest_added_realizations'|trans }}</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="proerty-th">
+                {% for realization in latestRealizations %}
+                <div class="col-sm-6 col-md-3 p0">
+                    <div class="box-two proerty-item">
+                        <div class="item-thumb">
+                            <a href="{{ path('front_realization_show',{'id':realization.id}) }}" ><img src="{{ asset(realization.mainImage) }}"></a>
+                        </div>
+                        <div class="item-entry overflow">
+                            <h5><a href="{{ path('front_realization_show',{'id':realization.id}) }}" >{{ realization.name }} </a></h5>
+                            <div class="dot-hr"></div>
+                            <span class="pull-left"><b>{{ 'rooms'|trans }}</b> {{ realization.rooms }}
+                                |<b>{{ 'yardage'|trans }}</b> {{ realization.yardage }} </span>
+                            <span class="proerty-price pull-right">{{ realization.sellingPrice|number_format(0,'.',' ') }} {{ realization.currency }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <div class="col-sm-6 col-md-3 p0">
+                    <div class="box-tree more-proerty text-center">
+                        <div class="item-tree-icon">
+                            <i class="fa fa-th"></i>
+                        </div>
+                        <div class="more-entry overflow">
+                            <h5><a href="{{ path('front_realizations') }}" >{{ 'cant_decide'|trans }} </a></h5>
+                            <a class="btn border-btn more-black" href="{{ path('front_realizations') }}">{{ 'all_realizations'|trans }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

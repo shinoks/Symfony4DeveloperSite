@@ -1,0 +1,7 @@
+front_about_us:
+    path: /
+    controller: App\Controller\AboutUsController::index
+
+front_about_us_show:
+    path: /{id}
+    controller: App\Controller\AboutUsController::show

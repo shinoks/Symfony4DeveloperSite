@@ -1,0 +1,81 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/leftPanel.html.twig' %}
+
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        {% include 'back/header.html.twig' %}
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>{{ 'offerts_list'|trans }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">{{ 'offerts'|trans }} > {{ 'offerts_list'|trans }}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'back/flashMessages.html.twig' %}
+
+        <div class="content mt-3">
+            <div class="animated fade-in">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>{{ 'created'|trans }}</th>
+                            <th>{{ 'offer_number'|trans }}</th>
+                            <th>{{ 'username'|trans }}</th>
+                            <th>{{ 'ammount'|trans }}</th>
+                            <th>{{ 'interest'|trans }}</th>
+                            <th>{{ 'period'|trans }}</th>
+                            <th>{{ 'settlement'|trans }}</th>
+                            <th>{{ 'status'|trans }}</th>
+                            <th>Wyłącz</th>
+                            <th>Usuń</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for offer in offerts %}
+                            <tr>
+                                <td>{{ offer.id }}</td>
+                                <td>{{ offer.created|date('d-m-Y H:i:s') }}</td>
+                                <td><a href="{{ path('admin_offer_show',{'id':offer.id}) }}">{{ offer.offerNumber }}</a></td>
+                                <td><a href="{{ path('admin_user_show',{'id':offer.user.id}) }}">{{ offer.user.firstName }} {{ offer.user.lastName }}</a> </td>
+                                <td>{{ offer.ammount }}</td>
+                                <td>{{ offer.interest }} %</td>
+                                <td>{{ offer.period }} {{ 'month'|trans }}</td>
+                                <td>{{ offer.settlement }} {{ 'month'|trans }}</td>
+                                <td>{{ offer.status.name }} </td>
+                                {% if offer.isActive == 1 %}
+                                    <td><a href="{{ path('admin_offer_disable', { 'id':offer.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                                {% else %}
+                                    <td><a href="{{ path('admin_offer_disable', { 'id':offer.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                                {% endif %}
+                                <td><a href="{{ path('admin_offer_delete', { 'id':offer.id }) }}" class="btn btn-danger">Usuń</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+        <!--/.col-->
+
+{% endblock %}
+

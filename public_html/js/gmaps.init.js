@@ -23,7 +23,7 @@ function map() {
 	mapTypeControl: false,
 	overviewMapControl: false,
 	scrollwheel: false,
-	draggable: false,
+	draggable: true,
 	styles: styles
     });
 
@@ -33,7 +33,7 @@ function map() {
 	lat: -12.043333,
 	lng: -77.028333,
 	/* ,
-	 title: '',
+	 title: '4 Elite Investments',
 	 infoWindow: {
 	 content: '<p>HTML Content</p>'
 	 }*/

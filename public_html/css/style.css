@@ -719,9 +719,9 @@ label small{
 }
 .navbar-default .navbar-nav > li > a::after {
     background-color: #242a6d;
-    bottom: -24px;
+    bottom: -6px;
     content: "";
-    height: 5px;
+    height: 1px;
     left: 0;
     position: absolute;
     transition: all 0.2s ease 0s;
@@ -786,6 +786,7 @@ label small{
     box-shadow: none;
     border-left: none;
     border-right: none;
+    z-index: 100;
 }
 .nav-tabs > li > a{
     color: #666;
@@ -1009,11 +1010,9 @@ label small{
 
 .slider-area{
     position: relative;
-    height: 630px
 }
 #bg-slider .item img{
     width: 100%;
-    height: 630px
 }
 
 .slider-content{
@@ -1093,11 +1092,8 @@ page-header
         no-repeat scroll center top / cover;
     color:#FFF;
     position: relative;
-    min-height: 140px;
 }
 .page-head-content {
-    padding-top: 52px;
-    padding-bottom: 52px;
 }
 .page-head-content .page-title {
     margin: 0px;
@@ -1108,7 +1104,7 @@ page-header
     letter-spacing: 2px;
 }
 .content-area{
-    background-color: #FCFCFC; padding-bottom: 55px;
+    background-color: #FCFCFC;
 }
 .layout-switcher a{
     font-size: 25px;
@@ -1360,7 +1356,7 @@ Asside widgets CSS
 }
 
 .page-title {
-    padding-top: 55px;
+    padding-top: 15px;
 }
 .page-title h5{
     font-weight: 300;
@@ -1508,16 +1504,13 @@ Asside widgets CSS
 
 .testimonial{
     position: relative;
-    margin-top: 50px; 
+    margin-top: 10px;
 }
 .testimonial .item {
     padding-bottom: 67px;
     position: relative;
 }
 .testimonial .item .client-face {
-    position: absolute;
-    top: 112px;
-    right: 146px;
     text-align: center;
 }
 .client-face > img {
@@ -1776,10 +1769,8 @@ proerty-th-list
 } 
 .proerty-th-list .col-md-4 .item-thumb img {
     opacity: 0.7;
-    height: 230px;
     vertical-align: middle;
     border: 0px none;
-    width: 100%;
     padding-right: 25px;
 }
 
@@ -2003,7 +1994,6 @@ single property page
     margin-top: -35px;
 }
 .single-property-header {
-    padding-bottom: 25px;
     position: relative;
     clear: both;
     overflow: hidden;

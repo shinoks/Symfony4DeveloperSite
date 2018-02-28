@@ -22,3 +22,31 @@ admin_article:
 admin_category:
     resource: "admin/category.yml"
     prefix: /category
+
+admin_config:
+    resource: "admin/config.yml"
+    prefix: /config
+
+admin_contact:
+    resource: "admin/contacts.yml"
+    prefix: /contacts
+
+admin_offer:
+    resource: "admin/offer.yml"
+    prefix: /offer
+
+admin_offer_statuses:
+    resource: "admin/offer_status.yml"
+    prefix: /offer_status
+
+admin_file_manager:
+    resource: "admin/file_manager.yml"
+    prefix: /file_manager
+
+admin_realization:
+    resource: "admin/realization.yml"
+    prefix: /realization
+
+admin_comment:
+    resource: "admin/comments.yml"
+    prefix: /comments

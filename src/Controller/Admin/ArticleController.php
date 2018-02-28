@@ -3,10 +3,13 @@ namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Finder\Finder;
 use App\Form\ArticleType;
+use App\Service\FileUploader;
 
 class ArticleController extends Controller
 {
@@ -38,13 +41,21 @@ class ArticleController extends Controller
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->find($id);
+
+
+        $imageOld = $article->getImage();
         if($article){
             $form = $this->createForm(ArticleType::class, $article);
-
+            if($imageOld){
+                $article->setImage($imageOld);
+            }
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $article = $form->getData();
+                if(!$article->getImage()){
+                    $article->setImage($imageOld);
+                }
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($article);
@@ -52,7 +63,7 @@ class ArticleController extends Controller
 
                 $this->session->getFlashBag()->add('success', 'Artykuł został zmieniony');
 
-                return $this->redirectToRoute('admin_article_edit',['id'=> $id]);
+                return $this->redirectToRoute('admin_article_edit',['id'=>$id]);
             }
 
             return $this->render('back/article_edit.html.twig',array(
@@ -106,7 +117,33 @@ class ArticleController extends Controller
         $em->persist($article);
         $em->flush();
 
-        $this->session->getFlashBag()->add('success', 'Artykuł został wyłączony');
+        if($status == 1){
+            $this->session->getFlashBag()->add('success', 'Artykuł został włączony ze strony głównej');
+        }else {
+            $this->session->getFlashBag()->add('success', 'Artykuł został wyłączony ze strony głównej');
+        }
+
+        return $this->redirectToRoute('admin_articles');
+    }
+
+    /**
+     * @return Response
+     */
+    public function start($id, $status)    {
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->find($id);
+        $article->setStart($status);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($article);
+        $em->flush();
+
+        if($status == 1){
+            $this->session->getFlashBag()->add('success', 'Artykuł będzie wyświetlany na stronie głównej');
+        }else {
+            $this->session->getFlashBag()->add('success', 'Artykuł nie będzie wyświetlany na stronie głównej');
+        }
 
         return $this->redirectToRoute('admin_articles');
     }

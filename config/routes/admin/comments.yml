@@ -1,0 +1,15 @@
+admin_comments:
+    path: /
+    controller: App\Controller\Admin\CommentController::index
+
+admin_comment_show:
+    path: /{id}
+    controller: App\Controller\Admin\CommentController::show
+
+admin_comment_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\CommentController::delete
+
+admin_comment_accept:
+    path: /accept/{id}
+    controller: App\Controller\Admin\CommentController::accept

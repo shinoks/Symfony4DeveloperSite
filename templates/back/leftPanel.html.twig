@@ -14,15 +14,48 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="{{ path('admin') }}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                    <a href="{{ path('admin') }}"> <i class="menu-icon fa fa-dashboard"></i>{{ 'dashboard'|trans }} </a>
                 </li>
-                <li class="active">
-                    <a href="{{ path('admin_users') }}"> <i class="menu-icon fa fa-users"></i>Użytkownicy </a>
+                <li class="">
+                    <a href="{{ path('admin_config') }}"> <i class="menu-icon fa fa-cog"></i>{{ 'config'|trans }} </a>
                 </li>
-                <li class="active">
-                    <a href="{{ path('admin_admins') }}"> <i class="menu-icon fa fa-users"></i>Administratorzy </a>
+                <li class="">
+                    <a href="{{ path('admin_users') }}"> <i class="menu-icon fa fa-users"></i>{{ 'users'|trans }} </a>
+                </li>
+                <li class="">
+                    <a href="{{ path('admin_admins') }}"> <i class="menu-icon fa fa-users"></i>{{ 'admins'|trans }} </a>
+                </li>
+                <li class="">
+                    <a href="{{ path('admin_contacts') }}"> <i class="menu-icon fa ti-email"></i>{{ 'contact_forms'|trans }} </a>
+                </li>
+                <li class="">
+                    <a href="{{ path('admin_comments') }}"> <i class="menu-icon fa ti-email"></i>{{ 'comments'|trans }} </a>
+                </li>
+                <h3 class="menu-title">{{ 'offerts'|trans }}</h3><!-- /.menu-title -->
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="menu-icon fa la-file-text-o"></i>{{ 'offerts'|trans }}
+                    </a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-bars"></i><a href="{{ path('admin_offerts') }}">{{ 'offerts_list'|trans }}</a></li>
+                        <li><i class="fa fa-bars"></i><a href="{{ path('admin_offer_statuses') }}">{{ 'offer_statuses'|trans }}</a></li>
+                    </ul>
+                </li>
+                <h3 class="menu-title">{{ 'realizations'|trans }}</h3>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="menu-icon fa la-file-text-o"></i>{{ 'realizations'|trans }}
+                    </a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-bars"></i><a href="{{ path('admin_realizations') }}">{{ 'realizations_list'|trans }}</a></li>
+                        <li><i class="fa fa-bars"></i><a href="{{ path('admin_realization_new') }}">{{ 'realization_new'|trans }}</a></li>
+                    </ul>
                 </li>
                 <h3 class="menu-title">CMS</h3><!-- /.menu-title -->
+
+                <li class="">
+                    <a href="{{ path('file_manager',{'conf':'default'}) }}"> <i class="menu-icon fa ti-files"></i>Zarządzanie plikami </a>
+                </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file-o"></i>Artykuły</a>
                     <ul class="sub-menu children dropdown-menu">
@@ -35,14 +68,6 @@
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-bars"></i><a href="{{ path('admin_categories') }}">Lista kategorii</a></li>
                         <li><i class="fa fa-plus-square"></i><a href="{{ path('admin_category_new') }}">Dodaj kategorię</a></li>
-                    </ul>
-                </li>
-                <h3 class="menu-title">Inwestycje</h3><!-- /.menu-title -->
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa la-file-text-o"></i>Inwestorzy</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-bars"></i><a href="ui-buttons.html">Lista inwestorów</a></li>
-                        <li><i class="fa fa-plus-square"></i><a href="ui-badges.html">Dodaj inwestora</a></li>
                     </ul>
                 </li>
 

@@ -1,0 +1,11 @@
+admin_contacts:
+    path: /
+    controller: App\Controller\Admin\ContactController::index
+
+admin_contact_show:
+    path: /{id}
+    controller: App\Controller\Admin\ContactController::show
+
+admin_contact_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\ContactController::delete

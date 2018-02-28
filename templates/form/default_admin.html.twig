@@ -7,6 +7,15 @@
     </div>
 {% endblock %}
 
+{% block integer_widget %}
+    <div class="form-group">
+        {% set type = type|default('number') %}
+        <div class="input-group">
+            <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        </div>
+    </div>
+{% endblock %}
+
 {% block email_widget %}
     <div class="form-group">
         {% set type = type|default('email') %}

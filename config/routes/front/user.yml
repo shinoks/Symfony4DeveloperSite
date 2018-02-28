@@ -1,7 +1,9 @@
-front_articles:
-    path: /
-    controller: App\Controller\FrontController::articles
-
-front_article_show:
-    path: /{id}
-    controller: App\Controller\FrontController::articleShow
+front_user_register:
+    path: /register
+    controller: App\Controller\UserController::register
+front_user_account:
+    path: /account
+    controller: App\Controller\UserController::account
+front_user_account_edit:
+    path: /account/edit
+    controller: App\Controller\UserController::edit

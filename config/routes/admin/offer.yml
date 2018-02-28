@@ -1,0 +1,19 @@
+admin_offerts:
+    path: /
+    controller: App\Controller\Admin\OfferController::index
+
+admin_offer_show:
+    path: /{id}
+    controller: App\Controller\Admin\OfferController::show
+
+admin_offer_edit:
+    path: /edit/{id}
+    controller: App\Controller\Admin\OfferController::edit
+
+admin_offer_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\OfferController::delete
+
+admin_offer_disable:
+    path: /disable/{id}/{status}
+    controller: App\Controller\Admin\OfferController::disable

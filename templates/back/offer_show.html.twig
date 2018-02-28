@@ -1,0 +1,77 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/leftPanel.html.twig' %}
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+    {% include 'back/header.html.twig' %}
+
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1>{{ 'offer'|trans }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li class="active"><a href="{{ path('admin_offerts') }}">{{ 'offerts_list'|trans }}</a> > {{ 'show'|trans }}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'back/flashMessages.html.twig' %}
+
+    <div class="card">
+        <div class="card-body">
+            <section class="card">
+                <div class="card-header user-header alt bg-dark">
+                    <div class="media-body">
+                        <h2 class="text-light">
+                            {{ 'offer_number'|trans }}: {{ offer.offerNumber }}
+                        </h2>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <b>{{ 'post_date'|trans }}:</b>
+                        {{ offer.created|date('d-m-Y H:i:s') }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'user_data'|trans }}:</b>
+                        <a href="{{ path('admin_user_show',{'id':offer.user.id}) }}">{{ offer.user.firstName }} {{ offer.user.lastName }}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'ammount'|trans }}:</b>
+                        {{ offer.ammount }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'interest'|trans }}:</b>
+                        {{ offer.interest }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'period'|trans }}:</b>
+                        {{ offer.period }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'settlement'|trans }}:</b>
+                        {{ offer.settlement }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'status'|trans }}:</b>
+                        {{ offer.status.name }}
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Table(name="users")
@@ -34,6 +35,11 @@ class User implements AdvancedUserInterface, \Serializable
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=60)
+     */
+    private $phone;
+
+    /**
      * @ORM\Column(type="string", length=60, nullable=true)
      */
     private $firstName;
@@ -53,9 +59,21 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="user")
+     */
+    private $offers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->isActive = true;
+        $this->offers = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -96,6 +114,22 @@ class User implements AdvancedUserInterface, \Serializable
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param mixed $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
     }
 
     /**
@@ -167,7 +201,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getRoles()
+    public function getRoles(): array
     {
         return $this->roles;
     }
@@ -181,6 +215,22 @@ class User implements AdvancedUserInterface, \Serializable
         $this->roles = $roles;
 
         return array_unique($this->roles);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOffers()
+    {
+        return $this->offers;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComments(): ?array
+    {
+        return $this->comments;
     }
 
     public function eraseCredentials()

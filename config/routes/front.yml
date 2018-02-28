@@ -1,9 +1,9 @@
 index:
     path: /
-    controller: App\Controller\FrontController::startPage
+    controller: App\Controller\DefaultController::startPage
 contact:
     path: /contact
-    controller: App\Controller\FrontController::contactPage
+    controller: App\Controller\DefaultController::contactPage
 login:
     path: /login
     controller: App\Controller\SecurityController::login
@@ -11,8 +11,36 @@ logout:
     path: /logout
 register:
     path: /register
-    controller: App\Controller\FrontController::userRegister
+    controller: App\Controller\UserController::register
 
 front_article:
     resource: "front/article.yml"
     prefix: /article
+
+front_user:
+    resource: "front/user.yml"
+    prefix: /user
+
+front_offer:
+    resource: "front/offer.yml"
+    prefix: /offer
+
+front_realization:
+    resource: "front/realization.yml"
+    prefix: /realization
+
+front_about_us:
+    resource: "front/about_us.yml"
+    prefix: /about_us
+
+front_news:
+    resource: "front/news.yml"
+    prefix: /news
+
+front_sublease_zone:
+    resource: "front/sublease_zone.yml"
+    prefix: /sublease_zone
+
+front_investor_zone:
+    resource: "front/investor_zone.yml"
+    prefix: /investor_zone

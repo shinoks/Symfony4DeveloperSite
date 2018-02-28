@@ -1,8 +1,8 @@
 username: Użytkownik
 password: Hasło
 email: Email
-first name: Imię
-last name: Nazwisko
+first_name: Imię
+last_name: Nazwisko
 login: Logowanie
 logout: Wyloguj
 register: Zarejestruj się
@@ -15,3 +15,119 @@ page: Strona
 read_more: Czytaj więcej
 contact: Kontakt
 about_us: O nas
+dashboard: Panel startowy
+config: Konfiguracja
+users: Użytkownicy
+admins: Admini
+edit_config: Edycja konfiguracji
+title: Tytuł
+phone: Telefon
+address: Adres
+page_title: Tytuł strony
+yours_account: Twoje konto
+name: Nazwa
+description: Opis
+edit: Edytuj
+short_text: Krótki opis
+text: Opis
+category: Kategoria
+main_image: Obrazek główny
+message: Wiadomość
+contact_form: Formularz kontaktowy
+contact_forms: Formularze kontaktowe
+user: Użytkownik
+sender: Nadawca
+post_date: Data wysłania
+delete: Usuń
+user_not_logged: Użytkownik niezalogowany
+user_data: Dane użytkownika
+reply: Odpowiedz
+event: Wydarzenie
+event_name: Nazwa wydarzenia
+nickname: Przydomek
+comment: Komentarz
+comments: Komentarze
+offer_list: Lista ofert
+make_an_offer: Złóż ofertę
+make_a_loan_offer: Złóż ofertę pożyczki
+ammount: Kwota
+on_period: Na okres
+loan_settlement: Sposób rozliczania odsetek
+offerts: Oferty
+offerts_list: Lista Ofert
+created: Utworzono
+offer_number: Numer oferty
+interest: Odsetki
+period: Czas trwania
+settlement: Spłata odsetek
+month: msc
+status: Status
+investor_zone: Strefa inwestora
+sublease_zone: Strefa inwestycji
+realizations: Realizacje
+news: Aktualności
+proposal: Wniosek
+show: Pokaż
+offer: Oferta
+offer_statuses: Statusy ofert
+offer_status: Status oferty
+our_customer_said: Recenzje klientów
+you_can_trust_us: Możesz nam zaufać
+registered_investors: Zarejestrowani inwestorzy
+offerts_in_stock: Liczba złożonych ofert
+offerts_ammount: Kwota ofert
+completed_offers: Zakończone oferty
+looking_for_investment: Szukasz inwestycji
+looking_for_investor: Szukasz inwestora
+questions: Pytania
+call_us: Zadzwoń do Nas
+links: Linki
+newsletter: Newsletter
+selling_price: Kwota sprzedaży
+currency: Waluta
+volume: Rynek
+city: Miasto
+rooms: Pokoje
+default: Podstawowe
+basic: Podstawowe
+media: Media
+security: Bezpieczeństwo
+additional_info: Dodatkowe informacje
+add_another_value: Dodaj kolejną wartość
+realizations_list: Lista realizacji
+realization_new: Nowa realizacja
+realization_edit: Edycja realizacji
+recommended: Polecane
+image_miniature: Miniaturka obrazku
+additional_images: Dodatkowe obrazki
+select-all: Zaznacz wszystko
+yardage: Metraż
+latest_added_realizations: Ostatnie realizacje
+cant_decide: Nie możesz wybrać?
+all_realizations: Wszystkie realizacje
+write_to_us: Napisz do nas
+input:
+    default: Podstawowy
+table:
+    name: Nazwa
+    data: Data
+    size: Wielkość
+    dimension: Wymiary
+    actions: Akcje
+size:
+    kb: Kb
+    mb: Mb
+file:
+    add:
+        success: Plik dodany poprawnie
+button:
+    save: Zapisz
+    tree: Drzewo
+    refresh: Odśwież
+    cancle: Anuluj
+    add:
+        files: Plik
+        folder: Folder
+    delete:
+        selected: Usuń wybrane
+        action: Akcje

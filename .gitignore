@@ -3,6 +3,7 @@
 /.idea/
 .env
 /public/bundles/
+/public/upload/files/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###

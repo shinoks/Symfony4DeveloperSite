@@ -1,0 +1,91 @@
+{% set title = 'account'|trans %}
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+    {% include 'front/addons/top.html.twig' %}
+
+    <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
+        <div class="container">
+            <div class="row">
+                <div class="blog-lst col-md-12 pl0">
+
+                    {% include 'front/addons/flashMessages.html.twig' %}
+
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#home">Profil</a></li>
+                        <li><a data-toggle="tab" href="#menu1">Lista ofert</a></li>
+                        <li><a data-toggle="tab" href="#menu2">Złóż ofertę</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active">
+                            <div class="profile-header">
+                                <h3>
+                                    <b>{{ 'yours_account'|trans }}</b><br/>
+                                </h3>
+                            </div>
+                            <div class="">
+                                <label>{{ 'first_name'|trans }}:</label>
+                                {{ app.user.firstName }}<br/>
+                                <label>{{ 'last_name'|trans }}:</label>
+                                {{ app.user.lastName }}<br/>
+                                <label>{{ 'email'|trans }}:</label>
+                                {{ app.user.email }}<br/>
+                            </div>
+                            <a class="btn btn-default btn-border" href="{{ path('front_user_account_edit') }}">{{ 'edit'|trans }}</a>
+                        </div>
+                        <div id="menu1" class="tab-pane fade">
+                            <div class="profile-header">
+                            <h2>{{ 'offer_list'|trans }}</h2>
+                            </div>
+                            <div class="">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>{{ 'offer_number'|trans }}</th>
+                                            <th>{{ 'ammount'|trans }}</th>
+                                            <th>{{ 'interest'|trans }}</th>
+                                            <th>{{ 'period'|trans }}</th>
+                                            <th>{{ 'settlement'|trans }}</th>
+                                            <th>{{ 'status'|trans }}</th>
+                                        </tr>
+                                    </thead>
+                                {% for offer in app.user.offers %}
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ offer.offerNumber }}</td>
+                                            <td>{{ offer.ammount }}</td>
+                                            <td>{{ offer.interest }}</td>
+                                            <td>{{ offer.period }}</td>
+                                            <td>{{ offer.settlement }}</td>
+                                            <td>{{ offer.status }}</td>
+                                        </tr>
+                                    </tbody>
+                                {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                        <div id="menu2" class="tab-pane fade">
+                            <div class="profile-header">
+                                <h3>
+                                    <b>{{ 'make_an_offer'|trans }}</b><br/>
+                                </h3>
+                            </div>
+                            <div class="">
+                                <a class="btn btn-warning" href="{{ path('front_offer_new') }}">{{ 'proposal'|trans }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% endblock %}

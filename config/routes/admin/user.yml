@@ -10,6 +10,10 @@ admin_user_edit:
     path: /edit/{id}
     controller: App\Controller\Admin\UserController::edit
 
+admin_user_show:
+    path: /show/{id}
+    controller: App\Controller\Admin\UserController::show
+
 admin_user_disable:
     path: /disable/{id}/{status}
     controller: App\Controller\Admin\UserController::disable

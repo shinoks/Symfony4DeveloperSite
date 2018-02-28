@@ -1,0 +1,75 @@
+{% set title = 'account'|trans %}
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+    {% include 'front/addons/top.html.twig' %}
+
+    <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
+        <div class="container">
+            <div class="row">
+                <div class="blog-lst col-md-12 pl0">
+                    <h2><b>{{ 'make_an_offer'|trans }}</b></h2>
+
+                    {% form_theme form 'form/default_user.html.twig' %}
+
+                    {{ form_start(form) }}
+
+                    <div class="well">
+                        <label>
+                            {{ 'user_data'|trans }}
+                        </label><br/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <b>{{ 'first_name'|trans }}:</b> {{ app.user.firstName }}<br/>
+                                <b>{{ 'last_name'|trans }}:</b> {{ app.user.lastName }}<br/>
+                            </div>
+                            <div class="col-md-6">
+                                <b>{{ 'phone'|trans }}:</b> {{ app.user.phone }}<br/>
+                                <b>{{ 'email'|trans }}:</b> {{ app.user.email }}<br/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="well">
+                        <div class="row">
+                            <div class="center-block">
+                                <label>
+                                    {{ 'make_a_loan_offer'|trans }}
+                                </label><br/>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    {{ 'ammount'|trans }}
+                                </div>
+                                <div class="col-md-9">
+                                    {{ form_widget(form.ammount) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    {{ 'on_period'|trans }}
+                                </div>
+                                <div class="col-md-9">
+                                    {{ form_widget(form.period) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    {{ 'loan_settlement'|trans }}
+                                </div>
+                                <div class="col-md-9">
+                                    {{ form_widget(form.settlement) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="well">
+                        Text .......
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

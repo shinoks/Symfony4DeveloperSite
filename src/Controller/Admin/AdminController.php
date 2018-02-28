@@ -42,7 +42,7 @@ class AdminController extends Controller
             ->findAll();
 
         return $this->render('back/admins.html.twig',array(
-            'admins'=> $admins
+            'admins'=> $admins,
         ));
     }
 
@@ -83,7 +83,7 @@ class AdminController extends Controller
         }else {
             $this->session->getFlashBag()->add('danger', 'Admin nie został znaleziony');
 
-            return $this->redirectToRoute('admin_categories');
+            return $this->redirectToRoute('admin_admins');
         }
     }
 
@@ -110,7 +110,7 @@ class AdminController extends Controller
             return $this->redirectToRoute('admin_admin_edit',array('id'=>$admin->getId()));
         }
 
-        return $this->render('back/admin_new.html.twig',array(
+        return $this->render('back/admin_edit.html.twig',array(
             'form'=> $form->createView()
         ));
     }

@@ -1,0 +1,7 @@
+front_news:
+    path: /
+    controller: App\Controller\NewsController::index
+
+front_news_show:
+    path: /{id}
+    controller: App\Controller\NewsController::show
