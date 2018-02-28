@@ -1,7 +1,7 @@
 App\Entity\Subscriber:
     properties:
-        name:
+        email:
             - NotBlank: ~
-            - Length:
-                min: 3
-                minMessage: 'Tytuł artykułu musi mieć minimum 3 znaki.'
+            - Email:
+                message: 'Podany email nie jest poprawnym adresem email.'
+                checkMX: true

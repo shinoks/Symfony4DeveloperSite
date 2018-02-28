@@ -54,19 +54,7 @@
                 </div>
                 <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                     <div class="single-footer news-letter">
-                        <h4>{{ 'newsletter'|trans }}</h4>
-                        <div class="footer-title-line"></div>
-                        <p>Zapisz się do newslettera by otrzymywać nowości ze strony.</p>
-
-                        <form>
-                            <div class="input-group">
-                                <input class="form-control" type="text" placeholder="E-mail ... ">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
-                                </span>
-                            </div>
-                        </form>
-
+                        {{ render(controller('App\\Controller\\SubscriberController::getSubscribeForm')) }}
                         <div class="social pull-right">
                             <ul>
                                 <li><a class="wow fadeInUp animated" href="https://twitter.com/4eliteinvestments"><i class="fa fa-twitter"></i></a></li>

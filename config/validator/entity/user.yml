@@ -14,6 +14,7 @@ App\Entity\User:
                 minMessage: 'Twoje hasło musi mieć minimum 7 znaków'
                 maxMessage: 'Twoje hasło może mieć maksimum 50 znaków'
         email:
+            - NotBlank: ~
             - Email:
                 message: 'Podany email nie jest poprawnym adresem email.'
                 checkMX: true
