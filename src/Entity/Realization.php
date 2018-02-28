@@ -34,11 +34,6 @@ class Realization
     private $folderWithImages;
 
     /**
-     * @ORM\Column(type="json_array",nullable=true)
-     */
-    private $additionalImages;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $sellingPrice;
@@ -317,22 +312,6 @@ class Realization
     public function setAdditionalInfo(array $additionalInfo)
     {
         $this->additionalInfo = $additionalInfo;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAdditionalImages()
-    {
-        return $this->additionalImages;
-    }
-
-    /**
-     * @param mixed $additionalImages
-     */
-    public function setAdditionalImages(array $additionalImages)
-    {
-        $this->additionalImages = $additionalImages;
     }
 
     /**

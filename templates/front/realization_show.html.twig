@@ -49,9 +49,9 @@
                                                 </div>
 
                                                 <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                                    {% for additionalImage in realization.additionalImages %}
-                                                        <li data-thumb="{{ asset(additionalImage) }}">
-                                                            <img src="{{ asset(additionalImage) }}" />
+                                                    {% for image in images %}
+                                                        <li data-thumb="{{ asset(image.pathName) }}">
+                                                            <img src="{{ asset(image.pathName) }}" />
                                                         </li>
                                                     {% endfor %}
                                                 </ul>
