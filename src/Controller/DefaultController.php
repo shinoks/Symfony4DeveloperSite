@@ -67,7 +67,7 @@ class DefaultController extends Controller
                 ->find(1);
 
             $message = (new \Swift_Message('Formularz kontaktowy:'.$contact->getTitle()))
-                ->setFrom($config->getEmail())
+                ->setFrom('info@grupaformat.pl')
                 ->setReplyTo($contact->getSend())
                 ->setTo($config->getEmail())
                 ->setBody(
@@ -80,8 +80,9 @@ class DefaultController extends Controller
             ;
 
             $mailer->send($message);
-
-            return $this->redirectToRoute('contact');
+            $mailer->send($message);
+            var_dump($mailer);
+            //return $this->redirectToRoute('contact');
         }
         return $this->render('front/contact.html.twig',array(
             'session' => $this->session,
