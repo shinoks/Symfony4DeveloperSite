@@ -80,8 +80,6 @@ class DefaultController extends Controller
             ;
 
             $mailer->send($message);
-            $mailer->send($message);
-            var_dump($mailer);
             //return $this->redirectToRoute('contact');
         }
         return $this->render('front/contact.html.twig',array(
