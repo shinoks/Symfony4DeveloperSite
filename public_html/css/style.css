@@ -786,7 +786,7 @@ label small{
     box-shadow: none;
     border-left: none;
     border-right: none;
-    z-index: 100;
+    z-index: 90;
 }
 .nav-tabs > li > a{
     color: #666;
