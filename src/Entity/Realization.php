@@ -78,6 +78,11 @@ class Realization
     private $security;
 
     /**
+     * @ORM\Column(type="json_array",nullable=true)
+     */
+    private $additionalInfo;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
@@ -290,6 +295,22 @@ class Realization
     public function setSecurity(array $security)
     {
         $this->security = $security;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdditionalInfo()
+    {
+        return $this->additionalInfo;
+    }
+
+    /**
+     * @param mixed $additionalInfo
+     */
+    public function setAdditionalInfo($additionalInfo)
+    {
+        $this->additionalInfo = $additionalInfo;
     }
 
     /**
