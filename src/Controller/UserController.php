@@ -1,13 +1,13 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\Offer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
+use App\Entity\Config;
 use App\Form\UserType;
 
 class UserController extends Controller
@@ -22,7 +22,7 @@ class UserController extends Controller
      /**
      * @return Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -32,15 +32,34 @@ class UserController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setRoles(array('ROLE_USER'));
-            $user->setIsActive(1);
+            $user->setIsActive(0);
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
-
+            $user->setHash(uniqid("",true));
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
             $this->session = new Session();
-            $this->session->getFlashBag()->add('success', 'Zostałeś zarejestrowany');
+            $this->session->getFlashBag()->add('success', 'Zostałeś zarejestrowany. Potwierdź rejestrację klikając w link w przesłanej wiadomości email');
+
+            $config = $this->getDoctrine()
+                ->getRepository(Config::class)
+                ->find(1);
+
+            $message = (new \Swift_Message('Formularz rejestracyjny z '.$config->getTitle()))
+                ->setFrom('info@grupaformat.pl')
+                ->setReplyTo($config->getEmail())
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'emails/register_form.html.twig',
+                        ['user' => $user, 'config' => $config]
+                    ),
+                    'text/html'
+                )
+            ;
+
+            $mailer->send($message);
 
             return $this->redirectToRoute('login');
         }
@@ -50,6 +69,24 @@ class UserController extends Controller
         ));
     }
 
+    public function enable($h)
+    {
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['hash' => $h]);
+        if($user){
+            $user->setIsActive(1);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $this->session->getFlashBag()->add('success', 'Użytkownik został aktywowany. Możesz się zalogować');
+        }
+
+        return $this->redirectToRoute('login');
+    }
+
     /**
      * @return Response
      */
@@ -57,7 +94,6 @@ class UserController extends Controller
     {
 
         return $this->render('front/account.html.twig',array());
-
     }
 
     /**
