@@ -61,6 +61,17 @@
     <script src="{{ asset('js/price-range.js') }}"></script>
 
     <script src="{{ asset('js/main.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $(window).scroll(function(){
+                if ($(this).scrollTop() > 40) {
+                    $('#navi').addClass('fixed_menu');
+                } else {
+                    $('#navi').removeClass('fixed_menu');
+                }
+            });
+        });
+    </script>
 {% endblock %}
 
 </body>

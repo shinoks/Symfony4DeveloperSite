@@ -26,19 +26,7 @@ class RealizationType extends AbstractType
                 'label' => 'main_image',
                 'required' => false
             ))
-        ->add('additionalImages',CollectionType::class,[
-                'entry_type'    => TextType::class,
-                'allow_add'    => true,
-                'allow_delete' => true,
-                'delete_empty' => true,
-                'prototype'    => true,
-                'by_reference' => false,
-                'required' => false,
-                'attr'         => [
-                    'class' => "additionalImages-collection",
-                    'placeholder' => '/uploads/files/nazwapliku.jpg'
-                ],
-            ])
+        ->add('folderWithImages',TextType::class,['label'=>'folder_with_images'])
         ->add('sellingPrice',IntegerType::class,['label'=>'selling_price'])
         ->add('currency',ChoiceType::class,[
             'label'=>'currency',

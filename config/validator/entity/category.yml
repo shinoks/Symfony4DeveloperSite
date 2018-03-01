@@ -1,0 +1,7 @@
+App\Entity\Category:
+    properties:
+        name:
+            - Length:
+                min: 3
+                minMessage: 'Nazwa kategorii musi mieć minimum 3 znaki'
+            - NotBlank: ~

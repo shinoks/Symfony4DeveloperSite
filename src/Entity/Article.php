@@ -31,7 +31,7 @@ class Article
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $shortText = null;
+    private $shortText;
 
     /**
      * @ORM\Column(type="datetime")

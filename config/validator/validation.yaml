@@ -1,0 +1,14 @@
+user:
+    resource: "validator/entity/user.yml"
+admin:
+    resource: "validator/entity/admin.yml"
+article:
+    resource: "validator/entity/article.yml"
+category:
+    resource: "validator/entity/category.yml"
+config:
+    resource: "validator/entity/config.yml"
+subscriber:
+    resource: "validator/entity/subscriber.yml"
+newsletter:
+    resource: "validator/entity/newsletter.yml"

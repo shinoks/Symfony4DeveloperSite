@@ -1,0 +1,35 @@
+App\Entity\Admin:
+    properties:
+        username:
+            - NotBlank: ~
+            - Length:
+                min: 7
+                max: 50
+                minMessage: 'Twoja nazwa użytkownika musi mieć minimum 7 znaków'
+                maxMessage: 'Twoja nazwa użytkownika może mieć maksimum 50 znaków'
+        password:
+            - NotBlank: ~
+            - Length:
+                min: 7
+                max: 50
+                minMessage: 'Twoje hasło musi mieć minimum 7 znaków'
+                maxMessage: 'Twoje hasło może mieć maksimum 50 znaków'
+        email:
+            - NotBlank: ~
+            - Email:
+                message: 'Podany email nie jest poprawnym adresem email.'
+                checkMX: true
+        firstName:
+            - NotBlank: ~
+            - Length:
+                min: 3
+                max: 50
+                minMessage: 'Twoje imię musi mieć minimum znaków'
+                maxMessage: 'Twoje imię może mieć maksimum znaków'
+        lastName:
+            - NotBlank: ~
+            - Length:
+                min: 3
+                max: 50
+                minMessage: 'Twoje nazwisko musi mieć minimum znaków'
+                maxMessage: 'Twoje nazwisko może mieć maksimum znaków'

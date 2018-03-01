@@ -42,7 +42,7 @@ class RealizationController extends Controller
         $realization = $this->getDoctrine()
             ->getRepository(Realization::class)
             ->find($id);
-        $images = $this->getUploadedFilesInDir('test');
+        $images = $this->getUploadedFilesInDir($realization->getFolderWithImages());
 
         return $this->render('front/realization_show.html.twig',array(
             'realization'=> $realization,

@@ -1,0 +1,7 @@
+App\Entity\Subscriber:
+    properties:
+        email:
+            - NotBlank: ~
+            - Email:
+                message: 'Podany email nie jest poprawnym adresem email.'
+                checkMX: true

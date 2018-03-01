@@ -1,0 +1,27 @@
+App\Entity\Config:
+    properties:
+        title:
+            - Length:
+                min: 3
+                minMessage: 'Twoja nazwa użytkownika musi mieć minimum 3 znaków'
+            - NotBlank: ~
+        email:
+            - Length:
+                min: 3
+                minMessage: 'Twoja nazwa użytkownika musi mieć minimum 3 znaków'
+            - NotBlank: ~
+            - Email:
+                message: 'Podany email nie jest poprawnym adresem email.'
+                checkMX: true
+        phone:
+            - Length:
+                min: 9
+                minMessage: 'Twój telefon nie jest poprawny'
+            - NotBlank: ~
+        address:
+            - Length:
+                min: 3
+                minMessage: 'Podany adres jest za krótki'
+            - NotBlank: ~
+        description:
+            - NotBlank: ~

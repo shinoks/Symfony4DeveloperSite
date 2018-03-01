@@ -20,6 +20,6 @@ class ContactType extends AbstractType
         ->add('message',TextareaType::class,['label'=>'message'])
         ->add('send',EmailType::class,['label'=>'sender'])
 
-        ->add('save', SubmitType::class);
+        ->add('save', SubmitType::class,['label' => 'send']);
     }
 }

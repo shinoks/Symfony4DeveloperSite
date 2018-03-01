@@ -50,6 +50,11 @@ class User implements AdvancedUserInterface, \Serializable
     private $lastName;
 
     /**
+     * @ORM\Column(type="string", length=35, nullable=true)
+     */
+    private $hash;
+
+    /**
      * @ORM\Column(type="json_array")
      */
     private $roles = array();
@@ -167,7 +172,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getisActive(): bool
+    public function getIsActive(): bool
     {
         return $this->isActive;
     }
@@ -196,6 +201,22 @@ class User implements AdvancedUserInterface, \Serializable
     public function getPassword(): ?string
     {
         return $this->password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHash()
+    {
+        return $this->hash;
+    }
+
+    /**
+     * @param mixed $hash
+     */
+    public function setHash($hash)
+    {
+        $this->hash = $hash;
     }
 
     /**

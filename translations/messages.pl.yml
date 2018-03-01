@@ -106,6 +106,8 @@ latest_added_realizations: Ostatnie realizacje
 cant_decide: Nie możesz wybrać?
 all_realizations: Wszystkie realizacje
 write_to_us: Napisz do nas
+send: Wyślij
+faq: Faq
 input:
     default: Podstawowy
 table:

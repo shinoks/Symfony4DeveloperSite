@@ -29,14 +29,8 @@ class Realization
 
     /**
      * @ORM\Column(type="string",nullable=true)
-
      */
     private $folderWithImages;
-
-    /**
-     * @ORM\Column(type="json_array",nullable=true)
-     */
-    private $additionalImages;
 
     /**
      * @ORM\Column(type="integer")
@@ -87,6 +81,11 @@ class Realization
      * @ORM\Column(type="json_array",nullable=true)
      */
     private $additionalInfo;
+
+    /**
+     * @ORM\Column(type="json_array",nullable=true)
+     */
+    private $additionalImages;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -314,25 +313,9 @@ class Realization
     /**
      * @param mixed $additionalInfo
      */
-    public function setAdditionalInfo(array $additionalInfo)
+    public function setAdditionalInfo($additionalInfo)
     {
         $this->additionalInfo = $additionalInfo;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAdditionalImages()
-    {
-        return $this->additionalImages;
-    }
-
-    /**
-     * @param mixed $additionalImages
-     */
-    public function setAdditionalImages(array $additionalImages)
-    {
-        $this->additionalImages = $additionalImages;
     }
 
     /**

@@ -1,0 +1,10 @@
+<h4>{{ 'newsletter'|trans }}</h4>
+<div class="footer-title-line"></div>
+<p>Zapisz się do newslettera by otrzymywać nowości ze strony.</p>
+
+{% form_theme form 'form/default_user.html.twig' %}
+
+{{ form_start(form) }}
+{{ form_widget(form) }}
+
+{{ form_end(form) }}
