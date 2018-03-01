@@ -80,8 +80,8 @@ class DefaultController extends Controller
             ;
 
             $mailer->send($message);
-            //return $this->redirectToRoute('contact');
         }
+
         return $this->render('front/contact.html.twig',array(
             'session' => $this->session,
             'form' => $form->createView()
