@@ -5,3 +5,4 @@ twig:
     globals:
         config: '@App\Service\Config'
         news: '@App\Service\News'
+        menu: '@App\Service\Menu'

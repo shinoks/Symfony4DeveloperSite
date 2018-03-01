@@ -1,0 +1,105 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/leftPanel.html.twig' %}
+
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        {% include 'back/header.html.twig' %}
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>{{ 'menu'|trans }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">{{ 'menu'|trans }} > {{ 'menu_list'|trans }}</li>
+                        </ol>
+                        <div class="page-header float-right">
+                            <a href="{{ path('admin_menu_new') }}"><i class="fa fa-user-plus text-dark"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'back/flashMessages.html.twig' %}
+
+        <div class="content mt-3">
+            <div class="animated fade-in">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Nazwa</th>
+                            <th>Typ</th>
+                            <th>Odnośnik</th>
+                            <th>Wyłącz</th>
+                            <th>Usuń</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for menu in menus %}
+                            <tr>
+                                <td>{{ menu.id }}</td>
+                                <td><a href="{{ path('admin_menu_edit',{ 'id':menu.id }) }}">{{ menu.name }}</a></td>
+                                <td>{{ menu.type|trans }}</td>
+                                <td>
+                                    {% if menu.type == 'href' %}{{ menu.href }}
+                                    {% elseif menu.type == 'article' %}{{ menu.article.name }}
+                                    {% elseif menu.type == 'category' %}{{ menu.category.name }}
+                                    {% endif %}
+                                </td>
+                                {% if menu.isActive == 1 %}
+                                    <td><a href="{{ path('admin_menu_disable', { 'id':menu.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                                {% else %}
+                                    <td><a href="{{ path('admin_menu_disable', { 'id':menu.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                                {% endif %}
+                                <td><a href="{{ path('admin_menu_delete', { 'id':menu.id }) }}" class="btn btn-danger">Usuń</a></td>
+                                {% if menu.childrens is not empty %}
+                                    </tr>
+                                    <tr><td colspan="6">
+                                    <table class="table table-bordered">
+                                    {% for children in menu.childrens %}
+                                        <tr>
+                                            <td>{{ children.id }}</td>
+                                            <td><a href="{{ path('admin_menu_edit',{ 'id':children.id }) }}">{{ children.name }}</a></td>
+                                            <td>{{ children.type }}</td>
+                                            <td>
+                                                {% if children.type == 'href' %}{{ children.href }}
+                                                {% elseif children.type == 'article' %}{{ children.article.name }}
+                                                {% elseif children.type == 'category' %}{{ children.category.name }}
+                                                {% endif %}
+                                            </td>
+                                            {% if children.isActive == 1 %}
+                                                <td><a href="{{ path('admin_menu_disable', { 'id':children.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                                            {% else %}
+                                                <td><a href="{{ path('admin_menu_disable', { 'id':children.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                                            {% endif %}
+                                            <td><a href="{{ path('admin_menu_delete', { 'id':children.id }) }}" class="btn btn-danger">Usuń</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </table>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+        <!--/.col-->
+
+{% endblock %}
+

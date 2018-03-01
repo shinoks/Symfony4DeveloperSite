@@ -45,6 +45,9 @@
 {% block choice_widget %}
     <div class="form-group">
         <select class="form-control" {{ block('widget_attributes') }}>
+            {% if placeholder is not null and required is empty %}
+                <option value="">{{ 'choose_some_option'|trans }}</option>
+            {% endif %}
             {%- if preferred_choices|length > 0 -%}
                 {% set options = preferred_choices %}
                 {{- block('choice_widget_options') -}}

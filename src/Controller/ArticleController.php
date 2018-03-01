@@ -59,4 +59,18 @@ class ArticleController extends Controller
         ));
     }
 
+    /**
+     * @return Response
+     */
+    public function showByCategory($categoryId)
+    {
+        $articles = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->findBy(['category' => $categoryId]);
+
+        return $this->render('front/articles.html.twig',array(
+            'articles'=> $articles
+        ));
+    }
+
 }

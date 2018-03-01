@@ -5,3 +5,7 @@ front_articles:
 front_article_show:
     path: /{id}
     controller: App\Controller\ArticleController::show
+
+front_articles_show_by_category:
+    path: /category/{categoryId}
+    controller: App\Controller\ArticleController::showByCategory

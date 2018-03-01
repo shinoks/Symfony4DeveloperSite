@@ -47,6 +47,10 @@ admin_realization:
     resource: "admin/realization.yml"
     prefix: /realization
 
+admin_menu:
+    resource: "admin/menu.yml"
+    prefix: /menu
+
 admin_comment:
     resource: "admin/comments.yml"
     prefix: /comments

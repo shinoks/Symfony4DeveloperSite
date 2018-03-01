@@ -1,0 +1,23 @@
+admin_menus:
+    path: /
+    controller: App\Controller\Admin\MenuController::index
+
+admin_menu_new:
+    path: /new
+    controller: App\Controller\Admin\MenuController::new
+
+admin_menu_show:
+    path: /{id}
+    controller: App\Controller\Admin\MenuController::show
+
+admin_menu_edit:
+    path: /edit/{id}
+    controller: App\Controller\Admin\MenuController::edit
+
+admin_menu_disable:
+    path: /disable/{id}/{status}
+    controller: App\Controller\Admin\MenuController::disable
+
+admin_menu_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\MenuController::delete
