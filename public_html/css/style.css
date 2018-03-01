@@ -70,7 +70,7 @@ p {
     margin:0;
 }
 a {
-    color: #d27e04;
+    color: #37496d;
     outline: 0;
     font-weight: bold;
     -webkit-transition: all .8s ease;
@@ -766,7 +766,6 @@ label small{
 }
 .navbar{
     margin-bottom: 0px;
-    min-height: 100px;
 }
 .navbar-default {
     background-image: none;
@@ -802,6 +801,13 @@ label small{
     font-weight: 700;
     outline: none;
 }
+.fixed_menu{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+}
+
+
 /*!
  * Yamm!3
  * Yet another megamenu for Bootstrap 3
