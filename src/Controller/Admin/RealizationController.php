@@ -78,7 +78,7 @@ class RealizationController extends Controller
         $realization = $this->getDoctrine()
             ->getRepository(Realization::class)
             ->find($id);
-        var_dump($realization);
+
         if($realization){
             $form = $this->createForm(RealizationType::class, $realization);
 
