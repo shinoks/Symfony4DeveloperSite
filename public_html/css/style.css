@@ -3043,3 +3043,16 @@ padding: 10px;
 .mapmin{
     height: 100px;
 }
+
+.h3-header{
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 10px 20px;
+    background-color: #242a6d;
+    font-family: 'Open Sans';
+    color: #fff;
+    opacity: 0.8;
+}
+.h3-header div:hover{
+    opacity: 1;
+}
