@@ -54,11 +54,3 @@
     </div>
     <div id="map" style="height: 400px;"></div>
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
-    <script src="{{ asset('js/gmaps.js') }}"></script>
-    <script src="{{ asset('js/gmaps.init.js') }}"></script>
-{% endblock %}

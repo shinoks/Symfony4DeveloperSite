@@ -2801,7 +2801,7 @@ background: #555 url("../img.jpg") repeat scroll 0% 0%;
 color: #535353;
 }
 .footer{
-padding: 0px 0px 60px;
+padding: 0px 0px 10px;
 background: rgba(255, 255, 255, 0.89) none repeat scroll 0% 0%;
 }
 .footer ul li i { 
@@ -3036,6 +3036,10 @@ padding: 10px;
 .prop-btm-sheaerch {
     display: none
 }
-#map {
+.map {
     height: 300px;
+}
+
+.mapmin{
+    height: 150px;
 }
