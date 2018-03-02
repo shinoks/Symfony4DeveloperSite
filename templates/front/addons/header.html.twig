@@ -46,26 +46,6 @@
                 <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="{{ path('front_about_us') }}">{{ 'about_us'|trans }}</a></li>
                 <li class="wow fadeInDown" data-wow-delay="0.2s"><a href="{{ path('front_news') }}">{{ 'news'|trans }}</a></li>
                 <li class="wow fadeInDown" data-wow-delay="0.3s"><a href="{{ path('front_realizations') }}">{{ 'realizations'|trans }}</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.5s">
-                    <a href="{{ path('front_investor_zone') }}" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0.6s">
-                        {{ 'investor_zone'|trans }} <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu navbar-nav">
-                        <li>
-                            <a href="{{ path('front_article_show',{'id':5}) }}">Zarabiaj na gotówce</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('front_article_show',{'id':6}) }}">Zarabiaj na wynajmie</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('front_article_show',{'id':7}) }}">Zarabiaj na podnajmie</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('front_article_show',{'id':8}) }}">Zarabiaj na flipie</a>
-                        </li>
-
-                    </ul>
-                </li>
                 {% if menu.getMenu is not empty %}
                     {% for menuItem in menu.getMenu %}
                         {% set caret = '' %}
