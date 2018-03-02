@@ -35,17 +35,23 @@
                         <ul class="footer-blog">
                             {% for latestNews in news.latestNews %}
                             <li>
+                                {% if latestNews.image is not empty %}
                                 <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                    <a href="">
+                                    <a href="{{ path('front_article_show',{'id':latestNews.id}) }}">
                                         <img src="{{ asset(latestNews.image) }}">
                                     </a>
                                     <span class="blg-date">{{ latestNews.created|date('d-m-Y') }}</span>
-
                                 </div>
                                 <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                    <h6> <a href="">{{ latestNews.name }} </a></h6>
+                                    <h6> <a href="{{ path('front_article_show',{'id':latestNews.id}) }}">{{ latestNews.name }} </a></h6>
                                     <p style="line-height: 17px; padding: 8px 2px;">{{ latestNews.text[0:50]|striptags }} ...</p>
                                 </div>
+                                {% else %}
+                                    <div class="col-md-12  col-sm-12 col-xs-12  blg-entry">
+                                        <h6> <a href="{{ path('front_article_show',{'id':latestNews.id}) }}">{{ latestNews.name }} </a></h6>
+                                        <p style="line-height: 17px; padding: 8px 2px;">{{ latestNews.text[0:50]|striptags }} ...</p><br/>
+                                    </div>
+                                {% endif %}
                             </li>
                             {% endfor %}
 
