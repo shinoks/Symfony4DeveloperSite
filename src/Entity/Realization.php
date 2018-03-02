@@ -58,7 +58,7 @@ class Realization
     private $rooms;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $yardage;
 

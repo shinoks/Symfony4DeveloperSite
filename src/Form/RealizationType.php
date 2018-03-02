@@ -38,7 +38,7 @@ class RealizationType extends AbstractType
         ->add('volume',TextType::class,['label'=>'volume'])
         ->add('city',TextType::class,['label'=>'city'])
         ->add('rooms',IntegerType::class,['label'=>'rooms'])
-        ->add('yardage',TextType::class,['label'=>'yardage'])
+        ->add('yardage',IntegerType::class,['label'=>'yardage'])
         ->add('basic',CollectionType::class,[
                 'entry_type'    => TextType::class,
                 'allow_add'    => true,
