@@ -54,3 +54,7 @@ admin_menu:
 admin_comment:
     resource: "admin/comments.yml"
     prefix: /comments
+
+admin_file_browser:
+    resource: "admin/file_browser.yml"
+    prefix: /file_browser

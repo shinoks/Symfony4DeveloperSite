@@ -1310,7 +1310,7 @@ click:function(a){var b=a.elementMode==CKEDITOR.ELEMENT_MODE_INLINE?a.container.
 
 CKEDITOR.plugins.add( 'imageuploader', {
     init: function( editor ) {
-        editor.config.filebrowserBrowseUrl = 'ckeditor/plugins/imageuploader/imgbrowser.php';
+        editor.config.filebrowserBrowseUrl = '/admin/file_browser';
     }
 });
 (function(){CKEDITOR.plugins.add("youtube",{lang:"en pt pt-br ja hu it fr tr ru de ar nl pl vi zh el he es nb nn fi et sk cs ko eu".split(" "),init:function(a){a.addCommand("youtube",new CKEDITOR.dialogCommand("youtube",{allowedContent:"div{*}(*); iframe{*}[!width,!height,!src,!frameborder,!allowfullscreen]; object param[*]; a[*]; img[*]"}));a.ui.addButton("Youtube",{label:a.lang.youtube.button,toolbar:"insert",command:"youtube",icon:this.path+"images/icon.png"});CKEDITOR.dialog.add("youtube",function(b){var e,
