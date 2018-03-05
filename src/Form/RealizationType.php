@@ -1,8 +1,6 @@
 <?php
 namespace App\Form;
 
-use App\Entity\Article;
-use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -10,11 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormEvent;
 
 class RealizationType extends AbstractType
 {
@@ -38,7 +32,7 @@ class RealizationType extends AbstractType
         ->add('volume',TextType::class,['label'=>'volume'])
         ->add('city',TextType::class,['label'=>'city'])
         ->add('rooms',IntegerType::class,['label'=>'rooms'])
-        ->add('yardage',TextType::class,['label'=>'yardage'])
+        ->add('yardage',IntegerType::class,['label'=>'yardage'])
         ->add('basic',CollectionType::class,[
                 'entry_type'    => TextType::class,
                 'allow_add'    => true,

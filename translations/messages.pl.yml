@@ -108,6 +108,10 @@ all_realizations: Wszystkie realizacje
 write_to_us: Napisz do nas
 send: Wyślij
 faq: Faq
+choose_some_option: Wybierz opcję
+type: Typ
+parent: Rodzic
+article: Artykuł
 input:
     default: Podstawowy
 table:

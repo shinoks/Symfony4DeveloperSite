@@ -5,6 +5,7 @@
 {% form_theme form 'form/default_user.html.twig' %}
 
 {{ form_start(form) }}
-{{ form_widget(form) }}
+{{ form_widget(form.email) }}
+{{ form_widget(form.save) }}
 
 {{ form_end(form) }}

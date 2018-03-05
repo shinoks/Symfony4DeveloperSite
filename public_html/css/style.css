@@ -2357,7 +2357,7 @@ count-area
 }
 
 .asks-first{
-    background-color: rgb(225, 225, 225);
+    background-color: rgb(194,194,194);
     padding: 35px 0px 35px 30px;
     position: relative;
     cursor: pointer;
@@ -2801,7 +2801,7 @@ background: #555 url("../img.jpg") repeat scroll 0% 0%;
 color: #535353;
 }
 .footer{
-padding: 0px 0px 60px;
+padding: 0px 0px 10px;
 background: rgba(255, 255, 255, 0.89) none repeat scroll 0% 0%;
 }
 .footer ul li i { 
@@ -2939,8 +2939,7 @@ ul.footer-blog li {
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.42857;
-    color: #E1E1E1;
-    background-color: rgba(255, 255, 255, 0.52);
+    color: #000;
     background-image: none;
     border-radius: 0px;
     box-shadow: 0px 1px 1px rgba(179, 179, 179, 0.1) inset; 
@@ -2978,7 +2977,7 @@ order-color: #868686;
 background-color: #868686;
 }
 .social  ul li a:hover i{
-   color: #242a6d;
+   color: #fff;
 }
 .social ul li a{
 display: block;
@@ -3037,6 +3036,23 @@ padding: 10px;
 .prop-btm-sheaerch {
     display: none
 }
-#map {
+.map {
     height: 300px;
+}
+
+.mapmin{
+    height: 100px;
+}
+
+.h3-header{
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 10px 20px;
+    background-color: #242a6d;
+    font-family: 'Open Sans';
+    color: #fff;
+    opacity: 0.8;
+}
+.h3-header div:hover{
+    opacity: 1;
 }
