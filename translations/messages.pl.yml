@@ -113,6 +113,7 @@ type: Typ
 parent: Rodzic
 article: Artykuł
 regulations: Regulamin
+ammount_of_profits: Kwota zysków
 input:
     default: Podstawowy
 table:

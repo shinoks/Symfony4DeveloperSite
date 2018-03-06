@@ -92,17 +92,17 @@ $(document).ready(function () {
             var curval1 = parseInt($('#counter1').text().replace(' ', ''));
             var curval2 = parseInt($('#counter2').text());
             var curval3 = parseInt($('#counter3').text());
-            if (curval <= 1007) {
+            if (curval < 48) {
                 $('#counter').text(curval + 1);
             }
-            if (curval1 <= 1280) {
-                $('#counter1').text(sdf_FTS((curval1 + 20), 0, ' '));
+            if (curval1 <= 32) {
+                $('#counter1').text(curval2 + 1);
             }
-            if (curval2 <= 145) {
-                $('#counter2').text(curval2 + 1);
+            if (curval2 <= 1385220) {
+                $('#counter2').text(curval2 + 800);
             }
-            if (curval3 <= 1022) {
-                $('#counter3').text(curval3 + 1);
+            if (curval3 <= 117743) {
+                $('#counter3').text(curval3 + 200);
             }
         }, 2);
     }, 500);
