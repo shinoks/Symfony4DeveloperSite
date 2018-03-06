@@ -14,7 +14,7 @@ class Menu
     }
 
     public function getMenu() {
-        $menu = $this->em->getRepository(Men::class)->findBy(['isActive' => 1, 'parent' => null],['position' => 'ASC', 'id' => 'ASC']);
+        $menu = $this->em->getRepository(Men::class)->findBy(['isActive' => 1, 'parent' => null],['position' => 'ASC', 'id' => 'DESC']);
 
         return $menu;
     }
