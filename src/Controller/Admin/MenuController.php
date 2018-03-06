@@ -114,6 +114,22 @@ class MenuController extends Controller
         return $this->redirectToRoute('admin_menus');
     }
 
+    public function changePosition(Request $request)
+    {
+        $id = $request->get('id');
+        $position = $request->get('position');
+        $menu = $this->getDoctrine()
+            ->getRepository(Menu::class)
+            ->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $menu->setPosition($position);
+        $em->persist($menu);
+        $em->flush();$this->session->getFlashBag()->add('success', 'Pozycja została zmieniona');
+
+        return $this->redirectToRoute('admin_menus');
+    }
+
     /**
      * @return Response
      */
@@ -138,7 +154,7 @@ class MenuController extends Controller
     {
         $menus = $this->getDoctrine()
             ->getRepository(Menu::class)
-            ->findBy(['parent' => null]);
+            ->findBy(['parent' => null],['position' => 'ASC', 'id' => 'DESC']);
 
         return $this->render('back/menus.html.twig',array(
             'menus'=> $menus

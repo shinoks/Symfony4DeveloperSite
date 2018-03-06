@@ -44,6 +44,7 @@
                             <th>Nazwa</th>
                             <th>Typ</th>
                             <th>Odnośnik</th>
+                            <th>Pozycja</th>
                             <th>Wyłącz</th>
                             <th>Usuń</th>
                         </tr>
@@ -59,6 +60,13 @@
                                     {% elseif menu.type == 'article' %}{{ menu.article.name }}
                                     {% elseif menu.type == 'category' %}{{ menu.category.name }}
                                     {% endif %}
+                                </td>
+                                <td>
+                                    <form action="{{ path('admin_menu_change_position') }}" method="get" class="form form-control">
+                                        <input type="hidden" value="{{ menu.id }}" name="id"/>
+                                        <input type="number" name="position" value="{{ menu.position }}" />
+                                        <input type="submit" value="go"/>
+                                    </form>
                                 </td>
                                 {% if menu.isActive == 1 %}
                                     <td><a href="{{ path('admin_menu_disable', { 'id':menu.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
