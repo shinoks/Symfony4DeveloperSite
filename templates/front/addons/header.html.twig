@@ -60,7 +60,7 @@
                             {% elseif menuItem.type == 'category' %}
                                 <a {{ attr|raw }} href="{{ path('front_articles_show_by_category',{'categoryId':menuItem.category.id}) }}">{{ menuItem.name }}{{ caret|raw }}</a>
                             {% elseif menuItem.type == 'href' %}
-                                <a {{ attr|raw }} href="{{ href }}">{{ menuItem.name }}{{ caret|raw }}</a>
+                                <a {{ attr|raw }} href="{{ menuItem.href }}">{{ menuItem.name }}{{ caret|raw }}</a>
                             {% endif %}
 
                                 {% if menuItem.childrens is not empty %}
@@ -76,7 +76,7 @@
                                                 </li>
                                             {% elseif child.type == 'href' %}
                                                 <li>
-                                                    <a href="{{ href }}">{{ child.name }}</a>
+                                                    <a href="{{ child.href }}">{{ child.name }}</a>
                                                 </li>
                                             {% endif %}
                                         {% endfor %}
