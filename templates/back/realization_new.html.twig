@@ -35,6 +35,15 @@
                 + '</li>');
         });
     </script>
+    <script>
+        function CkEditorURLTransfer(url) {
+            //  window.opener.CKEDITOR.tools.callFunction(1, url);
+            // window.close();
+            window.parent.CKEDITOR.tools.callFunction(1, url, '');
+            $('#cke_111_textInput').val(url);
+
+        }
+    </script>
 {% endblock %}
 
 

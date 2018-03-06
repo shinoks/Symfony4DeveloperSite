@@ -112,6 +112,7 @@ choose_some_option: Wybierz opcję
 type: Typ
 parent: Rodzic
 article: Artykuł
+regulations: Regulamin
 input:
     default: Podstawowy
 table:

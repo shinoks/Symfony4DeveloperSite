@@ -5,11 +5,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-
             $(function () {
                 $('a').click(function () {
                     window.opener.CkEditorURLTransfer($(this).attr('data-for'));
-                    //window.opener.CKEDITOR.tools.callFunction('CkEditorURLTransfer("' + $(this).attr('href') + '")');
                     window.close();
                 });
             });
@@ -19,9 +17,6 @@
 {% endblock %}
 
 {% block body %}
-
-
-    <!-- Right Panel -->
 
     <div id="right-panel" class="right-panel">
 
@@ -69,7 +64,5 @@
             </div>
         </div>
         </div>
-        <!--/.col-->
 
 {% endblock %}
-
