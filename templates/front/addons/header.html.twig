@@ -43,9 +43,6 @@
                 {% endif %}
             </div>
             <ul class="main-nav nav navbar-nav navbar-right">
-                <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="{{ path('front_about_us') }}">{{ 'about_us'|trans }}</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.2s"><a href="{{ path('front_news') }}">{{ 'news'|trans }}</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.3s"><a href="{{ path('front_realizations') }}">{{ 'realizations'|trans }}</a></li>
                 {% if menu.getMenu is not empty %}
                     {% for menuItem in menu.getMenu %}
                         {% set caret = '' %}
@@ -88,7 +85,6 @@
                 {% if app.user %}
                     <li class="wow fadeInDown" data-wow-delay="0.8s"><a href="{{ path('front_user_account') }}">{{ 'account'|trans }}</a></li>
                 {% endif %}
-                <li class="wow fadeInDown" data-wow-delay="0.9s"><a href="{{ path('contact') }}">{{ 'contact'|trans }}</a></li>
             </ul>
         </div>
     </div>
