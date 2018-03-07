@@ -1534,8 +1534,9 @@ Asside widgets CSS
     background-color: #F5F5F5;
 }
 .client-text p {
-    line-height: 25px;
-padding: 0 0 0.5em;
+    line-height: 18px;
+    padding: 0 0 0.5em;
+    font-size: 13px;
 }
 .client-text h4 {
     font-size: 15px
