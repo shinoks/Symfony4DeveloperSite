@@ -101,7 +101,7 @@ $(document).ready(function () {
             if (parseInt(curval2) < 1385220) {
                 $('#counter2').text(number_format(curval2 + 1800,0,'',' '));
             }
-            if (curval3 <= 1177430) {
+            if (curval3 <= 117743) {
                 $('#counter3').text(formatNumber(curval3 + 600));
             }
         }, 2);
