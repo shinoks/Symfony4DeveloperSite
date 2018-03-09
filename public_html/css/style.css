@@ -2522,7 +2522,6 @@ padding-bottom: 15px;
 }
 .blog-lst img{
   width:100%;
-  padding-bottom: 15px;
 }
 .blog-lst .comment  img {
     width: auto;
@@ -3081,5 +3080,5 @@ padding: 10px;
 }
 
 .ul-squares-grey-violet{
-    list-style-image: url('/images/pic.png');
+    list-style-image: url('/img/pic.png');
 }
