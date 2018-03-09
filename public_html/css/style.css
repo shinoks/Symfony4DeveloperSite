@@ -3057,3 +3057,29 @@ padding: 10px;
 .h3-header div:hover{
     opacity: 1;
 }
+.p-grey-border-left{
+    background: #eaeaea;
+    padding: 10px;
+    border-left: 4px solid #242a6d;
+}
+
+.p-button-violet{
+    background-color: #242a6d;
+    margin-right: 5px;
+    color: #fff;
+    border: medium none;
+    font-size: 16px;
+    padding: 8px 20px;
+    border-radius: 2px;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+.p-button-violet a:hover{
+    background-color: #0e134b;
+}
+
+.ul-squares-grey-violet{
+    list-style-image: url('/images/pic.png');
+}
