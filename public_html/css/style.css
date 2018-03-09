@@ -290,8 +290,8 @@ input[type="search"]::-webkit-search-decoration {
     font-weight: 600;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active,.btn-primary:active:focus, .open > .dropdown-toggle.btn-primary {
-    color: #242a6d;
-    background-color: #313538;
+    color: #fff;
+    background-color: #0e134b;
     border-color: #282829;
     font-weight: 600;
 }

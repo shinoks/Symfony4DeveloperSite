@@ -114,6 +114,7 @@ parent: Rodzic
 article: Artykuł
 regulations: Regulamin
 ammount_of_profits: Kwota zysków
+knowledge_zone: Strefa wiedzy
 input:
     default: Podstawowy
 table:

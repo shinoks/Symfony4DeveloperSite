@@ -22,10 +22,10 @@
                         <div class="footer-title-line"></div>
                         <ul class="footer-menu">
                             <li><a href="{{ path('index') }}">O Nas</a>  </li>
-                            <li><a href="#">{{ 'news'|trans }}</a>  </li>
-                            <li><a href="#">{{ 'realizations'|trans }} </a></li>
-                            <li><a href="#">{{ 'investor_zone'|trans }}</a></li>
-                            <li><a href="#">{{ 'sublease_zone'|trans }}</a>  </li>
+                            <li><a href="{{ path('front_news') }}">{{ 'news'|trans }}</a>  </li>
+                            <li><a href="{{ path('front_realizations') }}">{{ 'realizations'|trans }} </a></li>
+                            <li><a href="{{ path('front_investor_zone') }}">{{ 'investor_zone'|trans }}</a></li>
+                            <li><a href="{{ path('front_articles_show_by_category',{'categoryId':8}) }}">{{ 'knowledge_zone'|trans }}</a></li>
                             <li><a href="{{ path('contact') }}">Kontakt </a>  </li>
                         </ul>
                     </div>
@@ -85,9 +85,9 @@
                 </div>
                 <div class="bottom-menu pull-right">
                     <ul>
-                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">{{ 'about_us'|trans }}</a></li>
+                        <li><a class="wow fadeInUp animated" href="{{ path('front_about_us') }}" data-wow-delay="0.2s">{{ 'about_us'|trans }}</a></li>
                         <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s">{{ 'faq'|trans }}</a></li>
-                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">{{ 'contact'|trans }}</a></li>
+                        <li><a class="wow fadeInUp animated" href="{{ path('contact') }}" data-wow-delay="0.6s">{{ 'contact'|trans }}</a></li>
                         <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">{{ 'regulations'|trans }}</a></li>
                     </ul>
                 </div>
