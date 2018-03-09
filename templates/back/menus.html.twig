@@ -62,10 +62,10 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <form action="{{ path('admin_menu_change_position') }}" method="get" class="form form-control">
+                                    <form action="{{ path('admin_menu_change_position') }}" method="get">
                                         <input type="hidden" value="{{ menu.id }}" name="id"/>
-                                        <input type="number" name="position" value="{{ menu.position }}" />
-                                        <input type="submit" value="go"/>
+                                        <input type="number" style="width:55px" name="position" value="{{ menu.position }}" />
+                                        <input type="image" value="<<"/>
                                     </form>
                                 </td>
                                 {% if menu.isActive == 1 %}
@@ -82,12 +82,19 @@
                                         <tr>
                                             <td>{{ children.id }}</td>
                                             <td><a href="{{ path('admin_menu_edit',{ 'id':children.id }) }}">{{ children.name }}</a></td>
-                                            <td>{{ children.type }}</td>
+                                            <td>{{ children.type|trans }}</td>
                                             <td>
                                                 {% if children.type == 'href' %}{{ children.href }}
                                                 {% elseif children.type == 'article' %}{{ children.article.name }}
                                                 {% elseif children.type == 'category' %}{{ children.category.name }}
                                                 {% endif %}
+                                            </td>
+                                            <td>
+                                                <form action="{{ path('admin_menu_change_position') }}" method="get">
+                                                    <input type="hidden" value="{{ children.id }}" name="id"/>
+                                                    <input type="number" style="width:55px" name="position" value="{{ children.position }}" />
+                                                    <input type="image" value="<<"/>
+                                                </form>
                                             </td>
                                             {% if children.isActive == 1 %}
                                                 <td><a href="{{ path('admin_menu_disable', { 'id':children.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
