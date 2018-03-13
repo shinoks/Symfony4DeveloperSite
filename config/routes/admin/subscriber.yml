@@ -1,0 +1,23 @@
+admin_articles:
+    path: /
+    controller: App\Controller\Admin\ArticleController::articles
+
+admin_article_new:
+    path: /new
+    controller: App\Controller\Admin\ArticleController::new
+
+admin_article_show:
+    path: /{id}
+    controller: App\Controller\Admin\ArticleController::show
+
+admin_article_edit:
+    path: /edit/{id}
+    controller: App\Controller\Admin\ArticleController::edit
+
+admin_article_disable:
+    path: /disable/{id}/{status}
+    controller: App\Controller\Admin\ArticleController::disable
+
+admin_article_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\ArticleController::delete
