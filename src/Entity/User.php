@@ -20,11 +20,6 @@ class User implements AdvancedUserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
-     */
-    private $username;
-
-    /**
      * @ORM\Column(type="string", length=64)
      */
     private $password;
@@ -65,6 +60,11 @@ class User implements AdvancedUserInterface, \Serializable
     private $isActive;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isEnabledByAdmin;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="user")
      */
     private $offers;
@@ -94,15 +94,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function getUsername(): ?string
     {
-        return $this->username;
-    }
-
-    /**
-     * @param mixed $username
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
+        return $this->email;
     }
 
     /**
@@ -183,6 +175,22 @@ class User implements AdvancedUserInterface, \Serializable
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisEnabledByAdmin()
+    {
+        return $this->isEnabledByAdmin;
+    }
+
+    /**
+     * @param mixed $isEnabledByAdmin
+     */
+    public function setIsEnabledByAdmin($isEnabledByAdmin)
+    {
+        $this->isEnabledByAdmin = $isEnabledByAdmin;
     }
 
     public function getSalt()
@@ -282,7 +290,7 @@ class User implements AdvancedUserInterface, \Serializable
     {
         return serialize(array(
             $this->id,
-            $this->username,
+            $this->email,
             $this->password,
             $this->firstName,
             $this->lastName,
@@ -295,7 +303,7 @@ class User implements AdvancedUserInterface, \Serializable
     {
         list (
             $this->id,
-            $this->username,
+            $this->email,
             $this->password,
             $this->firstName,
             $this->lastName,

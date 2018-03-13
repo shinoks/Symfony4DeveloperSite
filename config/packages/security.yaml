@@ -3,7 +3,7 @@ security:
         user_entity:
             entity:
                 class: App\Entity\User
-                property: username
+                property: email
         admin_entity:
             entity:
                 class: App\Entity\Admin
