@@ -49,7 +49,7 @@ class UserController extends Controller
                 ->find(1);
 
             $message = (new \Swift_Message('Formularz rejestracyjny z '.$config->getTitle()))
-                ->setFrom('info@grupaformat.pl')
+                ->setFrom($config->getEmail())
                 ->setReplyTo($config->getEmail())
                 ->setTo($user->getEmail())
                 ->setBody(

@@ -122,6 +122,24 @@ class UserController extends Controller
     /**
      * @return Response
      */
+    public function disableByAdmin($id, $status)    {
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->find($id);
+        $user->setIsEnabledByAdmin($status);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        $this->session->getFlashBag()->add('success', 'Użytkownik został wyłączony przez Admina');
+
+        return $this->redirectToRoute('admin_users');
+    }
+
+    /**
+     * @return Response
+     */
     public function delete($id)    {
         $user = $this->getDoctrine()
             ->getRepository(User::class)
