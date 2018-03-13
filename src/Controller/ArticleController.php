@@ -66,7 +66,7 @@ class ArticleController extends Controller
     {
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
-            ->findBy(['category' => $categoryId]);
+            ->findBy(['category' => $categoryId, 'isActive' => 1],['created' => 'DESC']);
 
         return $this->render('front/articles.html.twig',array(
             'articles'=> $articles

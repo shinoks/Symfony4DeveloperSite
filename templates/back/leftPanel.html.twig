@@ -16,25 +16,36 @@
                 <li class="active">
                     <a href="{{ path('admin') }}"> <i class="menu-icon fa fa-dashboard"></i>{{ 'dashboard'|trans }} </a>
                 </li>
-                <li class="">
-                    <a href="{{ path('admin_config') }}"> <i class="menu-icon fa fa-cog"></i>{{ 'config'|trans }} </a>
-                </li>
-                <li class="">
-                    <a href="{{ path('admin_users') }}"> <i class="menu-icon fa fa-users"></i>{{ 'users'|trans }} </a>
-                </li>
-                <li class="">
-                    <a href="{{ path('admin_admins') }}"> <i class="menu-icon fa fa-users"></i>{{ 'admins'|trans }} </a>
-                </li>
-                <li class="">
-                    <a href="{{ path('admin_contacts') }}"> <i class="menu-icon fa ti-email"></i>{{ 'contact_forms'|trans }} </a>
-                </li>
-                <li class="">
-                    <a href="{{ path('admin_comments') }}"> <i class="menu-icon fa ti-email"></i>{{ 'comments'|trans }} </a>
+                <h3 class="menu-title">{{ 'system'|trans }}</h3><!-- /.menu-title -->
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ 'system'|trans }}
+                    </a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li class="">
+                            <a href="{{ path('admin_config') }}"> <i class="fa fa-cog"></i>{{ 'config'|trans }} </a>
+                        </li>
+                        <li class="">
+                            <a href="{{ path('admin_users') }}"> <i class="fa fa-users"></i>{{ 'users'|trans }} </a>
+                        </li>
+                        <li class="">
+                            <a href="{{ path('admin_admins') }}"> <i class="fa fa-users"></i>{{ 'admins'|trans }} </a>
+                        </li>
+                        <li class="">
+                            <a href="{{ path('admin_contacts') }}"> <i class="fa ti-email"></i>{{ 'contact_forms'|trans }} </a>
+                        </li>
+                        <li class="">
+                            <a href="{{ path('admin_subscribers') }}"> <i class="fa ti-email"></i>{{ 'subscribers'|trans }} </a>
+                        </li>
+                        <li class="">
+                            <a href="{{ path('admin_comments') }}"> <i class="fa ti-email"></i>{{ 'comments'|trans }} </a>
+                        </li>
+                    </ul>
                 </li>
                 <h3 class="menu-title">{{ 'offerts'|trans }}</h3><!-- /.menu-title -->
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="menu-icon fa la-file-text-o"></i>{{ 'offerts'|trans }}
+                        {{ 'offerts'|trans }}
                     </a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-bars"></i><a href="{{ path('admin_offerts') }}">{{ 'offerts_list'|trans }}</a></li>
@@ -44,7 +55,7 @@
                 <h3 class="menu-title">{{ 'realizations'|trans }}</h3>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="menu-icon fa la-file-text-o"></i>{{ 'realizations'|trans }}
+                        {{ 'realizations'|trans }}
                     </a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-bars"></i><a href="{{ path('admin_realizations') }}">{{ 'realizations_list'|trans }}</a></li>

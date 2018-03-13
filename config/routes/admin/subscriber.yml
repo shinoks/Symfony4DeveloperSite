@@ -1,23 +1,23 @@
-admin_articles:
+admin_subscribers:
     path: /
-    controller: App\Controller\Admin\ArticleController::articles
+    controller: App\Controller\Admin\SubscriberController::index
 
-admin_article_new:
+admin_subscriber_new:
     path: /new
-    controller: App\Controller\Admin\ArticleController::new
+    controller: App\Controller\Admin\SubscriberController::new
 
-admin_article_show:
+admin_subscriber_show:
     path: /{id}
-    controller: App\Controller\Admin\ArticleController::show
+    controller: App\Controller\Admin\SubscriberController::show
 
-admin_article_edit:
+admin_subscriber_edit:
     path: /edit/{id}
-    controller: App\Controller\Admin\ArticleController::edit
+    controller: App\Controller\Admin\SubscriberController::edit
 
-admin_article_disable:
+admin_subscriber_disable:
     path: /disable/{id}/{status}
-    controller: App\Controller\Admin\ArticleController::disable
+    controller: App\Controller\Admin\SubscriberController::disable
 
-admin_article_delete:
+admin_subscriber_delete:
     path: /delete/{id}
-    controller: App\Controller\Admin\ArticleController::delete
+    controller: App\Controller\Admin\SubscriberController::delete
