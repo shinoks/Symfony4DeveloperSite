@@ -40,6 +40,7 @@
                             <div class="clearfix" >
                                 <div class="col-md-12 single-property-content prp-style-1 ">
                                     <div class="row">
+                                        
                                         <div class="light-slide-item">
                                             <div class="clearfix">
                                                 <div class="favorite-and-print">
@@ -62,12 +63,11 @@
                                     <div class="single-property-wrapper">
                                         <div class="single-property-header">
                                             <h1 class="property-title pull-left">{{ realization.name }}</h1>
-                                            <span class="property-price pull-right">{{ realization.sellingPrice|number_format(0,'.',' ') }} {{ realization.currency }} </span>
                                         </div>
 
                                         <div class="entry-meta clearfix ">
 
-                                            <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
+                                            <div class="col-xs-3 col-sm-2 col-md-2 p-b-15">
                                                 <span class="property-info icon-area">
                                                     <img src="{{ asset('img/icon/room-orange.png') }}">
                                                 </span>
@@ -77,13 +77,30 @@
                                                 </span>
                                             </div>
 
-                                            <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
+                                            <div class="col-xs-3 col-sm-2 col-md-2 p-b-15">
                                                 <span class="property-info-icon icon-garage">
                                                     <img src="{{ asset('img/icon/cars-orange.png') }}">
                                                 </span>
                                                 <span class="property-info-entry">
                                                     <span class="property-info-label">{{ 'city'|trans }}</span>
                                                     <span class="property-info-value">{{ realization.city }}</span>
+                                                </span>
+                                            </div>
+
+                                            <div class="col-xs-3 col-sm-2 col-md-2 p-b-15">
+                                                <span class="property-info-icon icon-garage">
+                                                    <img src="{{ asset('img/icon/m2.png') }}">
+                                                </span>
+                                                <span class="property-info-entry">
+                                                    <span class="property-info-label">{{ 'yardage'|trans }}</span>
+                                                    <span class="property-info-value">{{ realization.yardage }} m2</span>
+                                                </span>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
+                                                <span class="property-info-entry">
+                                                    <div class="single-property-header">
+                                                            <span class="property-price">{{ realization.sellingPrice|number_format(0,'.',' ') }} {{ realization.currency }} </span>
+                                                    </div>
                                                 </span>
                                             </div>
 
