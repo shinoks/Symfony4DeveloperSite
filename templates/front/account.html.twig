@@ -34,6 +34,7 @@
                             </div>
                             <a class="btn btn-default btn-border" href="{{ path('front_user_account_edit') }}">{{ 'edit'|trans }}</a>
                         </div>
+                        <div class="well">
                         <div id="menu1" class="tab-pane fade">
                             <div class="profile-header">
                             <h2>{{ 'offer_list'|trans }}</h2>
@@ -58,12 +59,13 @@
                                             <td>{{ offer.interest }}</td>
                                             <td>{{ offer.period }}</td>
                                             <td>{{ offer.settlement }}</td>
-                                            <td>{{ offer.status }}</td>
+                                            <td>{{ offer.status.name }}</td>
                                         </tr>
                                     </tbody>
                                 {% endfor %}
                                 </table>
-                            </div>
+                            </div></div>
+
                         </div>
                         <div id="menu2" class="tab-pane fade">
                             <div class="profile-header">

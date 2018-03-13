@@ -1,0 +1,68 @@
+{% extends 'back/base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(function () {
+                $('a').click(function () {
+                    window.opener.CkEditorURLTransfer($(this).attr('data-for'));
+                    window.close();
+                });
+            });
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+
+    <div id="right-panel" class="right-panel">
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Przeglądanie plików</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">Przeglądanie plików</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'back/flashMessages.html.twig' %}
+
+        <div class="content mt-3">
+            <div class="animated fade-in">
+                Foldery:<br/>
+                <ul>
+                    {% if directories is not empty %}
+                        {% for directory in directories %}
+                            <li><a href="{{ directory.basename }}">{{ directory.basename }}</a></li>
+                        {% endfor %}
+                            <li><a href="{{ path('admin_file_browser') }}">Folder główny</a></li>
+                    {% else %}
+                        <a href="{{ path('admin_file_browser') }}">Powrót</a>
+                    {% endif %}
+
+                </ul><br/>
+                Pliki:<br/>
+                <ul class="list-unstyled">
+                {% for file in files %}
+                    <li><img src="/{{ file.pathName }}" style="width:100px"/><a href="#" data-for="/{{ file.pathName }}">{{ file.fileName }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+        </div>
+
+{% endblock %}

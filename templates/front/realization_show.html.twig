@@ -35,60 +35,81 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="content-area single-property" style="background-color: #FCFCFC;">&nbsp;
+                    <div class="content-area single-property" style="background-color: #FCFCFC;">
                         <div class="container">
                             <div class="clearfix" >
                                 <div class="col-md-12 single-property-content prp-style-1 ">
                                     <div class="row">
-                                        <div class="light-slide-item">
-                                            <div class="clearfix">
-                                                <div class="favorite-and-print">
-                                                    <a class="printer-icon " href="javascript:window.print()">
-                                                        <i class="fa fa-print"></i>
-                                                    </a>
-                                                </div>
-
-                                                <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                                    {% for image in images %}
-                                                        <li data-thumb="{{ asset(image.pathName) }}">
-                                                            <img src="{{ asset(image.pathName) }}" />
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
+                                        <div class="col-md-12">
+                                            <div class="single-property-header">
+                                                <h1 class="property-title pull-left">{{ realization.name }}</h1>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="light-slide-item">
+                                                <div class="clearfix">
+                                                    <div class="favorite-and-print">
+                                                        <a class="printer-icon " href="javascript:window.print()">
+                                                            <i class="fa fa-print"></i>
+                                                        </a>
+                                                    </div>
 
-                                    <div class="single-property-wrapper">
-                                        <div class="single-property-header">
-                                            <h1 class="property-title pull-left">{{ realization.name }}</h1>
-                                            <span class="property-price pull-right">{{ realization.sellingPrice|number_format(0,'.',' ') }} {{ realization.currency }} </span>
+                                                    <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+                                                        {% for image in images %}
+                                                            <li data-thumb="{{ asset(image.pathName) }}">
+                                                                <img src="{{ asset(image.pathName) }}" />
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="text-center mg-top-80">
+                                                <div class="single-property-header">
+                                                    <span class="property-price">{{ realization.sellingPrice|number_format(0,'.',' ') }} {{ realization.currency }} </span>
+                                                </div>
+                                                <br/>
 
-                                        <div class="entry-meta clearfix ">
+                                                <div class="entry-meta clearfix ">
 
-                                            <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
+                                                    <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
                                                 <span class="property-info icon-area">
                                                     <img src="{{ asset('img/icon/room-orange.png') }}">
                                                 </span>
-                                                <span class="property-info-entry">
+                                                        <span class="property-info-entry">
                                                     <span class="property-info-label">{{ 'rooms'|trans }}</span>
                                                     <span class="property-info-value">{{ realization.rooms }}</span>
                                                 </span>
-                                            </div>
+                                                    </div>
 
-                                            <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
+                                                    <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
                                                 <span class="property-info-icon icon-garage">
                                                     <img src="{{ asset('img/icon/cars-orange.png') }}">
                                                 </span>
-                                                <span class="property-info-entry">
+                                                        <span class="property-info-entry">
                                                     <span class="property-info-label">{{ 'city'|trans }}</span>
                                                     <span class="property-info-value">{{ realization.city }}</span>
                                                 </span>
+                                                    </div>
+
+                                                    <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                                <span class="property-info-icon icon-garage">
+                                                    <img src="{{ asset('img/icon/m2.png') }}">
+                                                </span>
+                                                        <span class="property-info-entry">
+                                                    <span class="property-info-label">{{ 'yardage'|trans }}</span>
+                                                    <span class="property-info-value">{{ realization.yardage }} m2</span>
+                                                </span>
+                                                    </div>
+                                                </div>
                                             </div>
-
-
                                         </div>
+                                        </div>
+
+
                                         <!-- .property-meta -->
 
                                         <div class="section">
@@ -100,59 +121,64 @@
                                         <!-- End description area  -->
 
                                         <div class="row">
-                                            <div class="col-md-6">
                                                 {% if realization.media is not empty %}
-                                                <div class="section additional-details">
-                                                    <h4 class="s-property-title">{{ 'media'|trans }}</h4>
-                                                    <ul class="additional-details-list clearfix">
-                                                        {% for media in realization.media %}
-                                                            <li>
-                                                                <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">{{ media }}</span>
-                                                            </li>
-                                                        {% endfor %}
-                                                    </ul>
+                                                <div class="col-md-6">
+                                                    <div class="section additional-details">
+                                                        <h4 class="s-property-title">{{ 'media'|trans }}</h4>
+                                                        <ul class="additional-details-list clearfix">
+                                                            {% for media in realization.media %}
+                                                                <li>
+                                                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">{{ media }}</span>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                                 {% endif %}
 
                                                 {% if realization.additionalInfo is not empty %}
-                                                <div class="section additional-details">
-                                                    <h4 class="s-property-title">{{ 'additional_info'|trans }}</h4>
-                                                    <ul class="additional-details-list clearfix">
-                                                        {% for additionalInfo in realization.additionalInfo %}
-                                                            <li>
-                                                                <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">{{ additionalInfo }}</span>
-                                                            </li>
-                                                        {% endfor %}
-                                                    </ul>
+                                                <div class="col-md-6">
+                                                    <div class="section additional-details">
+                                                        <h4 class="s-property-title">{{ 'additional_info'|trans }}</h4>
+                                                        <ul class="additional-details-list clearfix">
+                                                            {% for additionalInfo in realization.additionalInfo %}
+                                                                <li>
+                                                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">{{ additionalInfo }}</span>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                                 {% endif %}
-                                            </div>
-                                            <div class="col-md-6">
+
                                                 {% if realization.basic is not empty %}
-                                                <div class="section additional-details">
-                                                    <h4 class="s-property-title">{{ 'basic'|trans }}</h4>
-                                                    <ul class="additional-details-list clearfix">
-                                                        {% for basic in realization.basic %}
-                                                            <li>
-                                                                <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">{{ basic }}</span>
-                                                            </li>
-                                                        {% endfor %}
-                                                    </ul>
+                                                <div class="col-md-6">
+                                                    <div class="section additional-details">
+                                                        <h4 class="s-property-title">{{ 'basic'|trans }}</h4>
+                                                        <ul class="additional-details-list clearfix">
+                                                            {% for basic in realization.basic %}
+                                                                <li>
+                                                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">{{ basic }}</span>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                                 {% endif %}
                                                 {% if realization.security is not empty %}
-                                                <div class="section additional-details">
-                                                    <h4 class="s-property-title">{{ 'security'|trans }}</h4>
-                                                    <ul class="additional-details-list clearfix">
-                                                        {% for security in realization.security %}
-                                                            <li>
-                                                                <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">{{ security }}</span>
-                                                            </li>
-                                                        {% endfor %}
-                                                    </ul>
+                                                <div class="col-md-6">
+                                                    <div class="section additional-details">
+                                                        <h4 class="s-property-title">{{ 'security'|trans }}</h4>
+                                                        <ul class="additional-details-list clearfix">
+                                                            {% for security in realization.security %}
+                                                                <li>
+                                                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">{{ security }}</span>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                                 {% endif %}
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -162,6 +188,5 @@
                 </div>
             </div>
         </div>
-    </div>
 
 {% endblock %}

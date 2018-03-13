@@ -1,0 +1,6 @@
+admin_file_browser:
+    path: /
+    controller: App\Controller\Admin\FileBrowserController::browseFiles
+admin_file_browser_in_dir:
+    path: /{dir}
+    controller: App\Controller\Admin\FileBrowserController::browseFilesInDir

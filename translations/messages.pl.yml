@@ -112,6 +112,12 @@ choose_some_option: Wybierz opcję
 type: Typ
 parent: Rodzic
 article: Artykuł
+regulations: Regulamin
+ammount_of_profits: Kwota zysków
+knowledge_zone: Strefa wiedzy
+subscribers: Użytkownicy newslettera
+subscriber: Użytkownik newslettera
+system: System
 input:
     default: Podstawowy
 table:

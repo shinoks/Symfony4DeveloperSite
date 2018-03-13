@@ -1,0 +1,23 @@
+admin_subscribers:
+    path: /
+    controller: App\Controller\Admin\SubscriberController::index
+
+admin_subscriber_new:
+    path: /new
+    controller: App\Controller\Admin\SubscriberController::new
+
+admin_subscriber_show:
+    path: /{id}
+    controller: App\Controller\Admin\SubscriberController::show
+
+admin_subscriber_edit:
+    path: /edit/{id}
+    controller: App\Controller\Admin\SubscriberController::edit
+
+admin_subscriber_disable:
+    path: /disable/{id}/{status}
+    controller: App\Controller\Admin\SubscriberController::disable
+
+admin_subscriber_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\SubscriberController::delete

@@ -6,28 +6,11 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    {% include 'back/addons/ckeditor_config.html.twig' %}
     <script>
-        CKEDITOR.stylesSet.add( 'my_style', [
-            // Block-level styles
-            { name: 'h1', element: 'h1'},
-            { name: 'h2', element: 'h2'},
-            { name: 'h3' , element: 'h3'},
-            { name: 'h4' , element: 'h4'},
-            { name: 'h5' , element: 'h5'},
-
-            // Inline styles
-            { name: 'Szary prostokąt', element: 'div', attributes: { 'class': 'asks-first' } },
-            { name: 'H3 header', element: 'p', attributes: { 'class': 'h3-header' } },
-            { name: 'Marker: Yellow', element: 'span', styles: { 'background-color': 'Yellow' } }
-        ] );
-        CKEDITOR.config.stylesSet = 'my_style';
-
         CKEDITOR.replace( 'article_text' );
         CKEDITOR.replace( 'article_shortText' );
-
     </script>
-
 
 {% endblock %}
 

@@ -1,6 +1,9 @@
 index:
     path: /
     controller: App\Controller\DefaultController::startPage
+index_start:
+    path: /index
+    controller: App\Controller\DefaultController::startPage
 contact:
     path: /contact
     controller: App\Controller\DefaultController::contactPage

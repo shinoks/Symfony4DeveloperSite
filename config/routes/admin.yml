@@ -29,7 +29,7 @@ admin_config:
 
 admin_contact:
     resource: "admin/contacts.yml"
-    prefix: /contacts
+    prefix: /contact
 
 admin_offer:
     resource: "admin/offer.yml"
@@ -53,4 +53,12 @@ admin_menu:
 
 admin_comment:
     resource: "admin/comments.yml"
-    prefix: /comments
+    prefix: /comment
+
+admin_file_browser:
+    resource: "admin/file_browser.yml"
+    prefix: /file_browser
+
+admin_subscriber:
+    resource: "admin/subscriber.yml"
+    prefix: /subscriber

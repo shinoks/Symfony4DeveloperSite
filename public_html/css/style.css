@@ -290,8 +290,8 @@ input[type="search"]::-webkit-search-decoration {
     font-weight: 600;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active,.btn-primary:active:focus, .open > .dropdown-toggle.btn-primary {
-    color: #242a6d;
-    background-color: #313538;
+    color: #fff;
+    background-color: #0e134b;
     border-color: #282829;
     font-weight: 600;
 }
@@ -1534,8 +1534,9 @@ Asside widgets CSS
     background-color: #F5F5F5;
 }
 .client-text p {
-    line-height: 25px;
-padding: 0 0 0.5em;
+    line-height: 18px;
+    padding: 0 0 0.5em;
+    font-size: 13px;
 }
 .client-text h4 {
     font-size: 15px
@@ -1938,7 +1939,7 @@ single property page
 
 .lSGallery {
     position: relative;
-    bottom: 90px;
+    bottom: -10px;
 }  
 .lSSlideOuter { 
     text-align: center;
@@ -1969,7 +1970,7 @@ single property page
     position: absolute;
     z-index: 9;
     right: 0px;
-    padding: 15px;
+    padding: 15px 27px;
 }
 .favorite-and-print .add-to-fav {
     color: #FFF;
@@ -2521,7 +2522,6 @@ padding-bottom: 15px;
 }
 .blog-lst img{
   width:100%;
-  padding-bottom: 15px;
 }
 .blog-lst .comment  img {
     width: auto;
@@ -3055,4 +3055,58 @@ padding: 10px;
 }
 .h3-header div:hover{
     opacity: 1;
+}
+.p-grey-border-left{
+    background: #eaeaea;
+    padding: 10px;
+    border-left: 4px solid #242a6d;
+}
+
+.p-button-violet{
+    background-color: #242a6d;
+    margin-right: 5px;
+    color: #fff;
+    border: medium none;
+    font-size: 16px;
+    padding: 8px 20px;
+    border-radius: 2px;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+.p-button-violet a:hover{
+    background-color: #0e134b;
+}
+
+.ul-squares-grey-violet{
+    list-style-image: url('/img/pic.png');
+}
+
+.p-grey-rounded-rectangle{
+    background-color: rgb(169, 167, 167);
+    padding: 35px 0px 35px 30px;
+    position: relative;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 15px;
+}
+
+.mg-top-80{
+    margin-top: 80px;
+}
+ul.ul-blue-dots {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.ul-blue-dots li {
+    padding-left: 1em;
+    text-indent: -.7em;
+}
+
+ul.ul-blue-dots li::before {
+    content: "• ";
+    color: #242a6d;
 }

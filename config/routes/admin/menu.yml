@@ -6,9 +6,9 @@ admin_menu_new:
     path: /new
     controller: App\Controller\Admin\MenuController::new
 
-admin_menu_show:
-    path: /{id}
-    controller: App\Controller\Admin\MenuController::show
+admin_menu_change_position:
+    path: /position
+    controller: App\Controller\Admin\MenuController::changePosition
 
 admin_menu_edit:
     path: /edit/{id}
@@ -21,3 +21,7 @@ admin_menu_disable:
 admin_menu_delete:
     path: /delete/{id}
     controller: App\Controller\Admin\MenuController::delete
+
+admin_menu_show:
+    path: /{id}
+    controller: App\Controller\Admin\MenuController::show

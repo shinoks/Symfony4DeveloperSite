@@ -22,7 +22,7 @@ class AboutUsController extends Controller
     {
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
-            ->findBy(['category' =>'1']);
+            ->findBy(['category' =>'1'],['created' => 'DESC']);
 
         return $this->render('front/about_us.html.twig',array(
             'articles'=> $articles
