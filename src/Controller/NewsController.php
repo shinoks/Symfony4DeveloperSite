@@ -22,7 +22,7 @@ class NewsController extends Controller
     {
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
-            ->findBy(['category' =>'2']);
+            ->findBy(['category' =>'2','isActive' =>1,['created' => 'DESC']]);
 
         return $this->render('front/news.html.twig',array(
             'articles'=> $articles
