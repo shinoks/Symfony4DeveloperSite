@@ -1939,7 +1939,7 @@ single property page
 
 .lSGallery {
     position: relative;
-    bottom: 90px;
+    bottom: -10px;
 }  
 .lSSlideOuter { 
     text-align: center;
@@ -1970,7 +1970,7 @@ single property page
     position: absolute;
     z-index: 9;
     right: 0px;
-    padding: 15px;
+    padding: 15px 27px;
 }
 .favorite-and-print .add-to-fav {
     color: #FFF;
