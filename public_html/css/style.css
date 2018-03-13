@@ -3091,6 +3091,22 @@ padding: 10px;
     color: #fff;
     border-radius: 15px;
 }
+
 .mg-top-80{
     margin-top: 80px;
+}
+ul.ul-blue-dots {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.ul-blue-dots li {
+    padding-left: 1em;
+    text-indent: -.7em;
+}
+
+ul.ul-blue-dots li::before {
+    content: "• ";
+    color: #242a6d;
 }

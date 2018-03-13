@@ -6,29 +6,9 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    {% include 'back/addons/ckeditor_config.html.twig' %}
     <script>
-        CKEDITOR.stylesSet.add( 'my_style', [
-            // Block-level styles
-            { name: 'h1', element: 'h1'},
-            { name: 'h2', element: 'h2'},
-            { name: 'h3' , element: 'h3'},
-            { name: 'h4' , element: 'h4'},
-            { name: 'h5' , element: 'h5'},
-            { name: 'Szary krawędź lewa', element: 'p', attributes: { 'class': 'p-grey-border-left' } },
-            { name: 'Szary prostokąt zaokrąglony', element: 'p', attributes: { 'class': 'p-grey-rounded-rectangle' } },
-            { name: 'Lista niest.', element: 'ul', attributes: { 'class': 'ul-squares-grey-violet' } },
-
-            // Inline styles
-            { name: 'Fioletowy przycisk', element: 'span', attributes: { 'class': 'p-button-violet' } },
-            { name: 'H3 header', element: 'p', attributes: { 'class': 'h3-header' } },
-            { name: 'Marker: Yellow', element: 'span', styles: { 'background-color': 'Yellow' } }
-        ] );
-        CKEDITOR.config.stylesSet = 'my_style';
-
-        CKEDITOR.replace( 'article_text' );
-        CKEDITOR.replace( 'article_shortText' );
-
+        CKEDITOR.replace( 'realization_description' );
     </script>
     <script>
         jQuery('.add-another-widget').click(function () {
@@ -39,15 +19,6 @@
                 '<input class="form-control" id="realization_'+ name +'_roles" name="realization['+ name +']['+ counter +']" type="text">'
                 + '</li>');
         });
-    </script>
-    <script>
-        function CkEditorURLTransfer(url) {
-            //  window.opener.CKEDITOR.tools.callFunction(1, url);
-            // window.close();
-            window.parent.CKEDITOR.tools.callFunction(1, url, '');
-            $('#cke_111_textInput').val(url);
-
-        }
     </script>
 {% endblock %}
 
