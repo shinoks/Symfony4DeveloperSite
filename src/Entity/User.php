@@ -20,7 +20,7 @@ class User implements AdvancedUserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $username;
 
@@ -40,14 +40,49 @@ class User implements AdvancedUserInterface, \Serializable
     private $phone;
 
     /**
-     * @ORM\Column(type="string", length=60, nullable=true)
+     * @ORM\Column(type="string", length=60)
      */
     private $firstName;
 
     /**
-     * @ORM\Column(type="string", length=60, nullable=true)
+     * @ORM\Column(type="string", length=60)
      */
     private $lastName;
+
+    /**
+     * @ORM\Column(type="integer", length=11)
+     */
+    private $pesel;
+
+    /**
+     * @ORM\Column(type="integer", length=9)
+     */
+    private $idNumber;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $birthDate;
+
+    /**
+     * @ORM\Column(type="string", length=5)
+     */
+    private $zipCode;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="string", length=70)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $regulations;
 
     /**
      * @ORM\Column(type="string", length=35, nullable=true)
@@ -214,6 +249,118 @@ class User implements AdvancedUserInterface, \Serializable
     public function getPassword(): ?string
     {
         return $this->password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPesel()
+    {
+        return $this->pesel;
+    }
+
+    /**
+     * @param mixed $pesel
+     */
+    public function setPesel($pesel)
+    {
+        $this->pesel = $pesel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdNumber()
+    {
+        return $this->idNumber;
+    }
+
+    /**
+     * @param mixed $idNumber
+     */
+    public function setIdNumber($idNumber)
+    {
+        $this->idNumber = $idNumber;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBirthDate()
+    {
+        return $this->birthDate;
+    }
+
+    /**
+     * @param mixed $birthDate
+     */
+    public function setBirthDate($birthDate)
+    {
+        $this->birthDate = $birthDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZipCode()
+    {
+        return $this->zipCode;
+    }
+
+    /**
+     * @param mixed $zipCode
+     */
+    public function setZipCode($zipCode)
+    {
+        $this->zipCode = $zipCode;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param mixed $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegulations()
+    {
+        return $this->regulations;
+    }
+
+    /**
+     * @param mixed $regulations
+     */
+    public function setRegulations($regulations)
+    {
+        $this->regulations = $regulations;
     }
 
     /**

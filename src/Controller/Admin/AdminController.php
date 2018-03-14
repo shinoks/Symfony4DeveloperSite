@@ -2,6 +2,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Admin;
+use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,10 +63,17 @@ class AdminController extends Controller
                 $admin = $form->getData();
                 $password = $passwordEncoder->encodePassword($admin, $admin->getPassword());
                 $admin->setPassword($password);
+                try{
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($admin);
+                    $em->flush();
+                }catch (DBALException $e) {
+                    $message = $e->getMessage();
+                    $mess = explode(':',$message);
+                    $this->session->getFlashBag()->add('danger', 'Admin nie został usunięty'.$mess[1].' --- '. $message);
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($admin);
-                $em->flush();
+                    return $this->redirectToRoute('admin_admin_edit',['id' => $id]);
+                }
 
                 $this->session->getFlashBag()->add('success', 'Admin został zmieniony');
 
@@ -100,10 +108,17 @@ class AdminController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $passwordEncoder->encodePassword($admin, $admin->getPassword());
             $admin->setPassword($password);
+            try{
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($admin);
+                $em->flush();
+            }catch (DBALException $e) {
+                $message = $e->getMessage();
+                $mess = explode(':',$message);
+                $this->session->getFlashBag()->add('danger', 'Admin nie został zmieniony'.$mess[1].' --- '. $message);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($admin);
-            $em->flush();
+                return $this->redirectToRoute('admin_admin_new');
+            }
 
             $this->session->getFlashBag()->add('success', 'Admin został dodany');
 
@@ -123,10 +138,17 @@ class AdminController extends Controller
             ->getRepository(Admin::class)
             ->find($id);
         $admin->setIsActive($status);
+        try{
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($admin);
+            $em->flush();
+        }catch (DBALException $e) {
+            $message = $e->getMessage();
+            $mess = explode(':',$message);
+            $this->session->getFlashBag()->add('danger', 'Admin nie wyłączony'.$mess[1].' --- '. $message);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($admin);
-        $em->flush();
+        return $this->redirectToRoute('admin_admins');
+        }
 
         $this->session->getFlashBag()->add('success', 'Admin został wyłączony');
 
@@ -140,10 +162,17 @@ class AdminController extends Controller
         $admin = $this->getDoctrine()
             ->getRepository(Admin::class)
             ->find($id);
+        try{
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($admin);
+            $em->flush();
+        }catch (DBALException $e) {
+            $message = $e->getMessage();
+            $mess = explode(':',$message);
+            $this->session->getFlashBag()->add('danger', 'Admin nie został usunięty'.$mess[1].' --- '. $message);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($admin);
-        $em->flush();
+        return $this->redirectToRoute('admin_admins');
+        }
 
         $this->session->getFlashBag()->add('success', 'Admin został usunięty');
 

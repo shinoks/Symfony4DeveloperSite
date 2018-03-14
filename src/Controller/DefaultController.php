@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Config;
 use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -59,7 +60,6 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($contact);
             $em->flush();
-
             $this->session->getFlashBag()->add('success', 'Wiadomość została wysłana');
 
             $config = $this->getDoctrine()
@@ -76,8 +76,7 @@ class DefaultController extends Controller
                         array('contact' => $contact)
                     ),
                     'text/html'
-                )
-            ;
+                );
 
             $mailer->send($message);
         }
