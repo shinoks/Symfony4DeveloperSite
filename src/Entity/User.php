@@ -50,12 +50,12 @@ class User implements AdvancedUserInterface, \Serializable
     private $lastName;
 
     /**
-     * @ORM\Column(type="integer", length=11)
+     * @ORM\Column(type="bigint", unique=true)
      */
     private $pesel;
 
     /**
-     * @ORM\Column(type="integer", length=9)
+     * @ORM\Column(type="string", length=9, unique=true)
      */
     private $idNumber;
 
