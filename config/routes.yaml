@@ -5,3 +5,7 @@ admin:
 front:
     resource: "routes/front.yml"
     prefix: /
+
+api:
+    resource: "routes/api.yml"
+    prefix: /api

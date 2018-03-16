@@ -1,0 +1,3 @@
+api_get_zip_code:
+    path: /getbycode/{zipCode}
+    controller: App\Controller\ZipCodeController::getZipCode

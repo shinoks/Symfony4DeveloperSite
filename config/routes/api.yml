@@ -1,0 +1,3 @@
+zip_code:
+    resource: "api/zip_code.yml"
+    prefix: /zip_code
