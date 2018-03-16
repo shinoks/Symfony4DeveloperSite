@@ -1,0 +1,23 @@
+admin_module_genuses:
+    path: /
+    controller: App\Controller\Admin\ModuleGenusController::index
+
+admin_module_genus_new:
+    path: /new
+    controller: App\Controller\Admin\ModuleGenusController::new
+
+admin_module_genus_show:
+    path: /{id}
+    controller: App\Controller\Admin\ModuleGenusController::show
+
+admin_module_genus_edit:
+    path: /edit/{id}
+    controller: App\Controller\Admin\ModuleGenusController::edit
+
+admin_module_genus_disable:
+    path: /disable/{id}/{status}
+    controller: App\Controller\Admin\ModuleGenusController::disable
+
+admin_module_genus_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\ModuleGenusController::delete
