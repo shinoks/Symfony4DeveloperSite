@@ -2,6 +2,10 @@ admin_offerts:
     path: /
     controller: App\Controller\Admin\OfferController::index
 
+admin_offer_new:
+    path: /new
+    controller: App\Controller\Admin\OfferController::new
+
 admin_offer_show:
     path: /{id}
     controller: App\Controller\Admin\OfferController::show

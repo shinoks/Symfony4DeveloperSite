@@ -118,6 +118,10 @@ knowledge_zone: Strefa wiedzy
 subscribers: Użytkownicy newslettera
 subscriber: Użytkownik newslettera
 system: System
+pesel: Pesel
+zip_code: Kod pocztowy
+id_number: Nr dowodu osobistego
+birth_date: Data urodzenia
 input:
     default: Podstawowy
 table:

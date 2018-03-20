@@ -62,3 +62,15 @@ admin_file_browser:
 admin_subscriber:
     resource: "admin/subscriber.yml"
     prefix: /subscriber
+
+admin_module:
+    resource: "admin/module.yml"
+    prefix: /module
+
+admin_module_position:
+    resource: "admin/module_position.yml"
+    prefix: /module_position
+
+admin_module_genus:
+    resource: "admin/module_genus.yml"
+    prefix: /module_genus

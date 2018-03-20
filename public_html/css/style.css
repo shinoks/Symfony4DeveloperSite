@@ -762,7 +762,26 @@ label small{
 .nav-button:hover{
     background-color: #0e134b;
     color: #fff;
-
+}
+.nav-button-orange {
+    background-color: #f0ad4e;
+    border: medium none;
+    color: #fff;
+    font-size: 16px;
+    padding: 8px 20px;
+    border-radius: 2px;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+.nav-button-orange.login{
+    background-color: #f0ad4e;
+    margin-right: 5px;
+}
+.nav-button-orange:hover{
+    background-color: #ffa500;
+    color: #fff;
 }
 .navbar{
     margin-bottom: 0px;

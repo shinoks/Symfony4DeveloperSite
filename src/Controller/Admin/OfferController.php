@@ -66,11 +66,37 @@ class OfferController extends Controller
         }
 
     }
+    /**
+     * @return Response
+     */
+    public function new(Request $request) {
+        $offer = new Offer;
+        $form = $this->createForm(OfferType::class, $offer);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $offer = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($offer);
+            $em->flush();
+
+            $this->session->getFlashBag()->add('success', 'Oferta została dodana');
+
+            return $this->redirectToRoute('admin_offer_edit',['id'=> $offer->getId()]);
+        }
+
+        return $this->render('back/offer_new.html.twig',array(
+            'offer'=> $offer,
+            'form'=> $form->createView()
+        ));
+    }
 
     /**
      * @return Response
      */
-    public function disable($id, $status)    {
+    public function disable($id, $status) {
         $offer = $this->getDoctrine()
             ->getRepository(Offer::class)
             ->find($id);

@@ -1,11 +1,9 @@
 App\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: pesel
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: idNumber
     properties:
-        username:
-            - Length:
-                min: 7
-                max: 50
-                minMessage: 'Twoja nazwa użytkownika musi mieć minimum 7 znaków'
-                maxMessage: 'Twoja nazwa użytkownika może mieć maksimum 50 znaków'
         password:
             - NotBlank: ~
             - Length:
@@ -15,6 +13,7 @@ App\Entity\User:
                 maxMessage: 'Twoje hasło może mieć maksimum 50 znaków'
         email:
             - NotBlank: ~
+
             - Email:
                 message: 'Podany email nie jest poprawnym adresem email.'
                 checkMX: true
@@ -36,3 +35,9 @@ App\Entity\User:
                 max: 50
                 minMessage: 'Twoje nazwisko musi mieć minimum znaków'
                 maxMessage: 'Twoje nazwisko może mieć maksimum znaków'
+        pesel:
+            - NotBlank: ~
+            - App\Validator\Constraints\Pesel: ~
+        idNumber:
+            - NotBlank: ~
+            - App\Validator\Constraints\IdNumber: ~

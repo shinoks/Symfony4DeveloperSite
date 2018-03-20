@@ -21,3 +21,7 @@ admin_user_disable:
 admin_user_delete:
     path: /delete/{id}
     controller: App\Controller\Admin\UserController::delete
+
+admin_user_disable_by_admin:
+    path: /disable-by-admin/{id}/{status}
+    controller: App\Controller\Admin\UserController::disableByAdmin
