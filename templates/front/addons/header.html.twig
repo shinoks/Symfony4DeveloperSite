@@ -44,7 +44,7 @@
                 {% endif %}
             </div>
             <ul class="main-nav nav navbar-nav navbar-right">
-                {% set activeMenu = menu.getActiveMenu %}
+                {% if menu.getActiveMenu is not empty %}{% set activeMenu = menu.getActiveMenu.getId %}{% endif %}
                 {% if menu.getMenu is not empty %}
                     {% for menuItem in menu.getMenu %}
                         {% set caret = '' %}
@@ -53,7 +53,7 @@
                             {% set caret = '<b class="caret"></b>' %}
                             {% set attr = ' class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0.6s" ' %}
                         {% endif %}
-                         <li class="{% if menuItem.id == activeMenu %}active{% endif %} wow fadeInDown" data-wow-delay="0.3s">
+                         <li class="{% if menu.getActiveMenu is not empty %}{% if menuItem.id == activeMenu %}active{% endif %}{% endif %} wow fadeInDown" data-wow-delay="0.3s">
                             <a {{ attr|raw }} href="{{ menuItem.href }}">{{ menuItem.name }}{{ caret|raw }}</a>
                                 {% if menuItem.childrens is not empty %}
                                     <ul class="dropdown-menu navbar-nav">

@@ -41,6 +41,11 @@ class Module
     protected $menus;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $sequence;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $isActive;
@@ -119,6 +124,22 @@ class Module
     public function setMenus($menus)
     {
         $this->menus = $menus;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSequence()
+    {
+        return $this->sequence;
+    }
+
+    /**
+     * @param mixed $sequence
+     */
+    public function setSequence($sequence)
+    {
+        $this->sequence = $sequence;
     }
 
     /**
