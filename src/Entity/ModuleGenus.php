@@ -38,13 +38,12 @@ class ModuleGenus
     private $template;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Module", mappedBy="type")
+     * @ORM\OneToMany(targetEntity="App\Entity\Module", mappedBy="genus")
      */
     private $modules;
 
     public function __construct()
     {
-        $this->modules = new ArrayCollection();
     }
     /**
      * @return mixed

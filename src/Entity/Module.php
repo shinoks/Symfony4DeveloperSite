@@ -38,7 +38,7 @@ class Module
      * @ORM\ManyToMany(targetEntity="App\Entity\Menu", inversedBy="modules")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $menus;
+    protected $menus;
 
     /**
      * @ORM\Column(type="boolean")
@@ -47,7 +47,6 @@ class Module
 
     public function __construct()
     {
-        $this->menus = new ArrayCollection();
     }
 
     /**
@@ -109,17 +108,17 @@ class Module
     /**
      * @return mixed
      */
-    public function getMenu()
+    public function getMenus()
     {
-        return $this->menu;
+        return $this->menus;
     }
 
     /**
-     * @param mixed $menu
+     * @param mixed $menus
      */
-    public function setMenu($menu)
+    public function setMenus($menus)
     {
-        $this->menu = $menu;
+        $this->menus = $menus;
     }
 
     /**

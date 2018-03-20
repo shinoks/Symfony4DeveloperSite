@@ -13,16 +13,15 @@ class MenuRepository extends ServiceEntityRepository
         parent::__construct($registry, Menu::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function findOneByActiveUrl($value)
     {
         return $this->createQueryBuilder('m')
-            ->where('m.something = :value')->setParameter('value', $value)
+            ->where('m.href LIKE :value')->setParameter('value', $value)
+            ->andWhere('m.parent is NULL')
             ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults(1)
             ->getQuery()
-            ->getResult()
+            ->getOneOrNullResult()
         ;
     }
-    */
 }

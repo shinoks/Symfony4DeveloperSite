@@ -44,6 +44,7 @@
                 {% endif %}
             </div>
             <ul class="main-nav nav navbar-nav navbar-right">
+                {% set activeMenu = menu.getActiveMenu %}
                 {% if menu.getMenu is not empty %}
                     {% for menuItem in menu.getMenu %}
                         {% set caret = '' %}
@@ -52,31 +53,14 @@
                             {% set caret = '<b class="caret"></b>' %}
                             {% set attr = ' class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0.6s" ' %}
                         {% endif %}
-                            <li class="wow fadeInDown" data-wow-delay="0.3s">
-                            {% if menuItem.type == 'article' %}
-                                <a {{ attr|raw }} href="{{ path('front_article_show',{'id':menuItem.article.id}) }}">{{ menuItem.name }}{{ caret|raw }}</a>
-                            {% elseif menuItem.type == 'category' %}
-                                <a {{ attr|raw }} href="{{ path('front_articles_show_by_category',{'categoryId':menuItem.category.id}) }}">{{ menuItem.name }}{{ caret|raw }}</a>
-                            {% elseif menuItem.type == 'href' %}
-                                <a {{ attr|raw }} href="/{{ menuItem.href }}">{{ menuItem.name }}{{ caret|raw }}</a>
-                            {% endif %}
-
+                         <li class="{% if menuItem.id == activeMenu %}active{% endif %} wow fadeInDown" data-wow-delay="0.3s">
+                            <a {{ attr|raw }} href="{{ menuItem.href }}">{{ menuItem.name }}{{ caret|raw }}</a>
                                 {% if menuItem.childrens is not empty %}
                                     <ul class="dropdown-menu navbar-nav">
                                         {% for child in menuItem.childrens %}
-                                            {% if child.type == 'article' %}
-                                                <li>
-                                                    <a href="{{ path('front_article_show',{'id':child.article.id}) }}">{{ child.name }}</a>
-                                                </li>
-                                            {% elseif child.type == 'category' %}
-                                                <li>
-                                                    <a href="{{ path('front_articles_show_by_category',{'categoryId':child.category.id}) }}">{{ child.name }}</a>
-                                                </li>
-                                            {% elseif child.type == 'href' %}
-                                                <li>
-                                                    <a href="{{ child.href }}">{{ child.name }}</a>
-                                                </li>
-                                            {% endif %}
+                                           <li>
+                                              <a href="{{ child.href }}">{{ child.name }}</a>
+                                           </li>
                                         {% endfor %}
                                     </ul>
                                 {% endif %}

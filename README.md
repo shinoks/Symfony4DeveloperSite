@@ -10,7 +10,8 @@ Symfony4 site with:
 
 # Admin
 
-- Little cms
+- Little cms:
+    ``Menu, Category, Article, Module``
 - Config site variable
 - Contact form manage
 
@@ -30,5 +31,4 @@ $ bin/console cache:clear
 $ bin/console cache:warmup
 ```
 # TODO
-Fixtures for admin account
-Fixtures for config
+Fixtures

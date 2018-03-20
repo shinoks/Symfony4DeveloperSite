@@ -27,6 +27,11 @@ class ModulePosition
     private $position;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Module", mappedBy="position")
+     */
+    private $modules;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -66,5 +71,19 @@ class ModulePosition
         $this->position = $position;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getModules()
+    {
+        return $this->modules;
+    }
 
+    /**
+     * @param mixed $modules
+     */
+    public function setModules($modules)
+    {
+        $this->modules = $modules;
+    }
 }
