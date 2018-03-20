@@ -76,6 +76,7 @@ you_can_trust_us: Możesz nam zaufać
 registered_investors: Zarejestrowani inwestorzy
 offerts_in_stock: Liczba złożonych ofert
 offerts_ammount: Kwota ofert
+add_offer: Dodaj ofertę
 completed_offers: Zakończone oferty
 looking_for_investment: Szukasz inwestycji
 looking_for_investor: Szukasz inwestora
@@ -122,6 +123,13 @@ pesel: Pesel
 zip_code: Kod pocztowy
 id_number: Nr dowodu osobistego
 birth_date: Data urodzenia
+module: Moduł
+modules: Moduły
+content: Zawartość
+template: Szablon
+menu: Menu
+menu_list: Lista menu
+href: Link
 input:
     default: Podstawowy
 table:
