@@ -126,7 +126,7 @@ class ModuleController extends Controller
 
         $this->session->getFlashBag()->add('success', 'Moduł został wyłączony');
 
-        return $this->redirectToRoute('admin_module');
+        return $this->redirectToRoute('admin_modules');
     }
 
     public function delete($id)    {
@@ -140,6 +140,6 @@ class ModuleController extends Controller
 
         $this->session->getFlashBag()->add('success', 'Moduł został usunięty');
 
-        return $this->redirectToRoute('admin_module');
+        return $this->redirectToRoute('admin_modules');
     }
 }
