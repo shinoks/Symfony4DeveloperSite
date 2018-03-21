@@ -10,17 +10,24 @@ use App\Form\ModulePositionType;
 
 class ModulePositionController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * ModulePositionController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
     }
 
     /**
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $modulePosition = $this->getDoctrine()
             ->getRepository(ModulePosition::class)
@@ -32,15 +39,17 @@ class ModulePositionController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function edit($id, Request $request)    {
+    public function edit(int $id, Request $request)
+    {
         $modulePosition = $this->getDoctrine()
             ->getRepository(ModulePosition::class)
             ->find($id);
         if($modulePosition){
             $form = $this->createForm(ModulePositionType::class, $modulePosition);
-
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -71,10 +80,11 @@ class ModulePositionController extends Controller
     }
 
     /**
-     * @return Response
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function new(Request $request){
-
+    public function new(Request $request)
+    {
         $modulePosition = new ModulePosition();
         $form = $this->createForm(ModulePositionType::class, $modulePosition);
 
@@ -97,9 +107,12 @@ class ModulePositionController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param int $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function disable($id, $status)    {
+    public function disable(int $id, int $status)
+    {
         $modulePosition = $this->getDoctrine()
             ->getRepository(ModulePosition::class)
             ->find($id);
@@ -119,9 +132,11 @@ class ModulePositionController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete($id)    {
+    public function delete(int $id)
+    {
         $modulePosition = $this->getDoctrine()
             ->getRepository(ModulePosition::class)
             ->find($id);

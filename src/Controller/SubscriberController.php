@@ -12,22 +12,31 @@ use App\Entity\Config;
 
 class SubscriberController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * SubscriberController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
     }
 
+    /**
+     * @param Request $request
+     * @param \Swift_Mailer $mailer
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function subscribe(Request $request, \Swift_Mailer $mailer)
     {
         $subscriber = new Subscriber();
         $form = $this->createForm(SubscriberType::class, $subscriber);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $subscriber->setHash(uniqid('', true));
             $subscriber->setIsActive(0);
             $em = $this->getDoctrine()->getManager();
@@ -60,7 +69,11 @@ class SubscriberController extends Controller
         ]);
     }
 
-    public function enable($h)
+    /**
+     * @param string $h
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function enable(string $h)
     {
         $subscriber = $this->getDoctrine()
             ->getRepository(Subscriber::class)
@@ -78,6 +91,9 @@ class SubscriberController extends Controller
         return $this->redirectToRoute('index');
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function getSubscribeForm()
     {
         $subscriber = new Subscriber();
@@ -112,5 +128,4 @@ class SubscriberController extends Controller
         }
         return true;
     }
-
 }

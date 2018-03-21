@@ -8,21 +8,12 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class ModulePositionRepository extends ServiceEntityRepository
 {
+    /**
+     * ModulePositionRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, ModulePosition::class);
     }
-
-    /*
-    public function findBySomething($value)
-    {
-        return $this->createQueryBuilder('m')
-            ->where('m.something = :value')->setParameter('value', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 }

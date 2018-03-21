@@ -15,11 +15,19 @@ use App\Entity\Realization;
 
 class DefaultController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * DefaultController constructor.
+     */
     public function __construct()
     {
+        $this->session = new Session();
     }
+
     /**
      * @return Response
      */
@@ -36,6 +44,8 @@ class DefaultController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param \Swift_Mailer $mailer
      * @return Response
      */
     public function contactPage(Request $request, \Swift_Mailer $mailer)
@@ -50,10 +60,10 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($contact);
             $em->flush();
+
             $this->session->getFlashBag()->add('success', 'Wiadomość została wysłana');
 
             $config = $this->getDoctrine()

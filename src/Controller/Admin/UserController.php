@@ -11,8 +11,14 @@ use App\Form\UserType;
 
 class UserController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * UserController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
@@ -33,15 +39,18 @@ class UserController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function edit($id, Request $request, UserPasswordEncoderInterface $passwordEncoder)    {
+    public function edit(int $id, Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
         $user = $this->getDoctrine()
             ->getRepository(User::class)
             ->find($id);
         if($user){
             $form = $this->createForm(UserType::class, $user);
-
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -66,7 +75,6 @@ class UserController extends Controller
                 'form'=> $form->createView()
             ));
         }else {
-
             $this->session->getFlashBag()->add('danger', 'Użytkownik nie został znaleziony');
 
             return $this->redirectToRoute('admin_users');
@@ -74,13 +82,14 @@ class UserController extends Controller
     }
 
     /**
-     * @return Response
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function new(Request $request,  UserPasswordEncoderInterface $passwordEncoder){
-
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -102,9 +111,11 @@ class UserController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param int $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function disable($id, $status)    {
+    public function disable(int $id, int $status)    {
         $user = $this->getDoctrine()
             ->getRepository(User::class)
             ->find($id);
@@ -120,9 +131,11 @@ class UserController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param int $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function disableByAdmin($id, $status)    {
+    public function disableByAdmin(int $id, int $status)    {
         $user = $this->getDoctrine()
             ->getRepository(User::class)
             ->find($id);
@@ -138,9 +151,10 @@ class UserController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete($id)    {
+    public function delete(int $id)    {
         $user = $this->getDoctrine()
             ->getRepository(User::class)
             ->find($id);

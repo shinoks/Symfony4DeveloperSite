@@ -10,17 +10,24 @@ use App\Form\OfferType;
 
 class OfferController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * OfferController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
     }
 
     /**
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $offer = $this->getDoctrine()
             ->getRepository(Offer::class)
@@ -32,15 +39,17 @@ class OfferController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function edit($id, Request $request)    {
+    public function edit(int $id, Request $request)
+    {
         $offer = $this->getDoctrine()
             ->getRepository(Offer::class)
             ->find($id);
         if($offer){
             $form = $this->createForm(OfferType::class, $offer);
-
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -66,10 +75,13 @@ class OfferController extends Controller
         }
 
     }
+
     /**
-     * @return Response
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function new(Request $request) {
+    public function new(Request $request)
+    {
         $offer = new Offer;
         $form = $this->createForm(OfferType::class, $offer);
 
@@ -96,7 +108,8 @@ class OfferController extends Controller
     /**
      * @return Response
      */
-    public function disable($id, $status) {
+    public function disable(int $id, int $status)
+    {
         $offer = $this->getDoctrine()
             ->getRepository(Offer::class)
             ->find($id);
@@ -112,9 +125,10 @@ class OfferController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete($id)    {
+    public function delete(int $id)    {
         $offer = $this->getDoctrine()
             ->getRepository(Offer::class)
             ->find($id);

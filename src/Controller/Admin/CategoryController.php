@@ -10,8 +10,14 @@ use App\Form\CategoryType;
 
 class CategoryController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * CategoryController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
@@ -32,13 +38,14 @@ class CategoryController extends Controller
     }
 
     /**
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $category = $this->getDoctrine()
             ->getRepository(Category::class)
-            ->findAll();
+            ->find($id);
 
         return $this->render('back/category_show.html.twig',array(
             'category'=> $category
@@ -46,7 +53,8 @@ class CategoryController extends Controller
     }
 
     /**
-     * @return Response
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function new(Request $request){
 
@@ -72,9 +80,11 @@ class CategoryController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function edit($id, Request $request)    {
+    public function edit(int $id, Request $request)    {
         $category = $this->getDoctrine()
             ->getRepository(Category::class)
             ->find($id);
@@ -111,9 +121,11 @@ class CategoryController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function disable($id, $status)    {
+    public function disable(int $id, $status)    {
         $category = $this->getDoctrine()
             ->getRepository(Category::class)
             ->find($id);
@@ -123,15 +135,16 @@ class CategoryController extends Controller
         $em->persist($category);
         $em->flush();
 
-        $this->session->getFlashBag()->add('success', 'Katgoria została wyłączona');
+        $this->session->getFlashBag()->add('success', 'Kategoria została wyłączona');
 
         return $this->redirectToRoute('admin_categories');
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete($id)    {
+    public function delete(int $id)    {
         $category = $this->getDoctrine()
             ->getRepository(Category::class)
             ->find($id);
@@ -140,7 +153,7 @@ class CategoryController extends Controller
         $em->remove($category);
         $em->flush();
 
-        $this->session->getFlashBag()->add('success', 'Kategoria został usunięty');
+        $this->session->getFlashBag()->add('success', 'Kategoria została usunięta');
 
         return $this->redirectToRoute('admin_categories');
     }

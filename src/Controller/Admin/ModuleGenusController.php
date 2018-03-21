@@ -10,8 +10,14 @@ use App\Form\ModuleGenusType;
 
 class ModuleGenusController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * ModuleGenusController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
@@ -32,9 +38,10 @@ class ModuleGenusController extends Controller
     }
 
     /**
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $moduleGenus = $this->getDoctrine()
             ->getRepository(ModuleGenus::class)
@@ -46,10 +53,11 @@ class ModuleGenusController extends Controller
     }
 
     /**
-     * @return Response
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function new(Request $request){
-
+    public function new(Request $request)
+    {
         $moduleGenus = new ModuleGenus();
         $form = $this->createForm(ModuleGenusType::class, $moduleGenus);
 
@@ -72,15 +80,16 @@ class ModuleGenusController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function edit($id, Request $request)    {
+    public function edit(int $id, Request $request)    {
         $moduleGenus = $this->getDoctrine()
             ->getRepository(ModuleGenus::class)
             ->find($id);
         if($moduleGenus){
             $form = $this->createForm(ModuleGenusType::class, $moduleGenus);
-
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -103,7 +112,6 @@ class ModuleGenusController extends Controller
                 'form'=> $form->createView()
             ));
         }else {
-
             $this->session->getFlashBag()->add('danger', 'Typ nie został znaleziony');
 
             return $this->redirectToRoute('admin_module_genuses');
@@ -111,9 +119,11 @@ class ModuleGenusController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param int $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function disable($id, $status)    {
+    public function disable(int $id, int $status)    {
         $moduleGenus = $this->getDoctrine()
             ->getRepository(ModuleGenus::class)
             ->find($id);
@@ -129,9 +139,10 @@ class ModuleGenusController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete($id)    {
+    public function delete(int $id)    {
         $moduleGenus = $this->getDoctrine()
             ->getRepository(ModuleGenus::class)
             ->find($id);

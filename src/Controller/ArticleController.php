@@ -11,8 +11,14 @@ use App\Form\CommentType;
 
 class ArticleController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * ArticleController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
@@ -33,9 +39,11 @@ class ArticleController extends Controller
     }
 
     /**
+     * @param int $id
+     * @param Request $request
      * @return Response
      */
-    public function show($id,Request $request)
+    public function show(int $id, Request $request)
     {
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
@@ -60,9 +68,10 @@ class ArticleController extends Controller
     }
 
     /**
+     * @param int $categoryId
      * @return Response
      */
-    public function showByCategory($categoryId)
+    public function showByCategory(int $categoryId)
     {
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
@@ -72,5 +81,4 @@ class ArticleController extends Controller
             'articles'=> $articles
         ));
     }
-
 }

@@ -5,12 +5,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Entity\Contact;
-use App\Repository\ContactRepository;
 
 class ContactController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * ContactController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
@@ -31,9 +36,10 @@ class ContactController extends Controller
     }
 
     /**
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $contact = $this->getDoctrine()
             ->getRepository(Contact::class)

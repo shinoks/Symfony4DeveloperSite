@@ -8,12 +8,20 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class MenuRepository extends ServiceEntityRepository
 {
+    /**
+     * MenuRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Menu::class);
     }
 
-    public function findOneByActiveUrl($value)
+    /**
+     * @param string $value
+     * @return mixed
+     */
+    public function findOneByActiveUrl(string $value)
     {
         return $this->createQueryBuilder('m')
             ->where('m.href LIKE :value')->setParameter('value', $value)

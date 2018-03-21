@@ -14,8 +14,14 @@ use App\Form\AdminType;
 
 class AdminController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * AdminController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
@@ -32,7 +38,6 @@ class AdminController extends Controller
         return $this->render('back/start.html.twig',array());
     }
 
-
     /**
      * @return Response
      */
@@ -48,9 +53,12 @@ class AdminController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function edit($id, Request $request, UserPasswordEncoderInterface $passwordEncoder)    {
+    public function edit(int $id, Request $request, UserPasswordEncoderInterface $passwordEncoder)    {
         $admin = $this->getDoctrine()
             ->getRepository(Admin::class)
             ->find($id);
@@ -85,8 +93,7 @@ class AdminController extends Controller
 
             return $this->render('back/admin_edit.html.twig',array(
                 'admin'=> $admin,
-                'form'=> $form->createView(),
-                'session'=>$this->session
+                'form'=> $form->createView()
             ));
         }else {
             $this->session->getFlashBag()->add('danger', 'Admin nie został znaleziony');
@@ -96,9 +103,11 @@ class AdminController extends Controller
     }
 
     /**
-     * @return Response
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function new(Request $request,  UserPasswordEncoderInterface $passwordEncoder){
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder){
 
         $admin = new Admin();
         $form = $this->createForm(AdminType::class, $admin);
@@ -131,9 +140,11 @@ class AdminController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param int $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function disable($id, $status)    {
+    public function disable(int $id, int $status)    {
         $admin = $this->getDoctrine()
             ->getRepository(Admin::class)
             ->find($id);
@@ -156,9 +167,10 @@ class AdminController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete($id)    {
+    public function delete(int $id)    {
         $admin = $this->getDoctrine()
             ->getRepository(Admin::class)
             ->find($id);

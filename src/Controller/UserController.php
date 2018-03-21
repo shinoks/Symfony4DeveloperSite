@@ -12,15 +12,24 @@ use App\Form\UserType;
 
 class UserController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * UserController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
     }
 
-     /**
-     * @return Response
+    /**
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param \Swift_Mailer $mailer
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer)
     {
@@ -60,7 +69,6 @@ class UserController extends Controller
                     'text/html'
                 )
             ;
-
             $mailer->send($message);
 
             return $this->redirectToRoute('login');
@@ -71,7 +79,11 @@ class UserController extends Controller
         ));
     }
 
-    public function enable($h)
+    /**
+     * @param string $h
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function enable(string $h)
     {
         $user = $this->getDoctrine()
             ->getRepository(User::class)
@@ -99,7 +111,9 @@ class UserController extends Controller
     }
 
     /**
-     * @return Response
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function edit(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -135,7 +149,6 @@ class UserController extends Controller
                 'form'=> $form->createView()
             ));
         }else {
-
             $this->session->getFlashBag()->add('danger', 'Użytkownik nie został znaleziony');
 
             return $this->redirectToRoute('front_user_account');

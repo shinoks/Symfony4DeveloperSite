@@ -10,17 +10,24 @@ use App\Form\SubscriberType;
 
 class SubscriberController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * SubscriberController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
     }
 
     /**
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $article = $this->getDoctrine()
             ->getRepository(Subscriber::class)
@@ -31,15 +38,14 @@ class SubscriberController extends Controller
         ));
     }
 
-
     /**
-     * @return Response
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function new(Request $request){
-
+    public function new(Request $request)
+    {
         $subscriber = new Subscriber();
-        $form = $this->createForm(SubscriberType::class, $article);
-
+        $form = $this->createForm(SubscriberType::class, $subscriber);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -58,7 +64,12 @@ class SubscriberController extends Controller
         ));
     }
 
-    public function disable($id, $status)    {
+    /**
+     * @param int $id
+     * @param int $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function disable(int $id, int $status)    {
         $article = $this->getDoctrine()
             ->getRepository(Subscriber::class)
             ->find($id);
@@ -78,9 +89,10 @@ class SubscriberController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete($id)    {
+    public function delete(int $id)    {
         $subscriber = $this->getDoctrine()
             ->getRepository(Subscriber::class)
             ->find($id);
