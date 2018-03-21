@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Config;
 use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -18,7 +19,6 @@ class DefaultController extends Controller
 
     public function __construct()
     {
-        $this->session = new Session();
     }
     /**
      * @return Response
@@ -29,14 +29,9 @@ class DefaultController extends Controller
             ->getRepository(Article::class)
             ->findAllStartPage();
 
-        $latestRealizations = $this->getDoctrine()
-            ->getRepository(Realization::class)
-            ->findLatestRealizations(7);
 
         return $this->render('front/start.html.twig',array(
-            'articles' => $articles,
-            'latestRealizations' => $latestRealizations,
-            'session' => $this->session
+            'articles' => $articles
         ));
     }
 
@@ -59,7 +54,6 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($contact);
             $em->flush();
-
             $this->session->getFlashBag()->add('success', 'Wiadomość została wysłana');
 
             $config = $this->getDoctrine()
@@ -76,14 +70,12 @@ class DefaultController extends Controller
                         array('contact' => $contact)
                     ),
                     'text/html'
-                )
-            ;
+                );
 
             $mailer->send($message);
         }
 
         return $this->render('front/contact.html.twig',array(
-            'session' => $this->session,
             'form' => $form->createView()
         ));
     }

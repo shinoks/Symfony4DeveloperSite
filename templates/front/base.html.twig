@@ -39,7 +39,23 @@
 <body>
 {% include 'front/addons/header.html.twig' %}
 
+{% set menus = menu.getMenu %}
+{% set activeMenu = menu.getActiveMenu %}
+{% for module in menu.modulesForActivePage.top %}
+    {% block top %}
+        {% set content = module.content %}
+        {%  include 'front/modules/' ~ module.template %}
+    {% endblock %}
+{% endfor %}
+
 {% block body %}{% endblock %}
+
+{% for module in menu.modulesForActivePage.bottom %}
+    {% block bottom %}
+        {% set content = module.content %}
+        {%  include 'front/modules/' ~ module.template %}
+    {% endblock %}
+{% endfor %}
 
 {% include 'front/addons/footer.html.twig' %}
 

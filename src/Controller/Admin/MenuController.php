@@ -45,6 +45,7 @@ class MenuController extends Controller
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $menu = $form->getData();
+                $menu->setHref($this->generateHref($menu));
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($menu);
@@ -77,7 +78,7 @@ class MenuController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $menu->setHref($this->generateHref($menu));
             $em = $this->getDoctrine()->getManager();
             $em->persist($menu);
             $em->flush();
@@ -90,6 +91,25 @@ class MenuController extends Controller
         return $this->render('back/menu_new.html.twig',array(
             'form'=> $form->createView()
         ));
+    }
+
+    public function generateHref(Menu $menu)
+    {
+        switch($menu->getType()){
+            case 'article':
+                $href = $this->generateUrl('front_article_show',['id' => $menu->getArticle()->getId()]);
+                break;
+            case 'category':
+                $href = $this->generateUrl('front_articles_show_by_category',['categoryId' => $menu->getCategory()->getId()]);
+                break;
+            case 'href':
+                $href = $menu->getHref();
+                break;
+            default:
+                $href = false;
+        }
+
+        return $href;
     }
 
     /**

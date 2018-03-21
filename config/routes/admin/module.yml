@@ -1,0 +1,28 @@
+admin_modules:
+    path: /
+    controller: App\Controller\Admin\ModuleController::index
+
+admin_module_new:
+    path: /new
+    controller: App\Controller\Admin\ModuleController::new
+
+admin_module_change_position:
+    path: /order
+    controller: App\Controller\Admin\ModuleController::changeSequence
+
+admin_module_show:
+    path: /{id}
+    controller: App\Controller\Admin\ModuleController::show
+
+admin_module_edit:
+    path: /edit/{id}
+    controller: App\Controller\Admin\ModuleController::edit
+
+admin_module_disable:
+    path: /disable/{id}/{status}
+    controller: App\Controller\Admin\ModuleController::disable
+
+admin_module_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\ModuleController::delete
+

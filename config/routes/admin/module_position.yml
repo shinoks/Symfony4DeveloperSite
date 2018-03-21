@@ -1,0 +1,23 @@
+admin_module_positions:
+    path: /
+    controller: App\Controller\Admin\ModulePositionController::index
+
+admin_module_position_new:
+    path: /new
+    controller: App\Controller\Admin\ModulePositionController::new
+
+admin_module_position_show:
+    path: /{id}
+    controller: App\Controller\Admin\ModulePositionController::show
+
+admin_module_position_edit:
+    path: /edit/{id}
+    controller: App\Controller\Admin\ModulePositionController::edit
+
+admin_module_position_disable:
+    path: /disable/{id}/{status}
+    controller: App\Controller\Admin\ModulePositionController::disable
+
+admin_module_position_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\ModulePositionController::delete

@@ -37,12 +37,14 @@
         <div class="collapse navbar-collapse yamm" id="navigation">
             <div class="button navbar-right">
                 {% if app.user %}
+                    <a class="navbar-btn nav-button-orange wow bounceInRight login" href="{{ path('front_user_account') }}" data-wow-delay="0.45s">{{ 'account'|trans }}</a>
                     <a class="navbar-btn nav-button wow bounceInRight login" href="{{ path('logout') }}" data-wow-delay="0.45s">{{ 'logout'|trans }}</a>
                 {% else %}
                     <a class="navbar-btn nav-button wow bounceInRight login" href="{{ path('login') }}" data-wow-delay="0.45s">{{ 'login'|trans }}</a>
                 {% endif %}
             </div>
             <ul class="main-nav nav navbar-nav navbar-right">
+                {% if menu.getActiveMenu is not empty %}{% set activeMenu = menu.getActiveMenu.getId %}{% endif %}
                 {% if menu.getMenu is not empty %}
                     {% for menuItem in menu.getMenu %}
                         {% set caret = '' %}
@@ -51,39 +53,19 @@
                             {% set caret = '<b class="caret"></b>' %}
                             {% set attr = ' class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0.6s" ' %}
                         {% endif %}
-                            <li class="wow fadeInDown" data-wow-delay="0.3s">
-                            {% if menuItem.type == 'article' %}
-                                <a {{ attr|raw }} href="{{ path('front_article_show',{'id':menuItem.article.id}) }}">{{ menuItem.name }}{{ caret|raw }}</a>
-                            {% elseif menuItem.type == 'category' %}
-                                <a {{ attr|raw }} href="{{ path('front_articles_show_by_category',{'categoryId':menuItem.category.id}) }}">{{ menuItem.name }}{{ caret|raw }}</a>
-                            {% elseif menuItem.type == 'href' %}
-                                <a {{ attr|raw }} href="/{{ menuItem.href }}">{{ menuItem.name }}{{ caret|raw }}</a>
-                            {% endif %}
-
+                         <li class="{% if menu.getActiveMenu is not empty %}{% if menuItem.id == activeMenu %}active{% endif %}{% endif %} wow fadeInDown" data-wow-delay="0.3s">
+                            <a {{ attr|raw }} href="{{ menuItem.href }}">{{ menuItem.name }}{{ caret|raw }}</a>
                                 {% if menuItem.childrens is not empty %}
                                     <ul class="dropdown-menu navbar-nav">
                                         {% for child in menuItem.childrens %}
-                                            {% if child.type == 'article' %}
-                                                <li>
-                                                    <a href="{{ path('front_article_show',{'id':child.article.id}) }}">{{ child.name }}</a>
-                                                </li>
-                                            {% elseif child.type == 'category' %}
-                                                <li>
-                                                    <a href="{{ path('front_articles_show_by_category',{'categoryId':child.category.id}) }}">{{ child.name }}</a>
-                                                </li>
-                                            {% elseif child.type == 'href' %}
-                                                <li>
-                                                    <a href="{{ child.href }}">{{ child.name }}</a>
-                                                </li>
-                                            {% endif %}
+                                           <li>
+                                              <a href="{{ child.href }}">{{ child.name }}</a>
+                                           </li>
                                         {% endfor %}
                                     </ul>
                                 {% endif %}
                             </li>
                     {% endfor %}
-                {% endif %}
-                {% if app.user %}
-                    <li class="wow fadeInDown" data-wow-delay="0.8s"><a href="{{ path('front_user_account') }}">{{ 'account'|trans }}</a></li>
                 {% endif %}
             </ul>
         </div>

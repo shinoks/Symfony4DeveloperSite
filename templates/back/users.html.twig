@@ -44,7 +44,8 @@
                             <th>Imię i Nazwisko</th>
                             <th>Email</th>
                             <th>Rola</th>
-                            <th>Wyłącz</th>
+                            <th>Aktywowany</th>
+                            <th>Włączony/potwierdzony</th>
                             <th>Usuń</th>
                         </tr>
                     </thead>
@@ -56,9 +57,14 @@
                                 <td>{{ user.email }}</td>
                                 <td>{% for role in user.roles %}{{ role }} {% endfor %}</td>
                                 {% if user.isActive == 1 %}
-                                    <td><a href="{{ path('admin_user_disable', { 'id':user.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                                    <td><a href="{{ path('admin_user_disable', { 'id':user.id,'status':0 }) }}" class="btn btn-warning">Dezaktywuj</a></td>
                                 {% else %}
-                                    <td><a href="{{ path('admin_user_disable', { 'id':user.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                                    <td><a href="{{ path('admin_user_disable', { 'id':user.id,'status':1 }) }}" class="btn btn-success">Aktywuj</a></td>
+                                {% endif %}
+                                {% if user.isEnabledByAdmin == 1 %}
+                                    <td><a href="{{ path('admin_user_disable_by_admin', { 'id':user.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                                {% else %}
+                                    <td><a href="{{ path('admin_user_disable_by_admin', { 'id':user.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
                                 {% endif %}
                                 <td><a href="{{ path('admin_user_delete', { 'id':user.id }) }}" class="btn btn-danger">Usuń</a></td>
                             </tr>

@@ -28,11 +28,13 @@ class UserController extends Controller
         $form = $this->createForm(UserType::class, $user);
         $form->remove('roles');
         $form->remove('isActive');
+        $form->remove('isEnabledByAdmin');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setRoles(array('ROLE_USER'));
             $user->setIsActive(0);
+            $user->setIsEnabledByAdmin(0);
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $user->setHash(uniqid("",true));
@@ -47,7 +49,7 @@ class UserController extends Controller
                 ->find(1);
 
             $message = (new \Swift_Message('Formularz rejestracyjny z '.$config->getTitle()))
-                ->setFrom('info@grupaformat.pl')
+                ->setFrom($config->getEmail())
                 ->setReplyTo($config->getEmail())
                 ->setTo($user->getEmail())
                 ->setBody(
@@ -108,6 +110,7 @@ class UserController extends Controller
             $form = $this->createForm(UserType::class, $user);
             $form->remove('roles');
             $form->remove('isActive');
+            $form->remove('isEnabledByAdmin');
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
