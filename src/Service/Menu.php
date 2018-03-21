@@ -57,14 +57,8 @@ class Menu
                 }
             }
 
-            usort($modules['top'], function ($a, $b)
-            {
-                return strcmp($a["sequence"], $b["sequence"]);
-            });
-            usort($modules['bottom'], function ($a, $b)
-            {
-                return strcmp($a["sequence"], $b["sequence"]);
-            });
+            usort($modules['top'], function ($a, $b){return strcmp($a["sequence"], $b["sequence"]);});
+            usort($modules['bottom'], function ($a, $b){return strcmp($a["sequence"], $b["sequence"]);});
         }
 
         return $modules;

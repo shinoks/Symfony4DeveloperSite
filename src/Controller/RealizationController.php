@@ -58,4 +58,15 @@ class RealizationController extends Controller
 
         return $filenames;
     }
+
+    public function getLatestRealizations(int $limit)
+    {
+        $latestRealizations = $this->getDoctrine()
+            ->getRepository(Realization::class)
+            ->findBy(['isActive' => 1],[],$limit);
+
+        return $this->render('front/addons/items.html.twig',[
+            'latestRealizations'=> $latestRealizations
+        ]);
+    }
 }
