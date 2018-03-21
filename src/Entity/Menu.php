@@ -65,10 +65,17 @@ class Menu
      */
     private $position;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Module", mappedBy="menus")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $modules;
+
     public function __construct()
     {
         $this->isActive = 1;
         $this->childrens = new ArrayCollection();
+        $this->modules = new ArrayCollection();
     }
 
     /**
@@ -221,6 +228,22 @@ class Menu
     public function setPosition($position)
     {
         $this->position = $position;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModules()
+    {
+        return $this->modules;
+    }
+
+    /**
+     * @param mixed $modules
+     */
+    public function setModules($modules)
+    {
+        $this->modules = $modules;
     }
 
 }

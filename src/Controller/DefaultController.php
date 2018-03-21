@@ -19,7 +19,6 @@ class DefaultController extends Controller
 
     public function __construct()
     {
-        $this->session = new Session();
     }
     /**
      * @return Response
@@ -30,14 +29,9 @@ class DefaultController extends Controller
             ->getRepository(Article::class)
             ->findAllStartPage();
 
-        $latestRealizations = $this->getDoctrine()
-            ->getRepository(Realization::class)
-            ->findLatestRealizations(7);
 
         return $this->render('front/start.html.twig',array(
-            'articles' => $articles,
-            'latestRealizations' => $latestRealizations,
-            'session' => $this->session
+            'articles' => $articles
         ));
     }
 
@@ -82,7 +76,6 @@ class DefaultController extends Controller
         }
 
         return $this->render('front/contact.html.twig',array(
-            'session' => $this->session,
             'form' => $form->createView()
         ));
     }

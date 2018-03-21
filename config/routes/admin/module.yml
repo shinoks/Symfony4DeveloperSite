@@ -6,6 +6,10 @@ admin_module_new:
     path: /new
     controller: App\Controller\Admin\ModuleController::new
 
+admin_module_change_position:
+    path: /order
+    controller: App\Controller\Admin\ModuleController::changeSequence
+
 admin_module_show:
     path: /{id}
     controller: App\Controller\Admin\ModuleController::show
@@ -21,3 +25,4 @@ admin_module_disable:
 admin_module_delete:
     path: /delete/{id}
     controller: App\Controller\Admin\ModuleController::delete
+

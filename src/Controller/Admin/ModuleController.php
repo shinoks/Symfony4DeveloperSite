@@ -114,6 +114,22 @@ class ModuleController extends Controller
         }
     }
 
+    public function changeSequence(Request $request)
+    {
+        $id = $request->get('id');
+        $sequence = $request->get('sequence');
+        $module = $this->getDoctrine()
+            ->getRepository(Module::class)
+            ->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $module->setSequence($sequence);
+        $em->persist($module);
+        $em->flush();$this->session->getFlashBag()->add('success', 'Kolejność została zmieniona');
+
+        return $this->redirectToRoute('admin_modules');
+    }
+
     public function disable($id, $status)    {
         $module = $this->getDoctrine()
             ->getRepository(Module::class)
@@ -126,7 +142,7 @@ class ModuleController extends Controller
 
         $this->session->getFlashBag()->add('success', 'Moduł został wyłączony');
 
-        return $this->redirectToRoute('admin_module');
+        return $this->redirectToRoute('admin_modules');
     }
 
     public function delete($id)    {
@@ -140,6 +156,6 @@ class ModuleController extends Controller
 
         $this->session->getFlashBag()->add('success', 'Moduł został usunięty');
 
-        return $this->redirectToRoute('admin_module');
+        return $this->redirectToRoute('admin_modules');
     }
 }

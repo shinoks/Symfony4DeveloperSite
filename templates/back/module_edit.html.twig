@@ -1,5 +1,13 @@
 {% extends 'back/base.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {% include 'back/addons/ckeditor_config.html.twig' %}
+    <script>
+        CKEDITOR.replace( 'module_content' );
+    </script>
+
+{% endblock %}
 {% block body %}
 
     {% include 'back/leftPanel.html.twig' %}

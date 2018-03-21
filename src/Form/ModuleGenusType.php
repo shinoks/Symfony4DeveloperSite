@@ -13,8 +13,8 @@ class ModuleGenusType extends AbstractType
     {
         $builder
         ->add('name',TextType::class,['label'=>'name'])
-        ->add('type',TextType::class,['label'=>'name'])
-        ->add('content',TextareaType::class,['label'=>'content'])
+        ->add('type',TextType::class,['label'=>'type'])
+        ->add('content',TextareaType::class,['label'=>'content','required' => false])
         ->add('template',TextType::class,['label'=>'template'])
 
         ->add('save', SubmitType::class, array('label' => 'Zapisz'));

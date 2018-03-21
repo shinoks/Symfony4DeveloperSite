@@ -43,7 +43,16 @@
 {% endblock %}
 
 {% block choice_widget %}
+    {% set type = type|default('checkbox') %}
     <div class="form-group">
+        {% if multiple %}
+            {%- for child in form %}
+                    <label class="checkbox-inline">
+                        {{- form_widget(child) -}}
+                        {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
+                    </label>
+            {% endfor -%}
+        {% else %}
         <select class="form-control" {{ block('widget_attributes') }}>
             {% if placeholder is not null and required is empty %}
                 <option value="">{{ 'choose_some_option'|trans }}</option>
@@ -58,6 +67,8 @@
             {%- set options = choices -%}
             {{- block('choice_widget_options') -}}
         </select>
+
+        {% endif %}
     </div>
 {% endblock %}
 
@@ -75,9 +86,7 @@
 
 {% block submit_widget %}
     <div class="form-group">
-
         {% set type = type|default('submit') %}
-
         <button class="btn btn-primary btn-sm" {{ block('button_attributes') }}>
             <i class="fa fa-dot-circle-o"></i>
             Zapisz

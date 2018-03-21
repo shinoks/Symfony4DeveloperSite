@@ -54,7 +54,7 @@
                                 <td><a href="{{ path('admin_module_genus_edit',{ 'id':genus.id }) }}">{{ genus.name }}</a></td>
                                 <td>{{ genus.type }}</td>
                                 <td>{{ genus.template }}</td>
-                                <td><a href="{{ path('admin_module_delete', { 'id':module.id }) }}" class="btn btn-danger">Usuń</a></td>
+                                <td><a href="{{ path('admin_module_delete', { 'id':genus.id }) }}" class="btn btn-danger">Usuń</a></td>
                             </tr>
                         {% endfor %}
                         <tr>

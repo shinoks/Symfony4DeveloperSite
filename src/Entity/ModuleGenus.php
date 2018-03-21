@@ -28,7 +28,7 @@ class ModuleGenus
     private $type;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $content;
 
@@ -38,13 +38,12 @@ class ModuleGenus
     private $template;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Module", mappedBy="type")
+     * @ORM\OneToMany(targetEntity="App\Entity\Module", mappedBy="genus")
      */
     private $modules;
 
     public function __construct()
     {
-        $this->modules = new ArrayCollection();
     }
     /**
      * @return mixed
