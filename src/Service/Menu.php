@@ -29,9 +29,9 @@ class Menu
     }
 
     /**
-     * @return array|null
+     * @return Men|null
      */
-    public function getActiveMenu(): ?array
+    public function getActiveMenu(): ?Men
     {
         $url = $this->requestStack->getCurrentRequest()->getPathInfo();
         if($url =='/'){$url = '/index';};
@@ -41,7 +41,7 @@ class Menu
         if($active){
             $activeMenu = $active;
         }else {
-            $activeMenu = false;
+            $activeMenu = NULL;
         }
 
         return $activeMenu;

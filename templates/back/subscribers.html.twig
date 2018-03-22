@@ -1,0 +1,77 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/leftPanel.html.twig' %}
+
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        {% include 'back/header.html.twig' %}
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Użytkownicy newslettera</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">Użytkownicy newslettera</li>
+                        </ol>
+                        <div class="page-header float-right">
+                            <a href="{{ path('admin_user_new') }}"><i class="fa fa-user-plus text-dark"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'back/flashMessages.html.twig' %}
+
+        <div class="content mt-3">
+            <div class="animated fade-in">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Nazwa</th>
+                            <th>Email</th>
+                            <th>Data utworzenia</th>
+                            <th>Strona główna</th>
+                            <th>Usuń</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for subscriber in subscribers %}
+                            <tr>
+                                <td>{{ subscriber.id }}</td>
+                                <td><a href="{{ path('admin_subscriber_edit',{ 'id':subscriber.id }) }}">{{ subscriber.name }}</a></td>
+                                <td>{{ subscriber.email }}</td>
+                                <td>{{ subscriber.added|date('d-m-Y H:i:s') }}</td>
+                                {% if subscriber.isActive == 1 %}
+                                    <td><a href="{{ path('admin_subscriber_disable', { 'id':subscriber.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                                {% else %}
+                                    <td><a href="{{ path('admin_subscriber_disable', { 'id':subscriber.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                                {% endif %}
+                                <td><a href="{{ path('admin_subscriber_delete', { 'id':subscriber.id }) }}" class="btn btn-danger">Usuń</a></td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+        <!--/.col-->
+
+{% endblock %}
+

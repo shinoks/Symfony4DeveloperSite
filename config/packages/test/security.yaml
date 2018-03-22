@@ -1,0 +1,14 @@
+security:
+    firewalls:
+        admin:
+            pattern: ^/admin
+            http_basic: ~
+            provider: admin_entity
+            anonymous: ~
+            form_login:
+                login_path: /admin/login
+                check_path: /admin/login
+                target_path_parameter: /admin/start
+            logout:
+                path:   /admin/logout
+                target: /admin/
