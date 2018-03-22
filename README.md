@@ -29,6 +29,11 @@ $ git clone https://github.com/shinoks/eliteInvestments.git
 $ bin/console doctrine:schema:update --force
 $ bin/console cache:clear
 $ bin/console cache:warmup
+$ bin/console doctrine:fixtures:load
 ```
 # TODO
-Fixtures
+Bottom menu
+Footer menu
+Info count module
+Comment system
+Logo url in config
