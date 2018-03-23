@@ -13,7 +13,7 @@ services:
 
     App\:
         resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests,DataFixtures,Kernel.php}'
+        exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
 
     App\Controller\:
         resource: '../src/Controller'
