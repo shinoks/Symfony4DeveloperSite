@@ -36,6 +36,16 @@ class Config
     private $address;
 
     /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $logoMain;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $logoAdmin;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $description;
@@ -139,6 +149,38 @@ class Config
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLogoMain()
+    {
+        return $this->logoMain;
+    }
+
+    /**
+     * @param mixed $logoMain
+     */
+    public function setLogoMain($logoMain)
+    {
+        $this->logoMain = $logoMain;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLogoAdmin()
+    {
+        return $this->logoAdmin;
+    }
+
+    /**
+     * @param mixed $logoAdmin
+     */
+    public function setLogoAdmin($logoAdmin)
+    {
+        $this->logoAdmin = $logoAdmin;
     }
 
     /**

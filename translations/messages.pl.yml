@@ -130,6 +130,9 @@ template: Szablon
 menu: Menu
 menu_list: Lista menu
 href: Link
+logo_for_main_site: Logo dla strony głównej
+logo_for_admin_site: Logo dla strony admina
+keywords: Tagi strony
 input:
     default: Podstawowy
 table:

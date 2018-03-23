@@ -15,6 +15,8 @@ class ConfigFixtures extends Fixture
         $config->setEmail('youremail@gr8companydomain.com');
         $config->setPhone(999888777);
         $config->setAddress('43-250 City, ul. Good 5/4');
+        $config->setLogoMain('img/logo-ss.png');
+        $config->setLogoAdmin('img/logo-ssw.png');
         $config->setDescription("Yes this is super super change this to your's heart content");
         $config->setKeywords("site, cms, shinoks, php, admin, user");
 

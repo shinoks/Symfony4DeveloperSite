@@ -59,6 +59,28 @@
                         <b>{{ 'address'|trans }}:</b>
                         {{ configuration.address }}
                     </li>
+                    <li class="list-group-item">
+                        <b>{{ 'logo_for_main_site'|trans }}:</b>
+                        {{ configuration.logoMain }}
+                        {% if configuration.logoMain %}
+                            <br/><img src="{{ asset(configuration.logoMain) }}"/>
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'logo_for_admin_site'|trans }}:</b>
+                        {{ configuration.logoAdmin }}
+                        {% if configuration.logoAdmin %}
+                            <br/><img src="{{ asset(configuration.logoAdmin) }}"/>
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'description'|trans }}:</b>
+                        {{ configuration.description }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'keywords'|trans }}:</b>
+                        {{ configuration.keywords }}
+                    </li>
                 </ul>
             </section>
             <a href="{{ path('admin_config_edit') }}" class="btn btn-primary">{{ 'edit'|trans }}</a>
