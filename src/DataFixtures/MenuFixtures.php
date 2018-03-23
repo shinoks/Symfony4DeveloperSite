@@ -15,6 +15,8 @@ class MenuFixtures extends Fixture
         $menu->setType('href');
         $menu->setIsActive(1);
         $menu->setPosition(1);
+        $menu->setInFooter(1);
+        $menu->setInBottom(1);
         $manager->persist($menu);
 
         $menu = new Menu();
@@ -23,6 +25,8 @@ class MenuFixtures extends Fixture
         $menu->setType('href');
         $menu->setIsActive(1);
         $menu->setPosition(2);
+        $menu->setInFooter(1);
+        $menu->setInBottom(0);
         $manager->persist($menu);
 
         $menu = new Menu();
@@ -31,6 +35,8 @@ class MenuFixtures extends Fixture
         $menu->setType('href');
         $menu->setIsActive(1);
         $menu->setPosition(3);
+        $menu->setInFooter(0);
+        $menu->setInBottom(0);
         $manager->persist($menu);
 
         $menu = new Menu();
@@ -39,6 +45,8 @@ class MenuFixtures extends Fixture
         $menu->setType('href');
         $menu->setIsActive(1);
         $menu->setPosition(4);
+        $menu->setInFooter(1);
+        $menu->setInBottom(0);
         $manager->persist($menu);
 
         $menu = new Menu();
@@ -47,6 +55,8 @@ class MenuFixtures extends Fixture
         $menu->setType('href');
         $menu->setIsActive(1);
         $menu->setPosition(5);
+        $menu->setInFooter(1);
+        $menu->setInBottom(1);
         $manager->persist($menu);
 
         $manager->flush();

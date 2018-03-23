@@ -74,11 +74,11 @@ class RealizationController extends Controller
      * @param int $limit
      * @return Response
      */
-    public function getLatestRealizations(int $limit)
+    public function getLatestRealizations(int $limit): response
     {
         $latestRealizations = $this->getDoctrine()
             ->getRepository(Realization::class)
-            ->findBy(['isActive' => 1],[],$limit);
+            ->findBy(['isActive' => 1],['id' => 'desc'],$limit);
 
         return $this->render('front/addons/items.html.twig',[
             'latestRealizations'=> $latestRealizations

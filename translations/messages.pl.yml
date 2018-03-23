@@ -133,6 +133,10 @@ href: Link
 logo_for_main_site: Logo dla strony głównej
 logo_for_admin_site: Logo dla strony admina
 keywords: Tagi strony
+in_footer: W dolnym menu
+in_bottom: W stopce menu
+footer_menu: Dolne menu
+bottom_menu: Menu w stopce
 input:
     default: Podstawowy
 table:

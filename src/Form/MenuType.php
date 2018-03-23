@@ -5,6 +5,7 @@ use App\Entity\Menu;
 use App\Entity\Article;
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -59,6 +60,14 @@ class MenuType extends AbstractType
                 ]])
             ->add('position',IntegerType::class,[
                 'label' => 'position',
+                'required' => false
+            ])
+            ->add('inFooter',CheckboxType::class,[
+                'label' => 'footer_menu',
+                'required' => false
+            ])
+            ->add('inBottom',CheckboxType::class,[
+                'label' => 'bottom_menu',
                 'required' => false
             ])
 

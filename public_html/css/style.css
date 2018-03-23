@@ -2863,7 +2863,7 @@ padding-top: 7px;
     width: 100px;
     height: 2px;
     background: #242a6d;
-    margin: 0px 0px 33px;
+    margin: 0px 0px 15px;
     position: relative;
     top: -2px;
 }
@@ -2937,7 +2937,7 @@ ul.footer-blog li {
 .footer-blog .blg-date {
     color: #FFF;
     background-color: #AD7206;
-    padding: 2px 3px;
+    padding: 2px 5px;
     font-size: 11px;
     position: relative;
     top: -22px;
