@@ -14,6 +14,7 @@ Symfony4 site with:
     ``Menu, Category, Article, Module``
 - Config site variable
 - Contact form manage
+- Social media
 
 # Tech
 
@@ -32,8 +33,5 @@ $ bin/console cache:warmup
 $ bin/console doctrine:fixtures:load
 ```
 # TODO
-Bottom menu
-Footer menu
-Info count module
-Comment system
-Logo url in config
+- Info count module
+- Comment system
