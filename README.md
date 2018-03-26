@@ -1,4 +1,4 @@
-# EliteInvestments
+# Developer
 
 Mainly project for education in SF4.
 
@@ -31,6 +31,8 @@ $ bin/console doctrine:schema:update --force
 $ bin/console cache:clear
 $ bin/console cache:warmup
 $ bin/console doctrine:fixtures:load
+$ set .env
+$ set phpunit.xml.dist database connection
 ```
 # TODO
 - Info count module

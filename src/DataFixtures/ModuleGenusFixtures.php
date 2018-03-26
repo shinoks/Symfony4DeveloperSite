@@ -28,6 +28,12 @@ class ModuleGenusFixtures extends Fixture
         $moduleGenus->setTemplate('front/modules/latest_realizations.html.twig');
         $manager->persist($moduleGenus);
 
+        $moduleGenus = new ModuleGenus();
+        $moduleGenus->setName('Google Map');
+        $moduleGenus->setType('googl_map');
+        $moduleGenus->setTemplate('front/modules/google_map.html.twig');
+        $manager->persist($moduleGenus);
+
         $manager->flush();
     }
 }
