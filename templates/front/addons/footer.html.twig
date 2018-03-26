@@ -68,9 +68,13 @@
                         {{ render(controller('App\\Controller\\SubscriberController::getSubscribeForm')) }}
                         <div class="social pull-right">
                             <ul>
-                                <li><a class="wow fadeInUp animated" href="https://www.facebook.com/4eliteinvestments" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
-                                <li><a class="wow fadeInUp animated" href="https://instagram.com/4eliteinvestments" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
-                                <li><a class="wow fadeInUp animated" href="https://youtube.com/4eliteinvestments" data-wow-delay="0.4s"><i class="fa fa-youtube"></i></a></li>
+                                {% for soc in social.getSocial %}
+                                    <li>
+                                        <a class="wow fadeInUp animated" href="{{ soc.href }}">
+                                            <i class="{{ soc.htmlClass }}" data-wow-delay="0.2s"> </i>
+                                        </a>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>

@@ -10,6 +10,7 @@ do_not_have_an_account: Nie posiadasz konta?
 account: Konto
 youre_logged_on: Jesteś zalogowany jako
 user_registration: Rejestracja użytkownika
+is_active: Aktywny
 home: Start
 page: Strona
 read_more: Czytaj więcej
@@ -137,6 +138,8 @@ in_footer: W dolnym menu
 in_bottom: W stopce menu
 footer_menu: Dolne menu
 bottom_menu: Menu w stopce
+social_media: Media społecznościowe
+html_class: Klasa html
 input:
     default: Podstawowy
 table:

@@ -10,7 +10,7 @@ admin:
 admin_social_resource:
     resource: "admin/social.yml"
     prefix: /social
-admin_social:
+admin_socials:
     path: /social
     controller: App\Controller\Admin\SocialController::index
 
