@@ -13,8 +13,14 @@ use App\Form\CommentType;
 
 class RealizationController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * RealizationController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
@@ -35,9 +41,10 @@ class RealizationController extends Controller
     }
 
     /**
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $realization = $this->getDoctrine()
             ->getRepository(Realization::class)
@@ -50,7 +57,11 @@ class RealizationController extends Controller
         ));
     }
 
-    private function getUploadedFilesInDir($dir)
+    /**
+     * @param null|string $dir
+     * @return array|null
+     */
+    private function getUploadedFilesInDir(?string $dir): ?array
     {
         $finder = new Finder();
         $files = $finder->files()->in(['uploads/files/'.$dir]);
@@ -59,11 +70,15 @@ class RealizationController extends Controller
         return $filenames;
     }
 
-    public function getLatestRealizations(int $limit)
+    /**
+     * @param int $limit
+     * @return Response
+     */
+    public function getLatestRealizations(int $limit): response
     {
         $latestRealizations = $this->getDoctrine()
             ->getRepository(Realization::class)
-            ->findBy(['isActive' => 1],[],$limit);
+            ->findBy(['isActive' => 1],['id' => 'desc'],$limit);
 
         return $this->render('front/addons/items.html.twig',[
             'latestRealizations'=> $latestRealizations

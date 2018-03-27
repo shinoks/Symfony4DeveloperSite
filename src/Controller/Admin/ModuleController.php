@@ -10,8 +10,14 @@ use App\Form\ModuleType;
 
 class ModuleController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * ModuleController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
@@ -32,10 +38,10 @@ class ModuleController extends Controller
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $module = $this->getDoctrine()
             ->getRepository(Module::class)
@@ -50,7 +56,8 @@ class ModuleController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function new(Request $request){
+    public function new(Request $request)
+    {
 
         $module = new Module();
         $form = $this->createForm(ModuleType::class, $module);
@@ -74,11 +81,12 @@ class ModuleController extends Controller
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function edit($id, Request $request)    {
+    public function edit(int $id, Request $request)
+    {
         $module = $this->getDoctrine()
             ->getRepository(Module::class)
             ->find($id);
@@ -114,6 +122,10 @@ class ModuleController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function changeSequence(Request $request)
     {
         $id = $request->get('id');
@@ -130,7 +142,13 @@ class ModuleController extends Controller
         return $this->redirectToRoute('admin_modules');
     }
 
-    public function disable($id, $status)    {
+    /**
+     * @param int $id
+     * @param $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function disable(int $id, $status)
+    {
         $module = $this->getDoctrine()
             ->getRepository(Module::class)
             ->find($id);
@@ -145,7 +163,12 @@ class ModuleController extends Controller
         return $this->redirectToRoute('admin_modules');
     }
 
-    public function delete($id)    {
+    /**
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function delete(int $id)
+    {
         $module = $this->getDoctrine()
             ->getRepository(Module::class)
             ->find($id);

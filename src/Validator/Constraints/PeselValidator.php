@@ -6,6 +6,10 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class PeselValidator extends ConstraintValidator
 {
+    /**
+     * @param mixed $value
+     * @param Constraint $constraint
+     */
     public function validate($value, Constraint $constraint)
     {
         if (!preg_match('/^[0-9]{11}$/',$value))

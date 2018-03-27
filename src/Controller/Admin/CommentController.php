@@ -8,8 +8,14 @@ use App\Entity\Comment;
 
 class CommentController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * CommentController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
@@ -30,9 +36,10 @@ class CommentController extends Controller
     }
 
     /**
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $comment = $this->getDoctrine()
             ->getRepository(Comment::class)
@@ -44,9 +51,10 @@ class CommentController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function accept($id)
+    public function accept(int $id)
     {
         $comment = $this->getDoctrine()
             ->getRepository(Comment::class)

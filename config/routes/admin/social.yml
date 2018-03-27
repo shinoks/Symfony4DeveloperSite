@@ -1,0 +1,19 @@
+admin_social_new:
+    path: /new
+    controller: App\Controller\Admin\SocialController::new
+
+admin_social_show:
+    path: /{id}
+    controller: App\Controller\Admin\SocialController::show
+
+admin_social_edit:
+    path: /edit/{id}
+    controller: App\Controller\Admin\SocialController::edit
+
+admin_social_disable:
+    path: /disable/{id}/{status}
+    controller: App\Controller\Admin\SocialController::disable
+
+admin_social_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\SocialController::delete

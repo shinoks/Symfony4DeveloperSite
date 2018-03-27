@@ -8,13 +8,20 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class ZipCodeRepository extends ServiceEntityRepository
 {
+    /**
+     * ZipCodeRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, ZipCode::class);
     }
 
-
-    public function findByCode($value)
+    /**
+     * @param string $value
+     * @return mixed
+     */
+    public function findByCode(string $value)
     {
         return $this->createQueryBuilder('z')
             ->where('z.code = :value')

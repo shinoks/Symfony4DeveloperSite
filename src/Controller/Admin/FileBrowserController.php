@@ -2,22 +2,29 @@
 namespace App\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Finder\Finder;
 
 class FileBrowserController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * FileBrowserController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
     }
 
-    public function browseFiles($dir = null)
+    /**
+     * @param null|string $dir
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function browseFiles(?string $dir = null)
     {
         $files = $this->getUploadedFilesInDir();
         $directories = $this->getUploadedDirectories();
@@ -28,7 +35,11 @@ class FileBrowserController extends Controller
         ));
     }
 
-    public function browseFilesInDir($dir)
+    /**
+     * @param string $dir
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function browseFilesInDir(string $dir)
     {
         $files = $this->getUploadedFilesInDir($dir);
         $directories = $this->getUploadedDirectories($dir);
@@ -39,7 +50,11 @@ class FileBrowserController extends Controller
         ));
     }
 
-    private function getUploadedFilesInDir($dir = null)
+    /**
+     * @param null|string $dir
+     * @return array|null
+     */
+    private function getUploadedFilesInDir(?string $dir = null): ?array
     {
         $finder = new Finder();
         $files = $finder->files()->in(['uploads/files/'.$dir]);
@@ -48,7 +63,11 @@ class FileBrowserController extends Controller
         return $filenames;
     }
 
-    private function getUploadedDirectories($dir = null)
+    /**
+     * @param null|string $dir
+     * @return array|null
+     */
+    private function getUploadedDirectories(?string $dir = null): ?array
     {
         $finder = new Finder();
         $files = $finder->directories()->in(['uploads/files/'.$dir]);

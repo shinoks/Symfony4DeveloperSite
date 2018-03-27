@@ -66,6 +66,16 @@ class Menu
     private $position;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $inFooter;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $inBottom;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Module", mappedBy="menus")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -228,6 +238,38 @@ class Menu
     public function setPosition($position)
     {
         $this->position = $position;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInFooter()
+    {
+        return $this->inFooter;
+    }
+
+    /**
+     * @param mixed $inFooter
+     */
+    public function setInFooter($inFooter)
+    {
+        $this->inFooter = $inFooter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInBottom()
+    {
+        return $this->inBottom;
+    }
+
+    /**
+     * @param mixed $inBottom
+     */
+    public function setInBottom($inBottom)
+    {
+        $this->inBottom = $inBottom;
     }
 
     /**

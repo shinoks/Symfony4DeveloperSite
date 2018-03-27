@@ -13,6 +13,9 @@ use App\Form\CommentType;
 
 class ZipCodeController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
     public function __construct()
@@ -34,10 +37,7 @@ class ZipCodeController extends Controller
         ));
     }
 
-    /**
-     * @return Response
-     */
-    public function show($id,Request $request)
+    public function show(int $id,Request $request)
     {
         $article = $this->getDoctrine()
             ->getRepository(ZipCode::class)
@@ -61,10 +61,7 @@ class ZipCodeController extends Controller
         ));
     }
 
-    /**
-     * @return Response
-     */
-    public function showByCategory($categoryId)
+    public function showByCategory(int $categoryId)
     {
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
@@ -75,10 +72,7 @@ class ZipCodeController extends Controller
         ));
     }
 
-    /**
-     * @return Response
-     */
-    public function getZipCode($zipCode)
+    public function getZipCode(string $zipCode): JsonResponse
     {
         $zipCode = $this->getDoctrine()
             ->getRepository(ZipCode::class)
@@ -88,5 +82,4 @@ class ZipCodeController extends Controller
 
         return new JsonResponse($jsonData);
     }
-
 }

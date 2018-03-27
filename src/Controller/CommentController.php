@@ -10,8 +10,14 @@ use App\Entity\Comment;
 
 class CommentController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * CommentController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
@@ -20,9 +26,9 @@ class CommentController extends Controller
     /**
      * @param $event
      * @param $eventId
-     * @return null|object
+     * @return null|array
      */
-    public function showEventComments($event, $eventId): ?object
+    public function showEventComments($event, $eventId): ?array
     {
         $comments = $this->getDoctrine()
             ->getRepository(Comment::class)
@@ -30,7 +36,6 @@ class CommentController extends Controller
 
         return $comments;
     }
-
 
     /**
      * @param Request $request

@@ -5,15 +5,30 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploader
 {
+    /**
+     * @var string
+     */
     private $targetDir;
+    /**
+     * @var string
+     */
     private $imageDir;
 
-    public function __construct($targetDir,$imageDir)
+    /**
+     * FileUploader constructor.
+     * @param string $targetDir
+     * @param string $imageDir
+     */
+    public function __construct(string $targetDir, string $imageDir)
     {
         $this->targetDir = $targetDir;
         $this->imageDir = $imageDir;
     }
 
+    /**
+     * @param UploadedFile|null $file
+     * @return string
+     */
     public function upload(UploadedFile $file = null)
     {
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
@@ -22,11 +37,21 @@ class FileUploader
         return $fileName;
     }
 
-    public function getTargetDir() {
+    /**
+     * @return string
+     */
+    public function getTargetDir(): string
+    {
+
         return $this->targetDir;
     }
 
-    public function getImageDir() {
+    /**
+     * @return string
+     */
+    public function getImageDir(): string
+    {
+
         return $this->imageDir;
     }
 }

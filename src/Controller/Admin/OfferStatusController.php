@@ -10,8 +10,14 @@ use App\Form\OfferStatusType;
 
 class OfferStatusController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * OfferStatusController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
@@ -32,9 +38,10 @@ class OfferStatusController extends Controller
     }
 
     /**
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $offerStatus = $this->getDoctrine()
             ->getRepository(OfferStatus::class)
@@ -46,13 +53,13 @@ class OfferStatusController extends Controller
     }
 
     /**
-     * @return Response
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function new(Request $request){
-
+    public function new(Request $request)
+    {
         $offerStatus = new OfferStatus();
         $form = $this->createForm(OfferStatusType::class, $offerStatus);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -72,15 +79,16 @@ class OfferStatusController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function edit($id, Request $request)    {
+    public function edit(int $id, Request $request)    {
         $offerStatus = $this->getDoctrine()
             ->getRepository(OfferStatus::class)
             ->find($id);
         if($offerStatus){
             $form = $this->createForm(OfferStatusType::class, $offerStatus);
-
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -111,9 +119,11 @@ class OfferStatusController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param int $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function disable($id, $status)    {
+    public function disable(int $id, int $status)    {
         $offerStatus = $this->getDoctrine()
             ->getRepository(OfferStatus::class)
             ->find($id);
@@ -129,9 +139,10 @@ class OfferStatusController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete($id)    {
+    public function delete(int $id)    {
         $offerStatus = $this->getDoctrine()
             ->getRepository(OfferStatus::class)
             ->find($id);

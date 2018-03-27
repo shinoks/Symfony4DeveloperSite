@@ -10,8 +10,14 @@ use App\Form\RealizationType;
 
 class RealizationController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * RealizationController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
@@ -32,9 +38,10 @@ class RealizationController extends Controller
     }
 
     /**
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $realization = $this->getDoctrine()
             ->getRepository(Realization::class)
@@ -46,13 +53,13 @@ class RealizationController extends Controller
     }
 
     /**
-     * @return Response
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function new(Request $request){
-
+    public function new(Request $request)
+    {
         $realization = new Realization();
         $form = $this->createForm(RealizationType::class, $realization);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -72,16 +79,17 @@ class RealizationController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function edit($id, Request $request)    {
+    public function edit(int $id, Request $request)    {
         $realization = $this->getDoctrine()
             ->getRepository(Realization::class)
             ->find($id);
 
         if($realization){
             $form = $this->createForm(RealizationType::class, $realization);
-
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -112,9 +120,11 @@ class RealizationController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param int $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function disable($id, $status)    {
+    public function disable(int $id, int $status)    {
         $realization = $this->getDoctrine()
             ->getRepository(Realization::class)
             ->find($id);
@@ -130,9 +140,10 @@ class RealizationController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete($id)    {
+    public function delete(int $id)    {
         $realization = $this->getDoctrine()
             ->getRepository(Realization::class)
             ->find($id);

@@ -8,8 +8,14 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class AboutUsController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * AboutUsController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
@@ -30,9 +36,10 @@ class AboutUsController extends Controller
     }
 
     /**
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $article = $this->getDoctrine()
             ->getRepository(Article::class)

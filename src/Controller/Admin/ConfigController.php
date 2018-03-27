@@ -10,8 +10,14 @@ use App\Form\ConfigType;
 
 class ConfigController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * ConfigController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();

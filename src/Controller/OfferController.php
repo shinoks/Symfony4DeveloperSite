@@ -11,24 +11,30 @@ use App\Form\OfferType;
 
 class OfferController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * OfferController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
     }
 
     /**
-     * @return Response
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function new(Request $request){
-
+    public function new(Request $request)
+    {
         $offer = new Offer();
         $offerStatus = $this->getDoctrine()
             ->getRepository(OfferStatus::class)
             ->find(1);
         $form = $this->createForm(OfferType::class, $offer);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

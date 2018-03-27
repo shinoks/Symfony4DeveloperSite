@@ -7,6 +7,13 @@ admin:
     path: /
     controller: App\Controller\Admin\DefaultController::index
 
+admin_social_resource:
+    resource: "admin/social.yml"
+    prefix: /social
+admin_socials:
+    path: /social
+    controller: App\Controller\Admin\SocialController::index
+
 admin_user:
     resource: "admin/user.yml"
     prefix: /user
@@ -74,3 +81,4 @@ admin_module_position:
 admin_module_genus:
     resource: "admin/module_genus.yml"
     prefix: /module_genus
+

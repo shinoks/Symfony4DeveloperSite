@@ -10,17 +10,24 @@ use App\Form\MenuType;
 
 class MenuController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * MenuController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
     }
 
     /**
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $menu = $this->getDoctrine()
             ->getRepository(Menu::class)
@@ -32,9 +39,11 @@ class MenuController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function edit($id, Request $request)    {
+    public function edit(int $id, Request $request)    {
         $menu = $this->getDoctrine()
             ->getRepository(Menu::class)
             ->find($id);
@@ -68,7 +77,8 @@ class MenuController extends Controller
     }
 
     /**
-     * @return Response
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function new(Request $request){
 
@@ -93,7 +103,11 @@ class MenuController extends Controller
         ));
     }
 
-    public function generateHref(Menu $menu)
+    /**
+     * @param Menu $menu
+     * @return null|string
+     */
+    public function generateHref(Menu $menu): ?string
     {
         switch($menu->getType()){
             case 'article':
@@ -113,9 +127,11 @@ class MenuController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function disable($id, $status)    {
+    public function disable(int $id, $status)    {
         $menu = $this->getDoctrine()
             ->getRepository(Menu::class)
             ->find($id);
@@ -134,6 +150,10 @@ class MenuController extends Controller
         return $this->redirectToRoute('admin_menus');
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function changePosition(Request $request)
     {
         $id = $request->get('id');
@@ -151,9 +171,10 @@ class MenuController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete($id)    {
+    public function delete(int $id)    {
         $menu = $this->getDoctrine()
             ->getRepository(Menu::class)
             ->find($id);

@@ -3,27 +3,31 @@ namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Finder\Finder;
 use App\Form\ArticleType;
-use App\Service\FileUploader;
 
 class ArticleController extends Controller
 {
+    /**
+     * @var Session
+     */
     private $session;
 
+    /**
+     * ArticleController constructor.
+     */
     public function __construct()
     {
         $this->session = new Session();
     }
 
     /**
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
@@ -35,9 +39,11 @@ class ArticleController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function edit($id, Request $request)    {
+    public function edit(int $id, Request $request)    {
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->find($id);
@@ -79,7 +85,8 @@ class ArticleController extends Controller
     }
 
     /**
-     * @return Response
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function new(Request $request){
 
@@ -105,9 +112,11 @@ class ArticleController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param int $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function disable($id, $status)    {
+    public function disable(int $id, int $status)    {
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->find($id);
@@ -127,9 +136,11 @@ class ArticleController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @param int $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function start($id, $status)    {
+    public function start(int $id, int $status)    {
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->find($id);
@@ -149,9 +160,10 @@ class ArticleController extends Controller
     }
 
     /**
-     * @return Response
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete($id)    {
+    public function delete(int $id)    {
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->find($id);

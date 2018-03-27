@@ -1,4 +1,4 @@
-# EliteInvestments
+# Symfony4DeveloperSitesssssssssssssssssssssss
 
 Mainly project for education in SF4.
 
@@ -14,6 +14,7 @@ Symfony4 site with:
     ``Menu, Category, Article, Module``
 - Config site variable
 - Contact form manage
+- Social media
 
 # Tech
 
@@ -29,6 +30,11 @@ $ git clone https://github.com/shinoks/eliteInvestments.git
 $ bin/console doctrine:schema:update --force
 $ bin/console cache:clear
 $ bin/console cache:warmup
+$ bin/console doctrine:fixtures:load
+$ set .env
+$ set phpunit.xml.dist database connection
+$ siteaddress.com/admin user admin pass admin
 ```
 # TODO
-Fixtures
+- Info count module
+- Comment system

@@ -8,16 +8,31 @@ use App\Entity\Menu as Men;
 
 class Menu
 {
+    /**
+     * @var EntityManagerInterface
+     */
     private $em;
+    /**
+     * @var RequestStack
+     */
     protected $requestStack;
 
+    /**
+     * Menu constructor.
+     * @param EntityManagerInterface $em
+     * @param RequestStack $requestStack
+     */
     public function __construct(EntityManagerinterface $em, RequestStack $requestStack)
     {
         $this->em = $em;
         $this->requestStack = $requestStack;
     }
 
-    public function getActiveMenu() {
+    /**
+     * @return Men|null
+     */
+    public function getActiveMenu(): ?Men
+    {
         $url = $this->requestStack->getCurrentRequest()->getPathInfo();
         if($url =='/'){$url = '/index';};
         $active = $this->em
@@ -26,19 +41,27 @@ class Menu
         if($active){
             $activeMenu = $active;
         }else {
-            $activeMenu = false;
+            $activeMenu = NULL;
         }
 
         return $activeMenu;
     }
 
-    public function getMenu() {
+    /**
+     * @return array|null
+     */
+    public function getMenu(): ?array
+    {
         $menu = $this->em->getRepository(Men::class)->findBy(['isActive' => 1, 'parent' => null],['position' => 'ASC', 'id' => 'DESC']);
 
         return $menu;
     }
 
-    public function modulesForActivePage(){
+    /**
+     * @return array
+     */
+    public function modulesForActivePage(): array
+    {
         $menu = $this->getActiveMenu();
         $modules = [];
         $modules['top']=[];
@@ -56,7 +79,6 @@ class Menu
                     $i = $i+1;
                 }
             }
-
             usort($modules['top'], function ($a, $b){return strcmp($a["sequence"], $b["sequence"]);});
             usort($modules['bottom'], function ($a, $b){return strcmp($a["sequence"], $b["sequence"]);});
         }
