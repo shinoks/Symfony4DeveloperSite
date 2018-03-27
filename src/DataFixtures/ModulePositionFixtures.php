@@ -13,11 +13,13 @@ class ModulePositionFixtures extends Fixture
         $modulePosition->setName('Top');
         $modulePosition->setPosition('top');
         $manager->persist($modulePosition);
+        $this->addReference('position_top', $modulePosition);
 
         $modulePosition = new ModulePosition();
         $modulePosition->setName('Bottom');
         $modulePosition->setPosition('bottom');
         $manager->persist($modulePosition);
+        $this->addReference('position_bottom', $modulePosition);
 
         $manager->flush();
     }

@@ -1,4 +1,4 @@
-# Symfony4DeveloperSitesssssssssssssssssssssss
+# Symfony4DeveloperSite
 
 Mainly project for education in SF4.
 
@@ -32,7 +32,7 @@ $ bin/console cache:clear
 $ bin/console cache:warmup
 $ bin/console doctrine:fixtures:load
 $ set .env
-$ set phpunit.xml.dist database connection
+$ set phpunit.xml.dist database connection for tests
 $ siteaddress.com/admin user admin pass admin
 ```
 # TODO

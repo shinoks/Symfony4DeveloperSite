@@ -72,9 +72,9 @@ class Menu
             foreach($menu->getModules() as $module){
                     if($module->getIsActive() == 1){
                     if($module->getPosition()->getPosition() == 'top'){
-                        $modules['top'][$i] = ['position' =>$module->getPosition()->getPosition(), 'id'=>$module->getId(),'content' => $module->getGenus()->getContent(), 'template' => $module->getGenus()->getTemplate(), 'sequence' => $module->getSequence()];
+                        $modules['top'][$i] = ['position' =>$module->getPosition()->getPosition(), 'id'=>$module->getId(),'content' => $module->getGenus()->getContent(), 'template' => $module->getGenus()->getTemplate(), 'sequence' => $module->getSequence(), 'variable' => $module->getVariable()];
                     }elseif($module->getPosition()->getPosition() == 'bottom'){
-                        $modules['bottom'][$i] = ['position' =>$module->getPosition()->getPosition(), 'id'=>$module->getId(),'content' => $module->getGenus()->getContent(), 'template' => $module->getGenus()->getTemplate(), 'sequence' => $module->getSequence()];
+                        $modules['bottom'][$i] = ['position' =>$module->getPosition()->getPosition(), 'id'=>$module->getId(),'content' => $module->getGenus()->getContent(), 'template' => $module->getGenus()->getTemplate(), 'sequence' => $module->getSequence(), 'variable' => $module->getVariable()];
                     }
                     $i = $i+1;
                 }

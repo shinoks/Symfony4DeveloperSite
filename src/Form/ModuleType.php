@@ -7,6 +7,7 @@ use App\Entity\ModulePosition;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -44,6 +45,18 @@ class ModuleType extends AbstractType
             ->add('sequence',IntegerType::class,[
                 'label' => 'order',
                 'required' => false
+            ])
+            ->add('variable',CollectionType::class,[
+                'entry_type'    => TextType::class,
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'delete_empty' => true,
+                'prototype'    => true,
+                'by_reference' => false,
+                'required' => false,
+                'attr'         => [
+                    'class' => "basic-collection",
+                ],
             ])
             ->add('isActive',CheckboxType::class, ['label'=>'is_active','required' => false ])
 

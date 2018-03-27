@@ -46,12 +46,18 @@ class Module
     private $sequence;
 
     /**
+     * @ORM\Column(type="json_array",nullable=true)
+     */
+    private $variable;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $isActive;
 
     public function __construct()
     {
+        $this->menus = new ArrayCollection();
     }
 
     /**
@@ -110,6 +116,16 @@ class Module
         $this->genus = $genus;
     }
 
+    public function addMenu(Menu $menus)
+    {
+        if (!$this->menus->contains($menus))
+        {
+            $this->menus[] = $menus;
+            $menus->addModule($this);
+        }
+
+        return $this;
+    }
     /**
      * @return mixed
      */
@@ -118,12 +134,16 @@ class Module
         return $this->menus;
     }
 
+
     /**
-     * @param mixed $menus
+     * @param $menus
+     * @return $this
      */
     public function setMenus($menus)
     {
         $this->menus = $menus;
+
+        return $this;
     }
 
     /**
@@ -145,7 +165,23 @@ class Module
     /**
      * @return mixed
      */
-    public function getisActive()
+    public function getVariable()
+    {
+        return $this->variable;
+    }
+
+    /**
+     * @param mixed $variable
+     */
+    public function setVariable(array $variable)
+    {
+        $this->variable = $variable;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsActive()
     {
         return $this->isActive;
     }

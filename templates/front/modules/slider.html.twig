@@ -1,11 +1,9 @@
 <div class="slider-area">
     <div class="slider">
         <div id="bg-slider" class="owl-carousel owl-theme">
-
-            <div class="item"><img src="{{ asset('uploads/files/banerstart1.jpg') }}" alt="Inwestycje z pasją"></div>
-            <div class="item"><img src="{{ asset('uploads/files/banerstart2.jpg') }}" alt="Inwestycje z pasją"></div>
-            <div class="item"><img src="{{ asset('uploads/files/banerstart3.jpg') }}" alt="Inwestycje z pasją"></div>
-
+            {% for var in module.variable %}
+                <div class="item"><img src="{{ asset(var) }}"></div>
+            {% endfor %}
         </div>
     </div>
     <div class="slider-content">
