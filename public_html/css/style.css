@@ -1738,7 +1738,7 @@ proerty-th
 }
 .proerty-th .proerty-item  .item-entry{
     padding: 8px;
-
+    height: 110px;
 }
 .properties-page .proerty-th .proerty-price{
     font-weight: 600;

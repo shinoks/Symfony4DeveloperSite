@@ -1,4 +1,4 @@
-# Developer
+# Symfony4DeveloperSitesssssssssssssssssssssss
 
 Mainly project for education in SF4.
 
@@ -33,6 +33,7 @@ $ bin/console cache:warmup
 $ bin/console doctrine:fixtures:load
 $ set .env
 $ set phpunit.xml.dist database connection
+$ siteaddress.com/admin user admin pass admin
 ```
 # TODO
 - Info count module
