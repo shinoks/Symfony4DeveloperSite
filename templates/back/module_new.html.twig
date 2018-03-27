@@ -1,5 +1,23 @@
 {% extends 'back/base.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {% include 'back/addons/ckeditor_config.html.twig' %}
+    <script>
+        CKEDITOR.replace( 'module_content' );
+    </script>
+    <script>
+        jQuery('.add-another-widget').click(function () {
+            var name = jQuery(this).attr('data-list');
+            var counter = jQuery("."+ name +"-collection").length;
+            counter = counter+1;
+            jQuery('#'+ name +'-fields-list').append('<li class="'+ name +'-collection">' +
+                '<input class="form-control" id="module'+ name +'_roles" name="module['+ name +']['+ counter +']" type="text">' +
+                + '</li>');
+        });
+    </script>
+{% endblock %}
+
 {% block body %}
 
     {% include 'back/leftPanel.html.twig' %}
@@ -36,9 +54,56 @@
             {% form_theme form 'form/default_admin.html.twig' %}
 
             {{ form_start(form) }}
-            {{ form_widget(form) }}
+
+            {{ form_errors(form.name) }}
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+
+            {{ form_errors(form.position) }}
+            {{ form_label(form.position) }}
+            {{ form_widget(form.position) }}
+
+            {{ form_errors(form.genus) }}
+            {{ form_label(form.genus) }}
+            {{ form_widget(form.genus) }}
+
+            {{ form_errors(form.menus) }}
+            {{ form_label(form.menus) }}
+            {{ form_widget(form.menus) }}
+
+            {{ form_errors(form.sequence) }}
+            {{ form_label(form.sequence) }}
+            {{ form_widget(form.sequence) }}
+
+            <div class="card" id="variable">
+                <div class="card-header">
+                    <strong class="card-title">{{ form_label(form.variable) }}</strong>
+                    <br/>If You want to pass some var to module
+                </div>
+                <div class="card-body">
+                    <ul id="variable-fields-list" class="list-unstyled"
+                        data-widget-tags="{{ 'variable'|e }}">
+                        {% for variable in form.variable %}
+                            <li class="variable-collection">
+                                {{ form_errors(variable) }}
+                                {{ form_widget(variable) }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <a href="#variable"
+                       class="add-another-widget btn btn-primary"
+                       data-list="variable">{{ 'add_another_value'|trans }}</a>
+                </div>
+            </div>
+
+            {{ form_errors(form.isActive) }}
+            {{ form_label(form.isActive) }}
+            {{ form_widget(form.isActive) }}
+
+            {{ form_widget(form.save) }}
 
             {{ form_end(form) }}
         </div>
+    </div>
     </div>
 {% endblock %}

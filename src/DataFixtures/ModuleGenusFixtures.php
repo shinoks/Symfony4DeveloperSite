@@ -12,27 +12,31 @@ class ModuleGenusFixtures extends Fixture
         $moduleGenus = new ModuleGenus();
         $moduleGenus->setName('Image slider');
         $moduleGenus->setType('slider');
-        $moduleGenus->setTemplate('front/modules/slider.html.twig');
+        $moduleGenus->setTemplate('slider.html.twig');
         $manager->persist($moduleGenus);
+
+        $this->addReference('genus_slider', $moduleGenus);
 
         $moduleGenus = new ModuleGenus();
         $moduleGenus->setName('Html');
         $moduleGenus->setType('raw_html');
         $moduleGenus->setContent('<b>super site</b><br/>of course Lorem ipsum is there as well');
-        $moduleGenus->setTemplate('front/modules/raw_html.html.twig');
+        $moduleGenus->setTemplate('raw_html.html.twig');
         $manager->persist($moduleGenus);
+        $this->addReference('genus_html', $moduleGenus);
 
         $moduleGenus = new ModuleGenus();
         $moduleGenus->setName('Latest realizations');
         $moduleGenus->setType('latest_realizations');
-        $moduleGenus->setTemplate('front/modules/latest_realizations.html.twig');
+        $moduleGenus->setTemplate('latest_realizations.html.twig');
         $manager->persist($moduleGenus);
 
         $moduleGenus = new ModuleGenus();
         $moduleGenus->setName('Google Map');
         $moduleGenus->setType('googl_map');
-        $moduleGenus->setTemplate('front/modules/google_map.html.twig');
+        $moduleGenus->setTemplate('google_map.html.twig');
         $manager->persist($moduleGenus);
+        $this->addReference('genus_map', $moduleGenus);
 
         $manager->flush();
     }

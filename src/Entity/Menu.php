@@ -272,6 +272,16 @@ class Menu
         $this->inBottom = $inBottom;
     }
 
+    public function addModule(Module $modules)
+    {
+        if (!$this->modules->contains($modules))
+        {
+            $this->modules[] = $modules;
+            $modules->addMenu($this);
+        }
+
+        return $this;
+    }
     /**
      * @return mixed
      */

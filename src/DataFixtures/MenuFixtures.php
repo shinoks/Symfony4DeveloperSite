@@ -18,6 +18,7 @@ class MenuFixtures extends Fixture
         $menu->setInFooter(1);
         $menu->setInBottom(1);
         $manager->persist($menu);
+        $this->addReference('menu_1', $menu);
 
         $menu = new Menu();
         $menu->setName('News');
@@ -28,6 +29,7 @@ class MenuFixtures extends Fixture
         $menu->setInFooter(1);
         $menu->setInBottom(0);
         $manager->persist($menu);
+        $this->addReference('menu_2', $menu);
 
         $menu = new Menu();
         $menu->setName('Realizations');
@@ -58,6 +60,7 @@ class MenuFixtures extends Fixture
         $menu->setInFooter(1);
         $menu->setInBottom(1);
         $manager->persist($menu);
+        $this->addReference('menu_contact', $menu);
 
         $manager->flush();
     }
