@@ -1,3 +1,0 @@
-front_about_us_show:
-    path: /{id}
-    controller: App\Controller\AboutUsController::show

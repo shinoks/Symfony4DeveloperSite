@@ -56,14 +56,14 @@ class FrontRouteTest extends WebTestCase
 
     public function testAboutUsPage()
     {
-        $this->client->request('GET', 'about_us');
+        $this->client->request('GET', 'about_us/index');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
     public function testNewsPage()
     {
-        $this->client->request('GET', 'news');
+        $this->client->request('GET', 'news/index');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }

@@ -182,18 +182,14 @@ class ArticleController extends Controller
      */
     public function articles(Request $request)
     {
-        $paginator  = $this->get('knp_paginator');
-
         $em = $this->getDoctrine()->getManager();
-        ($request->query->get('sort'))?$sort = $request->query->get('sort'): $sort = 'id';
-        ($request->query->get('direction'))?$direction = $request->query->get('direction'): $direction = 'asc';
-
-        $query = $em->getRepository(Article::class)->findBy([],[$sort=>$direction]);
-
+        $query = $em->getRepository(Article::class)->findBy([],[
+            $request->query->get('sort','id')=>$request->query->get('direction','asc')
+        ]);
+        $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $query,
-            $request->query->getInt('page', 1),
-            20
+            $request->query->getInt('page', 1)
         );
 
         return $this->render('back/articles.html.twig',array(

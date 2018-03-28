@@ -1,0 +1,11 @@
+front_menu_articles:
+    path: /{menuName}/index
+    controller: App\Controller\ArticleController::index
+
+front_menu_article_show:
+    path: /{menuName}/{id}
+    controller: App\Controller\ArticleController::show
+
+front_menu_articles_show_by_category:
+    path: /{menuName}/category/{categoryId}
+    controller: App\Controller\ArticleController::showByCategory

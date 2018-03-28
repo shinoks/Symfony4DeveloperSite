@@ -26,14 +26,21 @@ class CategoryController extends Controller
     /**
      * @return Response
      */
-    public function categories()
+    public function categories(Request $request)
     {
-        $categories = $this->getDoctrine()
-            ->getRepository(Category::class)
-            ->findAll();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->getRepository(Category::class)->findBy([],[
+            $request->query->get('sort','id')=>$request->query->get('direction','asc')
+        ]);
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1)
+        );
+
 
         return $this->render('back/categories.html.twig',array(
-            'categories'=> $categories
+            'pagination'=> $pagination
         ));
     }
 

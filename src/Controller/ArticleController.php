@@ -27,14 +27,17 @@ class ArticleController extends Controller
     /**
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articles = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->findAll();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->getRepository(Article::class)->findBy([],[
+            $request->query->get('sort','id')=>$request->query->get('direction','asc')
+        ]);
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($query);
 
         return $this->render('front/articles.html.twig',array(
-            'articles'=> $articles
+            'pagination'=> $pagination
         ));
     }
 
@@ -71,14 +74,21 @@ class ArticleController extends Controller
      * @param int $categoryId
      * @return Response
      */
-    public function showByCategory(int $categoryId)
+    public function showByCategory(int $categoryId, Request $request)
     {
-        $articles = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->findBy(['category' => $categoryId, 'isActive' => 1],['created' => 'DESC']);
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->getRepository(Article::class)->findBy(['category' => $categoryId],[
+            $request->query->get('sort','id')=>$request->query->get('direction','asc')
+        ]);
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1)
+        );
+
 
         return $this->render('front/articles.html.twig',array(
-            'articles'=> $articles
+            'pagination'=> $pagination
         ));
     }
 }

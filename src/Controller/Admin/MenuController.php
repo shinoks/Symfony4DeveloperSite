@@ -111,10 +111,10 @@ class MenuController extends Controller
     {
         switch($menu->getType()){
             case 'article':
-                $href = $this->generateUrl('front_article_show',['id' => $menu->getArticle()->getId()]);
+                $href = $this->generateUrl('front_menu_article_show',['menu' => $menu->getName(),'id' => $menu->getArticle()->getId()]);
                 break;
             case 'category':
-                $href = $this->generateUrl('front_articles_show_by_category',['categoryId' => $menu->getCategory()->getId()]);
+                $href = $this->generateUrl('front_menu_articles_show_by_category',['menu' => $menu->getName(),'categoryId' => $menu->getCategory()->getId()]);
                 break;
             case 'href':
                 $href = $menu->getHref();
