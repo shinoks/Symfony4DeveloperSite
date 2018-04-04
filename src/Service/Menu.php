@@ -33,7 +33,7 @@ class Menu
      */
     public function getActiveMenu(): ?Men
     {
-        $url = $this->requestStack->getCurrentRequest()->getPathInfo();
+        $url = urldecode($this->requestStack->getCurrentRequest()->getPathInfo());
         if($url =='/'){$url = '/index';};
         $active = $this->em
             ->getRepository(Men::class)

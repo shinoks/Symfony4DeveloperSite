@@ -26,9 +26,6 @@ front_article_resource:
     resource: "front/article.yml"
     prefix: /article
 
-front_menu_resource:
-    resource: "front/menu.yml"
-
 front_user_resource:
     resource: "front/user.yml"
     prefix: /user
@@ -51,13 +48,6 @@ front_news:
     path: /news
     controller: App\Controller\NewsController::index
 
-front_sublease_zone_resource:
-    resource: "front/sublease_zone.yml"
-    prefix: /sublease_zone
-front_sublease_zone:
-    path: /sublease_zone
-    controller: App\Controller\SubleaseZoneController::index
-
 front_investor_zone_resource:
     resource: "front/investor_zone.yml"
     prefix: /investor_zone
@@ -68,3 +58,6 @@ front_investor_zone:
 front_subscribe:
     resource: "front/subscriber.yml"
     prefix: /subscriber
+
+front_menu_resource:
+    resource: "front/menu.yml"

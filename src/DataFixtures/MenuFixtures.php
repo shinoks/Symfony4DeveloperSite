@@ -11,6 +11,7 @@ class MenuFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $category = $this->getReference('category');
+        $article = $this->getReference('article');
 
         $menu = new Menu();
         $menu->setName('Start');
@@ -34,8 +35,20 @@ class MenuFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($menu);
 
         $menu = new Menu();
-        $menu->setName('Some categoryshow');
-        $menu->setHref('/Some categoryshow/category/' . $category->getId());
+        $name = 'Some category';
+        $menu->setName($name);
+        $menu->setHref('/' . $name . '/category/' . $category->getId());
+        $menu->setType('href');
+        $menu->setIsActive(1);
+        $menu->setPosition(2);
+        $menu->setInFooter(1);
+        $menu->setInBottom(0);
+        $manager->persist($menu);
+
+        $menu = new Menu();
+        $name = 'Some article';
+        $menu->setName($name);
+        $menu->setHref('/' . $name . '/' . $article->getId());
         $menu->setType('href');
         $menu->setIsActive(1);
         $menu->setPosition(2);
@@ -70,6 +83,6 @@ class MenuFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return array(CategoryFixtures::class,);
+        return array(CategoryFixtures::class,ArticleFixtures::class,);
     }
 }

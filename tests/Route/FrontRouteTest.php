@@ -68,13 +68,6 @@ class FrontRouteTest extends WebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
-    public function testInvestorZonePage()
-    {
-        $this->client->request('GET', 'investor_zone');
-
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-    }
-
     protected function tearDown()
     {
         $this->client = NULL;
