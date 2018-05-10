@@ -46,6 +46,11 @@ class Config
     private $logoAdmin;
 
     /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $regulationsUrl;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $description;
@@ -133,6 +138,22 @@ class Config
     public function setAddress($address)
     {
         $this->address = $address;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegulationsUrl()
+    {
+        return $this->regulationsUrl;
+    }
+
+    /**
+     * @param mixed $regulationsUrl
+     */
+    public function setRegulationsUrl($regulationsUrl)
+    {
+        $this->regulationsUrl = $regulationsUrl;
     }
 
     /**

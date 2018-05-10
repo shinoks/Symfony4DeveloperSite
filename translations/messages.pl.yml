@@ -140,6 +140,8 @@ footer_menu: Dolne menu
 bottom_menu: Menu w stopce
 social_media: Media społecznościowe
 html_class: Klasa html
+regulations_url: Adres regulaminu
+i_have_accepted_regulations: Akceptuję regulamin
 input:
     default: Podstawowy
 table:
