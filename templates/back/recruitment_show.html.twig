@@ -1,0 +1,57 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/leftPanel.html.twig' %}
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+    {% include 'back/header.html.twig' %}
+
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1>{{ 'recruitment'|trans }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li class="active"><a href="{{ path('admin_recruitments') }}">{{ 'recruitment_list'|trans }}</a> > {{ 'show'|trans }}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'back/flashMessages.html.twig' %}
+
+    <div class="card">
+        <div class="card-body">
+            <section class="card">
+                <div class="card-header user-header alt bg-dark">
+                    <div class="media-body">
+                        <h2 class="text-light">
+                            {{ 'recruitment_number'|trans }}: {{ recruitment.number }}
+                        </h2>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <b>{{ 'post_date'|trans }}:</b>
+                        {{ recruitment.created|date('d-m-Y H:i:s') }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'status'|trans }}:</b>
+                        {{ recruitment.status.name }}
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+{% endblock %}

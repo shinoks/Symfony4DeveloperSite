@@ -17,7 +17,7 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=150)
      */
     private $event;
 
@@ -27,7 +27,7 @@ class Comment
     private $eventId;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=100)
      */
     private $nickname;
 

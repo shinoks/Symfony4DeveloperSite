@@ -46,6 +46,14 @@ admin_offer_statuses:
     resource: "admin/offer_status.yml"
     prefix: /offer_status
 
+admin_recruitment:
+    resource: "admin/recruitment.yml"
+    prefix: /recruitment
+
+admin_recruitment_statuses:
+    resource: "admin/recruitment_status.yml"
+    prefix: /recruitment_status
+
 admin_file_manager:
     resource: "admin/file_manager.yml"
     prefix: /file_manager

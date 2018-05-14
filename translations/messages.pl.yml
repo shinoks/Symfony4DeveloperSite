@@ -142,6 +142,20 @@ social_media: Media społecznościowe
 html_class: Klasa html
 regulations_url: Adres regulaminu
 i_have_accepted_regulations: Akceptuję regulamin
+recruitments: Nabory
+recruitment_status: Status naboru
+recruitments_list: Lista naborów
+recruitment_edit: Edycja naboru
+recruitment_number: Number naboru
+add_recruitment: Dodaj nabór
+recruitment_status_list: Lista statusów naborów
+add_recruitment_status: Dodaj status naboru
+number: Number
+collected_amount: Zgromadzone środki
+payed_amount: Wpłacone środki
+desired_amount: Pożądana kwota
+investment_period: Czas inwestycji
+investment_type: Typ inwestycji
 input:
     default: Podstawowy
 table:
