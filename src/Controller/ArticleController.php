@@ -78,7 +78,7 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $query = $em->getRepository(Article::class)->findBy(['category' => $categoryId],[
-            $request->query->get('sort','id')=>$request->query->get('direction','asc')
+            $request->query->get('sort','id')=>$request->query->get('direction','desc')
         ]);
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
