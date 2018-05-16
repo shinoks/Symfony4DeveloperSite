@@ -4,6 +4,7 @@ namespace App\Form;
 use App\Entity\RecruitmentStatus;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -47,6 +48,11 @@ class RecruitmentType extends AbstractType
                 'label'=>'status',
                 'class' => RecruitmentStatus::class,
                 'choice_label' => 'name',
+            ))
+            ->add('paymentTime', DateType::class, array(
+                'label'=>'payment_time',
+                'widget' => 'single_text',
+                'required' => false
             ))
             ->add('isActive',ChoiceType::class,[
                 'label'=>'is_active',

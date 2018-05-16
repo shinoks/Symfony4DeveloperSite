@@ -60,25 +60,25 @@
                     <tbody>
                         {% for recruitment in recruitments %}
                             <tr>
-                                <td>{{ recruitment.id }}</td>
-                                <td>{{ recruitment.name }}</td>
-                                <td><a href="{{ path('admin_recruitment_show',{'id':recruitment.id}) }}">{{ recruitment.number }}</a></td>
-                                <td>--- zł</td>
-                                <td>--- zł</td>
-                                <td>{{ recruitment.desiredAmount }} zł</td>
-                                <td>{{ recruitment.status.name }}</td>
-                                <td>{{ recruitment.investmentPeriod }} msc</td>
-                                <td>{{ recruitment.interest }} %</td>
-                                <td>{{ recruitment.investmentType }}</td>
-                                <td>{{ recruitment.rooms }}</td>
-                                <td>{{ recruitment.city }}</td>
-                                <td>{{ recruitment.created|date('d-m-Y H:i:s') }}</td>
-                                {% if recruitment.isActive == 1 %}
-                                    <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                                <td>{{ recruitment[0].id }}</td>
+                                <td>{{ recruitment[0].name }}</td>
+                                <td><a href="{{ path('admin_recruitment_show',{'id':recruitment.0.id}) }}">{{ recruitment.0.number }}</a></td>
+                                <td>{% if recruitment['declaredSum'] is empty %}0{% else %}{{ recruitment['declaredSum'] }}{% endif %} zł</td>
+                                <td>{% if recruitment['payedSum'] is empty %}0{% else %}{{ recruitment['payedSum'] }}{% endif %} zł</td>
+                                <td>{{ recruitment.0.desiredAmount }} zł</td>
+                                <td>{{ recruitment.0.status.name }}</td>
+                                <td>{{ recruitment.0.investmentPeriod }} msc</td>
+                                <td>{{ recruitment.0.interest }} %</td>
+                                <td>{{ recruitment.0.investmentType }}</td>
+                                <td>{{ recruitment.0.rooms }}</td>
+                                <td>{{ recruitment.0.city }}</td>
+                                <td>{{ recruitment.0.created|date('d-m-Y H:i:s') }}</td>
+                                {% if recruitment.0.isActive == 1 %}
+                                    <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.0.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
                                 {% else %}
-                                    <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                                    <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.0.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
                                 {% endif %}
-                                <td><a href="{{ path('admin_recruitment_delete', { 'id':recruitment.id }) }}" class="btn btn-danger">Usuń</a></td>
+                                <td><a href="{{ path('admin_recruitment_delete', { 'id':recruitment.0.id }) }}" class="btn btn-danger">Usuń</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>

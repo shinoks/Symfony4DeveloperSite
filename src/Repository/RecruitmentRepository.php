@@ -13,16 +13,17 @@ class RecruitmentRepository extends ServiceEntityRepository
         parent::__construct($registry, Recruitment::class);
     }
 
-    /*
-    public function findBySomething($value)
+
+    public function getRecruitmentWithCount()
     {
         return $this->createQueryBuilder('r')
-            ->where('r.something = :value')->setParameter('value', $value)
+            ->select('r,SUM(recruitmentUsers.payedAmount) as payedSum,SUM(recruitmentUsers.declaredAmount) as declaredSum')
+            ->leftJoin('r.recruitmentUsers','recruitmentUsers')
+            ->groupBy('r.id')
             ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 }

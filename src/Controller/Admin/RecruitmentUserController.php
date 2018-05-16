@@ -1,15 +1,14 @@
 <?php
 namespace App\Controller\Admin;
 
-use App\Entity\Recruitment;
 use App\Entity\RecruitmentUsers;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use App\Form\RecruitmentType;
+use App\Form\RecruitmentUserType;
 
-class RecruitmentController extends Controller
+class RecruitmentUserController extends Controller
 {
     /**
      * @var Session
@@ -17,7 +16,7 @@ class RecruitmentController extends Controller
     private $session;
 
     /**
-     * RecruitmentController constructor.
+     * RecruitmentUserController constructor.
      */
     public function __construct()
     {
@@ -30,17 +29,12 @@ class RecruitmentController extends Controller
      */
     public function show(int $id)
     {
-        $recruitment = $this->getDoctrine()
-            ->getRepository(Recruitment::class)
+        $recruitmentUser = $this->getDoctrine()
+            ->getRepository(RecruitmentUsers::class)
             ->find($id);
 
-        $recruitmentUsers = $this->getDoctrine()
-            ->getRepository(RecruitmentUsers::class)
-            ->findByRecruitment($recruitment);
-
-        return $this->render('back/recruitment_show.html.twig',array(
-            'recruitment'=> $recruitment,
-            'recruitmentUsers' => $recruitmentUsers
+        return $this->render('back/recruitment_user_show.html.twig',array(
+            'recruitment_user'=> $recruitmentUser
         ));
     }
 
@@ -51,33 +45,33 @@ class RecruitmentController extends Controller
      */
     public function edit(int $id, Request $request)
     {
-        $recruitment = $this->getDoctrine()
-            ->getRepository(Recruitment::class)
+        $recruitmentUser = $this->getDoctrine()
+            ->getRepository(RecruitmentUsers::class)
             ->find($id);
-        if($recruitment){
-            $form = $this->createForm(RecruitmentType::class, $recruitment);
+        if($recruitmentUser){
+            $form = $this->createForm(RecruitmentUserType::class, $recruitmentUser);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $recruitment = $form->getData();
+                $recruitmentUser = $form->getData();
 
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($recruitment);
+                $em->persist($recruitmentUser);
                 $em->flush();
 
                 $this->session->getFlashBag()->add('success', 'Nabór został zmieniony');
 
-                return $this->redirectToRoute('admin_recruitment_edit',['id'=> $id]);
+                return $this->redirectToRoute('admin_recruitment_user_edit',['id'=> $id]);
             }
 
-            return $this->render('back/recruitment_edit.html.twig',array(
-                'recruitment'=> $recruitment,
+            return $this->render('back/recruitment_user_edit.html.twig',array(
+                'recruitment_users'=> $recruitmentUser,
                 'form'=> $form->createView()
             ));
         }else {
             $this->session->getFlashBag()->add('danger', 'Nabór nie została znaleziona');
 
-            return $this->redirectToRoute('admin_recruitments');
+            return $this->redirectToRoute('admin_recruitment_users');
         }
 
     }
@@ -88,25 +82,25 @@ class RecruitmentController extends Controller
      */
     public function new(Request $request)
     {
-        $recruitment = new Recruitment;
-        $form = $this->createForm(RecruitmentType::class, $recruitment);
+        $recruitmentUser = new RecruitmentUsers;
+        $form = $this->createForm(RecruitmentUserType::class, $recruitmentUser);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $recruitment = $form->getData();
+            $recruitmentUser = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($recruitment);
+            $em->persist($recruitmentUser);
             $em->flush();
 
             $this->session->getFlashBag()->add('success', 'Oferta została dodana');
 
-            return $this->redirectToRoute('admin_recruitment_edit',['id'=> $recruitment->getId()]);
+            return $this->redirectToRoute('admin_recruitment_user_edit',['id'=> $recruitmentUser->getId()]);
         }
 
-        return $this->render('back/recruitment_new.html.twig',array(
-            'recruitment'=> $recruitment,
+        return $this->render('back/recruitment_user_new.html.twig',array(
+            'recruitment_user'=> $recruitmentUser,
             'form'=> $form->createView()
         ));
     }
@@ -116,13 +110,13 @@ class RecruitmentController extends Controller
      */
     public function disable(int $id, int $status)
     {
-        $recruitment = $this->getDoctrine()
-            ->getRepository(Recruitment::class)
+        $recruitmentUser = $this->getDoctrine()
+            ->getRepository(RecruitmentUsers::class)
             ->find($id);
-        $recruitment->setIsActive($status);
+        $recruitmentUser->setIsActive($status);
 
         $em = $this->getDoctrine()->getManager();
-        $em->persist($recruitment);
+        $em->persist($recruitmentUser);
         $em->flush();
 
         $this->session->getFlashBag()->add('success', 'Oferta została wyłączona');
@@ -135,17 +129,17 @@ class RecruitmentController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function delete(int $id)    {
-        $recruitment = $this->getDoctrine()
-            ->getRepository(Recruitment::class)
+        $recruitmentUser = $this->getDoctrine()
+            ->getRepository(RecruitmentUsers::class)
             ->find($id);
 
         $em = $this->getDoctrine()->getManager();
-        $em->remove($recruitment);
+        $em->remove($recruitmentUser);
         $em->flush();
 
         $this->session->getFlashBag()->add('success', 'Nabór został usunięta');
 
-        return $this->redirectToRoute('admin_recruitments');
+        return $this->redirectToRoute('admin_recruitment_users');
     }
 
     /**
@@ -153,12 +147,12 @@ class RecruitmentController extends Controller
      */
     public function index()
     {
-        $recruitmentt = $this->getDoctrine()
-            ->getRepository(Recruitment::class)
-            ->getRecruitmentWithCount();
+        $recruitmentUsers = $this->getDoctrine()
+            ->getRepository(RecruitmentUsers::class)
+            ->findAll();
 
-        return $this->render('back/recruitments.html.twig',array(
-            'recruitments'=> $recruitmentt
+        return $this->render('back/recruitment_users.html.twig',array(
+            'recruitmentUsers'=> $recruitmentUsers
         ));
     }
 }

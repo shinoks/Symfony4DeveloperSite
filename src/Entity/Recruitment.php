@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RecruitmentRepository")
  */
-class Recruitment
+class Recruitment implements \ArrayAccess
 {
     /**
      * @ORM\Id
@@ -63,6 +63,11 @@ class Recruitment
     private $status;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $paymentTime;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $created;
@@ -72,11 +77,17 @@ class Recruitment
      */
     private $isActive;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RecruitmentUsers", mappedBy="recruitment")
+     */
+    private $recruitmentUsers;
+
     public function __construct()
     {
         $this->number = uniqid();
         $this->created = new \DateTime("now");
         $this->isActive = true;
+        $this->paymentTime = NULL;
     }
 
     /**
@@ -235,6 +246,22 @@ class Recruitment
     /**
      * @return mixed
      */
+    public function getPaymentTime()
+    {
+        return $this->paymentTime;
+    }
+
+    /**
+     * @param mixed $paymentTime
+     */
+    public function setPaymentTime($paymentTime)
+    {
+        $this->paymentTime = $paymentTime;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getCreated()
     {
         return $this->created;
@@ -262,5 +289,39 @@ class Recruitment
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecruitmentUsers()
+    {
+        return $this->recruitmentUsers;
+    }
+
+    /**
+     * @param mixed $recruitmentUsers
+     */
+    public function setRecruitmentUsers($recruitmentUsers)
+    {
+        $this->recruitmentUsers = $recruitmentUsers;
+    }
+
+    public function offsetExists($offset) {
+
+        return isset($this->$offset);
+    }
+
+    public function offsetSet($offset, $value) {
+        $this->$offset = $value;
+    }
+
+    public function offsetGet($offset) {
+
+        return $this->$offset;
+    }
+
+    public function offsetUnset($offset) {
+        $this->$offset = null;
     }
 }

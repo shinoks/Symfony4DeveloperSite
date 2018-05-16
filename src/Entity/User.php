@@ -114,6 +114,11 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RecruitmentUsers", mappedBy="user")
+     */
+    private $recruitmentUsers;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -412,6 +417,38 @@ class User implements AdvancedUserInterface, \Serializable
     public function getComments(): ?array
     {
         return $this->comments;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecruitment()
+    {
+        return $this->recruitment;
+    }
+
+    /**
+     * @param mixed $recruitment
+     */
+    public function setRecruitment($recruitment)
+    {
+        $this->recruitment = $recruitment;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecruitmentUsers()
+    {
+        return $this->recruitmentUsers;
+    }
+
+    /**
+     * @param mixed $recruitmentUsers
+     */
+    public function setRecruitmentUsers($recruitmentUsers)
+    {
+        $this->recruitmentUsers = $recruitmentUsers;
     }
 
     public function eraseCredentials()

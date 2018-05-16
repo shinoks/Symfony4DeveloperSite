@@ -52,6 +52,55 @@
                     </li>
                 </ul>
             </section>
+
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>{{ 'first_name'|trans }} {{ 'last_name'|trans }}</th>
+                        <th>{{ 'status'|trans }}</th>
+                        <th>{{ 'declared_amount'|trans }}</th>
+                        <th>{{ 'payed_amount'|trans }}</th>
+                        <th>{{ 'investment_period'|trans }}</th>
+                        <th>{{ 'interest'|trans }}</th>
+                        <th>{{ 'amount_of_days'|trans }}</th>
+                        <th>{{ 'amount_of_interest'|trans }}</th>
+                        <th>{{ 'created'|trans }}</th>
+                        <th>Wyłącz</th>
+                        <th>Usuń</th>
+                    </tr>
+                </thead>
+                {% for user in recruitmentUsers %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.user.firstName }} {{ user.user.lastName }}</td>
+                        <td>{{ user.status.name }}</td>
+                        <td>{{ user.declaredAmount }} zł</td>
+                        <td>{{ user.payedAmount }} zł</td>
+                        <td>{{ user.investmentPeriod }} msc</td>
+                        <td>{{ user.interest }} %</td>
+                        <td>{% set difference = date("now").diff(date(user.payedDate)) %}
+                            {% set leftDays = difference.days %}
+                            {% if leftDays == 1 %}
+                                1 dni
+                            {% else %}
+                                {{ leftDays }} dni
+                            {% endif %}</td>
+                        <td>
+                            {% set interestPerDay = ((user.interest/100)/365) * leftDays %}
+                            {% set inter = interestPerDay * user.payedAmount %}
+                            {{ inter|round(2) }} zł
+                        </td>
+                        <td>{{ user.created|date('d-m-Y H:i:s') }}</td>
+                        {% if recruitment.isActive == 1 %}
+                            <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                        {% else %}
+                            <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                        {% endif %}
+                        <td><a href="{{ path('admin_recruitment_delete', { 'id':recruitment.id }) }}" class="btn btn-danger">Usuń</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
         </div>
     </div>
 {% endblock %}

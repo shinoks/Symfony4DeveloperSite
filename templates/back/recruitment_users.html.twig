@@ -1,0 +1,86 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/leftPanel.html.twig' %}
+
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        {% include 'back/header.html.twig' %}
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>{{ 'recruitment_users_list'|trans }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">{{ 'recruitment_users'|trans }} > {{ 'recruitment_usersvv_list'|trans }}</li>
+                        </ol>
+                        <div class="page-header float-right">
+                            <a href="{{ path('admin_recruitment_user_new') }}"><i class="fa fa-user-plus text-dark"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'back/flashMessages.html.twig' %}
+
+        <div class="content mt-3">
+            <div class="animated fade-in">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>{{ 'first_name'|trans }} {{ 'last_name'|trans }}</th>
+                            <th>{{ 'status'|trans }}</th>
+                            <th>{{ 'declared_amount'|trans }}</th>
+                            <th>{{ 'payed_amount'|trans }}</th>
+                            <th>{{ 'investment_period'|trans }}</th>
+                            <th>{{ 'interest'|trans }}</th>
+                            <th>{{ 'amount_of_days'|trans }}</th>
+                            <th>{{ 'amount_of_interest'|trans }}</th>
+                            <th>{{ 'created'|trans }}</th>
+                            <th>Wyłącz</th>
+                            <th>Usuń</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for recruitment in recruitmentUsers %}
+                            <tr>
+                                <td>{{ recruitment.id }}</td>
+                                <td>{{ recruitment.user.firstName }} {{ recruitment.user.lastName }} </td>
+                                <td>{{ recruitment.status.name }} </td>
+                                <td>{{ recruitment.declaredAmount }} </td>
+                                <td>{{ recruitment.payedAmount }} </td>
+                                <td>{{ recruitment.investmentPeriod }} </td>
+                                <td>{{ recruitment.interest }} </td>
+                                <td> -- </td>
+                                <td> -- </td>
+                                <td>{{ recruitment.created|date('d-m-Y H:i:s') }}</td>
+                                {% if recruitment.isActive == 1 %}
+                                    <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                                {% else %}
+                                    <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                                {% endif %}
+                                <td><a href="{{ path('admin_recruitment_delete', { 'id':recruitment.id }) }}" class="btn btn-danger">Usuń</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+        <!--/.col-->
+
+{% endblock %}
+

@@ -64,15 +64,10 @@
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-bars"></i><a href="{{ path('admin_recruitments') }}">{{ 'recruitments_list'|trans }}</a></li>
                         <li><i class="fa fa-bars"></i><a href="{{ path('admin_recruitment_new') }}">{{ 'add_recruitment'|trans }}</a></li>
-                    </ul>
-                </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ 'recruitment_status'|trans }}
-                    </a>
-                    <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-bars"></i><a href="{{ path('admin_recruitment_statuses') }}">{{ 'recruitment_status_list'|trans }}</a></li>
                         <li><i class="fa fa-bars"></i><a href="{{ path('admin_recruitment_status_new') }}">{{ 'add_recruitment_status'|trans }}</a></li>
+                        <li><i class="fa fa-bars"></i><a href="{{ path('admin_recruitment_users') }}">{{ 'recruitment_users_list'|trans }}</a></li>
+                        <li><i class="fa fa-bars"></i><a href="{{ path('admin_recruitment_user_statuses') }}">{{ 'recruitment_user_status_list'|trans }}</a></li>
                     </ul>
                 </li>
                 <h3 class="menu-title">{{ 'realizations'|trans }}</h3>
