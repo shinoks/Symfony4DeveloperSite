@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Recruitment;
+use App\Entity\RecruitmentUsers;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -106,8 +108,22 @@ class UserController extends Controller
      */
     public function account()
     {
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->find($this->getUser());
 
-        return $this->render('front/account.html.twig',array());
+        $recruitmentUserOffers = $this->getDoctrine()
+            ->getRepository(RecruitmentUsers::class)
+            ->getRecruitmentUsersOfferByUser($user);
+
+        $recruitments = $this->getDoctrine()
+            ->getRepository(Recruitment::class)
+            ->findAllByActive(1);
+
+        return $this->render('front/account.html.twig',array(
+            'recruitments' => $recruitments,
+            'recruitmentUserOffers' => $recruitmentUserOffers
+        ));
     }
 
     /**

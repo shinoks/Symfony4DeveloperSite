@@ -50,6 +50,7 @@ comment: Komentarz
 comments: Komentarze
 offer_list: Lista ofert
 make_an_offer: Złóż ofertę
+make_an_offer_for_recruitment: Złóż ofertę na nabór
 make_a_loan_offer: Złóż ofertę pożyczki
 ammount: Kwota
 on_period: Na okres
@@ -142,16 +143,22 @@ social_media: Media społecznościowe
 html_class: Klasa html
 regulations_url: Adres regulaminu
 i_have_accepted_regulations: Akceptuję regulamin
+recruitment: Nabór
 recruitments: Nabory
 recruitment_status: Status naboru
-recruitments_list: Lista naborów
+recruitments_list: Nabory
 recruitment_edit: Edycja naboru
 recruitment_number: Number naboru
 add_recruitment: Dodaj nabór
-recruitment_status_list: Lista statusów naborów
+recruitment_status_list: Statusy naborów
+recruitments_user_offer: Oferty do naborów
+recruitment_user_status_list: Statusy dla ofert
 add_recruitment_status: Dodaj status naboru
 number: Number
 collected_amount: Zgromadzone środki
+declared_amount: Zadeklarowana kwota
+amount_of_days: Ilość dni
+amount_of_interest: Kwota odsetek
 payed_amount: Wpłacone środki
 desired_amount: Pożądana kwota
 investment_period: Czas inwestycji

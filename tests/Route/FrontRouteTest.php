@@ -61,13 +61,6 @@ class FrontRouteTest extends WebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
-    public function testNewsPage()
-    {
-        $this->client->request('GET', 'news/index');
-
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-    }
-
     protected function tearDown()
     {
         $this->client = NULL;

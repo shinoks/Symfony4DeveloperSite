@@ -7,3 +7,7 @@ front_user_account:
 front_user_account_edit:
     path: /account/edit
     controller: App\Controller\UserController::edit
+
+front_user_recruitment_user_new:
+    path: /recruitment_user/{recruitmentId}/new
+    controller: App\Controller\RecruitmentUserController::new

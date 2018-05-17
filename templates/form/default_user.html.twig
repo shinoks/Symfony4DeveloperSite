@@ -14,6 +14,15 @@
     </div>
 {% endblock %}
 
+{% block range_widget %}
+    <div class="form-group">
+        {% set type = type|default('range') %}
+        <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+
+    </div>
+
+{% endblock %}
+
 {% block number_widget %}
     <div class="form-group">
         <input type="text" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>

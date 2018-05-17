@@ -40,7 +40,7 @@ class RecruitmentUsers
     private $declaredAmount;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string",nullable=true)
      */
     private $payedAmount;
 
@@ -72,6 +72,8 @@ class RecruitmentUsers
     public function __construct()
     {
         $this->payedDate = NULL;
+        $this->created = new \DateTime("now");
+        $this->isActive = 1;
     }
 
     /**
