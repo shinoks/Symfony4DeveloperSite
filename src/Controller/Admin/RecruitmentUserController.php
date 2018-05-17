@@ -2,6 +2,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\RecruitmentUsers;
+use App\Form\RecruitmentUsersAdminType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,7 +50,7 @@ class RecruitmentUserController extends Controller
             ->getRepository(RecruitmentUsers::class)
             ->find($id);
         if($recruitmentUser){
-            $form = $this->createForm(RecruitmentUserType::class, $recruitmentUser);
+            $form = $this->createForm(RecruitmentUsersAdminType::class, $recruitmentUser);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {

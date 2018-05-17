@@ -50,6 +50,11 @@ class RecruitmentUsers
     private $payedDate;
 
     /**
+     * @ORM\Column(type="datetime",nullable=true)
+     */
+    private $endDate;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $investmentPeriod;
@@ -226,6 +231,22 @@ class RecruitmentUsers
     public function setCreated($created)
     {
         $this->created = $created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param mixed $endDate
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
     }
 
     /**

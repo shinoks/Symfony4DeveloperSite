@@ -66,6 +66,7 @@
                         <th>{{ 'amount_of_days'|trans }}</th>
                         <th>{{ 'amount_of_interest'|trans }}</th>
                         <th>{{ 'created'|trans }}</th>
+                        <th>Edytuj</th>
                         <th>Wyłącz</th>
                         <th>Usuń</th>
                     </tr>
@@ -91,13 +92,14 @@
                             {% set inter = interestPerDay * user.payedAmount %}
                             {{ inter|round(2) }} zł
                         </td>
+                        <td><a href="{{ path('admin_recruitment_user_edit', { 'id':user.id,'status':0 }) }}" class="btn btn-default">Edytuj</a></td>
                         <td>{{ user.created|date('d-m-Y H:i:s') }}</td>
                         {% if recruitment.isActive == 1 %}
-                            <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                            <td><a href="{{ path('admin_recruitment_user_disable', { 'id':user.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
                         {% else %}
-                            <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                            <td><a href="{{ path('admin_recruitment_user_disable', { 'id':user.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
                         {% endif %}
-                        <td><a href="{{ path('admin_recruitment_delete', { 'id':recruitment.id }) }}" class="btn btn-danger">Usuń</a></td>
+                        <td><a href="{{ path('admin_recruitment_user_delete', { 'id':user.id }) }}" class="btn btn-danger">Usuń</a></td>
                     </tr>
                 {% endfor %}
             </table>
