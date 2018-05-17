@@ -11,3 +11,7 @@ front_user_account_edit:
 front_user_recruitment_user_new:
     path: /recruitment_user/{recruitmentId}/new
     controller: App\Controller\RecruitmentUserController::new
+
+front_user_recruitment_show:
+    path: /recruitment/{id}
+    controller: App\Controller\RecruitmentController::show

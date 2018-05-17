@@ -73,6 +73,11 @@ class Recruitment implements \ArrayAccess
     private $created;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $content;
+
+    /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
@@ -278,7 +283,23 @@ class Recruitment implements \ArrayAccess
     /**
      * @return mixed
      */
-    public function getisActive()
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param mixed $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsActive()
     {
         return $this->isActive;
     }

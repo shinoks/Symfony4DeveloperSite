@@ -76,4 +76,5 @@ class RecruitmentUserController extends Controller
             'recruitment' => $recruitment
         ));
     }
+
 }

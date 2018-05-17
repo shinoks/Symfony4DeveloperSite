@@ -23,4 +23,16 @@ class RecruitmentUsersRepository extends ServiceEntityRepository
             ;
     }
 
+    public function getRecruitmentUsersOfferByUserAndRecruitment($user,$recruitmentId)
+    {
+        return $this->createQueryBuilder('r')
+            ->leftJoin('r.recruitment','recruitment')
+            ->where('r.user = :user')->setParameter('user', $user)
+            ->andWhere('recruitment.id = :recruitmentId')->setParameter('recruitmentId', $recruitmentId)
+            ->orderBy('r.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 }

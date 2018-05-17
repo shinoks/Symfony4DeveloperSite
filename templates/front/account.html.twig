@@ -105,7 +105,7 @@
                                         </thead>
                                         {% for user in recruitmentUserOffers %}
                                             <tr>
-                                                <td>{{ user.recruitment.name }}</td>
+                                                <td><a href="{{ path('front_user_recruitment_show',{'id':user.recruitment.id}) }}">{{ user.recruitment.name }}</a></td>
                                                 <td>{{ user.status.name }}</td>
                                                 <td>{{ user.declaredAmount }} zł</td>
                                                 <td>{% if user.payedAmount is empty %}0{% else %}{{ user.payedAmount }}{% endif %} zł</td>

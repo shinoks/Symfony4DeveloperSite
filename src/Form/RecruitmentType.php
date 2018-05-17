@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -62,6 +63,9 @@ class RecruitmentType extends AbstractType
                     'Wyłączony' => '0',
                     'Włączony' => '1'
                 ]
+            ])
+            ->add('content',TextareaType::class,[
+                'label' => 'content'
             ])
             ->add('save', SubmitType::class, ['label' => 'add']);
     }

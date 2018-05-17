@@ -43,3 +43,11 @@
     </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% include 'back/addons/ckeditor_config.html.twig' %}
+    <script>
+        CKEDITOR.replace( 'recruitment_content' );
+    </script>
+{% endblock %}
