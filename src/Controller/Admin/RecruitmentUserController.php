@@ -161,9 +161,13 @@ class RecruitmentUserController extends Controller
         $recruitmentUsers = $this->getDoctrine()
             ->getRepository(RecruitmentUsers::class)
             ->findAll();
+        $recruitmentUserStatus = $this->getDoctrine()
+            ->getRepository(RecruitmentUserStatus::class)
+            ->findBy(['isActive'=>1]);
 
         return $this->render('back/recruitment_users.html.twig',array(
-            'recruitmentUsers'=> $recruitmentUsers
+            'recruitmentUsers'=> $recruitmentUsers,
+            'recruitmentUserStatus' => $recruitmentUserStatus
         ));
     }
 }

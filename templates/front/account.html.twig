@@ -49,7 +49,6 @@
                                         <tr>
                                             <th>{{ 'name'|trans }}</th>
                                             <th>{{ 'desired_amount'|trans }}</th>
-                                            <th>{{ 'collected_amount'|trans }}</th>
                                             <th>{{ 'investment_period'|trans }}</th>
                                             <th>{{ 'interest'|trans }}</th>
                                             <th>{{ 'investment_type'|trans }}</th>
@@ -62,8 +61,7 @@
                                         {% for recruitment in recruitments %}
                                             <tr>
                                                 <td>{{ recruitment.0.name }}</td>
-                                                <td>{{ recruitment.0.desiredAmount }} zł</td>
-                                                <td>{% if recruitment['declaredSum'] is empty %}0{% else %}{{ recruitment['declaredSum'] }}{% endif %} zł</td>
+                                                <td>{{ recruitment.0.desiredAmount - recruitment['declaredSum'] }} zł</td>
                                                 <td>{{ recruitment.0.investmentPeriod }} msc</td>
                                                 <td>{{ recruitment.0.interest }} %</td>
                                                 <td>{{ recruitment.0.investmentType }}</td>
@@ -73,7 +71,8 @@
                                                     <a class="btn btn-warning" href="{{ path('front_user_recruitment_user_new',{'recruitmentId': recruitment.0.id }) }}">{{ 'proposal'|trans }}</a>
                                                     {% else %}
                                                     Kwota zebrana
-                                                    {% endif %}</td>
+                                                    {% endif %}
+                                                </td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>
