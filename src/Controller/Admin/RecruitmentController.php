@@ -3,6 +3,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Recruitment;
 use App\Entity\RecruitmentUsers;
+use App\Entity\RecruitmentUserStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,9 +39,14 @@ class RecruitmentController extends Controller
             ->getRepository(RecruitmentUsers::class)
             ->findByRecruitment($recruitment);
 
+        $recruitmentUserStatus = $this->getDoctrine()
+            ->getRepository(RecruitmentUserStatus::class)
+            ->findBy(['isActive'=>1]);
+
         return $this->render('back/recruitment_show.html.twig',array(
             'recruitment'=> $recruitment,
-            'recruitmentUsers' => $recruitmentUsers
+            'recruitmentUsers' => $recruitmentUsers,
+            'recruitmentUserStatus' => $recruitmentUserStatus
         ));
     }
 
@@ -82,6 +88,38 @@ class RecruitmentController extends Controller
 
     }
 
+    /**
+     * @param $id
+     * @param $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function editStatus($id, $status)
+    {
+        $recruitmentUser = $this->getDoctrine()
+            ->getRepository(RecruitmentUsers::class)
+            ->find($id);
+        if($recruitmentUser){
+            $recruitmentUserStatus = $this->getDoctrine()
+                ->getRepository(RecruitmentUserStatus::class)
+                ->find($status);
+            if($recruitmentUserStatus){
+                $recruitmentUser->setStatus($recruitmentUserStatus);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($recruitmentUser);
+                $em->flush();
+
+                $this->session->getFlashBag()->add('success', 'Status oferty został zmieniony');
+
+            }else {
+                $this->session->getFlashBag()->add('danger', 'Status oferty nie został zmieniony');
+            }
+        }else {
+            $this->session->getFlashBag()->add('danger', 'Status oferty nie został zmieniony');
+        }
+
+        return $this->redirectToRoute('admin_recruitment_show',['id' => $recruitmentUser->getRecruitment()->getId()]);
+    }
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
@@ -153,12 +191,12 @@ class RecruitmentController extends Controller
      */
     public function index()
     {
-        $recruitmentt = $this->getDoctrine()
+        $recruitment = $this->getDoctrine()
             ->getRepository(Recruitment::class)
             ->getRecruitmentWithCount();
 
         return $this->render('back/recruitments.html.twig',array(
-            'recruitments'=> $recruitmentt
+            'recruitments' => $recruitment
         ));
     }
 }

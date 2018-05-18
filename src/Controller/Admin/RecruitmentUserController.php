@@ -2,6 +2,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\RecruitmentUsers;
+use App\Entity\RecruitmentUserStatus;
 use App\Form\RecruitmentUsersAdminType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,6 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Form\RecruitmentUserType;
 
+/**
+ * Class RecruitmentUserController
+ * @package App\Controller\Admin
+ */
 class RecruitmentUserController extends Controller
 {
     /**
@@ -33,6 +38,7 @@ class RecruitmentUserController extends Controller
         $recruitmentUser = $this->getDoctrine()
             ->getRepository(RecruitmentUsers::class)
             ->find($id);
+
 
         return $this->render('back/recruitment_user_show.html.twig',array(
             'recruitment_user'=> $recruitmentUser
@@ -78,32 +84,36 @@ class RecruitmentUserController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @param $id
+     * @param $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function new(Request $request)
+    public function editStatus($id, $status)
     {
-        $recruitmentUser = new RecruitmentUsers;
-        $form = $this->createForm(RecruitmentUserType::class, $recruitmentUser);
+        $recruitmentUser = $this->getDoctrine()
+            ->getRepository(RecruitmentUsers::class)
+            ->find($id);
+        if($recruitmentUser){
+            $recruitmentUserStatus = $this->getDoctrine()
+                ->getRepository(RecruitmentUserStatus::class)
+                ->find($status);
+            if($recruitmentUserStatus){
+                $recruitmentUser->setStatus($recruitmentUserStatus);
 
-        $form->handleRequest($request);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($recruitmentUser);
+                $em->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $recruitmentUser = $form->getData();
+                $this->session->getFlashBag()->add('success', 'Status oferty został zmieniony');
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($recruitmentUser);
-            $em->flush();
-
-            $this->session->getFlashBag()->add('success', 'Oferta została dodana');
-
-            return $this->redirectToRoute('admin_recruitment_user_edit',['id'=> $recruitmentUser->getId()]);
+            }else {
+                $this->session->getFlashBag()->add('danger', 'Status oferty nie został zmieniony');
+            }
+        }else {
+            $this->session->getFlashBag()->add('danger', 'Status oferty nie został zmieniony');
         }
 
-        return $this->render('back/recruitment_user_new.html.twig',array(
-            'recruitment_user'=> $recruitmentUser,
-            'form'=> $form->createView()
-        ));
+        return $this->redirectToRoute('admin_recruitment_users');
     }
 
     /**

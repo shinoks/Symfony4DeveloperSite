@@ -59,7 +59,15 @@
                             <tr>
                                 <td>{{ recruitment.id }}</td>
                                 <td><a href="{{ path('admin_recruitment_user_edit',{'id':recruitment.id}) }}">{{ recruitment.user.firstName }} {{ recruitment.user.lastName }} </a></td>
-                                <td>{{ recruitment.status.name }} </td>
+                                <td><form class="form" action="#">
+                                        <select id="recruitment_user_status" name="{{ recruitment.id }}">
+                                            <option value="{{ recruitment.status.id }}">{{ recruitment.status.name }}</option>
+                                        {% for status  in recruitmentUserStatus %}
+                                                <option value="{{ status.id }}">{{ status.name }}</option>
+                                        {% endfor %}
+                                        </select>
+                                    </form>
+                                </td>
                                 <td>{{ recruitment.declaredAmount }} </td>
                                 <td>{{ recruitment.payedAmount }} </td>
                                 <td>{{ recruitment.investmentPeriod }} </td>
@@ -84,3 +92,19 @@
 
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function(){
+            $( "select" ).change(function() {
+                var status = this.value;
+                var recruitment_id = $(this).attr('name');
+                var url = '{{ path('admin_recruitment_edit_status',{'id':'recruitment_id','status':'recruitment_status'}) }}';
+                url = url.replace('recruitment_id',recruitment_id);
+                url = url.replace('recruitment_status', status);
+                window.location.href = url;
+            });
+        });
+    </script>
+{% endblock %}
