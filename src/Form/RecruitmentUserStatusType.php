@@ -13,6 +13,8 @@ class RecruitmentUserStatusType extends AbstractType
     {
         $builder
             ->add('name',TextType::class,['label'=>'name'])
+            ->add('isFvGenerated',CheckboxType::class, ['label'=>'is_fv_generated','required' => false ])
+            ->add('isFvMailed',CheckboxType::class, ['label'=>'is_fv_mailed','required' => false ])
             ->add('isActive',CheckboxType::class, ['label'=>'is_active','required' => false ])
 
             ->add('save', SubmitType::class, array('label' => 'Zapisz'));

@@ -25,6 +25,16 @@ class RecruitmentUserStatus
     /**
      * @ORM\Column(type="boolean")
      */
+    private $isFvMailed;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFvGenerated;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
     private $isActive;
 
     /**
@@ -59,6 +69,38 @@ class RecruitmentUserStatus
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisFvMailed()
+    {
+        return $this->isFvMailed;
+    }
+
+    /**
+     * @param mixed $isFvMailed
+     */
+    public function setIsFvMailed($isFvMailed): void
+    {
+        $this->isFvMailed = $isFvMailed;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisFvGenerated()
+    {
+        return $this->isFvGenerated;
+    }
+
+    /**
+     * @param mixed $isFvGenerated
+     */
+    public function setIsFvGenerated($isFvGenerated): void
+    {
+        $this->isFvGenerated = $isFvGenerated;
     }
 
     /**

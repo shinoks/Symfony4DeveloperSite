@@ -42,6 +42,8 @@
                         <tr>
                             <th>Id</th>
                             <th>Nazwa</th>
+                            <th>Czy widać fv</th>
+                            <th>Czy fv wysyłać mailem</th>
                             <th>Wyłącz</th>
                             <th>Usuń</th>
                         </tr>
@@ -51,6 +53,20 @@
                             <tr>
                                 <td>{{ recruitmentUserStatus.id }}</td>
                                 <td><a href="{{ path('admin_recruitment_user_status_edit',{ 'id':recruitmentUserStatus.id }) }}">{{ recruitmentUserStatus.name }}</a></td>
+                                <td>
+                                    {% if recruitmentUserStatus.isFvGenerated == 1 %}
+                                        Tak
+                                    {% else %}
+                                        Nie
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if recruitmentUserStatus.isFvMailed == 1 %}
+                                        Tak
+                                    {% else %}
+                                        Nie
+                                    {% endif %}
+                                </td>
                                 {% if recruitmentUserStatus.isActive == 1 %}
                                     <td><a href="{{ path('admin_recruitment_user_status_disable', { 'id':recruitmentUserStatus.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
                                 {% else %}
