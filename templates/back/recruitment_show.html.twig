@@ -74,7 +74,7 @@
                 {% for user in recruitmentUsers %}
                     <tr>
                         <td>{{ user.id }}</td>
-                        <td>{{ user.user.firstName }} {{ user.user.lastName }}</td>
+                        <td><a href="{{ path('admin_recruitment_user_edit',{'id':user.id}) }}">{{ user.user.firstName }} {{ user.user.lastName }}</a></td>
                         <td>{{ user.status.name }}</td>
                         <td>{{ user.declaredAmount }} zł</td>
                         <td>{{ user.payedAmount }} zł</td>

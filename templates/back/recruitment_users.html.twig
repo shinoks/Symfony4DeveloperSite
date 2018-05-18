@@ -58,7 +58,7 @@
                         {% for recruitment in recruitmentUsers %}
                             <tr>
                                 <td>{{ recruitment.id }}</td>
-                                <td>{{ recruitment.user.firstName }} {{ recruitment.user.lastName }} </td>
+                                <td><a href="{{ path('admin_recruitment_user_edit',{'id':recruitment.id}) }}">{{ recruitment.user.firstName }} {{ recruitment.user.lastName }} </a></td>
                                 <td>{{ recruitment.status.name }} </td>
                                 <td>{{ recruitment.declaredAmount }} </td>
                                 <td>{{ recruitment.payedAmount }} </td>
