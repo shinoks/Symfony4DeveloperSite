@@ -119,6 +119,7 @@ class RecruitmentController extends Controller
                     $mailManager = new MailManagerUtils($emi);
                     $template = 'emails/' . $recruitmentUserStatus->getMailTemplate();
                     $mailBody = $this->renderView($template,[
+                        'recruitmentUser' => $recruitmentUser,
                         'recruitment' => $recruitmentUser->getRecruitment(),
                     ]);
                     if(!$mailBody){
@@ -141,7 +142,7 @@ class RecruitmentController extends Controller
 
         return $this->redirectToRoute('admin_recruitment_show',['id' => $recruitmentUser->getRecruitment()->getId()]);
     }
-    
+
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
