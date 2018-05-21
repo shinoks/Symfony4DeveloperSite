@@ -4,11 +4,17 @@ namespace App\Controller\Admin;
 use App\Entity\Recruitment;
 use App\Entity\RecruitmentUsers;
 use App\Entity\RecruitmentUserStatus;
+use App\Entity\User;
+use App\Utils\MailManagerUtils;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Form\RecruitmentType;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class RecruitmentController extends Controller
 {
@@ -124,7 +130,7 @@ class RecruitmentController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function new(Request $request)
+    public function new(Request $request,\Swift_Mailer $mailer,EntityManagerInterface $emi)
     {
         $recruitment = new Recruitment;
         $form = $this->createForm(RecruitmentType::class, $recruitment);
@@ -139,6 +145,28 @@ class RecruitmentController extends Controller
             $em->flush();
 
             $this->session->getFlashBag()->add('success', 'Oferta została dodana');
+            $mailManager = new MailManagerUtils($emi);
+
+            $mailBody = $this->renderView('emails/recruitment_new.html.twig',[
+                'recruitment' => $recruitment,
+            ]);
+            if(!$mailBody){
+                throw new FileNotFoundException('emails/recruitment_new.html.twig');
+            }
+
+            $usersActive = $this->getDoctrine()
+                ->getRepository(User::class)
+                ->findBy(['isActive' => 1, 'isEnabledByAdmin' => 1]);
+            if(!$usersActive){
+                throw new ResourceNotFoundException();
+            }else {
+                foreach($usersActive as $user){
+                    $name = $user->getFirstName() . ' ' .$user->getLastName();
+                    $mailBodyPersonalized = str_replace('user',$name, $mailBody);
+
+                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => 'tytul'],$user->getEmail(),$mailer);
+                }
+            }
 
             return $this->redirectToRoute('admin_recruitment_edit',['id'=> $recruitment->getId()]);
         }

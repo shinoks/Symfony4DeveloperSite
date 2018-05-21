@@ -44,6 +44,9 @@ services:
     App\Service\Article:
         arguments: ['@doctrine.orm.entity_manager']
 
+    App\Utils\MailManager:
+        arguments: ['@doctrine.orm.entity_manager']
+
 artgris_file_manager:
     web_dir: "%public_dir%"
     conf:
