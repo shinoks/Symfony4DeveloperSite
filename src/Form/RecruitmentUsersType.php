@@ -26,11 +26,11 @@ class RecruitmentUsersType extends AbstractType
                 'attr' => array(
                     'min' => $options['data']->min,
                     'max' => $options['data']->max,
-                    'step' => 1000,
+                    'step' => 10000,
                     'data-slider-min' => $options['data']->min,
                     'data-slider-max' => $options['data']->max,
-                    'data-slider-step' => 1000,
-                    'value' => 1000
+                    'data-slider-step' => 10000,
+                    'value' => $options['data']->max
                 )
             ])
 

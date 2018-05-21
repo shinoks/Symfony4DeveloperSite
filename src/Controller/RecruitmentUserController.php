@@ -5,7 +5,10 @@ use App\Entity\Recruitment;
 use App\Entity\RecruitmentUsers;
 use App\Entity\RecruitmentUserStatus;
 use App\Form\RecruitmentUsersType;
+use App\Utils\MailManagerUtils;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -35,7 +38,7 @@ class RecruitmentUserController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @throws \ErrorException
      */
-    public function new($recruitmentId, Request $request)
+    public function new($recruitmentId, Request $request, \Swift_Mailer $mailer, EntityManagerInterface $emi)
     {
         $recruitment = $this->getDoctrine()
             ->getRepository(Recruitment::class)
@@ -65,6 +68,20 @@ class RecruitmentUserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($recruitmentUsers);
             $em->flush();
+
+            $mailManager = new MailManagerUtils($emi);
+
+            $mailBody = $this->renderView('emails/recruitment_user_new.html.twig',[
+                'recruitment' => $recruitment,
+            ]);
+            if(!$mailBody){
+                throw new FileNotFoundException('emails/recruitment_user_new.html.twig');
+            }
+            $user = $this->getUser();
+            $name = $user->getFirstName() . ' ' .$user->getLastName();
+            $mailBodyPersonalized = str_replace('user',$name, $mailBody);
+
+            $mailManager->sendEmail($mailBodyPersonalized,['subject' => 'tytul'],$user->getEmail(),$mailer);
 
             $this->session->getFlashBag()->add('success', 'Oferta na nabór została dodana');
 
