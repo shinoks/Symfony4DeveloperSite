@@ -122,6 +122,7 @@ class User implements AdvancedUserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = true;
+        $this->isEnabledByAdmin = true;
         $this->offers = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
