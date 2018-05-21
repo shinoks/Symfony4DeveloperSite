@@ -179,7 +179,7 @@ class RecruitmentController extends Controller
                     $name = $user->getFirstName() . ' ' .$user->getLastName();
                     $mailBodyPersonalized = str_replace('user',$name, $mailBody);
 
-                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => 'tytul'],$user->getEmail(),$mailer);
+                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Nowa oferta pożyczki'],$user->getEmail(),$mailer);
                 }
             }
 
