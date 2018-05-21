@@ -79,7 +79,7 @@ class RecruitmentUserStatus
     /**
      * @return mixed
      */
-    public function getisFvMailed()
+    public function getIsFvMailed()
     {
         return $this->isFvMailed;
     }
@@ -95,7 +95,7 @@ class RecruitmentUserStatus
     /**
      * @return mixed
      */
-    public function getisFvGenerated()
+    public function getIsFvGenerated()
     {
         return $this->isFvGenerated;
     }
@@ -127,7 +127,7 @@ class RecruitmentUserStatus
     /**
      * @return mixed
      */
-    public function getisActive()
+    public function getIsActive()
     {
         return $this->isActive;
     }

@@ -4,7 +4,10 @@ namespace App\Controller\Admin;
 use App\Entity\RecruitmentUsers;
 use App\Entity\RecruitmentUserStatus;
 use App\Form\RecruitmentUsersAdminType;
+use App\Utils\MailManagerUtils;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -88,7 +91,7 @@ class RecruitmentUserController extends Controller
      * @param $status
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function editStatus($id, $status)
+    public function editStatus($id, $status, \Swift_Mailer $mailer, EntityManagerInterface $emi)
     {
         $recruitmentUser = $this->getDoctrine()
             ->getRepository(RecruitmentUsers::class)
@@ -104,6 +107,21 @@ class RecruitmentUserController extends Controller
                 $em->persist($recruitmentUser);
                 $em->flush();
 
+                if($recruitmentUserStatus->getIsFvMailed() == 1){
+                    $mailManager = new MailManagerUtils($emi);
+                    $template = 'emails/' . $recruitmentUserStatus->getMailTemplate();
+                    $mailBody = $this->renderView($template,[
+                        'recruitment' => $recruitmentUser->getRecruitment(),
+                    ]);
+                    if(!$mailBody){
+                        throw new FileNotFoundException($template);
+                    }
+                    $user = $recruitmentUser->getUser();
+                    $name = $user->getFirstName() . ' ' .$user->getLastName();
+                    $mailBodyPersonalized = str_replace('user',$name, $mailBody);
+
+                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => 'tytul'],$user->getEmail(),$mailer);
+                }
                 $this->session->getFlashBag()->add('success', 'Status oferty został zmieniony');
 
             }else {

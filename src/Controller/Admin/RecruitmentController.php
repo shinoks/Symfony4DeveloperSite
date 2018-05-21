@@ -99,7 +99,7 @@ class RecruitmentController extends Controller
      * @param $status
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function editStatus($id, $status)
+    public function editStatus($id, $status, \Swift_Mailer $mailer, EntityManagerInterface $emi)
     {
         $recruitmentUser = $this->getDoctrine()
             ->getRepository(RecruitmentUsers::class)
@@ -115,6 +115,21 @@ class RecruitmentController extends Controller
                 $em->persist($recruitmentUser);
                 $em->flush();
 
+                if($recruitmentUserStatus->getIsFvMailed() == 1){
+                    $mailManager = new MailManagerUtils($emi);
+                    $template = 'emails/' . $recruitmentUserStatus->getMailTemplate();
+                    $mailBody = $this->renderView($template,[
+                        'recruitment' => $recruitmentUser->getRecruitment(),
+                    ]);
+                    if(!$mailBody){
+                        throw new FileNotFoundException($template);
+                    }
+                    $user = $recruitmentUser->getUser();
+                    $name = $user->getFirstName() . ' ' .$user->getLastName();
+                    $mailBodyPersonalized = str_replace('user',$name, $mailBody);
+
+                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => 'tytul'],$user->getEmail(),$mailer);
+                }
                 $this->session->getFlashBag()->add('success', 'Status oferty został zmieniony');
 
             }else {
