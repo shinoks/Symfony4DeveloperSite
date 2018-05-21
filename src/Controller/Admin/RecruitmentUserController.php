@@ -107,7 +107,7 @@ class RecruitmentUserController extends Controller
                 $em->persist($recruitmentUser);
                 $em->flush();
 
-                if($recruitmentUserStatus->getIsFvMailed() == 1){
+                if($recruitmentUserStatus->getIsMailed() == 1){
                     $mailManager = new MailManagerUtils($emi);
                     $template = 'emails/' . $recruitmentUserStatus->getMailTemplate();
                     $mailBody = $this->renderView($template,[

@@ -115,7 +115,7 @@ class RecruitmentController extends Controller
                 $em->persist($recruitmentUser);
                 $em->flush();
 
-                if($recruitmentUserStatus->getIsFvMailed() == 1){
+                if($recruitmentUserStatus->getIsMailed() == 1){
                     $mailManager = new MailManagerUtils($emi);
                     $template = 'emails/' . $recruitmentUserStatus->getMailTemplate();
                     $mailBody = $this->renderView($template,[
@@ -141,6 +141,7 @@ class RecruitmentController extends Controller
 
         return $this->redirectToRoute('admin_recruitment_show',['id' => $recruitmentUser->getRecruitment()->getId()]);
     }
+    
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
@@ -160,6 +161,7 @@ class RecruitmentController extends Controller
             $em->flush();
 
             $this->session->getFlashBag()->add('success', 'Oferta została dodana');
+
             $mailManager = new MailManagerUtils($emi);
 
             $mailBody = $this->renderView('emails/recruitment_new.html.twig',[
