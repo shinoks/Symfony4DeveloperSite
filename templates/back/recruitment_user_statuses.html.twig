@@ -44,6 +44,7 @@
                             <th>Nazwa</th>
                             <th>Czy widać fv</th>
                             <th>Czy fv wysyłać mailem</th>
+                            <th>Czy wysłać maila</th>
                             <th>Wyłącz</th>
                             <th>Usuń</th>
                         </tr>
@@ -62,6 +63,13 @@
                                 </td>
                                 <td>
                                     {% if recruitmentUserStatus.isFvMailed == 1 %}
+                                        Tak
+                                    {% else %}
+                                        Nie
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if recruitmentUserStatus.isMailed == 1 %}
                                         Tak
                                     {% else %}
                                         Nie

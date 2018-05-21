@@ -31,6 +31,10 @@ class RecruitmentUserStatus
      * @ORM\Column(type="boolean")
      */
     private $isFvGenerated;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isMailed;
 
     /**
      * @ORM\Column(type="string")
@@ -106,6 +110,22 @@ class RecruitmentUserStatus
     public function setIsFvGenerated($isFvGenerated): void
     {
         $this->isFvGenerated = $isFvGenerated;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsMailed()
+    {
+        return $this->isMailed;
+    }
+
+    /**
+     * @param mixed $isMailed
+     */
+    public function setIsMailed($isMailed): void
+    {
+        $this->isMailed = $isMailed;
     }
 
     /**
