@@ -17,6 +17,11 @@ class RecruitmentUsers
     private $id;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $number;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="recruitmentUsers")
      * @ORM\JoinColumn()
      */
@@ -79,6 +84,7 @@ class RecruitmentUsers
         $this->payedDate = NULL;
         $this->created = new \DateTime("now");
         $this->isActive = 1;
+        $this->number = uniqid();
     }
 
     /**
@@ -87,6 +93,14 @@ class RecruitmentUsers
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumber()
+    {
+        return $this->number;
     }
 
     /**

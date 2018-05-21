@@ -128,7 +128,7 @@ class RecruitmentController extends Controller
                     $name = $user->getFirstName() . ' ' .$user->getLastName();
                     $mailBodyPersonalized = str_replace('user',$name, $mailBody);
 
-                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => 'tytul'],$user->getEmail(),$mailer);
+                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status twojej oferty uległ zmianie'],$user->getEmail(),$mailer);
                 }
                 $this->session->getFlashBag()->add('success', 'Status oferty został zmieniony');
 

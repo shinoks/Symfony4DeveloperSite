@@ -129,14 +129,6 @@ class Recruitment implements \ArrayAccess
     }
 
     /**
-     * @param mixed $number
-     */
-    public function setNumber($number)
-    {
-        $this->number = $number;
-    }
-
-    /**
      * @return mixed
      */
     public function getDesiredAmount()
