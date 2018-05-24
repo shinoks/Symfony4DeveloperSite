@@ -6,9 +6,14 @@ use App\Entity\RecruitmentUsers;
 use App\Entity\RecruitmentUserStatus;
 use App\Entity\User;
 use App\Utils\MailManagerUtils;
+use App\Utils\TcpdfUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
+use ProxyManager\Exception\FileNotWritableException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -94,54 +99,6 @@ class RecruitmentController extends Controller
 
     }
 
-    /**
-     * @param $id
-     * @param $status
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function editStatus($id, $status, \Swift_Mailer $mailer, EntityManagerInterface $emi)
-    {
-        $recruitmentUser = $this->getDoctrine()
-            ->getRepository(RecruitmentUsers::class)
-            ->find($id);
-        if($recruitmentUser){
-            $recruitmentUserStatus = $this->getDoctrine()
-                ->getRepository(RecruitmentUserStatus::class)
-                ->find($status);
-            if($recruitmentUserStatus){
-                $recruitmentUser->setStatus($recruitmentUserStatus);
-
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($recruitmentUser);
-                $em->flush();
-
-                if($recruitmentUserStatus->getIsMailed() == 1){
-                    $mailManager = new MailManagerUtils($emi);
-                    $template = 'emails/' . $recruitmentUserStatus->getMailTemplate();
-                    $mailBody = $this->renderView($template,[
-                        'recruitmentUser' => $recruitmentUser,
-                        'recruitment' => $recruitmentUser->getRecruitment(),
-                    ]);
-                    if(!$mailBody){
-                        throw new FileNotFoundException($template);
-                    }
-                    $user = $recruitmentUser->getUser();
-                    $name = $user->getFirstName() . ' ' .$user->getLastName();
-                    $mailBodyPersonalized = str_replace('user',$name, $mailBody);
-
-                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status twojej oferty uległ zmianie'],$user->getEmail(),$mailer);
-                }
-                $this->session->getFlashBag()->add('success', 'Status oferty został zmieniony');
-
-            }else {
-                $this->session->getFlashBag()->add('danger', 'Status oferty nie został zmieniony');
-            }
-        }else {
-            $this->session->getFlashBag()->add('danger', 'Status oferty nie został zmieniony');
-        }
-
-        return $this->redirectToRoute('admin_recruitment_show',['id' => $recruitmentUser->getRecruitment()->getId()]);
-    }
 
     /**
      * @param Request $request
@@ -244,5 +201,42 @@ class RecruitmentController extends Controller
         return $this->render('back/recruitments.html.twig',array(
             'recruitments' => $recruitment
         ));
+    }
+
+    private function generateAgreement($recruitmentUserId)
+    {
+        $tcpdf = new TcpdfUtils();
+        $recruitmentUser = $this->getDoctrine()
+            ->getRepository(RecruitmentUsers::class)
+            ->find($recruitmentUserId);
+
+        $fileSystem = new Filesystem();
+        $filePath = $recruitmentUser->getUploadRootDir();
+        $fileName = $recruitmentUser->getNumber() . '-' . mt_rand() .'.pdf';
+        if(!$fileSystem->exists($filePath)){
+            try{
+                $fileSystem->mkdir($filePath);
+            }catch (IOException $exception){
+                echo 'Error in dir creation'. $exception->getPath() . ' ' . $exception->getPath();
+            }
+        }
+        $tcpdf->AddPage();
+        $html = $this->renderView('agreement/agreement.html.twig',[
+            'recruitment' => $recruitmentUser->getRecruitment(),
+            'recruitmentUser' => $recruitmentUser,
+        ]);
+        $tcpdf->writeHTML($html);
+        try{
+            $tcpdf->Output($recruitmentUser->getAbsoluteAgreementPath(), 'F');
+        } catch (FileNotWritableException $exception){
+            echo 'Agreement was not created: '. $exception->getMessage();
+        }
+
+        $recruitmentUser->setAgreementPath($fileName);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($recruitmentUser);
+        $em->flush();
+
+        return $fileName;
     }
 }

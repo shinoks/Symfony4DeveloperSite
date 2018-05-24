@@ -52,6 +52,11 @@ class RecruitmentUsers
     /**
      * @ORM\Column(type="datetime",nullable=true)
      */
+    private $acceptedDate;
+
+    /**
+     * @ORM\Column(type="datetime",nullable=true)
+     */
     private $payedDate;
 
     /**
@@ -75,6 +80,11 @@ class RecruitmentUsers
     private $created;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $agreementPath;
+
+    /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
@@ -82,6 +92,7 @@ class RecruitmentUsers
     public function __construct()
     {
         $this->payedDate = NULL;
+        $this->acceptedDate = NULL;
         $this->created = new \DateTime("now");
         $this->isActive = 1;
         $this->number = uniqid();
@@ -183,6 +194,10 @@ class RecruitmentUsers
         $this->payedAmount = $payedAmount;
     }
 
+    public function getCashBackDate()
+    {
+        return date_add($this->acceptedDate,new \DateInterval('P' . $this->investmentPeriod . 'M'));
+    }
     /**
      * @return mixed
      */
@@ -197,6 +212,22 @@ class RecruitmentUsers
     public function setPayedDate($payedDate)
     {
         $this->payedDate = $payedDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAcceptedDate()
+    {
+        return $this->acceptedDate;
+    }
+
+    /**
+     * @param mixed $acceptedDate
+     */
+    public function setAcceptedDate($acceptedDate): void
+    {
+        $this->acceptedDate = $acceptedDate;
     }
 
     /**
@@ -247,6 +278,38 @@ class RecruitmentUsers
         $this->created = $created;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAgreementPath()
+    {
+        return $this->agreementPath;
+    }
+
+    /**
+     * @param mixed $agreementPath
+     */
+    public function setAgreementPath($agreementPath): void
+    {
+        $this->agreementPath = $agreementPath;
+    }
+
+    public function getAbsoluteAgreementPath()
+    {
+        return null === $this->agreementPath
+            ? null
+            : $this->getUploadRootDir().'/'.$this->agreementPath;
+    }
+
+    public function getUploadRootDir()
+    {
+        return $_SERVER['DOCUMENT_ROOT'].'/../var/data/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        return $this->getUser()->getId();
+    }
     /**
      * @return mixed
      */

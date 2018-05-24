@@ -53,6 +53,7 @@
 
     <script>
         $(document).ready(function(){
+            $("#range-slider-value").html($( "#recruitment_users_declaredAmount" ).val());
             $( "#recruitment_users_declaredAmount" ).change(function() {
                 $("#range-slider-value").html($(this).val());
             });

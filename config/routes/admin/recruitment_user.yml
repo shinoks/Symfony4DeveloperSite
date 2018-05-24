@@ -24,3 +24,7 @@ admin_recruitment_user_delete:
 admin_recruitment_user_disable:
     path: /disable/{id}/{status}
     controller: App\Controller\Admin\RecruitmentUserController::disable
+
+admin_recruitment_user_get_agreement:
+    path: /agreement/show/{id}
+    controller: App\Controller\Admin\RecruitmentUserController::getAgreement

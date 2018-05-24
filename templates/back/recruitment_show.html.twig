@@ -66,6 +66,7 @@
                         <th>{{ 'amount_of_days'|trans }}</th>
                         <th>{{ 'amount_of_interest'|trans }}</th>
                         <th>{{ 'created'|trans }}</th>
+                        <th>{{ 'agreement'|trans }}</th>
                         <th>Edytuj</th>
                         <th>Wyłącz</th>
                         <th>Usuń</th>
@@ -102,6 +103,11 @@
                         </td>
                         <td><a href="{{ path('admin_recruitment_user_edit', { 'id':user.id,'status':0 }) }}" class="btn btn-default">Edytuj</a></td>
                         <td>{{ user.created|date('d-m-Y H:i:s') }}</td>
+                        {% if user.agreementPath is not empty %}
+                            <td><a target="_blank" href="{{ path('admin_recruitment_user_get_agreement', { 'id':user.id }) }}" class="btn btn-default">Pobierz</a></td>
+                        {% else %}
+                            <td>{{ 'agreement.not_available' }}</td>
+                        {% endif %}
                         {% if recruitment.isActive == 1 %}
                             <td><a href="{{ path('admin_recruitment_user_disable', { 'id':user.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
                         {% else %}
@@ -123,7 +129,7 @@
             $( "select" ).change(function() {
                 var status = this.value;
                 var recruitment_id = $(this).attr('name');
-                var url = '{{ path('admin_recruitment_edit_status',{'id':'recruitment_id','status':'recruitment_status'}) }}';
+                var url = '{{ path('admin_recruitment_user_edit_status',{'id':'recruitment_id','status':'recruitment_status'}) }}';
                 url = url.replace('recruitment_id',recruitment_id);
                 url = url.replace('recruitment_status', status);
                 window.location.href = url;

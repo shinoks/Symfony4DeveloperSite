@@ -6,9 +6,13 @@ use App\Entity\RecruitmentUsers;
 use App\Entity\RecruitmentUserStatus;
 use App\Form\RecruitmentUsersType;
 use App\Utils\MailManagerUtils;
+use App\Utils\TcpdfUtils;
 use Doctrine\ORM\EntityManagerInterface;
+use ProxyManager\Exception\FileNotWritableException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
+use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -43,7 +47,7 @@ class RecruitmentUserController extends Controller
         $recruitment = $this->getDoctrine()
             ->getRepository(Recruitment::class)
             ->getRecruitmentWithCountById($recruitmentId);
-        $minOfferAmount = 1000;
+        $minOfferAmount = 10000;
         $maxOfferAmount = $recruitment[0]->getDesiredAmount() - $recruitment['declaredSum'];
 
         $recruitmentUsers = new RecruitmentUsers();
@@ -65,12 +69,7 @@ class RecruitmentUserController extends Controller
                 throw new \ErrorException('Zadeklarowana kwota jest większa od pozostałej wolnej kwoty w naborze');
             }
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($recruitmentUsers);
-            $em->flush();
-
             $mailManager = new MailManagerUtils($emi);
-
             $mailBody = $this->renderView('emails/recruitment_user_new.html.twig',[
                 'recruitment' => $recruitment,
             ]);
@@ -80,9 +79,11 @@ class RecruitmentUserController extends Controller
             $user = $this->getUser();
             $name = $user->getFirstName() . ' ' .$user->getLastName();
             $mailBodyPersonalized = str_replace('user',$name, $mailBody);
-
             $mailManager->sendEmail($mailBodyPersonalized,['subject' => 'tytul'],$user->getEmail(),$mailer);
 
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($recruitmentUsers);
+            $em->flush();
             $this->session->getFlashBag()->add('success', 'Oferta na nabór została dodana');
 
             return $this->redirectToRoute('front_user_account');

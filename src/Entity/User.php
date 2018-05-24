@@ -80,6 +80,11 @@ class User implements AdvancedUserInterface, \Serializable
     private $city;
 
     /**
+     * @ORM\Column(type="string", length=70)
+     */
+    private $bankAccount;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $regulations;
@@ -351,6 +356,22 @@ class User implements AdvancedUserInterface, \Serializable
     public function setCity($city)
     {
         $this->city = $city;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBankAccount()
+    {
+        return $this->bankAccount;
+    }
+
+    /**
+     * @param mixed $bankAccount
+     */
+    public function setBankAccount($bankAccount): void
+    {
+        $this->bankAccount = $bankAccount;
     }
 
     /**
