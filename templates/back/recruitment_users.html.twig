@@ -50,7 +50,7 @@
                             <th>{{ 'amount_of_days'|trans }}</th>
                             <th>{{ 'amount_of_interest'|trans }}</th>
                             <th>{{ 'created'|trans }}</th>
-                            <th>{{ 'agreement'|trans }}</th>
+                            <th>{{ 'agreement.agreement'|trans }}</th>
                             <th>Wyłącz</th>
                             <th>Usuń</th>
                         </tr>
@@ -79,7 +79,7 @@
                                 {% if recruitment.agreementPath is not empty %}
                                     <td><a target="_blank" href="{{ path('admin_recruitment_user_get_agreement', { 'id':recruitment.id }) }}" class="btn btn-default">Pobierz</a></td>
                                 {% else %}
-                                    <td>{{ 'agreement.not_available' }}</td>
+                                    <td>{{ 'agreement.not_available'|trans }}</td>
                                 {% endif %}
                                 {% if recruitment.isActive == 1 %}
                                     <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
@@ -91,6 +91,11 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation">
+                    <div class="navigation">
+                        {{ knp_pagination_render(recruitmentUsers) }}
+                    </div>
+                </nav>
             </div>
         </div>
         </div>

@@ -191,17 +191,24 @@ class RecruitmentUserController extends Controller
     /**
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $recruitmentUsers = $this->getDoctrine()
-            ->getRepository(RecruitmentUsers::class)
-            ->findAll();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->getRepository(RecruitmentUsers::class)->findBy([],[
+            $request->query->get('sort','id')=>$request->query->get('direction','asc')
+        ]);
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1)
+        );
+
         $recruitmentUserStatus = $this->getDoctrine()
             ->getRepository(RecruitmentUserStatus::class)
             ->findBy(['isActive'=>1]);
 
         return $this->render('back/recruitment_users.html.twig',array(
-            'recruitmentUsers'=> $recruitmentUsers,
+            'recruitmentUsers'=> $pagination,
             'recruitmentUserStatus' => $recruitmentUserStatus
         ));
     }

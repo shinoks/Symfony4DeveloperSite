@@ -39,54 +39,57 @@
             <div class="animated fade-in">
                 <table class="table">
                     <thead class="thead-dark">
-                        <tr>
-                            <th>Id</th>
-                            <th>{{ 'name'|trans }}</th>
-                            <th>{{ 'number'|trans }}</th>
-                            <th>{{ 'collected_amount'|trans }}</th>
-                            <th>{{ 'payed_amount'|trans }}</th>
-                            <th>{{ 'desired_amount'|trans }}</th>
-                            <th>{{ 'status'|trans }}</th>
-                            <th>{{ 'investment_period'|trans }}</th>
-                            <th>{{ 'interest'|trans }}</th>
-                            <th>{{ 'investment_type'|trans }}</th>
-                            <th>{{ 'rooms'|trans }}</th>
-                            <th>{{ 'city'|trans }}</th>
-                            <th>{{ 'created'|trans }}</th>
-                            <th>Wyłącz</th>
-                            <th>Usuń</th>
-                        </tr>
+                        <th>Id</th>
+                        <th>{{ 'name'|trans }}</th>
+                        <th>{{ 'number'|trans }}</th>
+                        <th>{{ 'collected_amount'|trans }}</th>
+                        <th>{{ 'payed_amount'|trans }}</th>
+                        <th>{{ 'desired_amount'|trans }}</th>
+                        <th>{{ 'status'|trans }}</th>
+                        <th>{{ 'investment_period'|trans }}</th>
+                        <th>{{ 'interest'|trans }}</th>
+                        <th>{{ 'investment_type'|trans }}</th>
+                        <th>{{ 'rooms'|trans }}</th>
+                        <th>{{ 'city'|trans }}</th>
+                        <th>{{ 'created'|trans }}</th>
+                        <th>Wyłącz</th>
+                        <th>Usuń</th>
                     </thead>
                     <tbody>
-                        {% for recruitment in recruitments %}
-                            <tr>
-                                <td>{{ recruitment[0].id }}</td>
-                                <td>{{ recruitment[0].name }}</td>
-                                <td><a href="{{ path('admin_recruitment_show',{'id':recruitment.0.id}) }}">{{ recruitment.0.number }}</a></td>
-                                <td>{% if recruitment['declaredSum'] is empty %}0{% else %}{{ recruitment['declaredSum'] }}{% endif %} zł</td>
-                                <td>{% if recruitment['payedSum'] is empty %}0{% else %}{{ recruitment['payedSum'] }}{% endif %} zł</td>
-                                <td>{{ recruitment.0.desiredAmount }} zł</td>
-                                <td>{{ recruitment.0.status.name }}</td>
-                                <td>{{ recruitment.0.investmentPeriod }} msc</td>
-                                <td>{{ recruitment.0.interest }} %</td>
-                                <td>{{ recruitment.0.investmentType }}</td>
-                                <td>{{ recruitment.0.rooms }}</td>
-                                <td>{{ recruitment.0.city }}</td>
-                                <td>{{ recruitment.0.created|date('d-m-Y H:i:s') }}</td>
-                                {% if recruitment.0.isActive == 1 %}
-                                    <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.0.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
-                                {% else %}
-                                    <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.0.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
-                                {% endif %}
-                                <td><a href="{{ path('admin_recruitment_delete', { 'id':recruitment.0.id }) }}" class="btn btn-danger">Usuń</a></td>
-                            </tr>
-                        {% endfor %}
+                    {% for recruitment in pagination %}
+                        <tr>
+                            <td>{{ recruitment[0].id }}</td>
+                            <td>{{ recruitment[0].name }}</td>
+                            <td><a href="{{ path('admin_recruitment_show',{'id':recruitment.0.id}) }}">{{ recruitment.0.number }}</a></td>
+                            <td>{% if recruitment['declaredSum'] is empty %}0{% else %}{{ recruitment['declaredSum'] }}{% endif %} zł</td>
+                            <td>{% if recruitment['payedSum'] is empty %}0{% else %}{{ recruitment['payedSum'] }}{% endif %} zł</td>
+                            <td>{{ recruitment.0.desiredAmount }} zł</td>
+                            <td>{{ recruitment.0.status.name }}</td>
+                            <td>{{ recruitment.0.investmentPeriod }} msc</td>
+                            <td>{{ recruitment.0.interest }} %</td>
+                            <td>{{ recruitment.0.investmentType }}</td>
+                            <td>{{ recruitment.0.rooms }}</td>
+                            <td>{{ recruitment.0.city }}</td>
+                            <td>{{ recruitment.0.created|date('d-m-Y H:i:s') }}</td>
+                            {% if recruitment.0.isActive == 1 %}
+                                <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.0.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                            {% else %}
+                                <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.0.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                            {% endif %}
+                            <td><a href="{{ path('admin_recruitment_delete', { 'id':recruitment.0.id }) }}" class="btn btn-danger">Usuń</a></td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+
+                    </tr>
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation">
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </nav>
             </div>
         </div>
         </div>
-        <!--/.col-->
-
 {% endblock %}
-

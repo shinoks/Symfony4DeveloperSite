@@ -192,14 +192,20 @@ class RecruitmentController extends Controller
     /**
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $recruitment = $this->getDoctrine()
-            ->getRepository(Recruitment::class)
-            ->getRecruitmentWithCount();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->getRepository(Recruitment::class)->getRecruitmentWithCount([],[
+            $request->query->get('sort','id')=>$request->query->get('direction','asc')
+        ]);
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1)
+        );
 
         return $this->render('back/recruitments.html.twig',array(
-            'recruitments' => $recruitment
+            'pagination' => $pagination
         ));
     }
 
