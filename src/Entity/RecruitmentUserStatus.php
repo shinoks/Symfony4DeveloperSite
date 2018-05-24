@@ -30,10 +30,12 @@ class RecruitmentUserStatus
     /**
      * @ORM\Column(type="boolean")
      */
+
     private $isFvGenerated;
     /**
      * @ORM\Column(type="boolean")
      */
+
     private $isMailed;
 
     /**

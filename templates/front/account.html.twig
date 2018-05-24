@@ -125,7 +125,7 @@
                                                 </td>
                                                 <td>{{ user.created|date('d-m-Y H:i:s') }}</td>
                                                 <td>
-                                                    {% if user.status.isFvGenerated ==1 %}
+                                                    {% if user.agreementPath is defined %}
                                                         <a href="#" class="btn btn-finish">{{ 'agreement.download_agreement'|trans }}</a>
                                                     {% else %}
                                                         {{ 'agreement.agreement_not_available'|trans }}
