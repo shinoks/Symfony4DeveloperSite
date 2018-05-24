@@ -44,6 +44,7 @@ class MailManagerUtils
                 ->setBody($template, 'text/html')
             ;
             if($file){
+
                 $message->attach(\Swift_Attachment::fromPath($file));
             }
             $response = $mailer->send($message);

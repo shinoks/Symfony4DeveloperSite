@@ -133,7 +133,7 @@ class RecruitmentUserController extends Controller
                     $mailBodyPersonalized = str_replace('user',$name, $mailBody);
 
                     if($recruitmentUserStatus->getIsFvMailed() == 1){
-                       $file = $this->getAgreement($recruitmentUser->getId());
+                       $file = $recruitmentUser->getAbsoluteAgreementPath();
                     }
                     $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status twojej oferty uległ zmianie'],$user->getEmail(),$mailer,$file);
                 }
