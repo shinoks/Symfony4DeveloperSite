@@ -132,7 +132,10 @@ class RecruitmentUserController extends Controller
                     $name = $user->getFirstName() . ' ' .$user->getLastName();
                     $mailBodyPersonalized = str_replace('user',$name, $mailBody);
 
-                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status twojej oferty uległ zmianie'],$user->getEmail(),$mailer);
+                    if($recruitmentUserStatus->getIsFvMailed() == 1){
+                       $file = $this->getAgreement($recruitmentUser->getId());
+                    }
+                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status twojej oferty uległ zmianie'],$user->getEmail(),$mailer,$file);
                 }
                 $this->session->getFlashBag()->add('success', 'Status oferty został zmieniony');
 
