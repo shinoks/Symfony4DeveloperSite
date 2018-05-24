@@ -1,6 +1,7 @@
 admin:
     resource: "routes/admin.yml"
     prefix: /admin
+    schemes: [https]
 
 front:
     resource: "routes/front.yml"
