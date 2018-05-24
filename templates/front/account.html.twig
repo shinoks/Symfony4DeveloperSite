@@ -125,8 +125,8 @@
                                                 </td>
                                                 <td>{{ user.created|date('d-m-Y H:i:s') }}</td>
                                                 <td>
-                                                    {% if user.agreementPath is defined %}
-                                                        <a href="#" class="btn btn-finish">{{ 'agreement.download_agreement'|trans }}</a>
+                                                    {% if user.agreementPath is not null %}
+                                                        <a href="{{ path('admin_user_account_recruitment_user_get_agreement',{'id':user.id}) }}" class="btn btn-finish">{{ 'agreement.download_agreement'|trans }}</a>
                                                     {% else %}
                                                         {{ 'agreement.agreement_not_available'|trans }}
                                                     {% endif %}

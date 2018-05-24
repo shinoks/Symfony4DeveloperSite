@@ -95,4 +95,18 @@ class RecruitmentUserController extends Controller
         ));
     }
 
+    public function getAgreement($id)
+    {
+        $recruitmentUser = $this->getDoctrine()
+            ->getRepository(RecruitmentUsers::class)
+            ->find($id);
+        try{
+            $file = $this->file($recruitmentUser->getAbsoluteAgreementPath(),$recruitmentUser->getNumber());
+        }catch(FileNotFoundException $exception){
+            echo 'Umowa nie znaleziona'. $exception->getMessage();
+
+        }
+
+        return $file;
+    }
 }
