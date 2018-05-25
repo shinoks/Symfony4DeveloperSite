@@ -61,7 +61,7 @@ class Config
     private $keywords;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     private $footer;
 
