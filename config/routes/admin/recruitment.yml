@@ -10,12 +10,12 @@ admin_recruitment_show:
     path: /{id}
     controller: App\Controller\Admin\RecruitmentController::show
 
+admin_recruitment_edit_status:
+    path: /editstatus/{id}/{status}
+    controller: App\Controller\Admin\RecruitmentController::editStatus
 admin_recruitment_edit:
     path: /edit/{id}
     controller: App\Controller\Admin\RecruitmentController::edit
-admin_recruitment_edit_status:
-    path: /edit/{id}/{status}
-    controller: App\Controller\Admin\RecruitmentController::editStatus
 
 admin_recruitment_delete:
     path: /delete/{id}
