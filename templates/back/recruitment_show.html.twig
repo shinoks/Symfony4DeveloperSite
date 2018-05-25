@@ -50,6 +50,10 @@
                         <b>{{ 'status'|trans }}:</b>
                         {{ recruitment.status.name }}
                     </li>
+                    <li class="list-group-item">
+                        <b>{{ 'recruitment_edit'|trans }}:</b>
+                        <a href="{{ path('admin_recruitment_edit',{'id':recruitment.id}) }}">{{ 'edit'|trans }}</a>
+                    </li>
                 </ul>
             </section>
 
