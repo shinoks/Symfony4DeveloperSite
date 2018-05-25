@@ -1,7 +1,9 @@
 <?php
 namespace App\Controller\Admin;
 
+use App\Entity\Admin;
 use App\Entity\Recruitment;
+use App\Entity\RecruitmentStatus;
 use App\Entity\RecruitmentUsers;
 use App\Entity\RecruitmentUserStatus;
 use App\Entity\User;
@@ -54,10 +56,15 @@ class RecruitmentController extends Controller
             ->getRepository(RecruitmentUserStatus::class)
             ->findBy(['isActive'=>1]);
 
+        $recruitmentStatus = $this->getDoctrine()
+            ->getRepository(RecruitmentStatus::class)
+            ->findBy(['isActive'=>1]);
+
         return $this->render('back/recruitment_show.html.twig',array(
             'recruitment'=> $recruitment,
             'recruitmentUsers' => $recruitmentUsers,
-            'recruitmentUserStatus' => $recruitmentUserStatus
+            'recruitmentUserStatus' => $recruitmentUserStatus,
+            'recruitmentStatus' => $recruitmentStatus
         ));
     }
 
@@ -99,6 +106,76 @@ class RecruitmentController extends Controller
 
     }
 
+    /**
+     * @param $id
+     * @param $status
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function editStatus($id, $status, \Swift_Mailer $mailer, EntityManagerInterface $emi)
+    {
+        $recruitment = $this->getDoctrine()
+            ->getRepository(Recruitment::class)
+            ->find($id);
+        if($recruitment){
+            $recruitmentStatus = $this->getDoctrine()
+                ->getRepository(RecruitmentStatus::class)
+                ->find($status);
+            if($recruitmentStatus){
+                $recruitment->setStatus($recruitmentStatus);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($recruitment);
+                $em->flush();
+                if($recruitmentStatus->getIsMailedToAdmin() == 1){
+                    $mailManager = new MailManagerUtils($emi);
+                    $template = 'emails/' . $recruitmentStatus->getMailAdminTemplate();
+                    $mailBody = $this->renderView($template,[
+                        'recruitment' => $recruitment,
+                    ]);
+                    if(!$mailBody){
+                        throw new FileNotFoundException($template);
+                    }
+
+                    $admins = $this->getDoctrine()
+                        ->getRepository(Admin::class)
+                        ->findAll();
+                    foreach($admins as $admin){
+                        $name = $admin->getFirstName() . ' ' .$admin->getLastName();
+                        $mailBodyPersonalized = str_replace('user',$name, $mailBody);
+                        $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status naboru uległ zmianie'],$admin->getEmail(),$mailer,NULL);
+                    }
+                }
+                if($recruitmentStatus->getIsMailedToUsers() == 1){
+                    $mailManager = new MailManagerUtils($emi);
+                    $template = 'emails/' . $recruitmentStatus->getMailUsersTemplate();
+                    $mailBody = $this->renderView($template,[
+                        'recruitment' => $recruitment,
+                    ]);
+                    if(!$mailBody){
+                        throw new FileNotFoundException($template);
+                    }
+                    $users = $this->getDoctrine()
+                        ->getRepository(User::class)
+                        ->findAll();
+                    foreach($users as $user){
+                        $name = $user->getFirstName() . ' ' .$user->getLastName();
+                        $mailBodyPersonalized = str_replace('user',$name, $mailBody);
+                        $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status naboru uległ zmianie'],$user->getEmail(),$mailer,NULL);
+                    }
+                }
+                $this->session->getFlashBag()->add('success', 'Status naboru został zmieniony');
+
+                return $this->redirectToRoute('admin_recruitment_show',['id' => $recruitment->getId()]);
+
+            }else {
+                $this->session->getFlashBag()->add('danger', 'Status naboru nie został zmieniony');
+            }
+        }else {
+            $this->session->getFlashBag()->add('danger', 'Status naboru nie został zmieniony');
+        }
+
+        return $this->redirectToRoute('admin_recruitment');
+    }
 
     /**
      * @param Request $request
@@ -139,7 +216,7 @@ class RecruitmentController extends Controller
                     $name = $user->getFirstName() . ' ' .$user->getLastName();
                     $mailBodyPersonalized = str_replace('user',$name, $mailBody);
 
-                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Nowa oferta pożyczki'],$user->getEmail(),$mailer);
+                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Nowy nabór'],$user->getEmail(),$mailer);
                 }
             }
 
@@ -204,45 +281,13 @@ class RecruitmentController extends Controller
             $request->query->getInt('page', 1)
         );
 
+        $recruitmentStatus = $this->getDoctrine()
+            ->getRepository(RecruitmentStatus::class)
+            ->findBy(['isActive'=>1]);
+
         return $this->render('back/recruitments.html.twig',array(
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'recruitmentStatus' => $recruitmentStatus
         ));
-    }
-
-    private function generateAgreement($recruitmentUserId)
-    {
-        $tcpdf = new TcpdfUtils();
-        $recruitmentUser = $this->getDoctrine()
-            ->getRepository(RecruitmentUsers::class)
-            ->find($recruitmentUserId);
-
-        $fileSystem = new Filesystem();
-        $filePath = $recruitmentUser->getUploadRootDir();
-        $fileName = $recruitmentUser->getNumber() . '-' . mt_rand() .'.pdf';
-        if(!$fileSystem->exists($filePath)){
-            try{
-                $fileSystem->mkdir($filePath);
-            }catch (IOException $exception){
-                echo 'Error in dir creation'. $exception->getPath() . ' ' . $exception->getPath();
-            }
-        }
-        $tcpdf->AddPage();
-        $html = $this->renderView('agreement/agreement.html.twig',[
-            'recruitment' => $recruitmentUser->getRecruitment(),
-            'recruitmentUser' => $recruitmentUser,
-        ]);
-        $tcpdf->writeHTML($html);
-        try{
-            $tcpdf->Output($recruitmentUser->getAbsoluteAgreementPath(), 'F');
-        } catch (FileNotWritableException $exception){
-            echo 'Agreement was not created: '. $exception->getMessage();
-        }
-
-        $recruitmentUser->setAgreementPath($fileName);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($recruitmentUser);
-        $em->flush();
-
-        return $fileName;
     }
 }

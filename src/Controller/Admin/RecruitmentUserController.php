@@ -96,7 +96,7 @@ class RecruitmentUserController extends Controller
      * @param $status
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function editStatus($id, $status, \Swift_Mailer $mailer, EntityManagerInterface $emi, TcpdfUtils $tcpdf)
+    public function editStatus($id, $status, \Swift_Mailer $mailer, EntityManagerInterface $emi)
     {
         $recruitmentUser = $this->getDoctrine()
             ->getRepository(RecruitmentUsers::class)

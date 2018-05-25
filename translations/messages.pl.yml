@@ -179,6 +179,13 @@ desired_amount: Pożądana kwota
 investment_period: Czas inwestycji
 investment_type: Typ inwestycji
 bank_account: Nr konta
+click_for_detail: Wejdź w szczegóły
+is_visible_to_users: Widoczny dla użytkowników
+is_mailed_to_admin: Wysyłany do adminów ?
+is_mailed_to_users: Wysyłany do użytkowników ?
+mail_admin_template: Szablon maila do adminów
+mail_users_template: Szablon maila do użytkowników
+footer: Stopka
 input:
     default: Podstawowy
 table:

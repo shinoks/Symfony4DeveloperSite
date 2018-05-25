@@ -1,0 +1,10 @@
+{% extends 'emails/base.html.twig' %}
+
+{% block body %}
+    Witaj <br/><br/>
+
+    Status naboru "{{ recruitment.name }} - {{ recruitment.number }}" uległ zmianie <br/><br/>
+    <b>Aktualny status:</b><br/>
+    {{ recruitment.status.name }}
+
+{% endblock %}

@@ -17,7 +17,7 @@ class RecruitmentUsersRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('r')
             ->where('r.user = :user')->setParameter('user', $user)
-            ->orderBy('r.id', 'ASC')
+            ->orderBy('r.id', 'DESC')
             ->getQuery()
             ->getResult()
             ;
@@ -29,7 +29,7 @@ class RecruitmentUsersRepository extends ServiceEntityRepository
             ->leftJoin('r.recruitment','recruitment')
             ->where('r.user = :user')->setParameter('user', $user)
             ->andWhere('recruitment.id = :recruitmentId')->setParameter('recruitmentId', $recruitmentId)
-            ->orderBy('r.id', 'ASC')
+            ->orderBy('r.id', 'DESC')
             ->getQuery()
             ->getResult()
             ;

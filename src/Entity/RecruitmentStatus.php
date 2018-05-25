@@ -25,6 +25,33 @@ class RecruitmentStatus
     /**
      * @ORM\Column(type="boolean")
      */
+
+    private $isMailedToAdmin;
+
+    /**
+     * @ORM\Column(type="string",nullable=true)
+     */
+    private $mailAdminTemplate;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+
+    private $isMailedToUsers;
+
+    /**
+     * @ORM\Column(type="string",nullable=true)
+     */
+    private $mailUsersTemplate;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVisibleToUsers;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
     private $isActive;
 
     /**
@@ -35,6 +62,7 @@ class RecruitmentStatus
     public function __construct()
     {
         $this->recruitments = new ArrayCollection();
+        $this->isVisibleToUsers = 1;
     }
 
     /**
@@ -59,6 +87,86 @@ class RecruitmentStatus
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisMailedToAdmin()
+    {
+        return $this->isMailedToAdmin;
+    }
+
+    /**
+     * @param mixed $isMailedToAdmin
+     */
+    public function setIsMailedToAdmin($isMailedToAdmin): void
+    {
+        $this->isMailedToAdmin = $isMailedToAdmin;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMailAdminTemplate()
+    {
+        return $this->mailAdminTemplate;
+    }
+
+    /**
+     * @param mixed $mailAdminTemplate
+     */
+    public function setMailAdminTemplate($mailAdminTemplate): void
+    {
+        $this->mailAdminTemplate = $mailAdminTemplate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisMailedToUsers()
+    {
+        return $this->isMailedToUsers;
+    }
+
+    /**
+     * @param mixed $isMailedToUsers
+     */
+    public function setIsMailedToUsers($isMailedToUsers): void
+    {
+        $this->isMailedToUsers = $isMailedToUsers;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMailUsersTemplate()
+    {
+        return $this->mailUsersTemplate;
+    }
+
+    /**
+     * @param mixed $mailUsersTemplate
+     */
+    public function setMailUsersTemplate($mailUsersTemplate): void
+    {
+        $this->mailUsersTemplate = $mailUsersTemplate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisVisibleToUsers()
+    {
+        return $this->isVisibleToUsers;
+    }
+
+    /**
+     * @param mixed $isVisibleToUsers
+     */
+    public function setIsVisibleToUsers($isVisibleToUsers): void
+    {
+        $this->isVisibleToUsers = $isVisibleToUsers;
     }
 
     /**

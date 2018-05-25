@@ -64,7 +64,15 @@
                             <td>{% if recruitment['declaredSum'] is empty %}0{% else %}{{ recruitment['declaredSum'] }}{% endif %} zł</td>
                             <td>{% if recruitment['payedSum'] is empty %}0{% else %}{{ recruitment['payedSum'] }}{% endif %} zł</td>
                             <td>{{ recruitment.0.desiredAmount }} zł</td>
-                            <td>{{ recruitment.0.status.name }}</td>
+                            <td><form class="form" action="#">
+                                    <select id="recruitment_status" name="{{ recruitment.0.id }}">
+                                        <option value="{{ recruitment.0.status.id }}">{{ recruitment.0.status.name }}</option>
+                                        {% for status  in recruitmentStatus %}
+                                            <option value="{{ status.id }}">{{ status.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </form>
+                            </td>
                             <td>{{ recruitment.0.investmentPeriod }} msc</td>
                             <td>{{ recruitment.0.interest }} %</td>
                             <td>{{ recruitment.0.investmentType }}</td>
@@ -92,4 +100,21 @@
             </div>
         </div>
         </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function(){
+            $( "select" ).change(function() {
+                var status = this.value;
+                var recruitment_id = $(this).attr('name');
+                var url = '{{ path('admin_recruitment_edit_status',{'id':'recruitment_id','status':'recruitment_status'}) }}';
+                url = url.replace('recruitment_id',recruitment_id);
+                url = url.replace('recruitment_status', status);
+                window.location.href = url;
+            });
+        });
+    </script>
 {% endblock %}

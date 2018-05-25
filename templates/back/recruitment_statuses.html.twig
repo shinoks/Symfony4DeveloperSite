@@ -42,6 +42,8 @@
                         <tr>
                             <th>Id</th>
                             <th>Nazwa</th>
+                            <th>Czy wysyłany do admina</th>
+                            <th>Czy wysyłany do użytkowników</th>
                             <th>Wyłącz</th>
                             <th>Usuń</th>
                         </tr>
@@ -51,6 +53,16 @@
                             <tr>
                                 <td>{{ recruitmentStatus.id }}</td>
                                 <td><a href="{{ path('admin_recruitment_status_edit',{ 'id':recruitmentStatus.id }) }}">{{ recruitmentStatus.name }}</a></td>
+                                {% if recruitmentStatus.isMailedToAdmin == 1 %}
+                                    <td>Tak</td>
+                                {% else %}
+                                    <td>Nie</td>
+                                {% endif %}
+                                {% if recruitmentStatus.isMailedToUsers == 1 %}
+                                    <td>Tak</td>
+                                {% else %}
+                                    <td>Nie</td>
+                                {% endif %}
                                 {% if recruitmentStatus.isActive == 1 %}
                                     <td><a href="{{ path('admin_recruitment_status_disable', { 'id':recruitmentStatus.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
                                 {% else %}

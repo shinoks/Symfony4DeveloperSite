@@ -118,7 +118,7 @@ class UserController extends Controller
 
         $recruitments = $this->getDoctrine()
             ->getRepository(Recruitment::class)
-            ->findAllByActive(1);
+            ->findRecruitmentsForUsers();
 
         return $this->render('front/account.html.twig',array(
             'recruitments' => $recruitments,

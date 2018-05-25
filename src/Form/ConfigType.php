@@ -22,6 +22,7 @@ class ConfigType extends AbstractType
         ->add('regulationsUrl',TextType::class,['label'=>'regulations_url'])
         ->add('description',TextareaType::class,['label'=>'description'])
         ->add('keywords',TextareaType::class,['label'=>'keywords'])
+        ->add('footer',TextType::class,['label'=>'footer'])
 
         ->add('save', SubmitType::class);
     }

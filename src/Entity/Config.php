@@ -61,6 +61,11 @@ class Config
     private $keywords;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $footer;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -218,5 +223,21 @@ class Config
     public function setKeywords($keywords)
     {
         $this->keywords = $keywords;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFooter()
+    {
+        return $this->footer;
+    }
+
+    /**
+     * @param mixed $footer
+     */
+    public function setFooter($footer): void
+    {
+        $this->footer = $footer;
     }
 }

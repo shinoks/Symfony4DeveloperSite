@@ -19,7 +19,7 @@ class RecruitmentRepository extends ServiceEntityRepository
             ->select('r,SUM(recruitmentUsers.payedAmount) as payedSum,SUM(recruitmentUsers.declaredAmount) as declaredSum')
             ->leftJoin('r.recruitmentUsers','recruitmentUsers')
             ->groupBy('r.id')
-            ->orderBy('r.id', 'ASC')
+            ->orderBy('r.id', 'DESC')
             ->getQuery()
             ->getResult()
         ;
@@ -32,7 +32,7 @@ class RecruitmentRepository extends ServiceEntityRepository
             ->leftJoin('r.recruitmentUsers','recruitmentUsers')
             ->where('r.id = :id')->setParameter('id', $id)
             ->groupBy('r.id')
-            ->orderBy('r.id', 'ASC')
+            ->orderBy('r.id', 'DESC')
             ->getQuery()
             ->getSingleResult()
         ;
@@ -45,7 +45,21 @@ class RecruitmentRepository extends ServiceEntityRepository
             ->leftJoin('r.recruitmentUsers','recruitmentUsers')
             ->where('r.isActive = :isActive')->setParameter('isActive', $active)
             ->groupBy('r.id')
-            ->orderBy('r.id', 'ASC')
+            ->orderBy('r.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findRecruitmentsForUsers()
+    {
+        return $this->createQueryBuilder('r')
+            ->select('r, SUM(recruitmentUsers.declaredAmount) as declaredSum')
+            ->leftJoin('r.recruitmentUsers','recruitmentUsers')
+            ->leftJoin('r.status','recruitmentStatus')
+            ->where('recruitmentStatus.isVisibleToUsers = :isVisibleToUsers')->setParameter('isVisibleToUsers', 1)
+            ->groupBy('r.id')
+            ->orderBy('r.id', 'DESC')
             ->getQuery()
             ->getResult()
             ;

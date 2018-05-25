@@ -32,6 +32,7 @@ class RecruitmentUserStatus
      */
 
     private $isFvGenerated;
+
     /**
      * @ORM\Column(type="boolean")
      */
