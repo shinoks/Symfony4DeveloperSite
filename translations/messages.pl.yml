@@ -178,6 +178,7 @@ end_date: Data zakończenia
 desired_amount: Pożądana kwota
 investment_period: Czas inwestycji
 investment_type: Typ inwestycji
+bank_account: Nr konta
 input:
     default: Podstawowy
 table:

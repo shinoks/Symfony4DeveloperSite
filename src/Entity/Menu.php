@@ -76,6 +76,11 @@ class Menu
     private $inBottom;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isMain;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Module", mappedBy="menus")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -270,6 +275,22 @@ class Menu
     public function setInBottom($inBottom)
     {
         $this->inBottom = $inBottom;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsMain()
+    {
+        return $this->isMain;
+    }
+
+    /**
+     * @param mixed $inMain
+     */
+    public function setIsMain($inMain): void
+    {
+        $this->inMain = $inMain;
     }
 
     public function addModule(Module $modules)
