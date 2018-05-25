@@ -44,7 +44,7 @@
             <ul class="main-nav nav navbar-nav navbar-right">
                 {% if menu.getActiveMainMenu is not empty %}{% set activeMenu = menu.getActiveMainMenu.getId %}{% endif %}
                 {% if menu.getMainMenu is not empty %}
-                    {% for menuItem in menu.getMenu %}
+                    {% for menuItem in menu.getMainMenu %}
                         {% set caret = '' %}
                         {% set attr = '' %}
                         {% if menuItem.childrens is not empty %}
