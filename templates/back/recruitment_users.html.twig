@@ -41,6 +41,7 @@
                     <thead class="thead-dark">
                         <tr>
                             <th>Id</th>
+                            <th>{{ 'recruitment'|trans }}</th>
                             <th>{{ 'first_name'|trans }} {{ 'last_name'|trans }}</th>
                             <th>{{ 'status'|trans }}</th>
                             <th>{{ 'declared_amount'|trans }}</th>
@@ -59,6 +60,7 @@
                         {% for recruitment in recruitmentUsers %}
                             <tr>
                                 <td>{{ recruitment.id }}</td>
+                                <td><a href="{{ path('admin_recruitment_show',{'id':recruitment.recruitment.id}) }}">{{ recruitment.recruitment.name }}</a></td>
                                 <td><a href="{{ path('admin_recruitment_user_edit',{'id':recruitment.id}) }}">{{ recruitment.user.firstName }} {{ recruitment.user.lastName }} </a></td>
                                 <td><form class="form" action="#">
                                         <select id="recruitment_user_status" name="{{ recruitment.id }}">
@@ -99,7 +101,6 @@
             </div>
         </div>
         </div>
-        <!--/.col-->
 
 {% endblock %}
 

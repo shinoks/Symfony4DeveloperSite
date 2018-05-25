@@ -10,13 +10,11 @@ contact:
 login:
     path: /login
     controller: App\Controller\SecurityController::login
-    schemes: [https]
 logout:
     path: /logout
 register:
     path: /register
     controller: App\Controller\UserController::register
-    schemes: [https]
 enable_user:
     path: /enable_user/{h}
     controller: App\Controller\UserController::enable
@@ -31,7 +29,6 @@ front_article_resource:
 front_user_resource:
     resource: "front/user.yml"
     prefix: /user
-    schemes: [https]
 
 front_offer_resource:
     resource: "front/offer.yml"
