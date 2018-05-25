@@ -78,7 +78,7 @@ class Menu
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isMain;
+    private $inMain;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Module", mappedBy="menus")
@@ -280,7 +280,7 @@ class Menu
     /**
      * @return mixed
      */
-    public function getIsMain()
+    public function getInMain()
     {
         return $this->isMain;
     }
@@ -288,7 +288,7 @@ class Menu
     /**
      * @param mixed $inMain
      */
-    public function setIsMain($inMain): void
+    public function setInMain($inMain): void
     {
         $this->inMain = $inMain;
     }

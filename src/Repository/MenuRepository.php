@@ -37,11 +37,11 @@ class MenuRepository extends ServiceEntityRepository
      * @param string $value
      * @return mixed
      */
-    public function findOneByActiveUrlAndIsMain(string $value)
+    public function findOneByActiveUrlAndInMain(string $value)
     {
         return $this->createQueryBuilder('m')
             ->where('m.href LIKE :value')->setParameter('value', $value)
-            ->where('m.isMain LIKE :value')->setParameter('value', 1)
+            ->where('m.inMain LIKE :value')->setParameter('value', 1)
             ->andWhere('m.parent is NULL')
             ->orderBy('m.id', 'ASC')
             ->setMaxResults(1)

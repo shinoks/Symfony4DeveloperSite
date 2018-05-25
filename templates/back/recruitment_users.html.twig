@@ -84,11 +84,11 @@
                                     <td>{{ 'agreement.not_available'|trans }}</td>
                                 {% endif %}
                                 {% if recruitment.isActive == 1 %}
-                                    <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                                    <td><a href="{{ path('admin_recruitment_user_disable', { 'id':recruitment.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
                                 {% else %}
-                                    <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                                    <td><a href="{{ path('admin_recruitment_user_disable', { 'id':recruitment.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
                                 {% endif %}
-                                <td><a href="{{ path('admin_recruitment_delete', { 'id':recruitment.id }) }}" class="btn btn-danger">Usuń</a></td>
+                                <td><a href="{{ path('admin_recruitment_user_delete', { 'id':recruitment.id }) }}" class="btn btn-danger">Usuń</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>

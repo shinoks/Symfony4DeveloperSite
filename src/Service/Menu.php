@@ -56,7 +56,7 @@ class Menu
         if($url =='/'){$url = '/index';};
         $active = $this->em
             ->getRepository(Men::class)
-            ->findOneByActiveUrlAndIsMain($url);
+            ->findOneByActiveUrlAndInMain($url);
         if($active){
             $activeMenu = $active;
         }else {
@@ -81,7 +81,7 @@ class Menu
      */
     public function getMainMenu(): ?array
     {
-        $menu = $this->em->getRepository(Men::class)->findBy(['isActive' => 1, 'isMain' => 1, 'parent' => null],['position' => 'ASC', 'id' => 'DESC']);
+        $menu = $this->em->getRepository(Men::class)->findBy(['isActive' => 1, 'inMain' => 1, 'parent' => null],['position' => 'ASC', 'id' => 'DESC']);
 
         return $menu;
     }
