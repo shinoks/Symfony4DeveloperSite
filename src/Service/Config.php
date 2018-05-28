@@ -21,10 +21,7 @@ class Config
         $this->em = $em;
     }
 
-    /**
-     * @return conf
-     */
-    public function getConfig(): conf
+    public function getConfig()
     {
         $config = $this->em->getRepository(conf::class)->findOneBy(['id'=>'1']);
 

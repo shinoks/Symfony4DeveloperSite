@@ -16,7 +16,9 @@ class RecruitmentRepository extends ServiceEntityRepository
     public function getRecruitmentWithCount()
     {
         return $this->createQueryBuilder('r')
-            ->select('r,SUM(recruitmentUsers.payedAmount) as payedSum,SUM(recruitmentUsers.declaredAmount) as declaredSum')
+            ->select('r')
+            ->addSelect('SUM(recruitmentUsers.payedAmount) as payedSum')
+            ->addSelect('SUM(recruitmentUsers.declaredAmount) as declaredSum')
             ->leftJoin('r.recruitmentUsers','recruitmentUsers')
             ->groupBy('r.id')
             ->orderBy('r.id', 'DESC')

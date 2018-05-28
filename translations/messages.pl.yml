@@ -190,6 +190,7 @@ password:
     dont_remember: Nie pamiętasz hasła?
     new: Nowe hasło
     reset: Resetuj hasło
+    repeat: Powtórz hasło
 input:
     default: Podstawowy
 table:
