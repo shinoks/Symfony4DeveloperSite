@@ -1,0 +1,23 @@
+admin_recruitment_user_statuses:
+    path: /
+    controller: App\Controller\Admin\RecruitmentUserStatusController::index
+
+admin_recruitment_user_status_new:
+    path: /new
+    controller: App\Controller\Admin\RecruitmentUserStatusController::new
+
+admin_recruitment_user_status_show:
+    path: /{id}
+    controller: App\Controller\Admin\RecruitmentUserStatusController::show
+
+admin_recruitment_user_status_edit:
+    path: /edit/{id}
+    controller: App\Controller\Admin\RecruitmentUserStatusController::edit
+
+admin_recruitment_user_status_disable:
+    path: /disable/{id}/{status}
+    controller: App\Controller\Admin\RecruitmentUserStatusController::disable
+
+admin_recruitment_user_status_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\RecruitmentUserStatusController::delete

@@ -1,0 +1,120 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/leftPanel.html.twig' %}
+
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        {% include 'back/header.html.twig' %}
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>{{ 'recruitments_list'|trans }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">{{ 'recruitments'|trans }} > {{ 'recruitments_list'|trans }}</li>
+                        </ol>
+                        <div class="page-header float-right">
+                            <a href="{{ path('admin_recruitment_new') }}"><i class="fa fa-user-plus text-dark"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'back/flashMessages.html.twig' %}
+
+        <div class="content mt-3">
+            <div class="animated fade-in">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <th>Id</th>
+                        <th>{{ 'name'|trans }}</th>
+                        <th>{{ 'number'|trans }}</th>
+                        <th>{{ 'collected_amount'|trans }}</th>
+                        <th>{{ 'payed_amount'|trans }}</th>
+                        <th>{{ 'desired_amount'|trans }}</th>
+                        <th>{{ 'status'|trans }}</th>
+                        <th>{{ 'investment_period'|trans }}</th>
+                        <th>{{ 'interest'|trans }}</th>
+                        <th>{{ 'investment_type'|trans }}</th>
+                        <th>{{ 'rooms'|trans }}</th>
+                        <th>{{ 'city'|trans }}</th>
+                        <th>{{ 'created'|trans }}</th>
+                        <th>Wyłącz</th>
+                        <th>Usuń</th>
+                    </thead>
+                    <tbody>
+                    {% for recruitment in pagination %}
+                        <tr>
+                            <td>{{ recruitment[0].id }}</td>
+                            <td>{{ recruitment[0].name }}</td>
+                            <td><a href="{{ path('admin_recruitment_show',{'id':recruitment.0.id}) }}">{{ recruitment.0.number }}</a></td>
+                            <td>{% if recruitment['declaredSum'] is empty %}0{% else %}{{ recruitment['declaredSum'] }}{% endif %} zł</td>
+                            <td>{% if recruitment['payedSum'] is empty %}0{% else %}{{ recruitment['payedSum'] }}{% endif %} zł</td>
+                            <td>{{ recruitment.0.desiredAmount }} zł</td>
+                            <td><form class="form" action="#">
+                                    <select id="recruitment_status" name="{{ recruitment.0.id }}">
+                                        <option value="{{ recruitment.0.status.id }}">{{ recruitment.0.status.name }}</option>
+                                        {% for status  in recruitmentStatus %}
+                                            <option value="{{ status.id }}">{{ status.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </form>
+                            </td>
+                            <td>{{ recruitment.0.investmentPeriod }} msc</td>
+                            <td>{{ recruitment.0.interest }} %</td>
+                            <td>{{ recruitment.0.investmentType }}</td>
+                            <td>{{ recruitment.0.rooms }}</td>
+                            <td>{{ recruitment.0.city }}</td>
+                            <td>{{ recruitment.0.created|date('d-m-Y H:i:s') }}</td>
+                            {% if recruitment.0.isActive == 1 %}
+                                <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.0.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                            {% else %}
+                                <td><a href="{{ path('admin_recruitment_disable', { 'id':recruitment.0.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                            {% endif %}
+                            <td><a href="{{ path('admin_recruitment_delete', { 'id':recruitment.0.id }) }}" class="btn btn-danger">Usuń</a></td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+
+                    </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation">
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </nav>
+            </div>
+        </div>
+        </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function(){
+            $( "select" ).change(function() {
+                var status = this.value;
+                var recruitment_id = $(this).attr('name');
+                var url = '{{ path('admin_recruitment_edit_status',{'id':'recruitment_id','status':'recruitment_status'}) }}';
+                url = url.replace('recruitment_id',recruitment_id);
+                url = url.replace('recruitment_status', status);
+                window.location.href = url;
+            });
+        });
+    </script>
+{% endblock %}

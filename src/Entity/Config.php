@@ -46,6 +46,11 @@ class Config
     private $logoAdmin;
 
     /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $regulationsUrl;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $description;
@@ -54,6 +59,11 @@ class Config
      * @ORM\Column(type="string", length=200)
      */
     private $keywords;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $footer;
 
     /**
      * @return mixed
@@ -138,6 +148,22 @@ class Config
     /**
      * @return mixed
      */
+    public function getRegulationsUrl()
+    {
+        return $this->regulationsUrl;
+    }
+
+    /**
+     * @param mixed $regulationsUrl
+     */
+    public function setRegulationsUrl($regulationsUrl)
+    {
+        $this->regulationsUrl = $regulationsUrl;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getDescription()
     {
         return $this->description;
@@ -197,5 +223,21 @@ class Config
     public function setKeywords($keywords)
     {
         $this->keywords = $keywords;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFooter()
+    {
+        return $this->footer;
+    }
+
+    /**
+     * @param mixed $footer
+     */
+    public function setFooter($footer): void
+    {
+        $this->footer = $footer;
     }
 }

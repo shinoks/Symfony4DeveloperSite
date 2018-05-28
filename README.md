@@ -1,12 +1,11 @@
-# Symfony4DeveloperSite
-
-Mainly project for education in SF4.
+# Symfony4 Developer Crowdfunding
 
 Symfony4 site with:
 
 - user account
 - admin back (site/admin)
 - public folder in public_html (for shared hosting)
+- auto generating agreement from template ('var/data') on selected Recruitment User Status
 
 # Admin
 
@@ -15,6 +14,8 @@ Symfony4 site with:
 - Config site variable
 - Contact form manage
 - Social media
+- Recruitment:
+    ``Recruitment, Status, Recruitment User, Recruitment User Status``
 
 # Tech
 
@@ -36,5 +37,6 @@ $ set phpunit.xml.dist database connection for tests
 $ siteaddress.com/admin user admin pass admin
 ```
 # TODO
-- Info count module
 - Comment system
+- Newsletter system
+- Logger system

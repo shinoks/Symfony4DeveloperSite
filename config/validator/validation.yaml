@@ -12,3 +12,5 @@ subscriber:
     resource: "validator/entity/subscriber.yml"
 newsletter:
     resource: "validator/entity/newsletter.yml"
+recruitment_user:
+    resource: "validator/entity/recruitment_user.yml"

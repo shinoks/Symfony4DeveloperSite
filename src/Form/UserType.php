@@ -34,6 +34,7 @@ class UserType extends AbstractType
         ->add('zipCode',TextType::class,['label'=>'zip_code'])
         ->add('address',TextType::class,['label'=>'address'])
         ->add('city',TextType::class,['label'=>'city'])
+        ->add('bankAccount',TextType::class,['label'=>'bank_account'])
         ->add('roles',ChoiceType::class, [
             'label'=>'roles',
             'multiple' => true,

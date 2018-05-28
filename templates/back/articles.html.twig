@@ -23,10 +23,10 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li class="active">Artykuły > Lista Artykułów</li>
+                            <li class="active"><a href="{{ path('admin_articles') }}">Artykuły</a> > Lista Artykułów</li>
                         </ol>
                         <div class="page-header float-right">
-                            <a href="{{ path('admin_user_new') }}"><i class="fa fa-user-plus text-dark"></i></a>
+                            <a href="{{ path('admin_article_new') }}"><i class="fa fa-user-plus text-dark"></i></a>
                         </div>
                     </div>
                 </div>
@@ -40,17 +40,17 @@
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Id</th>
-                            <th>Nazwa</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Id', 'id') }}</th>
+                            <th{% if pagination.isSorted('name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nazwa', 'name') }}</th>
                             <th>Obrazek</th>
-                            <th>Kategoria</th>
-                            <th>Data utworzenia</th>
-                            <th>Strona główna</th>
+                            <th{% if pagination.isSorted('category') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Kategoria', 'category') }}</th>
+                            <th{% if pagination.isSorted('created') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Data utworzenia', 'created') }}</th>
+                            <th{% if pagination.isSorted('isActive') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Strona główna', 'isActive') }}</th>
                             <th>Usuń</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for article in articles %}
+                        {% for article in pagination %}
                             <tr>
                                 <td>{{ article.id }}</td>
                                 <td><a href="{{ path('admin_article_edit',{ 'id':article.id }) }}">{{ article.name }}</a></td>
@@ -81,6 +81,11 @@
                         </tr>
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation">
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+                </nav>
             </div>
         </div>
         </div>

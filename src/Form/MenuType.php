@@ -70,6 +70,10 @@ class MenuType extends AbstractType
                 'label' => 'bottom_menu',
                 'required' => false
             ])
+            ->add('inMain',CheckboxType::class,[
+                'label' => 'main_menu',
+                'required' => false
+            ])
 
         ->add('save', SubmitType::class, ['label' => 'Zapisz']);
     }

@@ -40,16 +40,16 @@
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Id</th>
-                            <th>Nazwa</th>
-                            <th>Email</th>
-                            <th>Data utworzenia</th>
-                            <th>Strona główna</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Id', 'id') }}</th>
+                            <th{% if pagination.isSorted('name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nazwa', 'name') }}</th>
+                            <th{% if pagination.isSorted('email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Email', 'email') }}</th>
+                            <th{% if pagination.isSorted('added') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Data utworzenia', 'added') }}</th>
+                            <th{% if pagination.isSorted('isActive') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Wyłącz', 'isActive') }}</th>
                             <th>Usuń</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for subscriber in subscribers %}
+                        {% for subscriber in pagination %}
                             <tr>
                                 <td>{{ subscriber.id }}</td>
                                 <td><a href="{{ path('admin_subscriber_edit',{ 'id':subscriber.id }) }}">{{ subscriber.name }}</a></td>
@@ -68,6 +68,11 @@
                         </tr>
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation">
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </nav>
             </div>
         </div>
         </div>

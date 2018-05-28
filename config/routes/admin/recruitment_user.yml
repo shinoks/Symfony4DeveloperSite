@@ -1,0 +1,30 @@
+admin_recruitment_users:
+    path: /
+    controller: App\Controller\Admin\RecruitmentUserController::index
+
+admin_recruitment_user_new:
+    path: /new
+    controller: App\Controller\Admin\RecruitmentUserController::new
+
+admin_recruitment_user_show:
+    path: /{id}
+    controller: App\Controller\Admin\RecruitmentUserController::show
+
+admin_recruitment_user_edit:
+    path: /edit/{id}
+    controller: App\Controller\Admin\RecruitmentUserController::edit
+admin_recruitment_user_edit_status:
+    path: /edit/{id}/{status}
+    controller: App\Controller\Admin\RecruitmentUserController::editStatus
+
+admin_recruitment_user_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\RecruitmentUserController::delete
+
+admin_recruitment_user_disable:
+    path: /disable/{id}/{status}
+    controller: App\Controller\Admin\RecruitmentUserController::disable
+
+admin_recruitment_user_get_agreement:
+    path: /agreement/show/{id}
+    controller: App\Controller\Admin\RecruitmentUserController::getAgreement

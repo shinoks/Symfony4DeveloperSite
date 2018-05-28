@@ -80,6 +80,11 @@ class User implements AdvancedUserInterface, \Serializable
     private $city;
 
     /**
+     * @ORM\Column(type="string", length=70)
+     */
+    private $bankAccount;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $regulations;
@@ -114,9 +119,15 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RecruitmentUsers", mappedBy="user")
+     */
+    private $recruitmentUsers;
+
     public function __construct()
     {
         $this->isActive = true;
+        $this->isEnabledByAdmin = true;
         $this->offers = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
@@ -350,6 +361,22 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return mixed
      */
+    public function getBankAccount()
+    {
+        return $this->bankAccount;
+    }
+
+    /**
+     * @param mixed $bankAccount
+     */
+    public function setBankAccount($bankAccount): void
+    {
+        $this->bankAccount = $bankAccount;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getRegulations()
     {
         return $this->regulations;
@@ -412,6 +439,38 @@ class User implements AdvancedUserInterface, \Serializable
     public function getComments(): ?array
     {
         return $this->comments;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecruitment()
+    {
+        return $this->recruitment;
+    }
+
+    /**
+     * @param mixed $recruitment
+     */
+    public function setRecruitment($recruitment)
+    {
+        $this->recruitment = $recruitment;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecruitmentUsers()
+    {
+        return $this->recruitmentUsers;
+    }
+
+    /**
+     * @param mixed $recruitmentUsers
+     */
+    public function setRecruitmentUsers($recruitmentUsers)
+    {
+        $this->recruitmentUsers = $recruitmentUsers;
     }
 
     public function eraseCredentials()

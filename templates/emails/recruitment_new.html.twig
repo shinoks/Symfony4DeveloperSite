@@ -1,0 +1,24 @@
+{% extends 'emails/base.html.twig' %}
+
+{% block body %}
+    Witaj user<br/><br/>
+
+
+    Właśnie ogłosiliśmy nabór inwestycyjny nr:{{ recruitment.recruitment.number }}<br/><br/>
+
+    Zamierzamy zakupić i zmodernizować kolejną nieruchomość. Zapraszamy do Inwestycji grupowych. <br/>
+    Możesz wpłacić kwotę od 10 000 zł do maksymalnej granicy naboru i inwestować razem z innymi. <br/>
+    Złóż ofertę już teraz. Życzymy powodzenia.<br/>
+    <br/>
+
+    Przewidywany czas inwestycyjny wynosi maksymalnie {{ recruitment.investmentPeriod }} miesięcy<br/>
+
+    Pożądana kwota	{{ recruitment.desiredAmount }},00 zł<br/>
+
+    Stopa zwrotu pożyczki w stosunku rocznym	{{ recruitment.interest }}%<br/>
+
+    Szczegóły znajdziesz na swoim koncie w zakładce nabory po zalogowaniu<br/><br/>
+
+
+    Zaloguj się już teraz na swoim koncie i złóż ofertę<br/>
+{% endblock %}

@@ -26,14 +26,21 @@ class RealizationController extends Controller
     /**
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $realizations = $this->getDoctrine()
-            ->getRepository(Realization::class)
-            ->findAll();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->getRepository(Realization::class)->findBy([],[
+            $request->query->get('sort','id')=>$request->query->get('direction','asc')
+        ]);
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1)
+        );
+
 
         return $this->render('back/realizations.html.twig',array(
-            'realizations'=> $realizations
+            'pagination'=> $pagination
         ));
     }
 

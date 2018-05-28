@@ -107,14 +107,144 @@
                 <div class="col-md-12">
                     <div class="box-for overflow">
                         <div class="col-md-12 col-xs-12 login-blocks">
-                            <h2>{{ 'user_registration'|trans }} : </h2>
+                            <div class="row">
+                                <h2>{{ 'user_registration'|trans }} : </h2>
+                            </div>
+                            <div class="row">
+                                {% form_theme form 'form/default_user.html.twig' %}
+                                <div class="col-md-5">
+                                    {{ form_start(form) }}
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form_label(form.email) }}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.email) }}
+                                            {{ form_errors(form.email) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form_label(form.password) }}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.password) }}
+                                            {{ form_errors(form.password) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form_label(form.phone) }}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.phone) }}
+                                            {{ form_errors(form.phone) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form_label(form.firstName) }}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.firstName) }}
+                                            {{ form_errors(form.firstName) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form_label(form.lastName) }}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.lastName) }}
+                                            {{ form_errors(form.lastName) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form_label(form.pesel) }}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.pesel) }}
+                                            {{ form_errors(form.pesel) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form_label(form.idNumber) }}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.idNumber) }}
+                                            {{ form_errors(form.idNumber) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form_label(form.bankAccount) }}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.bankAccount) }}
+                                            {{ form_errors(form.bankAccount) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form_label(form.birthDate) }}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.birthDate.year, { 'attr' : { 'class': 'year-class' }}) }}
+                                            {{ form_widget(form.birthDate.year, {'attr': {'class': 'birth-class'}}) }}
+                                            {{ form_widget(form.birthDate.month, {'attr': {'class': 'birth-class'}}) }}
+                                            {{ form_widget(form.birthDate.day, {'attr': {'class': 'birth-class'}}) }}
+                                            {{ form_errors(form.birthDate) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form_label(form.zipCode) }}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.zipCode) }}
+                                            {{ form_errors(form.zipCode) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form_label(form.address) }}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.address) }}
+                                            {{ form_errors(form.address) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form_label(form.city) }}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{ form_widget(form.city) }}
+                                            {{ form_errors(form.city) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form_label(form.regulations) }}
+                                        </div>
+                                        <div class="col-md-9">
+                                            <a href="{{ config.config.regulationsUrl }}">{{ 'i_have_accepted_regulations'|trans }}</a> {{ form_widget(form.regulations) }}
+                                            {{ form_errors(form.regulations) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {{ form_widget(form.save) }}
+                                        </div>
+                                    </div>
+                                    {{ form_end(form) }}
+                                </div>
+                                <div class="col-md-7">
 
-                            {% form_theme form 'form/default_user.html.twig' %}
-
-                            {{ form_start(form) }}
-                            {{ form_widget(form) }}
-
-                            {{ form_end(form) }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

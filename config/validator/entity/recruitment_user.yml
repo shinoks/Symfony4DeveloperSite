@@ -1,0 +1,6 @@
+App\Entity\RecruitmentUser:
+    properties:
+        declaredAmount:
+            - NotBlank: ~
+            - Range:
+                min: 1000

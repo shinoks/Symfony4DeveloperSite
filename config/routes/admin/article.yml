@@ -2,6 +2,10 @@ admin_articles:
     path: /
     controller: App\Controller\Admin\ArticleController::articles
 
+admin_articles_index:
+    path: /paginator
+    controller: App\Controller\Admin\ArticleController::articles
+
 admin_article_new:
     path: /new
     controller: App\Controller\Admin\ArticleController::new

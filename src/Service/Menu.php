@@ -33,11 +33,30 @@ class Menu
      */
     public function getActiveMenu(): ?Men
     {
-        $url = $this->requestStack->getCurrentRequest()->getPathInfo();
+        $url = urldecode($this->requestStack->getCurrentRequest()->getPathInfo());
         if($url =='/'){$url = '/index';};
         $active = $this->em
             ->getRepository(Men::class)
             ->findOneByActiveUrl($url);
+        if($active){
+            $activeMenu = $active;
+        }else {
+            $activeMenu = NULL;
+        }
+
+        return $activeMenu;
+    }
+
+    /**
+     * @return Men|null
+     */
+    public function getActiveMainMenu(): ?Men
+    {
+        $url = urldecode($this->requestStack->getCurrentRequest()->getPathInfo());
+        if($url =='/'){$url = '/index';};
+        $active = $this->em
+            ->getRepository(Men::class)
+            ->findOneByActiveUrlAndInMain($url);
         if($active){
             $activeMenu = $active;
         }else {
@@ -53,6 +72,16 @@ class Menu
     public function getMenu(): ?array
     {
         $menu = $this->em->getRepository(Men::class)->findBy(['isActive' => 1, 'parent' => null],['position' => 'ASC', 'id' => 'DESC']);
+
+        return $menu;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getMainMenu(): ?array
+    {
+        $menu = $this->em->getRepository(Men::class)->findBy(['isActive' => 1, 'inMain' => 1, 'parent' => null],['position' => 'ASC', 'id' => 'DESC']);
 
         return $menu;
     }

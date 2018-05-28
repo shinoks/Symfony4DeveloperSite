@@ -41,14 +41,21 @@ class AdminController extends Controller
     /**
      * @return Response
      */
-    public function admins()
+    public function admins(Request $request)
     {
-        $admins = $this->getDoctrine()
-            ->getRepository(Admin::class)
-            ->findAll();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->getRepository(Admin::class)->findBy([],[
+            $request->query->get('sort','id')=>$request->query->get('direction','asc')
+        ]);
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1)
+        );
+
 
         return $this->render('back/admins.html.twig',array(
-            'admins'=> $admins,
+            'pagination'=> $pagination,
         ));
     }
 

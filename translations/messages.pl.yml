@@ -50,6 +50,7 @@ comment: Komentarz
 comments: Komentarze
 offer_list: Lista ofert
 make_an_offer: Złóż ofertę
+make_an_offer_for_recruitment: Złóż ofertę na nabór
 make_a_loan_offer: Złóż ofertę pożyczki
 ammount: Kwota
 on_period: Na okres
@@ -140,6 +141,51 @@ footer_menu: Dolne menu
 bottom_menu: Menu w stopce
 social_media: Media społecznościowe
 html_class: Klasa html
+regulations_url: Adres regulaminu
+i_have_accepted_regulations: Akceptuję regulamin
+recruitment: Nabór
+recruitments: Nabory
+recruitment_status: Status naboru
+recruitments_list: Nabory
+recruitment_edit: Edycja naboru
+recruitment_number: Number naboru
+add_recruitment: Dodaj nabór
+recruitment_status_list: Statusy naborów
+recruitments_user_offer: Oferty do naborów
+recruitment_user_statuses: Statusy dla ofert
+recruitment_user_status_edit: Edycja statusu oferty do naboru
+agreement:
+    agreement: Umowa
+    download_agreement: Pobierz umowę
+    not_available: Umowa nie dostępna
+is_fv_generated: Czy fv ma być generowana
+is_fv_mailed: Czy fv na email
+recruitment_user: Oferta naboru
+recruitment_users: Oferty naboru
+recruitment_status_edit: Edycja oferty naboru
+edit_recruitment_user: Edycja oferty naboru
+add_recruitment_status: Dodaj status naboru
+new_offer_status: Nowy status oferty do naboru
+number: Number
+collected_amount: Zgromadzone środki
+declared_amount: Zadeklarowana kwota
+amount_of_days: Ilość dni
+amount_of_interest: Kwota odsetek
+payed_amount: Wpłacone środki
+payment_time:
+payed_date: Data wpłaty
+end_date: Data zakończenia
+desired_amount: Pożądana kwota
+investment_period: Czas inwestycji
+investment_type: Typ inwestycji
+bank_account: Nr konta
+click_for_detail: Wejdź w szczegóły
+is_visible_to_users: Widoczny dla użytkowników
+is_mailed_to_admin: Wysyłany do adminów ?
+is_mailed_to_users: Wysyłany do użytkowników ?
+mail_admin_template: Szablon maila do adminów
+mail_users_template: Szablon maila do użytkowników
+footer: Stopka
 input:
     default: Podstawowy
 table:

@@ -40,16 +40,16 @@
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Id</th>
-                            <th>Imię i Nazwisko</th>
-                            <th>Email</th>
-                            <th>Rola</th>
-                            <th>Wyłącz</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Id', 'id') }}</th>
+                            <th{% if pagination.isSorted('lastName') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Imie i nazwisko', 'lastName') }}</th>
+                            <th{% if pagination.isSorted('email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Email', 'email') }}</th>
+                            <th{% if pagination.isSorted('roles') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Rola', 'roles') }}</th>
+                            <th{% if pagination.isSorted('isActive') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Wyłącz', 'isActive') }}</th>
                             <th>Usuń</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for admin in admins %}
+                        {% for admin in pagination %}
                             <tr>
                                 <td>{{ admin.id }}</td>
                                 <td><a href="{{ path('admin_admin_edit',{ 'id':admin.id }) }}">{{ admin.firstName }} {{ admin.lastName }}</a></td>
@@ -68,6 +68,11 @@
                         </tr>
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation">
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </nav>
             </div>
         </div>
         </div>

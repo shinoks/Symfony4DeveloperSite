@@ -1,0 +1,23 @@
+{% extends 'emails/base.html.twig' %}
+
+{% block body %}
+    Witaj user<br/><br/>
+
+    Zgodnie z umową pożyczki przekaż środki zdeklarowane w ofercie w ciągu trzech dni.<br/><br/>
+
+
+    Dane do przelewu:<br/>
+
+
+    {{ config.config.title }}<br/>
+    {{ config.config.address }}<br/>
+    bzwbk rach nr.64666664646446664664646464646464646<br/>
+
+
+    W tytule wpisz nr oferty {{ recruitmentUser.number }}<br/><br/>
+
+
+    Zaloguj się już teraz na swoim koncie<br/>
+{% endblock %}
+
+

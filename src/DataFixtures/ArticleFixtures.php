@@ -42,6 +42,26 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
         $article->setCategory($category);
         $manager->persist($article);
 
+        $article = new Article();
+        $article->setName("Test article 4");
+        $article->setText("<h1>Some good test article nr 4</h1> Lorem ipsum ");
+        $article->setShortText("Check it out");
+        $article->setStart(1);
+        $article->setIsActive(1);
+        $article->setCategory($category);
+        $manager->persist($article);
+        $this->addReference('article', $article);
+
+        $article = new Article();
+        $article->setName("Regulations");
+        $article->setText("<h1>Regulamin</h1> Lorem ipsum ");
+        $article->setShortText("Check it out");
+        $article->setStart(1);
+        $article->setIsActive(1);
+        $article->setCategory($category);
+        $manager->persist($article);
+        $this->addReference('regulations', $article);
+
         $manager->flush();
     }
 

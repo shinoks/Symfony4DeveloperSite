@@ -13,68 +13,128 @@
 
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#home">Profil</a></li>
-                        <li><a data-toggle="tab" href="#menu1">Lista ofert</a></li>
-                        <li><a data-toggle="tab" href="#menu2">Złóż ofertę</a></li>
+                        <li><a data-toggle="tab" href="#menu4">{{ 'recruitments'|trans }}</a></li>
+                        <li><a data-toggle="tab" href="#menu3">{{ 'recruitments_user_offer'|trans }}</a></li>
                     </ul>
 
                     <div class="tab-content">
                         <div id="home" class="tab-pane fade in active">
-                            <div class="profile-header">
-                                <h3>
-                                    <b>{{ 'yours_account'|trans }}</b><br/>
-                                </h3>
+                            <div class="well">
+                                <div class="profile-header">
+                                    <h3>
+                                        <b>{{ 'yours_account'|trans }}</b><br/>
+                                    </h3>
+                                </div>
+                                <div class="">
+                                    <label>{{ 'first_name'|trans }}:</label>
+                                    {{ app.user.firstName }}<br/>
+                                    <label>{{ 'last_name'|trans }}:</label>
+                                    {{ app.user.lastName }}<br/>
+                                    <label>{{ 'email'|trans }}:</label>
+                                    {{ app.user.email }}<br/>
+                                </div>
+                                <a class="btn btn-default btn-border" href="{{ path('front_user_account_edit') }}">{{ 'edit'|trans }}</a>
                             </div>
-                            <div class="">
-                                <label>{{ 'first_name'|trans }}:</label>
-                                {{ app.user.firstName }}<br/>
-                                <label>{{ 'last_name'|trans }}:</label>
-                                {{ app.user.lastName }}<br/>
-                                <label>{{ 'email'|trans }}:</label>
-                                {{ app.user.email }}<br/>
-                            </div>
-                            <a class="btn btn-default btn-border" href="{{ path('front_user_account_edit') }}">{{ 'edit'|trans }}</a>
                         </div>
-                        <div class="well">
-                        <div id="menu1" class="tab-pane fade">
-                            <div class="profile-header">
-                            <h2>{{ 'offer_list'|trans }}</h2>
-                            </div>
-                            <div class="">
-                                <table class="table table-bordered">
-                                    <thead>
+                        <div id="menu4" class="tab-pane fade">
+                            <div class="well">
+                                <div class="profile-header">
+                                    <h3>
+                                        <b>{{ 'recruitments'|trans }}</b><br/>
+                                    </h3>
+                                </div>
+                                <div class="">
+                                    <table class="table table-bordered">
+                                        <thead>
                                         <tr>
-                                            <th>{{ 'offer_number'|trans }}</th>
-                                            <th>{{ 'ammount'|trans }}</th>
+                                            <th>{{ 'name'|trans }}</th>
+                                            <th>{{ 'desired_amount'|trans }}</th>
+                                            <th>{{ 'investment_period'|trans }}</th>
                                             <th>{{ 'interest'|trans }}</th>
-                                            <th>{{ 'period'|trans }}</th>
-                                            <th>{{ 'settlement'|trans }}</th>
-                                            <th>{{ 'status'|trans }}</th>
+                                            <th>{{ 'investment_type'|trans }}</th>
+                                            <th>{{ 'rooms'|trans }}</th>
+                                            <th>{{ 'city'|trans }}</th>
+                                            <th>{{ 'make_an_offer'|trans }}</th>
                                         </tr>
-                                    </thead>
-                                {% for offer in app.user.offers %}
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ offer.offerNumber }}</td>
-                                            <td>{{ offer.ammount }}</td>
-                                            <td>{{ offer.interest }}</td>
-                                            <td>{{ offer.period }}</td>
-                                            <td>{{ offer.settlement }}</td>
-                                            <td>{{ offer.status.name }}</td>
-                                        </tr>
-                                    </tbody>
-                                {% endfor %}
-                                </table>
-                            </div></div>
-
-                        </div>
-                        <div id="menu2" class="tab-pane fade">
-                            <div class="profile-header">
-                                <h3>
-                                    <b>{{ 'make_an_offer'|trans }}</b><br/>
-                                </h3>
+                                        </thead>
+                                        <tbody>
+                                        {% for recruitment in recruitments %}
+                                            <tr>
+                                                <td>{{ recruitment.0.name }}</td>
+                                                <td>{{ recruitment.0.desiredAmount - recruitment['declaredSum'] }} zł</td>
+                                                <td>{{ recruitment.0.investmentPeriod }} msc</td>
+                                                <td>{{ recruitment.0.interest }} %</td>
+                                                <td>{{ recruitment.0.investmentType }}</td>
+                                                <td>{{ recruitment.0.rooms }}</td>
+                                                <td>{{ recruitment.0.city }}</td>
+                                                <td>{%  if recruitment['declaredSum'] < recruitment.0.desiredAmount %}
+                                                    <a class="btn btn-warning" href="{{ path('front_user_recruitment_user_new',{'recruitmentId': recruitment.0.id }) }}">{{ 'proposal'|trans }}</a>
+                                                    {% else %}
+                                                    Kwota zebrana
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <div class="">
-                                <a class="btn btn-warning" href="{{ path('front_offer_new') }}">{{ 'proposal'|trans }}</a>
+                        </div>
+                        <div id="menu3" class="tab-pane fade">
+                            <div class="well">
+                                <div class="profile-header">
+                                    <h3>
+                                        <b>{{ 'recruitments_user_offer'|trans }}</b><br/>
+                                    </h3>
+                                </div>
+                                <div class="">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>{{ 'recruitment'|trans }}<br/><span style="font-size: 10px;">{{ 'click_for_detail'|trans }}</span> </th>
+                                            <th>{{ 'status'|trans }}</th>
+                                            <th>{{ 'declared_amount'|trans }}</th>
+                                            <th>{{ 'payed_amount'|trans }}</th>
+                                            <th>{{ 'investment_period'|trans }}</th>
+                                            <th>{{ 'interest'|trans }}</th>
+                                            <th>{{ 'amount_of_days'|trans }}</th>
+                                            <th>{{ 'amount_of_interest'|trans }}</th>
+                                            <th>{{ 'created'|trans }}</th>
+                                            <th>{{ 'agreement.agreement'|trans }}</th>
+                                        </tr>
+                                        </thead>
+                                        {% for user in recruitmentUserOffers %}
+                                            <tr>
+                                                <td><a href="{{ path('front_user_recruitment_show',{'id':user.recruitment.id}) }}">{{ user.recruitment.name }}</a></td>
+                                                <td>{{ user.status.name }}</td>
+                                                <td>{{ user.declaredAmount }} zł</td>
+                                                <td>{% if user.payedAmount is empty %}0{% else %}{{ user.payedAmount }}{% endif %} zł</td>
+                                                <td>{{ user.investmentPeriod }} msc</td>
+                                                <td>{{ user.interest }} %</td>
+                                                <td>{% set difference = date("now").diff(date(user.payedDate)) %}
+                                                    {% set leftDays = difference.days %}
+                                                    {% if leftDays == 1 %}
+                                                        1 dni
+                                                    {% else %}
+                                                        {{ leftDays }} dni
+                                                    {% endif %}</td>
+                                                <td>
+                                                    {% set interestPerDay = ((user.interest/100)/365) * leftDays %}
+                                                    {% set inter = interestPerDay * user.payedAmount %}
+                                                    {{ inter|round(2) }} zł
+                                                </td>
+                                                <td>{{ user.created|date('d-m-Y H:i:s') }}</td>
+                                                <td>
+                                                    {% if user.agreementPath is not null %}
+                                                        <a href="{{ path('admin_user_account_recruitment_user_get_agreement',{'id':user.id}) }}" class="btn btn-finish">{{ 'agreement.download_agreement'|trans }}</a>
+                                                    {% else %}
+                                                        {{ 'agreement.not_available'|trans }}
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

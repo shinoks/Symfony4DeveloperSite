@@ -45,17 +45,17 @@
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Id</th>
-                            <th>Nazwa</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Id', 'id') }}</th>
+                            <th{% if pagination.isSorted('name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nazwa', 'name') }}</th>
                             <th>Obrazek</th>
-                            <th>Miasto</th>
-                            <th>Cena</th>
-                            <th>Wyłącz</th>
+                            <th{% if pagination.isSorted('city') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Miasto', 'city') }}</th>
+                            <th{% if pagination.isSorted('sellingPrice') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Cena', 'sellingPrice') }}</th>
+                            <th{% if pagination.isSorted('isActive') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Wyłącz', 'isActive') }}</th>
                             <th>Usuń</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for realization in realizations %}
+                        {% for realization in pagination %}
                             <tr>
                                 <td>{{ realization.id }}</td>
                                 <td><a href="{{ path('admin_realization_edit',{ 'id':realization.id }) }}">{{ realization.name }}</a></td>
@@ -86,6 +86,11 @@
                         </tr>
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation">
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </nav>
             </div>
         </div>
         </div>

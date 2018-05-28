@@ -1,8 +1,14 @@
 {% block text_widget %}
     <div class="form-group">
         {% set type = type|default('text') %}
-                <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </div>
+{% endblock %}
 
+{% block date_widget %}
+    <div class="form-group">
+        {% set type = type|default('date') %}
+        <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
     </div>
 {% endblock %}
 
@@ -11,6 +17,30 @@
         {% set type = type|default('number') %}
         <div class="input-group">
             <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        </div>
+    </div>
+{% endblock %}
+
+{% block percent_widget %}
+    <div class="form-group">
+        {% set type = type|default('percent') %}
+        <div class="form-group">
+            <div class="input-group">
+                <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+                <span class="input-group-addon"> %</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block money_widget %}
+    <div class="form-group">
+        {% set type = type|default('money') %}
+        <div class="form-group">
+            <div class="input-group">
+                <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+                <span class="input-group-addon"> zł</span>
+            </div>
         </div>
     </div>
 {% endblock %}

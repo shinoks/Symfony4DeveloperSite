@@ -180,14 +180,20 @@ class ArticleController extends Controller
     /**
      * @return Response
      */
-    public function articles()
+    public function articles(Request $request)
     {
-        $articles = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->findAll();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->getRepository(Article::class)->findBy([],[
+            $request->query->get('sort','id')=>$request->query->get('direction','asc')
+        ]);
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1)
+        );
 
         return $this->render('back/articles.html.twig',array(
-            'articles'=> $articles
+            'pagination'=> $pagination
         ));
     }
 }

@@ -1,0 +1,62 @@
+{% set title = 'account'|trans %}
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+    {% include 'front/addons/top.html.twig' %}
+
+    <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
+        <div class="container">
+            <div class="row">
+                <div class="blog-lst col-md-12 pl0">
+                    <h2><b>{{ 'make_an_offer_for_recruitment'|trans }}</b></h2>
+
+                    <div class="well">
+                        <h3>{{ recruitment.0.name }}</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>{{ 'desired_amount'|trans }}: </label> {{ recruitment.0.desiredAmount }} zł<br/>
+                                <label>{{ 'investment_period'|trans }}: </label> {{ recruitment.0.investmentPeriod }} msc<br/>
+                                <label>{{ 'interest'|trans }}: </label> {{ recruitment.0.interest }}<br/>
+                            </div>
+                            <div class="col-md-6">
+                                <label>{{ 'investment_type'|trans }}: </label> {{ recruitment.0.investmentType }}<br/>
+                                <label>{{ 'rooms'|trans }}: </label> {{ recruitment.0.rooms }}<br/>
+                                <label>{{ 'city'|trans }}: </label> {{ recruitment.0.city }}<br/>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% form_theme form 'form/default_user.html.twig' %}
+
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="range-output">Kwota oferty: <span id="range-slider-value">1000</span> zł</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            {{ form_widget(form.declaredAmount) }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ form_widget(form.save) }}
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function(){
+            $("#range-slider-value").html($( "#recruitment_users_declaredAmount" ).val());
+            $( "#recruitment_users_declaredAmount" ).change(function() {
+                $("#range-slider-value").html($(this).val());
+            });
+        });
+    </script>
+{% endblock %}

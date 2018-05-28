@@ -41,26 +41,12 @@ front_realizations:
     path: /realization
     controller: App\Controller\RealizationController::index
 
-front_about_us_resource:
-    resource: "front/about_us.yml"
-    prefix: /about_us
-front_about_us:
-    path: /about_us
-    controller: App\Controller\AboutUsController::index
-
 front_news_resource:
     resource: "front/news.yml"
     prefix: /news
 front_news:
     path: /news
     controller: App\Controller\NewsController::index
-
-front_sublease_zone_resource:
-    resource: "front/sublease_zone.yml"
-    prefix: /sublease_zone
-front_sublease_zone:
-    path: /sublease_zone
-    controller: App\Controller\SubleaseZoneController::index
 
 front_investor_zone_resource:
     resource: "front/investor_zone.yml"
@@ -72,3 +58,6 @@ front_investor_zone:
 front_subscribe:
     resource: "front/subscriber.yml"
     prefix: /subscriber
+
+front_menu_resource:
+    resource: "front/menu.yml"

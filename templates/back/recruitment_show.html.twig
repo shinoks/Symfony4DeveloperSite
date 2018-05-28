@@ -1,0 +1,143 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/leftPanel.html.twig' %}
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+    {% include 'back/header.html.twig' %}
+
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1>{{ 'recruitment'|trans }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li class="active"><a href="{{ path('admin_recruitments') }}">{{ 'recruitment_list'|trans }}</a> > {{ 'show'|trans }}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'back/flashMessages.html.twig' %}
+
+    <div class="card">
+        <div class="card-body">
+            <section class="card">
+                <div class="card-header user-header alt bg-dark">
+                    <div class="media-body">
+                        <h2 class="text-light">
+                            {{ 'recruitment_number'|trans }}: {{ recruitment.number }}
+                        </h2>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <b>{{ 'post_date'|trans }}:</b>
+                        {{ recruitment.created|date('d-m-Y H:i:s') }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'status'|trans }}:</b>
+                        {{ recruitment.status.name }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'recruitment_edit'|trans }}:</b>
+                        <a href="{{ path('admin_recruitment_edit',{'id':recruitment.id}) }}">{{ 'edit'|trans }}</a>
+                    </li>
+                </ul>
+            </section>
+
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>{{ 'first_name'|trans }} {{ 'last_name'|trans }}</th>
+                        <th>{{ 'status'|trans }}</th>
+                        <th>{{ 'declared_amount'|trans }}</th>
+                        <th>{{ 'payed_amount'|trans }}</th>
+                        <th>{{ 'investment_period'|trans }}</th>
+                        <th>{{ 'interest'|trans }}</th>
+                        <th>{{ 'amount_of_days'|trans }}</th>
+                        <th>{{ 'amount_of_interest'|trans }}</th>
+                        <th>{{ 'created'|trans }}</th>
+                        <th>{{ 'agreement'|trans }}</th>
+                        <th>Edytuj</th>
+                        <th>Wyłącz</th>
+                        <th>Usuń</th>
+                    </tr>
+                </thead>
+                {% for user in recruitmentUsers %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td><a href="{{ path('admin_recruitment_user_edit',{'id':user.id}) }}">{{ user.user.firstName }} {{ user.user.lastName }}</a></td>
+                        <td><form class="form" action="#">
+                                <select id="recruitment_user_status" name="{{ user.id }}">
+                                    <option value="{{ user.status.id }}">{{ user.status.name }}</option>
+                                    {% for status  in recruitmentUserStatus %}
+                                        <option value="{{ status.id }}">{{ status.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </form>
+                        </td>
+                        <td>{{ user.declaredAmount }} zł</td>
+                        <td>{{ user.payedAmount }} zł</td>
+                        <td>{{ user.investmentPeriod }} msc</td>
+                        <td>{{ user.interest }} %</td>
+                        <td>{% set difference = date("now").diff(date(user.payedDate)) %}
+                            {% set leftDays = difference.days %}
+                            {% if leftDays == 1 %}
+                                1 dni
+                            {% else %}
+                                {{ leftDays }} dni
+                            {% endif %}</td>
+                        <td>
+                            {% set interestPerDay = ((user.interest/100)/365) * leftDays %}
+                            {% set inter = interestPerDay * user.payedAmount %}
+                            {{ inter|round(2) }} zł
+                        </td>
+                        <td><a href="{{ path('admin_recruitment_user_edit', { 'id':user.id,'status':0 }) }}" class="btn btn-default">Edytuj</a></td>
+                        <td>{{ user.created|date('d-m-Y H:i:s') }}</td>
+                        {% if user.agreementPath is not empty %}
+                            <td><a target="_blank" href="{{ path('admin_recruitment_user_get_agreement', { 'id':user.id }) }}" class="btn btn-default">Pobierz</a></td>
+                        {% else %}
+                            <td>{{ 'agreement.not_available'|trans }}</td>
+                        {% endif %}
+                        {% if recruitment.isActive == 1 %}
+                            <td><a href="{{ path('admin_recruitment_user_disable', { 'id':user.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                        {% else %}
+                            <td><a href="{{ path('admin_recruitment_user_disable', { 'id':user.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                        {% endif %}
+                        <td><a href="{{ path('admin_recruitment_user_delete', { 'id':user.id }) }}" class="btn btn-danger">Usuń</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function(){
+            $( "select" ).change(function() {
+                var status = this.value;
+                var recruitment_id = $(this).attr('name');
+                var url = '{{ path('admin_recruitment_user_edit_status',{'id':'recruitment_id','status':'recruitment_status'}) }}';
+                url = url.replace('recruitment_id',recruitment_id);
+                url = url.replace('recruitment_status', status);
+                window.location.href = url;
+            });
+        });
+    </script>
+{% endblock %}
