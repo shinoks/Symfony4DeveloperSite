@@ -1,5 +1,4 @@
 username: Użytkownik
-password: Hasło
 email: Email
 first_name: Imię
 last_name: Nazwisko
@@ -186,6 +185,11 @@ is_mailed_to_users: Wysyłany do użytkowników ?
 mail_admin_template: Szablon maila do adminów
 mail_users_template: Szablon maila do użytkowników
 footer: Stopka
+password:
+    password: Hasło
+    dont_remember: Nie pamiętasz hasła?
+    new: Nowe hasło
+    reset: Resetuj hasło
 input:
     default: Podstawowy
 table:

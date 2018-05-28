@@ -123,7 +123,7 @@ class RecruitmentUserController extends Controller
                     $mailManager = new MailManagerUtils($emi);
                     $template = 'emails/' . $recruitmentUserStatus->getMailTemplate();
                     $mailBody = $this->renderView($template,[
-                        'recruitment' => $recruitmentUser->getRecruitment(),
+                        'recruitment' => $recruitmentUser,
                     ]);
                     if(!$mailBody){
                         throw new FileNotFoundException($template);

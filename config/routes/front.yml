@@ -18,6 +18,12 @@ register:
 enable_user:
     path: /enable_user/{h}
     controller: App\Controller\UserController::enable
+reset_password:
+    path: /reset_password
+    controller: App\Controller\UserController::resetPassword
+new_password:
+    path: /new_password/{h}
+    controller: App\Controller\UserController::newPassword
 enable_subscriber:
     path: /enable_subscriber/{h}
     controller: App\Controller\SubscriberController::enable

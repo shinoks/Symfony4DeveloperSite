@@ -21,7 +21,7 @@ class UserType extends AbstractType
     {
         $builder
         ->add('email',EmailType::class,['label'=>'email'])
-        ->add('password',PasswordType::class, ['label'=>'password','required' => false,'empty_data'=> $builder->getData()->getPassword()])
+        ->add('password',PasswordType::class, ['label'=>'password.password','required' => false,'empty_data'=> $builder->getData()->getPassword()])
         ->add('phone',TelType::class,['label'=>'phone'])
         ->add('firstName',TextType::class,['label'=>'first_name'])
         ->add('lastName',TextType::class,['label'=>'last_name'])

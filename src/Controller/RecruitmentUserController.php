@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Config;
 use App\Entity\Recruitment;
 use App\Entity\RecruitmentUsers;
 use App\Entity\RecruitmentUserStatus;
@@ -79,7 +80,11 @@ class RecruitmentUserController extends Controller
             $user = $this->getUser();
             $name = $user->getFirstName() . ' ' .$user->getLastName();
             $mailBodyPersonalized = str_replace('user',$name, $mailBody);
-            $mailManager->sendEmail($mailBodyPersonalized,['subject' => 'tytul'],$user->getEmail(),$mailer);
+            $config = $this->getDoctrine()
+                ->getRepository(Config::class)
+                ->find(1);
+
+            $mailManager->sendEmail($mailBodyPersonalized,['subject' => 'Oferta pożyczki - '.$config->getTitle()],$user->getEmail(),$mailer);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($recruitmentUsers);

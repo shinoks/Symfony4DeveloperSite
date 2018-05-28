@@ -36,6 +36,9 @@
                         <br/>
                         {{ 'do_not_have_an_account'|trans }} <a href="{{ path('register') }}" class="btn btn-success">{{ 'register'|trans }}</a>
                     </div>
+                    <div class="row">
+                        <a href="{{ path('reset_password') }}">{{ 'password.dont_remember'|trans }}</a>
+                    </div>
                 </div>
             </div>
             {% endif %}

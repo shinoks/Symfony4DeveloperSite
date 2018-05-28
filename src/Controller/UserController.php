@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Entity\Recruitment;
 use App\Entity\RecruitmentUsers;
+use App\Form\PasswordNewType;
+use App\Form\PasswordResetType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +13,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
 use App\Entity\Config;
 use App\Form\UserType;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 class UserController extends Controller
 {
@@ -48,7 +51,7 @@ class UserController extends Controller
             $user->setIsEnabledByAdmin(0);
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
-            $user->setHash(uniqid("",true));
+            $user->setHash(null);
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -92,6 +95,7 @@ class UserController extends Controller
             ->findOneBy(['hash' => $h]);
         if($user){
             $user->setIsActive(1);
+            $user->setHash(null);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -102,6 +106,7 @@ class UserController extends Controller
 
         return $this->redirectToRoute('login');
     }
+
 
     /**
      * @return Response
@@ -124,6 +129,95 @@ class UserController extends Controller
             'recruitments' => $recruitments,
             'recruitmentUserOffers' => $recruitmentUserOffers
         ));
+    }
+
+    /**
+     * @return Response
+     */
+    public function resetPassword(Request $request, \Swift_Mailer $mailer)
+    {
+        $form = $this->createForm(PasswordResetType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+            try{
+                $userFound = $this->getDoctrine()
+                    ->getRepository(User::class)
+                    ->findOneBy((['email' => $user['email'], 'pesel' => $user['pesel']]));
+            }catch(UsernameNotFoundException $exception)
+            {
+                $this->session->getFlashBag()->add('success', 'Link do zmiany hasła został wysłany');
+            }
+            if($userFound) {
+                $userFound->setHash(uniqid("", true));
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($userFound);
+                $em->flush();
+
+                $config = $this->getDoctrine()
+                    ->getRepository(Config::class)
+                    ->find(1);
+
+                $message = (new \Swift_Message('Formularz zmiany hasła z '.$config->getTitle()))
+                    ->setFrom($config->getEmail())
+                    ->setReplyTo($config->getEmail())
+                    ->setTo($userFound->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'emails/account_password_reset.html.twig',
+                            ['user' => $userFound, 'config' => $config]
+                        ),
+                        'text/html'
+                    )
+                ;
+                $mailer->send($message);
+                $this->session->getFlashBag()->add('success', 'Link do zmiany hasła został wysłany');
+            } else {
+                $this->session->getFlashBag()->add('danger', 'Podany użytkownik nie został znaleziony');
+            }
+        }
+        return $this->render('front/password_reset.html.twig',array(
+            'form'=> $form->createView()
+        ));
+    }
+
+    /**
+     * @param string $h
+     */
+    public function newPassword(string $h, UserPasswordEncoderInterface $passwordEncoder, Request $request)
+    {
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['hash' => $h]);
+        if($user){
+            $user->setHash($h);
+            $form = $this->createForm(PasswordNewType::class, $user);
+
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $user = $form->getData();
+                $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+                $user->setPassword($password);
+                $user->setHash(NULL);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+
+                $this->session->getFlashBag()->add('success', 'Hasło zostało zmienione. Zapraszamy do logowania.');
+
+                return $this->redirectToRoute('login');
+            }
+
+            return $this->render('front/password_reset.html.twig',array(
+                'form'=> $form->createView(),
+                'user' => $user
+            ));
+        }
+
+        return $this->redirectToRoute('login');
     }
 
     /**
