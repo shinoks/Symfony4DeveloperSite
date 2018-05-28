@@ -4,15 +4,11 @@ $(window).load(function () { // makes sure the whole site is loaded
     $('body').delay(350).css({'overflow': 'visible'});
 })
 $(document).ready(function () {
-
-    
     $('input').iCheck({
         checkboxClass: 'icheckbox_square-yellow',
         radioClass: 'iradio_square-yellow',
         increaseArea: '20%' // optional
     });
-
-
     $('.layout-grid').on('click', function () {
         $('.layout-grid').addClass('active');
         $('.layout-list').removeClass('active');
@@ -21,7 +17,6 @@ $(document).ready(function () {
         $('#list-type').addClass('proerty-th');
 
     });
-
     $('.layout-list').on('click', function () {
         $('.layout-grid').removeClass('active');
         $('.layout-list').addClass('active');
@@ -30,7 +25,6 @@ $(document).ready(function () {
         $('#list-type').removeClass('proerty-th');
 
     });
-
 });
 $(document).ready(function () {
     $("#bg-slider").owlCarousel({
