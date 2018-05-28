@@ -88,6 +88,10 @@
             });
 
         });
+        $(window).load(function(){
+            if ($(window).scrollTop() > 40) {
+                $('#navi').addClass('fixed_menu');
+            }});
     </script>
     <script>
         function initMap() {
