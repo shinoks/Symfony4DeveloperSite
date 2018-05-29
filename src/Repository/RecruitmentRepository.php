@@ -15,6 +15,32 @@ class RecruitmentRepository extends ServiceEntityRepository
 
     public function getRecruitmentWithCount()
     {
+        return $this->createQueryBuilder('r')
+            ->select('r')
+            ->addSelect('SUM(recruitmentUsers.payedAmount) as payedSum')
+            ->addSelect('SUM(recruitmentUsers.declaredAmount) as declaredSum')
+            ->leftJoin('r.recruitmentUsers','recruitmentUsers')
+            ->groupBy('r.id')
+            ->orderBy('r.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function getRecruitmentWithCountById($id)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('r,SUM(recruitmentUsers.payedAmount) as payedSum,SUM(recruitmentUsers.declaredAmount) as declaredSum')
+            ->leftJoin('r.recruitmentUsers','recruitmentUsers')
+            ->where('r.id = :id')->setParameter('id', $id)
+            ->groupBy('r.id')
+            ->orderBy('r.id', 'DESC')
+            ->getQuery()
+            ->getSingleResult()
+            ;
+    }
+    public function getRecruitmentWithCount2()
+    {
         return  $this->createQueryBuilder('r')
             ->select('r')
             ->addSelect('(SELECT SUM(b.payedAmount) FROM APP\Entity\RecruitmentUsers b WHERE b.isActive = 1 and r.id = b.recruitment) as payedSum')
@@ -27,7 +53,7 @@ class RecruitmentRepository extends ServiceEntityRepository
         ;
     }
 
-    public function getRecruitmentWithCountById($id)
+    public function getRecruitmentWithCountById2($id)
     {
         return  $this->createQueryBuilder('r')
             ->select('r')
