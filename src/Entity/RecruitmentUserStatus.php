@@ -30,19 +30,22 @@ class RecruitmentUserStatus
     /**
      * @ORM\Column(type="boolean")
      */
-
     private $isFvGenerated;
 
     /**
      * @ORM\Column(type="boolean")
      */
-
     private $isMailed;
 
     /**
      * @ORM\Column(type="string")
      */
     private $mailTemplate;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isDisabling;
 
     /**
      * @ORM\Column(type="boolean")
@@ -145,6 +148,22 @@ class RecruitmentUserStatus
     public function setMailTemplate($mailTemplate): void
     {
         $this->mailTemplate = $mailTemplate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsDisabling()
+    {
+        return $this->isDisabling;
+    }
+
+    /**
+     * @param mixed $isDisabling
+     */
+    public function setIsDisabling($isDisabling): void
+    {
+        $this->isDisabling = $isDisabling;
     }
 
     /**

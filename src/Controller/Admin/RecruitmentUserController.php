@@ -107,6 +107,11 @@ class RecruitmentUserController extends Controller
                 ->find($status);
             if($recruitmentUserStatus){
                 $recruitmentUser->setStatus($recruitmentUserStatus);
+                if($recruitmentUserStatus->getIsDisabling() == 1){
+                    $recruitmentUser->setIsActive(0);
+                }else {
+                    $recruitmentUser->setIsActive(1);
+                }
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($recruitmentUser);
@@ -116,7 +121,7 @@ class RecruitmentUserController extends Controller
                     try{
                         $this->generateAgreement($recruitmentUser->getId());
                     }catch(FileException $exception){
-                        echo 'Umowa już istnieje'. $exception->getMessage();
+                        echo 'Błąd w generowaniu umowy '. $exception->getMessage();
                     }
                 }
                 if($recruitmentUserStatus->getIsMailed() == 1){
@@ -140,7 +145,6 @@ class RecruitmentUserController extends Controller
                 $this->session->getFlashBag()->add('success', 'Status oferty został zmieniony');
 
                 return $this->redirectToRoute('admin_recruitment_show',['id' => $recruitmentUser->getRecruitment()->getId()]);
-
             }else {
                 $this->session->getFlashBag()->add('danger', 'Status oferty nie został zmieniony');
             }
@@ -167,7 +171,7 @@ class RecruitmentUserController extends Controller
 
         $this->session->getFlashBag()->add('success', 'Oferta została wyłączona');
 
-        return $this->redirectToRoute('admin_recruitments');
+        return $this->redirectToRoute('admin_recruitment_show',['id' => $recruitmentUser->getRecruitment()->getId()]);
     }
 
     /**
