@@ -1,7 +1,18 @@
 {% extends 'front/base.html.twig' %}
 
+{% block styleshets %}
+    {{ parent() }}
+
+{% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script type="text/javascript">
+        var RecaptchaOptions = {
+            lang : 'pl'
+        };
+    </script>
     <script language = "javascript"
             src = "https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
@@ -83,9 +94,9 @@
                 var wynik = PeselDecode(this.value);
                 if (!wynik.valid)
                 {
-                   // alert('Błędny pesel');
+                    // alert('Błędny pesel');
                 }else {
-                  //  alert('Poprawny pesel');
+                    //  alert('Poprawny pesel');
                 }
             });
         });
@@ -190,6 +201,11 @@
                                             <span style="font-size: small">
                                                 Wyrażam zgodę na przetwarzanie moich danych osobowych w rozumieniu ustawy z dnia 29 sierpnia 1997 roku o ochronie danych osobowych oraz ustawy z dnia 16 lipca 2004 roku Prawo telekomunikacyjne w celach marketingowych przez {{ config.config.title }} {{ config.config.address }} i oświadczam, iż podanie przeze mnie danych osobowych jest dobrowolne oraz iż zostałem poinformowany o prawie żądania dostępu do moich danych osobowych, ich zmiany oraz usunięcia.
                                             </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="g-recaptcha" data-sitekey="6Lf7OFwUAAAAAFOa6v8rxkM_xvUWFVTVrt-quxR8"></div>
                                         </div>
                                     </div>
                                     <div class="row">

@@ -6,6 +6,7 @@ use App\Entity\RecruitmentUsers;
 use App\Form\PasswordNewType;
 use App\Form\PasswordResetType;
 use App\Form\UserUpdateType;
+use App\Utils\RecaptchaUtils;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,23 +38,20 @@ class UserController extends Controller
      * @param \Swift_Mailer $mailer
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer)
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer, RecaptchaUtils $recaptchaUtils)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
-        $form->remove('roles');
-        $form->remove('pesel');
-        $form->remove('idNumber');
-        $form->remove('zipCode');
-        $form->remove('address');
-        $form->remove('city');
-        $form->remove('phone');
-        $form->remove('bankAccount');
-        $form->remove('isActive');
-        $form->remove('isEnabledByAdmin');
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            $captcha = $recaptchaUtils->check($request->get('g-recaptcha-response'),$request->getClientIp());
+            if($captcha == false){
+                $this->session->getFlashBag()->add('danger', 'Wypełnij formularz ponownie. Błąd captchy');
+
+                return $this->render('front/register.html.twig',array(
+                    'form' => $form->createView()
+                ));
+            }
             $user->setRoles(array('ROLE_USER'));
             $user->setIsActive(0);
             $user->setIsEnabledByAdmin(0);

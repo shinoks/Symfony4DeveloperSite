@@ -20,6 +20,8 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+        ->add('email',TextType::class,['label'=>'first_name'])
+        ->add('password',PasswordType::class,['label'=>'password.password'])
         ->add('firstName',TextType::class,['label'=>'first_name'])
         ->add('lastName',TextType::class,['label'=>'last_name'])
         ->add('gender',ChoiceType::class, [
@@ -34,17 +36,8 @@ class UserType extends AbstractType
             'label'=>'birth_date',
             'placeholder' => 'Wybierz datę'
         ])
-        ->add('roles',ChoiceType::class, [
-            'label'=>'roles',
-            'multiple' => true,
-                    'expanded' => true,
-                    'choices' => [
-            'Użytkownik' => 'ROLE_USER'
-            ]])
         ->add('regulations',CheckboxType::class, ['label'=>'regulations','required' => true ])
         ->add('marketingRegulations',CheckboxType::class, ['label'=>'marketing_regulations','required' => false ])
-        ->add('isActive',CheckboxType::class, ['label'=>'is_active','required' => false ])
-        ->add('isEnabledByAdmin',CheckboxType::class, ['label'=>'is_enabled_by_admin','required' => false ])
 
         ->add('save', SubmitType::class);
     }

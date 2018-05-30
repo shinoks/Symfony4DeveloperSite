@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Entity\Config;
 use App\Form\ContactType;
+use App\Utils\RecaptchaUtils;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,7 +49,7 @@ class DefaultController extends Controller
      * @param \Swift_Mailer $mailer
      * @return Response
      */
-    public function contactPage(Request $request, \Swift_Mailer $mailer)
+    public function contactPage(Request $request, \Swift_Mailer $mailer, RecaptchaUtils $recaptchaUtils)
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
@@ -60,6 +61,14 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $captcha = $recaptchaUtils->check($request->get('g-recaptcha-response'),$request->getClientIp());
+            if($captcha == false){
+                $this->session->getFlashBag()->add('danger', 'Wypełnij formularz ponownie. Błąd captchy');
+
+                return $this->render('front/contact.html.twig',array(
+                    'form' => $form->createView()
+                ));
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($contact);
             $em->flush();

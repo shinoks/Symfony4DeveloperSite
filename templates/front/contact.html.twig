@@ -1,5 +1,17 @@
 {% extends 'front/base.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+    <script type="text/javascript">
+        var RecaptchaOptions = {
+            lang : 'pl'
+        };
+    </script>
+{% endblock %}
+
 {% block body %}
     <div class="page-head">
         <div class="container">
@@ -42,8 +54,13 @@
                         {% form_theme form 'form/default_user.html.twig' %}
 
                         {{ form_start(form) }}
-                        {{ form_widget(form) }}
 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="g-recaptcha" data-sitekey="6Lf7OFwUAAAAAFOa6v8rxkM_xvUWFVTVrt-quxR8"></div>
+                            </div>
+                        </div>
+                        {{ form_widget(form) }}
                         {{ form_end(form) }}
 
                     </div>
