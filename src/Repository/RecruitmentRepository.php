@@ -39,6 +39,7 @@ class RecruitmentRepository extends ServiceEntityRepository
             ->getSingleResult()
             ;
     }
+
     public function getRecruitmentWithCount2()
     {
         return  $this->createQueryBuilder('r')

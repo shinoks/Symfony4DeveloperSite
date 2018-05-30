@@ -15,13 +15,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class UserType extends AbstractType
+class UserUpdateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('firstName',TextType::class,['label'=>'first_name'])
-        ->add('lastName',TextType::class,['label'=>'last_name'])
+        ->add('phone',TelType::class,['label'=>'phone','required' => true])
+        ->add('firstName',TextType::class,['label'=>'first_name','required' => true])
+        ->add('lastName',TextType::class,['label'=>'last_name','required' => true])
         ->add('gender',ChoiceType::class, [
                 'label'=>'gender',
                 'multiple' => false,
@@ -30,21 +31,18 @@ class UserType extends AbstractType
                     'Pani' => 'f',
                     'Pan' => 'm'
                 ]])
-        ->add('birthDate',BirthdayType::class,[
-            'label'=>'birth_date',
-            'placeholder' => 'Wybierz datę'
-        ])
-        ->add('roles',ChoiceType::class, [
-            'label'=>'roles',
-            'multiple' => true,
-                    'expanded' => true,
-                    'choices' => [
-            'Użytkownik' => 'ROLE_USER'
-            ]])
+            ->add('birthDate',BirthdayType::class,[
+                'label'=>'birth_date',
+                'placeholder' => 'Wybierz datę'
+            ])
+        ->add('pesel',NumberType::class,['label'=>'pesel','required' => true])
+        ->add('idNumber',TextType::class,['label'=>'id_number','required' => true])
+        ->add('zipCode',TextType::class,['label'=>'zip_code','required' => true])
+        ->add('address',TextType::class,['label'=>'address','required' => true])
+        ->add('city',TextType::class,['label'=>'city','required' => true])
+        ->add('bankAccount',TextType::class,['label'=>'bank_account','required' => true])
         ->add('regulations',CheckboxType::class, ['label'=>'regulations','required' => true ])
         ->add('marketingRegulations',CheckboxType::class, ['label'=>'marketing_regulations','required' => false ])
-        ->add('isActive',CheckboxType::class, ['label'=>'is_active','required' => false ])
-        ->add('isEnabledByAdmin',CheckboxType::class, ['label'=>'is_enabled_by_admin','required' => false ])
 
         ->add('save', SubmitType::class);
     }

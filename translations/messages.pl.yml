@@ -115,6 +115,7 @@ type: Typ
 parent: Rodzic
 article: Artykuł
 regulations: Regulamin
+marketing_regulations: Zgoda marketingowa
 ammount_of_profits: Kwota zysków
 knowledge_zone: Strefa wiedzy
 subscribers: Użytkownicy newslettera
@@ -186,6 +187,7 @@ is_disabling: Czy wyłącza?
 mail_admin_template: Szablon maila do adminów
 mail_users_template: Szablon maila do użytkowników
 footer: Stopka
+gender: Pan/Pani
 password:
     password: Hasło
     dont_remember: Nie pamiętasz hasła?

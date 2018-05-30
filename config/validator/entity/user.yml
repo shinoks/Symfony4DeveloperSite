@@ -8,7 +8,7 @@ App\Entity\User:
             - NotBlank: ~
             - Length:
                 min: 7
-                max: 50
+                max: 100
                 minMessage: 'Twoje hasło musi mieć minimum 7 znaków'
                 maxMessage: 'Twoje hasło może mieć maksimum 50 znaków'
         email:
@@ -23,6 +23,12 @@ App\Entity\User:
                 max: 20
                 minMessage: 'Twój telefon nie jest poprawny'
                 maxMessage: 'Twój telefon nie jest poprawny'
+        zipCode:
+            - Length:
+                min: 5
+                max: 10
+                minMessage: 'Twój kod pocztowy nie jest poprawny'
+                maxMessage: 'Twój kod pocztowy nie jest poprawny'
         firstName:
             - Length:
                 min: 3
@@ -36,8 +42,6 @@ App\Entity\User:
                 minMessage: 'Twoje nazwisko musi mieć minimum znaków'
                 maxMessage: 'Twoje nazwisko może mieć maksimum znaków'
         pesel:
-            - NotBlank: ~
             - App\Validator\Constraints\Pesel: ~
         idNumber:
-            - NotBlank: ~
             - App\Validator\Constraints\IdNumber: ~

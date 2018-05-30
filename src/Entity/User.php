@@ -35,7 +35,7 @@ class User implements AdvancedUserInterface, \Serializable
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(type="string", length=60, nullable=true)
      */
     private $phone;
 
@@ -50,12 +50,17 @@ class User implements AdvancedUserInterface, \Serializable
     private $lastName;
 
     /**
-     * @ORM\Column(type="bigint", unique=true)
+     * @ORM\Column(type="string", length=1)
+     */
+    private $gender;
+
+    /**
+     * @ORM\Column(type="bigint", unique=true, nullable=true)
      */
     private $pesel;
 
     /**
-     * @ORM\Column(type="string", length=9, unique=true)
+     * @ORM\Column(type="string", length=9, unique=true, nullable=true)
      */
     private $idNumber;
 
@@ -65,22 +70,22 @@ class User implements AdvancedUserInterface, \Serializable
     private $birthDate;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=5, nullable=true)
      */
     private $zipCode;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $address;
 
     /**
-     * @ORM\Column(type="string", length=70)
+     * @ORM\Column(type="string", length=70, nullable=true)
      */
     private $city;
 
     /**
-     * @ORM\Column(type="string", length=70)
+     * @ORM\Column(type="string", length=70, nullable=true)
      */
     private $bankAccount;
 
@@ -88,6 +93,11 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(type="boolean")
      */
     private $regulations;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $marketingRegulations;
 
     /**
      * @ORM\Column(type="string", length=35, nullable=true)
@@ -210,6 +220,22 @@ class User implements AdvancedUserInterface, \Serializable
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param mixed $gender
+     */
+    public function setGender($gender): void
+    {
+        $this->gender = $gender;
     }
 
     /**
@@ -388,6 +414,22 @@ class User implements AdvancedUserInterface, \Serializable
     public function setRegulations($regulations)
     {
         $this->regulations = $regulations;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMarketingRegulations()
+    {
+        return $this->marketingRegulations;
+    }
+
+    /**
+     * @param mixed $marketingRegulations
+     */
+    public function setMarketingRegulations($marketingRegulations): void
+    {
+        $this->marketingRegulations = $marketingRegulations;
     }
 
     /**

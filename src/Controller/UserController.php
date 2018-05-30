@@ -5,6 +5,7 @@ use App\Entity\Recruitment;
 use App\Entity\RecruitmentUsers;
 use App\Form\PasswordNewType;
 use App\Form\PasswordResetType;
+use App\Form\UserUpdateType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,6 +42,13 @@ class UserController extends Controller
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->remove('roles');
+        $form->remove('pesel');
+        $form->remove('idNumber');
+        $form->remove('zipCode');
+        $form->remove('address');
+        $form->remove('city');
+        $form->remove('phone');
+        $form->remove('bankAccount');
         $form->remove('isActive');
         $form->remove('isEnabledByAdmin');
         $form->handleRequest($request);
@@ -51,7 +59,7 @@ class UserController extends Controller
             $user->setIsEnabledByAdmin(0);
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
-            $user->setHash(null);
+            $user->setHash(uniqid("", true));
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -231,10 +239,7 @@ class UserController extends Controller
             ->getRepository(User::class)
             ->find($this->getUser());
         if($user){
-            $form = $this->createForm(UserType::class, $user);
-            $form->remove('roles');
-            $form->remove('isActive');
-            $form->remove('isEnabledByAdmin');
+            $form = $this->createForm(UserUpdateType::class, $user);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -255,6 +260,41 @@ class UserController extends Controller
             }
 
             return $this->render('front/account_user_edit.html.twig',array(
+                'user'=> $user,
+                'form'=> $form->createView()
+            ));
+        }else {
+            $this->session->getFlashBag()->add('danger', 'Użytkownik nie został znaleziony');
+
+            return $this->redirectToRoute('front_user_account');
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function updateUserData($recruitmentId, Request $request)
+    {
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->find($this->getUser());
+        if($user){
+            $form = $this->createForm(UserUpdateType::class, $user);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $user = $form->getData();
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+
+                $this->session->getFlashBag()->add('success', 'Dane użytkownika zostały uzupełnione');
+
+                return $this->redirectToRoute('front_user_recruitment_user_new',['recruitmentId' => $recruitmentId]);
+            }
+
+            return $this->render('front/account_user_update.html.twig',array(
                 'user'=> $user,
                 'form'=> $form->createView()
             ));

@@ -3139,3 +3139,10 @@ ul.ul-blue-dots li::before {
     color: #242a6d;
     height: 50px;
 }
+.table-head{
+    background: #242a6d;
+    color: #fff;
+}
+.table-content{
+    font-size:11px;
+}

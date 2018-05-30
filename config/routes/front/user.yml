@@ -7,6 +7,9 @@ front_user_account:
 front_user_account_edit:
     path: /account/edit
     controller: App\Controller\UserController::edit
+front_user_update:
+    path: /account/user_update/{recruitmentId}
+    controller: App\Controller\UserController::updateUserData
 admin_user_account_recruitment_user_get_agreement:
     path: /account/agreement/show/{id}
     controller: App\Controller\RecruitmentUserController::getAgreement

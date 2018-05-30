@@ -38,14 +38,9 @@
                         </div>
                         <div id="menu4" class="tab-pane fade">
                             <div class="well">
-                                <div class="profile-header">
-                                    <h3>
-                                        <b>{{ 'recruitments'|trans }}</b><br/>
-                                    </h3>
-                                </div>
                                 <div class="">
                                     <table class="table table-bordered">
-                                        <thead>
+                                        <thead class="table-head">
                                         <tr>
                                             <th>{{ 'name'|trans }}</th>
                                             <th>{{ 'desired_amount'|trans }}</th>
@@ -57,7 +52,7 @@
                                             <th>{{ 'make_an_offer'|trans }}</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="table-content">
                                         {% for recruitment in recruitments %}
                                             <tr>
                                                 <td>{{ recruitment.0.name }}</td>
@@ -82,14 +77,9 @@
                         </div>
                         <div id="menu3" class="tab-pane fade">
                             <div class="well">
-                                <div class="profile-header">
-                                    <h3>
-                                        <b>{{ 'recruitments_user_offer'|trans }}</b><br/>
-                                    </h3>
-                                </div>
                                 <div class="">
                                     <table class="table table-bordered">
-                                        <thead>
+                                        <thead class="table-head">
                                         <tr>
                                             <th>{{ 'recruitment'|trans }}<br/><span style="font-size: 10px;">{{ 'click_for_detail'|trans }}</span> </th>
                                             <th>{{ 'status'|trans }}</th>
@@ -104,7 +94,7 @@
                                         </tr>
                                         </thead>
                                         {% for user in recruitmentUserOffers %}
-                                            <tr>
+                                            <tr class="table-content">
                                                 <td><a href="{{ path('front_user_recruitment_show',{'id':user.recruitment.id}) }}">{{ user.recruitment.name }}</a></td>
                                                 <td>{{ user.status.name }}</td>
                                                 <td>{{ user.declaredAmount }} zł</td>
