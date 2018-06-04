@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use App\Form\RecruitmentUserType;
+use App\Form\RecruitmentUsersType;
 
 /**
  * Class RecruitmentUserController
@@ -263,6 +263,17 @@ class RecruitmentUserController extends Controller
             'recruitment' => $recruitmentUser->getRecruitment(),
             'recruitmentUser' => $recruitmentUser,
         ]);
+        $tcpdf->writeHTML($html);
+        $tcpdf->AddPage();
+        $config = $this->getDoctrine()
+            ->getRepository(Config::class)
+            ->find(1);
+        $articleId = explode('/',$config->getRegulationsUrl())[1];
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->find($articleId);
+
+        $html = $article->getText();
         $tcpdf->writeHTML($html);
         try{
             $tcpdf->Output($recruitmentUser->getAbsoluteAgreementPath(), 'F');
