@@ -39,6 +39,6 @@ class UserType extends AbstractType
         ->add('regulations',CheckboxType::class, ['label'=>'regulations','required' => true ])
         ->add('marketingRegulations',CheckboxType::class, ['label'=>'marketing_regulations','required' => false ])
 
-        ->add('save', SubmitType::class);
+        ->add('save', SubmitType::class, ['label' => 'register']);
     }
 }
