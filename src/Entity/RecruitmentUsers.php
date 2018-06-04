@@ -298,7 +298,14 @@ class RecruitmentUsers
     {
         return null === $this->agreementPath
             ? null
-            : $this->getUploadRootDir().'/'.$this->agreementPath;
+            : $this->getUploadRootDir() . '/' . $this->agreementPath;
+    }
+
+    public function getAbsoluteAttachementPath($url)
+    {
+        return null === $this->agreementPath
+            ? null
+            : $this->getUploadRootDir() . '/' . $this->getNumber() . $url;
     }
 
     public function getUploadRootDir()

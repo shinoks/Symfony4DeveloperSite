@@ -98,4 +98,36 @@ class DefaultController extends Controller
             'form' => $form->createView()
         ));
     }
+
+    public function regulationsPage()
+    {
+        $config = $this->getDoctrine()
+            ->getRepository(Config::class)
+            ->find(1);
+        $articleId = explode('/',$config->getRegulationsUrl())[1];
+
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->find($articleId);
+
+        return $this->render('front/regulations.html.twig',array(
+            'article'=> $article
+        ));
+    }
+
+    public function privacyPolicyPage()
+    {
+        $config = $this->getDoctrine()
+            ->getRepository(Config::class)
+            ->find(1);
+        $articleId = explode('/',$config->getPrivacyPolicyUrl())[1];
+
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->find($articleId);
+
+        return $this->render('front/privacy_policy.html.twig',array(
+            'article'=> $article
+        ));
+    }
 }

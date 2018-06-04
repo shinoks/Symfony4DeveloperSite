@@ -2,10 +2,12 @@
 
 Symfony4 site with:
 
+- cms
 - user account
 - admin back (site/admin)
 - public folder in public_html (for shared hosting)
-- auto generating agreement from template ('var/data') on selected Recruitment User Status
+- auto generating agreement (stored in 'var/data') from template on selected Recruitment User Status
+- recaptcha on register and contact
 
 # Admin
 
@@ -40,3 +42,4 @@ $ siteaddress.com/admin user admin pass admin
 - Comment system
 - Newsletter system
 - Logger system
+- Tests

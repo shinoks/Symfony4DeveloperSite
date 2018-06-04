@@ -1,9 +1,12 @@
 <?php
 namespace App\Controller\Admin;
 
+use App\Entity\Article;
+use App\Entity\Config;
 use App\Entity\RecruitmentUsers;
 use App\Entity\RecruitmentUserStatus;
 use App\Form\RecruitmentUsersAdminType;
+use App\Utils\FilesUtils;
 use App\Utils\MailManagerUtils;
 use App\Utils\TcpdfUtils;
 use Doctrine\ORM\EntityManagerInterface;
@@ -120,11 +123,13 @@ class RecruitmentUserController extends Controller
                 if($recruitmentUserStatus->getIsFvGenerated() == 1){
                     try{
                         $this->generateAgreement($recruitmentUser->getId());
+                        $this->generateRegulation($recruitmentUser->getId(),'-regulamin.pdf');
                     }catch(FileException $exception){
                         echo 'Błąd w generowaniu umowy '. $exception->getMessage();
                     }
                 }
                 if($recruitmentUserStatus->getIsMailed() == 1){
+                    $files = null;
                     $mailManager = new MailManagerUtils($emi);
                     $template = 'emails/' . $recruitmentUserStatus->getMailTemplate();
                     $mailBody = $this->renderView($template,[
@@ -138,9 +143,12 @@ class RecruitmentUserController extends Controller
                     $mailBodyPersonalized = str_replace('user',$name, $mailBody);
 
                     if($recruitmentUserStatus->getIsFvMailed() == 1){
-                       $file = $recruitmentUser->getAbsoluteAgreementPath();
+                       $files []= $recruitmentUser->getAbsoluteAgreementPath();
+                       $files []= $recruitmentUser->getAbsoluteAttachementPath('-regulamin.pdf');
+                       $filesManager = new FilesUtils();
+                       $files []= $filesManager->getFileUrl('Formularz_odstąpienia_od_umowy.pdf');
                     }
-                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status twojej oferty uległ zmianie'],$user->getEmail(),$mailer,$file);
+                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status twojej oferty uległ zmianie'],$user->getEmail(),$mailer,$files);
                 }
                 $this->session->getFlashBag()->add('success', 'Status oferty został zmieniony');
 
@@ -261,7 +269,42 @@ class RecruitmentUserController extends Controller
             echo 'Agreement was not created: '. $exception->getMessage();
         }
 
+        return true;
+    }
 
+    private function generateRegulation($recruitmentUserId,$url)
+    {
+        $tcpdf = new TcpdfUtils();
+        $recruitmentUser = $this->getDoctrine()
+            ->getRepository(RecruitmentUsers::class)
+            ->find($recruitmentUserId);
+
+        $fileSystem = new Filesystem();
+        $filePath = $recruitmentUser->getUploadRootDir();
+
+        if(!$fileSystem->exists($filePath)){
+            try{
+                $fileSystem->mkdir($filePath);
+            }catch (IOException $exception){
+                echo 'Error in dir creation'. $exception->getPath() . ' ' . $exception->getPath();
+            }
+        }
+        $tcpdf->AddPage();
+        $config = $this->getDoctrine()
+            ->getRepository(Config::class)
+            ->find(1);
+        $articleId = explode('/',$config->getRegulationsUrl())[1];
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->find($articleId);
+
+        $html = $article->getText();
+        $tcpdf->writeHTML($html);
+        try{
+            $tcpdf->Output($recruitmentUser->getAbsoluteAttachementPath($url), 'F');
+        } catch (FileNotWritableException $exception){
+            echo 'Agreement was not created: '. $exception->getMessage();
+        }
 
         return true;
     }

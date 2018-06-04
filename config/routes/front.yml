@@ -7,6 +7,12 @@ index_start:
 contact:
     path: /contact
     controller: App\Controller\DefaultController::contactPage
+regulations:
+    path: /regulations
+    controller: App\Controller\DefaultController::regulationsPage
+privacy_policy:
+    path: /privacy_policy
+    controller: App\Controller\DefaultController::privacyPolicyPage
 login:
     path: /login
     controller: App\Controller\SecurityController::login
