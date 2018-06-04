@@ -90,6 +90,11 @@ class RecruitmentUserController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($recruitmentUsers);
                 $em->flush();
+
+                if($maxOfferAmount==0){
+                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => 'Oferta pożyczki - '.$config->getTitle()],$user->getEmail(),$mailer);
+                }
+
                 $this->session->getFlashBag()->add('success', 'Oferta na nabór została dodana');
 
                 return $this->redirectToRoute('front_user_account');
