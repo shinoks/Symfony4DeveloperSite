@@ -147,6 +147,7 @@ class RecruitmentUserController extends Controller
                        $files []= $recruitmentUser->getAbsoluteAttachementPath('-regulamin.pdf');
                        $filesManager = new FilesUtils();
                        $files []= $filesManager->getFileUrl('Formularz_odstąpienia_od_umowy.pdf');
+                       $files []= $filesManager->getFileUrl('Pouczenie_o_możliwości_odstąpienia_od_umowy.pdf');
                     }
                     $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status twojej oferty uległ zmianie'],$user->getEmail(),$mailer,$files);
                 }
