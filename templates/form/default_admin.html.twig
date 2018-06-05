@@ -5,14 +5,25 @@
     </div>
 {% endblock %}
 
-{% block date_widget %}
+{% block integer_widget %}
     <div class="form-group">
-        {% set type = type|default('date') %}
-        <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        {% set type = type|default('number') %}
+        <div class="input-group">
+            <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        </div>
     </div>
 {% endblock %}
 
-{% block integer_widget %}
+{% block tel_widget %}
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><b>+48 </b></span>
+            <input type="tel" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        </div>
+    </div>
+{% endblock %}
+
+{% block number_widget %}
     <div class="form-group">
         {% set type = type|default('number') %}
         <div class="input-group">

@@ -2,6 +2,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Form\UserAdminType;
+use App\Form\UserUpdateType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,7 +52,7 @@ class UserController extends Controller
             ->getRepository(User::class)
             ->find($id);
         if($user){
-            $form = $this->createForm(UserType::class, $user);
+            $form = $this->createForm(UserAdminType::class, $user);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {

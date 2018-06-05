@@ -83,7 +83,7 @@ class RecruitmentUserController extends Controller
             }
 
             return $this->render('back/recruitment_user_edit.html.twig',array(
-                'recruitment_users'=> $recruitmentUser,
+                'recruitmentUser'=> $recruitmentUser,
                 'form'=> $form->createView()
             ));
         }else {
