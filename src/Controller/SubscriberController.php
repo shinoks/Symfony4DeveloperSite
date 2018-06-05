@@ -50,7 +50,7 @@ class SubscriberController extends Controller
                 ->find(1);
 
             $message = (new \Swift_Message('Potwierdzenie zapisu do newslettera : '.$config->getTitle()))
-                ->setFrom('info@grupaformat.pl')
+                ->setFrom($config->getEmail())
                 ->setReplyTo($config->getEmail())
                 ->setTo($subscriber->getEmail())
                 ->setBody(
