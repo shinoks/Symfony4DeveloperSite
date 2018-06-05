@@ -92,7 +92,10 @@ class RecruitmentUserController extends Controller
                 $em->flush();
 
                 if($maxOfferAmount==0){
-                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => 'Oferta pożyczki - '.$config->getTitle()],$user->getEmail(),$mailer);
+                    $mailBody = $this->renderView('emails/recruitment_declared_amount_reached.html.twig',[
+                        'recruitment' => $recruitment,
+                    ]);
+                    $mailManager->sendEmail($mailBody,['subject' => 'Kwota naboru ' . $recruitment[0]->getNumber() . 'została zebrana - '.$config->getTitle()],$config->getEmail(),$mailer);
                 }
 
                 $this->session->getFlashBag()->add('success', 'Oferta na nabór została dodana');
