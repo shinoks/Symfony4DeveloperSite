@@ -92,18 +92,8 @@
                         <td>{{ user.payedAmount }} zł</td>
                         <td>{{ user.investmentPeriod }} msc</td>
                         <td>{{ user.interest }} %</td>
-                        <td>{% set difference = date("now").diff(date(user.payedDate)) %}
-                            {% set leftDays = difference.days %}
-                            {% if leftDays == 1 %}
-                                1 dni
-                            {% else %}
-                                {{ leftDays }} dni
-                            {% endif %}</td>
-                        <td>
-                            {% set interestPerDay = ((user.interest/100)/365) * leftDays %}
-                            {% set inter = interestPerDay * user.payedAmount %}
-                            {{ inter|round(2) }} zł
-                        </td>
+                        <td>{{ user.daysOfInvestment }}</td>
+                        <td>{{ user.amountOfInterest }} zł</td>
                         <td><a href="{{ path('admin_recruitment_user_edit', { 'id':user.id,'status':0 }) }}" class="btn btn-default">Edytuj</a></td>
                         <td>{{ user.created|date('d-m-Y H:i:s') }}</td>
                         {% if user.agreementPath is not empty %}

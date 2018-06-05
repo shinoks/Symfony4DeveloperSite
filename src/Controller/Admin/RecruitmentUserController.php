@@ -116,18 +116,32 @@ class RecruitmentUserController extends Controller
                     $recruitmentUser->setIsActive(1);
                 }
 
+                if($recruitmentUserStatus->getIsEndingOffer() == 1){
+                    if(!$recruitmentUser->getEndDate()){
+                        $recruitmentUser->setEndDate(new \DateTime());
+                    }
+                }
+
+                if($recruitmentUserStatus->getIsFvGenerated() == 1){
+                    if(!$recruitmentUser->getAgreementPath()){
+                        try{
+                            $this->generateAgreement($recruitmentUser->getId());
+                            $this->generateRegulation($recruitmentUser->getId(),'-regulamin.pdf');
+                        }catch(FileException $exception){
+                            echo 'Błąd w generowaniu umowy '. $exception->getMessage();
+                        }
+                        if(!$recruitmentUser->getPayedDate()){
+                            $recruitmentUser->setPayedDate(new \DateTime());
+                        }
+                    }else {
+                        $this->session->getFlashBag()->add('danger', 'Umowa nie została wygenerowana ponownie/umowa już istnieje');
+                    }
+                }
+
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($recruitmentUser);
                 $em->flush();
 
-                if($recruitmentUserStatus->getIsFvGenerated() == 1){
-                    try{
-                        $this->generateAgreement($recruitmentUser->getId());
-                        $this->generateRegulation($recruitmentUser->getId(),'-regulamin.pdf');
-                    }catch(FileException $exception){
-                        echo 'Błąd w generowaniu umowy '. $exception->getMessage();
-                    }
-                }
                 if($recruitmentUserStatus->getIsMailed() == 1){
                     $files = null;
                     $mailManager = new MailManagerUtils($emi);
@@ -151,6 +165,7 @@ class RecruitmentUserController extends Controller
                     }
                     $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status twojej oferty uległ zmianie'],$user->getEmail(),$mailer,$files);
                 }
+
                 $this->session->getFlashBag()->add('success', 'Status oferty został zmieniony');
 
                 return $this->redirectToRoute('admin_recruitment_show',['id' => $recruitmentUser->getRecruitment()->getId()]);

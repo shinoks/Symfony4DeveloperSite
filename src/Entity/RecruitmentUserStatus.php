@@ -25,6 +25,11 @@ class RecruitmentUserStatus
     /**
      * @ORM\Column(type="boolean")
      */
+    private $isEndingOffer;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
     private $isFvMailed;
 
     /**
@@ -84,6 +89,22 @@ class RecruitmentUserStatus
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsEndingOffer()
+    {
+        return $this->isEndingOffer;
+    }
+
+    /**
+     * @param mixed $isEndingOffer
+     */
+    public function setIsEndingOffer($isEndingOffer): void
+    {
+        $this->isEndingOffer = $isEndingOffer;
     }
 
     /**

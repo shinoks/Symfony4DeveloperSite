@@ -196,7 +196,7 @@ class RecruitmentUsers
 
     public function getCashBackDate()
     {
-        return date_add($this->acceptedDate,new \DateInterval('P' . $this->investmentPeriod . 'M'));
+        return date_add($this->payedDate,new \DateInterval('P' . $this->investmentPeriod . 'M'));
     }
     /**
      * @return mixed
@@ -336,7 +336,7 @@ class RecruitmentUsers
     /**
      * @return mixed
      */
-    public function getisActive()
+    public function getIsActive()
     {
         return $this->isActive;
     }
@@ -347,6 +347,28 @@ class RecruitmentUsers
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
+    }
+
+    public function getAmountOfInterest()
+    {
+        $daysDiff = $this->getDaysOfInvestment();
+        $interest = $this->getInterest();
+        $payedAmount= $this->getPayedAmount();
+        $amount = round($daysDiff * (($interest/100)/365) * $payedAmount,2);
+
+        return $amount;
+    }
+
+    public function getDaysOfInvestment()
+    {
+        if($this->getPayedDate() || $this->getEndDate()){
+            $daysOfInvestment = date_diff($this->getPayedDate(),$this->getEndDate())->d;
+
+            return $daysOfInvestment;
+        }else {
+
+            return 0;
+        }
     }
 
 }

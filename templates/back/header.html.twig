@@ -20,6 +20,9 @@
                         <span class="count bg-primary">{{ config.NotReadedMessages.0.0.1 }}</span>
                     </button>
                 </div>
+                {% if config.NotReadedMessages.0.0.1 > 0 %}
+                    <div class="alert alert-success float-right">Masz nieodczytaną wiadomość </div>
+                {% endif %}
             </div>
         </div>
 

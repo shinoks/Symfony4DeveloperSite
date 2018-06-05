@@ -74,8 +74,8 @@
                                 <td>{{ recruitment.payedAmount }} </td>
                                 <td>{{ recruitment.investmentPeriod }} </td>
                                 <td>{{ recruitment.interest }} </td>
-                                <td> -- </td>
-                                <td> -- </td>
+                                <td>{{ recruitment.daysOfInvestment }}</td>
+                                <td>{{ recruitment.amountOfInterest }} zł</td>
                                 <td>{{ recruitment.created|date('d-m-Y H:i:s') }}</td>
                                 {% if recruitment.agreementPath is not empty %}
                                     <td><a target="_blank" href="{{ path('admin_recruitment_user_get_agreement', { 'id':recruitment.id }) }}" class="btn btn-default">Pobierz</a></td>
