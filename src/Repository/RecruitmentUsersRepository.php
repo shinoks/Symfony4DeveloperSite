@@ -35,4 +35,30 @@ class RecruitmentUsersRepository extends ServiceEntityRepository
             ;
     }
 
+    public function count(array $criteria = null)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('count(r.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
+    public function sumDeclaredAmount()
+    {
+        return $this->createQueryBuilder('z')
+            ->select('sum(z.declaredAmount)')
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
+    public function sumPayedAmount()
+    {
+        return $this->createQueryBuilder('z')
+            ->select('sum(z.payedAmount)')
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
 }

@@ -16,4 +16,22 @@ class UserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, User::class);
     }
+
+    public function count(array $criteria = null)
+    {
+        return $this->createQueryBuilder('z')
+            ->select('count(z.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
+    public function sum($field)
+    {
+        return $this->createQueryBuilder('z')
+            ->select('sum(:field)')->setParameter('field' , $field)
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
 }
