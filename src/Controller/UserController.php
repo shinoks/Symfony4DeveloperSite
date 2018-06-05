@@ -6,7 +6,9 @@ use App\Entity\RecruitmentUsers;
 use App\Form\PasswordNewType;
 use App\Form\PasswordResetType;
 use App\Form\UserUpdateType;
+use App\Utils\MailManagerUtils;
 use App\Utils\RecaptchaUtils;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,7 +40,7 @@ class UserController extends Controller
      * @param \Swift_Mailer $mailer
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer, RecaptchaUtils $recaptchaUtils)
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer, RecaptchaUtils $recaptchaUtils, EntityManagerInterface $emi)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -80,7 +82,10 @@ class UserController extends Controller
                     'text/html'
                 )
             ;
+            $mailManager = new MailManagerUtils($emi);
             $mailer->send($message);
+            $mailBody = $this->renderView('emails/user_new_created.html.twig');
+            $mailManager->sendEmail($mailBody,['subject' => 'Nowy użytkownik się zarejestrował - '.$config->getTitle()],$config->getEmail(),$mailer);
 
             return $this->redirectToRoute('login');
         }

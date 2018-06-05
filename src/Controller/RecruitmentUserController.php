@@ -7,13 +7,9 @@ use App\Entity\RecruitmentUsers;
 use App\Entity\RecruitmentUserStatus;
 use App\Form\RecruitmentUsersType;
 use App\Utils\MailManagerUtils;
-use App\Utils\TcpdfUtils;
 use Doctrine\ORM\EntityManagerInterface;
-use ProxyManager\Exception\FileNotWritableException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
-use Symfony\Component\Filesystem\Exception\IOException;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -49,6 +45,7 @@ class RecruitmentUserController extends Controller
             $recruitment = $this->getDoctrine()
                 ->getRepository(Recruitment::class)
                 ->getRecruitmentWithCountById($recruitmentId);
+            $recruitment = $recruitment[0];
             $minOfferAmount = 10000;
             $maxOfferAmount = $recruitment[0]->getDesiredAmount() - $recruitment['declaredSum'];
 

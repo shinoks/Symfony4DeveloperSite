@@ -101,14 +101,15 @@
                                                 <td>{% if user.payedAmount is empty %}0{% else %}{{ user.payedAmount }}{% endif %} zł</td>
                                                 <td>{{ user.investmentPeriod }} msc</td>
                                                 <td>{{ user.interest }} %</td>
-                                                <td>{{ user.daysOfInvestment }}</td>
-                                                <td>{{ user.amountOfInterest }} zł</td>
+                                                <td>{% if user.status.isDisabling == 1 %}---{% else %}{{ user.daysOfInvestment }}{% endif %}</td>
+                                                <td>{% if user.status.isDisabling == 1 %}---{% else %}{{ user.amountOfInterest }} zł{% endif %}</td>
                                                 <td>{{ user.created|date('d-m-Y H:i:s') }}</td>
-                                                <td>
-                                                    {% if user.agreementPath is not null %}
-                                                        <a href="{{ path('admin_user_account_recruitment_user_get_agreement',{'id':user.id}) }}" class="btn btn-finish">{{ 'agreement.download_agreement'|trans }}</a>
-                                                    {% else %}
-                                                        {{ 'agreement.not_available'|trans }}
+                                                <td>{% if user.status.isDisabling == 1 %}---{% else %}
+                                                        {% if user.agreementPath is not null %}
+                                                            <a href="{{ path('admin_user_account_recruitment_user_get_agreement',{'id':user.id}) }}" class="btn btn-finish">{{ 'agreement.download_agreement'|trans }}</a>
+                                                        {% else %}
+                                                            {{ 'agreement.not_available'|trans }}
+                                                        {% endif %}
                                                     {% endif %}
                                                 </td>
                                             </tr>

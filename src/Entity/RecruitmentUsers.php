@@ -361,7 +361,7 @@ class RecruitmentUsers
 
     public function getDaysOfInvestment()
     {
-        if($this->getPayedDate() || $this->getEndDate()){
+        if($this->getPayedDate() && $this->getEndDate()){
             $daysOfInvestment = date_diff($this->getPayedDate(),$this->getEndDate())->d;
 
             return $daysOfInvestment;

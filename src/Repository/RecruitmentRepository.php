@@ -13,7 +13,7 @@ class RecruitmentRepository extends ServiceEntityRepository
         parent::__construct($registry, Recruitment::class);
     }
 
-    public function getRecruitmentWithCount()
+    public function getRecruitmentWithCount22()
     {
         return $this->createQueryBuilder('r')
             ->select('r')
@@ -27,7 +27,7 @@ class RecruitmentRepository extends ServiceEntityRepository
             ;
     }
 
-    public function getRecruitmentWithCountById($id)
+    public function getRecruitmentWithCountById2($id)
     {
         return $this->createQueryBuilder('r')
             ->select('r,SUM(recruitmentUsers.payedAmount) as payedSum,SUM(recruitmentUsers.declaredAmount) as declaredSum')
@@ -40,7 +40,7 @@ class RecruitmentRepository extends ServiceEntityRepository
             ;
     }
 
-    public function getRecruitmentWithCount2()
+    public function getRecruitmentWithCount()
     {
         return  $this->createQueryBuilder('r')
             ->select('r')
@@ -54,7 +54,7 @@ class RecruitmentRepository extends ServiceEntityRepository
         ;
     }
 
-    public function getRecruitmentWithCountById2($id)
+    public function getRecruitmentWithCountById($id)
     {
         return  $this->createQueryBuilder('r')
             ->select('r')
@@ -85,7 +85,8 @@ class RecruitmentRepository extends ServiceEntityRepository
     public function findRecruitmentsForUsers()
     {
         return $this->createQueryBuilder('r')
-            ->select('r, SUM(recruitmentUsers.declaredAmount) as declaredSum')
+            ->select('r')
+            ->addSelect('(SELECT SUM(c.declaredAmount) FROM APP\Entity\RecruitmentUsers c WHERE c.isActive = 1 and r.id = c.recruitment) as declaredSum')
             ->leftJoin('r.recruitmentUsers','recruitmentUsers')
             ->leftJoin('r.status','recruitmentStatus')
             ->where('recruitmentStatus.isVisibleToUsers = :isVisibleToUsers')->setParameter('isVisibleToUsers', 1)
