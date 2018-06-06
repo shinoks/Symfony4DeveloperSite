@@ -52,7 +52,7 @@ class RecruitmentUsersRepository extends ServiceEntityRepository
     public function getRecruitmentUsersDeclaredAmountSumByIsActive($isActive)
     {
         return $this->createQueryBuilder('r')
-            ->select('sum(r.declaredAmount) as declaredAmount,recruitment.id')
+            ->select('sum(r.declaredAmount) as declaredAmount,sum(r.payedAmount) as payedAmount,recruitment.id')
             ->leftJoin('r.recruitment','recruitment')
             ->where('r.isActive = :is_active')->setParameter('is_active', $isActive)
             ->orderBy('recruitment.id', 'DESC')

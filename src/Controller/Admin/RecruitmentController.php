@@ -298,6 +298,7 @@ class RecruitmentController extends Controller
             $data = array_search_result($recruitmentDeclaredAndPayedSum,'id',$item[0]->getId());
             if($data && $data['declaredAmount'] > 0){
                 $item['declaredSum'] = $data['declaredAmount'];
+                $item['payedSum'] = $data['payedAmount'];
             }else {
                 $item['declaredSum'] = 0;
             }
