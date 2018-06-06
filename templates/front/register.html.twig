@@ -144,6 +144,15 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-md-4">
+                                            {{ form_label(form.phone) }}
+                                        </div>
+                                        <div class="col-md-8">
+                                            {{ form_widget(form.phone) }}
+                                            {{ form_errors(form.phone) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         {{ form_errors(form.gender) }}
                                         <div class="col-md-4">
                                             {{ form_label(form.gender) }}
