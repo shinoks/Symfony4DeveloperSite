@@ -140,10 +140,14 @@ class RecruitmentController extends Controller
                     }
                 }
                 if($recruitmentStatus->getIsMailedToUsers() == 1){
+                    $declaredAmount = $this->getDoctrine()
+                        ->getRepository(RecruitmentUsers::class)
+                        ->getRecruitmentSumDeclaredAndPayed($recruitment->getId());
                     $mailManager = new MailManagerUtils($emi);
                     $template = 'emails/' . $recruitmentStatus->getMailUsersTemplate();
                     $mailBody = $this->renderView($template,[
                         'recruitment' => $recruitment,
+                        'declaredAmount' => $declaredAmount,
                     ]);
                     if(!$mailBody){
                         throw new FileNotFoundException($template);
