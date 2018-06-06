@@ -265,6 +265,10 @@ class RecruitmentController extends Controller
      */
     public function index(Request $request)
     {
+
+        $recruitmentDeclaredAndPayedSum = $this->getDoctrine()
+            ->getRepository(RecruitmentUsers::class)
+            ->getRecruitmentUsersDeclaredAmountSumByIsActive(1);
         $em = $this->getDoctrine()->getManager();
         $query = $em->getRepository(Recruitment::class)->getRecruitmentWithCount([],[
             $request->query->get('sort','id')=>$request->query->get('direction','asc')
@@ -274,6 +278,32 @@ class RecruitmentController extends Controller
             $query,
             $request->query->getInt('page', 1)
         );
+        $pag = [];
+
+        function array_search_result($array,$key,$value)
+        {
+            $result = false;
+            foreach($array as $k=>$v)
+            {
+                if(array_key_exists($key,$v) && ($v[$key] == $value))
+                {
+                    $result = $v;
+                }
+            }
+
+            return $result;
+        }
+
+        foreach($pagination as $item){
+            $data = array_search_result($recruitmentDeclaredAndPayedSum,'id',$item[0]->getId());
+            if($data && $data['declaredAmount'] > 0){
+                $item['declaredSum'] = $data['declaredAmount'];
+            }else {
+                $item['declaredSum'] = 0;
+            }
+            $pag []=$item;
+
+        }
 
         $recruitmentStatus = $this->getDoctrine()
             ->getRepository(RecruitmentStatus::class)
@@ -281,6 +311,7 @@ class RecruitmentController extends Controller
 
         return $this->render('back/recruitments.html.twig',array(
             'pagination' => $pagination,
+            'pag' => $pag,
             'recruitmentStatus' => $recruitmentStatus
         ));
     }

@@ -38,13 +38,27 @@ class RecruitmentUsersRepository extends ServiceEntityRepository
     public function getRecruitmentUsersDeclaredAmountSumByRecruitmentAndIsActive($recruitmentId,$isActive)
     {
         return $this->createQueryBuilder('r')
-            ->select('sum(r.declaredAmount)')
+            ->select('sum(r.declaredAmount) as declaredAmount,recruitment.id')
             ->leftJoin('r.recruitment','recruitment')
             ->where('r.isActive = :is_active')->setParameter('is_active', $isActive)
             ->andWhere('recruitment.id = :recruitmentId')->setParameter('recruitmentId', $recruitmentId)
-            ->orderBy('r.id', 'DESC')
+            ->orderBy('recruitment.id', 'DESC')
+            ->groupBy('recruitment.id')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getResult();
+            ;
+    }
+
+    public function getRecruitmentUsersDeclaredAmountSumByIsActive($isActive)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('sum(r.declaredAmount) as declaredAmount,recruitment.id')
+            ->leftJoin('r.recruitment','recruitment')
+            ->where('r.isActive = :is_active')->setParameter('is_active', $isActive)
+            ->orderBy('recruitment.id', 'DESC')
+            ->groupBy('recruitment.id')
+            ->getQuery()
+            ->getResult();
             ;
     }
 
