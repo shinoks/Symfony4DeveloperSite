@@ -52,7 +52,7 @@
                             <th>{{ 'amount_of_interest'|trans }}</th>
                             <th>{{ 'created'|trans }}</th>
                             <th>{{ 'agreement.agreement'|trans }}</th>
-                            <th>Wyłącz</th>
+                            <th>{{ 'edit'|trans }}</th>
                             <th>Usuń</th>
                         </tr>
                     </thead>
@@ -61,7 +61,7 @@
                             <tr>
                                 <td>{{ recruitment.id }}</td>
                                 <td><a href="{{ path('admin_recruitment_show',{'id':recruitment.recruitment.id}) }}">{{ recruitment.recruitment.name }}</a></td>
-                                <td><a href="{{ path('admin_recruitment_user_edit',{'id':recruitment.id}) }}">{{ recruitment.user.firstName }} {{ recruitment.user.lastName }} </a></td>
+                                <td><a href="{{ path('admin_user_show',{'id':recruitment.user.id}) }}">{{ recruitment.user.firstName }} {{ recruitment.user.lastName }} </a></td>
                                 <td><form class="form" action="#">
                                         <select id="recruitment_user_status" name="{{ recruitment.id }}">
                                             <option value="{{ recruitment.status.id }}">{{ recruitment.status.name }}</option>
@@ -75,19 +75,15 @@
                                 <td>{{ recruitment.payedAmount }} </td>
                                 <td>{{ recruitment.investmentPeriod }} </td>
                                 <td>{{ recruitment.interest }} </td>
-                                <td> -- </td>
-                                <td> -- </td>
+                                <td>{{ recruitment.daysOfInvestment }}</td>
+                                <td>{{ recruitment.amountOfInterest }} zł</td>
                                 <td>{{ recruitment.created|date('d-m-Y H:i:s') }}</td>
                                 {% if recruitment.agreementPath is not empty %}
                                     <td><a target="_blank" href="{{ path('admin_recruitment_user_get_agreement', { 'id':recruitment.id }) }}" class="btn btn-default">Pobierz</a></td>
                                 {% else %}
                                     <td>{{ 'agreement.not_available'|trans }}</td>
                                 {% endif %}
-                                {% if recruitment.isActive == 1 %}
-                                    <td><a href="{{ path('admin_recruitment_user_disable', { 'id':recruitment.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
-                                {% else %}
-                                    <td><a href="{{ path('admin_recruitment_user_disable', { 'id':recruitment.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
-                                {% endif %}
+                                <td><a href="{{ path('admin_recruitment_user_edit', { 'id':recruitment.id }) }}" class="btn btn-success">{{ 'edit'|trans }}</a></td>
                                 <td><a href="{{ path('admin_recruitment_user_delete', { 'id':recruitment.id }) }}" class="btn btn-danger">Usuń</a></td>
                             </tr>
                         {% endfor %}

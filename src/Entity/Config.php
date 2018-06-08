@@ -51,6 +51,11 @@ class Config
     private $regulationsUrl;
 
     /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $privacyPolicyUrl;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $description;
@@ -159,6 +164,22 @@ class Config
     public function setRegulationsUrl($regulationsUrl)
     {
         $this->regulationsUrl = $regulationsUrl;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrivacyPolicyUrl()
+    {
+        return $this->privacyPolicyUrl;
+    }
+
+    /**
+     * @param mixed $privacyPolicyUrl
+     */
+    public function setPrivacyPolicyUrl($privacyPolicyUrl): void
+    {
+        $this->privacyPolicyUrl = $privacyPolicyUrl;
     }
 
     /**

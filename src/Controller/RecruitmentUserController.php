@@ -1,18 +1,15 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Config;
 use App\Entity\Recruitment;
 use App\Entity\RecruitmentUsers;
 use App\Entity\RecruitmentUserStatus;
 use App\Form\RecruitmentUsersType;
 use App\Utils\MailManagerUtils;
-use App\Utils\TcpdfUtils;
 use Doctrine\ORM\EntityManagerInterface;
-use ProxyManager\Exception\FileNotWritableException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
-use Symfony\Component\Filesystem\Exception\IOException;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -44,55 +41,74 @@ class RecruitmentUserController extends Controller
      */
     public function new($recruitmentId, Request $request, \Swift_Mailer $mailer, EntityManagerInterface $emi)
     {
-        $recruitment = $this->getDoctrine()
-            ->getRepository(Recruitment::class)
-            ->getRecruitmentWithCountById($recruitmentId);
-        $minOfferAmount = 10000;
-        $maxOfferAmount = $recruitment[0]->getDesiredAmount() - $recruitment['declaredSum'];
+        if($this->getUser()->getPesel() && $this->getUser()->getIdNumber() && $this->getUser()->getBankAccount()){
+            $recruitment = $this->getDoctrine()
+                ->getRepository(Recruitment::class)
+                ->getRecruitmentWithCountById($recruitmentId);
+            $recruitment = $recruitment[0];
+            $minOfferAmount = 10000;
+            $maxOfferAmount = $recruitment[0]->getDesiredAmount() - $recruitment['declaredSum'];
 
-        $recruitmentUsers = new RecruitmentUsers();
-        $recruitmentUsers->min = $minOfferAmount;
-        $recruitmentUsers->max = $maxOfferAmount;
-        $form = $this->createForm(RecruitmentUsersType::class,$recruitmentUsers);
-        $form->handleRequest($request);
+            $recruitmentUsers = new RecruitmentUsers();
+            $recruitmentUsers->min = $minOfferAmount;
+            $recruitmentUsers->max = $maxOfferAmount;
+            $form = $this->createForm(RecruitmentUsersType::class,$recruitmentUsers);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $recruitmentUserStatus = $this->getDoctrine()
-                ->getRepository(RecruitmentUserStatus::class)
-                ->find(1);
-            $recruitmentUsers->setUser($this->getUser());
-            $recruitmentUsers->setRecruitment($recruitment[0]);
-            $recruitmentUsers->setStatus($recruitmentUserStatus);
-            $recruitmentUsers->setInterest($recruitment[0]->getInterest());
-            $recruitmentUsers->setInvestmentPeriod($recruitment[0]->getInvestmentPeriod());
-            if($maxOfferAmount<$recruitmentUsers->getDeclaredAmount()){
-                throw new \ErrorException('Zadeklarowana kwota jest większa od pozostałej wolnej kwoty w naborze');
+            if ($form->isSubmitted() && $form->isValid()) {
+                $recruitmentUserStatus = $this->getDoctrine()
+                    ->getRepository(RecruitmentUserStatus::class)
+                    ->find(1);
+                $recruitmentUsers->setUser($this->getUser());
+                $recruitmentUsers->setRecruitment($recruitment[0]);
+                $recruitmentUsers->setStatus($recruitmentUserStatus);
+                $recruitmentUsers->setInterest($recruitment[0]->getInterest());
+                $recruitmentUsers->setInvestmentPeriod($recruitment[0]->getInvestmentPeriod());
+                if($maxOfferAmount<$recruitmentUsers->getDeclaredAmount()){
+                    throw new \ErrorException('Zadeklarowana kwota jest większa od pozostałej wolnej kwoty w naborze');
+                }
+
+                $mailManager = new MailManagerUtils($emi);
+                $mailBody = $this->renderView('emails/recruitment_user_new.html.twig',[
+                    'recruitment' => $recruitment,
+                ]);
+                if(!$mailBody){
+                    throw new FileNotFoundException('emails/recruitment_user_new.html.twig');
+                }
+                $user = $this->getUser();
+                $name = $user->getFirstName() . ' ' .$user->getLastName();
+                $mailBodyPersonalized = str_replace('user',$name, $mailBody);
+                $config = $this->getDoctrine()
+                    ->getRepository(Config::class)
+                    ->find(1);
+
+                $mailManager->sendEmail($mailBodyPersonalized,['subject' => 'Oferta pożyczki - '.$config->getTitle()],$user->getEmail(),$mailer);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($recruitmentUsers);
+                $em->flush();
+
+                if($maxOfferAmount==0){
+                    $mailBody = $this->renderView('emails/recruitment_declared_amount_reached.html.twig',[
+                        'recruitment' => $recruitment,
+                    ]);
+                    $mailManager->sendEmail($mailBody,['subject' => 'Kwota naboru ' . $recruitment[0]->getNumber() . 'została zebrana - '.$config->getTitle()],$config->getEmail(),$mailer);
+                }
+
+                $this->session->getFlashBag()->add('success', 'Oferta na nabór została dodana');
+
+                return $this->redirectToRoute('front_user_account');
             }
 
-            $mailManager = new MailManagerUtils($emi);
-            $mailBody = $this->renderView('emails/recruitment_user_new.html.twig',[
-                'recruitment' => $recruitment,
-            ]);
-            if(!$mailBody){
-                throw new FileNotFoundException('emails/recruitment_user_new.html.twig');
-            }
-            $user = $this->getUser();
-            $name = $user->getFirstName() . ' ' .$user->getLastName();
-            $mailBodyPersonalized = str_replace('user',$name, $mailBody);
-            $mailManager->sendEmail($mailBodyPersonalized,['subject' => 'tytul'],$user->getEmail(),$mailer);
+            return $this->render('front/recruitment_user_new.html.twig',array(
+                'form'=> $form->createView(),
+                'recruitment' => $recruitment
+            ));
+        }else{
+            $this->session->getFlashBag()->add('success', 'Uzupełnij dane by móc kontynuować składanie oferty.');
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($recruitmentUsers);
-            $em->flush();
-            $this->session->getFlashBag()->add('success', 'Oferta na nabór została dodana');
-
-            return $this->redirectToRoute('front_user_account');
+            return $this->redirectToRoute('front_user_update',['recruitmentId' => $recruitmentId]);
         }
-
-        return $this->render('front/recruitment_user_new.html.twig',array(
-            'form'=> $form->createView(),
-            'recruitment' => $recruitment
-        ));
     }
 
     public function getAgreement($id)

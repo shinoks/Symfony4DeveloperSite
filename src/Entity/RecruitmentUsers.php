@@ -196,7 +196,8 @@ class RecruitmentUsers
 
     public function getCashBackDate()
     {
-        return date_add($this->acceptedDate,new \DateInterval('P' . $this->investmentPeriod . 'M'));
+        return $this->payedDate->modify('+' . $this->investmentPeriod . ' month');
+        //return date_add($this->payedDate,new \DateInterval('P' . $this->investmentPeriod . 'M'));
     }
     /**
      * @return mixed
@@ -298,7 +299,14 @@ class RecruitmentUsers
     {
         return null === $this->agreementPath
             ? null
-            : $this->getUploadRootDir().'/'.$this->agreementPath;
+            : $this->getUploadRootDir() . '/' . $this->agreementPath;
+    }
+
+    public function getAbsoluteAttachementPath($url)
+    {
+        return null === $this->agreementPath
+            ? null
+            : $this->getUploadRootDir() . '/' . $this->getNumber() . $url;
     }
 
     public function getUploadRootDir()
@@ -329,7 +337,7 @@ class RecruitmentUsers
     /**
      * @return mixed
      */
-    public function getisActive()
+    public function getIsActive()
     {
         return $this->isActive;
     }
@@ -340,6 +348,33 @@ class RecruitmentUsers
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
+    }
+
+    public function getAmountOfInterest()
+    {
+        $daysDiff = $this->getDaysOfInvestment();
+        $interest = $this->getInterest();
+        $payedAmount= $this->getPayedAmount();
+        $amount = round($daysDiff * (($interest/100)/365) * $payedAmount,2);
+
+        return $amount;
+    }
+
+    public function getDaysOfInvestment()
+    {
+        $end = $this->getEndDate();
+
+        if($end == null){
+            $end = new \DateTime("now");
+        }
+        if($this->getPayedDate()){
+            $daysOfInvestment = date_diff($this->getPayedDate(),$end)->d;
+
+            return $daysOfInvestment;
+        }else {
+
+            return 0;
+        }
     }
 
 }

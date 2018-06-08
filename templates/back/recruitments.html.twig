@@ -56,7 +56,8 @@
                         <th>Usuń</th>
                     </thead>
                     <tbody>
-                    {% for recruitment in pagination %}
+
+                    {% for recruitment in pag %}
                         <tr>
                             <td>{{ recruitment[0].id }}</td>
                             <td>{{ recruitment[0].name }}</td>

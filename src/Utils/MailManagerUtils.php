@@ -28,7 +28,7 @@ class MailManagerUtils
      *
      * @return  boolean                 send status
      */
-    public function sendEmail($template, $parameters, $to, \Swift_Mailer $mailer, $file = null)
+    public function sendEmail($template, $parameters, $to, \Swift_Mailer $mailer, $files = null)
     {
         $this->config = $this->em->getRepository(Config::class)->findOneBy(['id'=>'1']);
         $from = $this->config->getEmail();
@@ -43,9 +43,10 @@ class MailManagerUtils
                 ->setTo($to)
                 ->setBody($template, 'text/html')
             ;
-            if($file){
-
-                $message->attach(\Swift_Attachment::fromPath($file));
+            if($files){
+                foreach($files as $file){
+                    $message->attach(\Swift_Attachment::fromPath($file));
+                }
             }
             $response = $mailer->send($message);
 

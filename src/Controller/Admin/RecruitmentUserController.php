@@ -1,9 +1,12 @@
 <?php
 namespace App\Controller\Admin;
 
+use App\Entity\Article;
+use App\Entity\Config;
 use App\Entity\RecruitmentUsers;
 use App\Entity\RecruitmentUserStatus;
 use App\Form\RecruitmentUsersAdminType;
+use App\Utils\FilesUtils;
 use App\Utils\MailManagerUtils;
 use App\Utils\TcpdfUtils;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,7 +19,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use App\Form\RecruitmentUserType;
+use App\Form\RecruitmentUsersType;
 
 /**
  * Class RecruitmentUserController
@@ -80,7 +83,7 @@ class RecruitmentUserController extends Controller
             }
 
             return $this->render('back/recruitment_user_edit.html.twig',array(
-                'recruitment_users'=> $recruitmentUser,
+                'recruitmentUser'=> $recruitmentUser,
                 'form'=> $form->createView()
             ));
         }else {
@@ -107,23 +110,44 @@ class RecruitmentUserController extends Controller
                 ->find($status);
             if($recruitmentUserStatus){
                 $recruitmentUser->setStatus($recruitmentUserStatus);
+                if($recruitmentUserStatus->getIsDisabling() == 1){
+                    $recruitmentUser->setIsActive(0);
+                }else {
+                    $recruitmentUser->setIsActive(1);
+                }
+
+                if($recruitmentUserStatus->getIsEndingOffer() == 1){
+                    if(!$recruitmentUser->getEndDate()){
+                        $recruitmentUser->setEndDate(new \DateTime());
+                    }
+                }
+
+                if($recruitmentUserStatus->getIsFvGenerated() == 1){
+                    if(!$recruitmentUser->getAgreementPath()){
+                        try{
+                            $this->generateAgreement($recruitmentUser->getId());
+                            $this->generateRegulation($recruitmentUser->getId(),'-regulamin.pdf');
+                        }catch(FileException $exception){
+                            echo 'Błąd w generowaniu umowy '. $exception->getMessage();
+                        }
+                        if(!$recruitmentUser->getPayedDate()){
+                            $recruitmentUser->setPayedDate(new \DateTime());
+                        }
+                    }else {
+                        $this->session->getFlashBag()->add('danger', 'Umowa nie została wygenerowana ponownie/umowa już istnieje');
+                    }
+                }
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($recruitmentUser);
                 $em->flush();
 
-                if($recruitmentUserStatus->getIsFvGenerated() == 1){
-                    try{
-                        $this->generateAgreement($recruitmentUser->getId());
-                    }catch(FileException $exception){
-                        echo 'Umowa już istnieje'. $exception->getMessage();
-                    }
-                }
                 if($recruitmentUserStatus->getIsMailed() == 1){
+                    $files = null;
                     $mailManager = new MailManagerUtils($emi);
                     $template = 'emails/' . $recruitmentUserStatus->getMailTemplate();
                     $mailBody = $this->renderView($template,[
-                        'recruitment' => $recruitmentUser->getRecruitment(),
+                        'recruitment' => $recruitmentUser,
                     ]);
                     if(!$mailBody){
                         throw new FileNotFoundException($template);
@@ -133,14 +157,18 @@ class RecruitmentUserController extends Controller
                     $mailBodyPersonalized = str_replace('user',$name, $mailBody);
 
                     if($recruitmentUserStatus->getIsFvMailed() == 1){
-                       $file = $recruitmentUser->getAbsoluteAgreementPath();
+                       $files []= $recruitmentUser->getAbsoluteAgreementPath();
+                       $files []= $recruitmentUser->getAbsoluteAttachementPath('-regulamin.pdf');
+                       $filesManager = new FilesUtils();
+                       $files []= $filesManager->getFileUrl('Formularz_odstąpienia_od_umowy.pdf');
+                       $files []= $filesManager->getFileUrl('Pouczenie_o_możliwości_odstąpienia_od_umowy.pdf');
                     }
-                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status twojej oferty uległ zmianie'],$user->getEmail(),$mailer,$file);
+                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status twojej oferty uległ zmianie'],$user->getEmail(),$mailer,$files);
                 }
+
                 $this->session->getFlashBag()->add('success', 'Status oferty został zmieniony');
 
                 return $this->redirectToRoute('admin_recruitment_show',['id' => $recruitmentUser->getRecruitment()->getId()]);
-
             }else {
                 $this->session->getFlashBag()->add('danger', 'Status oferty nie został zmieniony');
             }
@@ -167,7 +195,7 @@ class RecruitmentUserController extends Controller
 
         $this->session->getFlashBag()->add('success', 'Oferta została wyłączona');
 
-        return $this->redirectToRoute('admin_recruitments');
+        return $this->redirectToRoute('admin_recruitment_show',['id' => $recruitmentUser->getRecruitment()->getId()]);
     }
 
     /**
@@ -251,13 +279,59 @@ class RecruitmentUserController extends Controller
             'recruitmentUser' => $recruitmentUser,
         ]);
         $tcpdf->writeHTML($html);
+        $tcpdf->AddPage();
+        $config = $this->getDoctrine()
+            ->getRepository(Config::class)
+            ->find(1);
+        $articleId = explode('/',$config->getRegulationsUrl())[1];
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->find($articleId);
+
+        $html = $article->getText();
+        $tcpdf->writeHTML($html);
         try{
             $tcpdf->Output($recruitmentUser->getAbsoluteAgreementPath(), 'F');
         } catch (FileNotWritableException $exception){
             echo 'Agreement was not created: '. $exception->getMessage();
         }
 
+        return true;
+    }
 
+    private function generateRegulation($recruitmentUserId,$url)
+    {
+        $tcpdf = new TcpdfUtils();
+        $recruitmentUser = $this->getDoctrine()
+            ->getRepository(RecruitmentUsers::class)
+            ->find($recruitmentUserId);
+
+        $fileSystem = new Filesystem();
+        $filePath = $recruitmentUser->getUploadRootDir();
+
+        if(!$fileSystem->exists($filePath)){
+            try{
+                $fileSystem->mkdir($filePath);
+            }catch (IOException $exception){
+                echo 'Error in dir creation'. $exception->getPath() . ' ' . $exception->getPath();
+            }
+        }
+        $tcpdf->AddPage();
+        $config = $this->getDoctrine()
+            ->getRepository(Config::class)
+            ->find(1);
+        $articleId = explode('/',$config->getRegulationsUrl())[1];
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->find($articleId);
+
+        $html = $article->getText();
+        $tcpdf->writeHTML($html);
+        try{
+            $tcpdf->Output($recruitmentUser->getAbsoluteAttachementPath($url), 'F');
+        } catch (FileNotWritableException $exception){
+            echo 'Agreement was not created: '. $exception->getMessage();
+        }
 
         return true;
     }

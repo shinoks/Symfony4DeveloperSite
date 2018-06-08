@@ -1,0 +1,101 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/leftPanel.html.twig' %}
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+    {% include 'back/header.html.twig' %}
+
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1>{{ 'user'|trans }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li class="active"><a href="{{ path('admin_users') }}">{{ 'users'|trans }}</a> > {{ 'user'|trans }}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'back/flashMessages.html.twig' %}
+
+    <div class="card">
+        <div class="card-body">
+            <section class="card">
+                <div class="card-header user-header alt bg-dark">
+                    <div class="media-body">
+                        <h2 class="text-light">
+                            {{ user.firstName }} {{ user.lastName }}
+                        </h2>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <b>{{ 'email'|trans }}:</b>
+                        {{ user.email }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'phone'|trans }}:</b>
+                        {{ user.phone }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'gender'|trans }}:</b>
+                        {{ user.gender }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'pesel'|trans }}:</b>
+                        {{ user.pesel }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'idNumber'|trans }}:</b>
+                        {{ user.idNumber }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'birthDate'|trans }}:</b>
+                        {{ user.birthDate|date('d-m-Y') }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'zip_code'|trans }}:</b>
+                        {{ user.zipCode }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'address'|trans }}:</b>
+                        {{ user.address }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'city'|trans }}:</b>
+                        {{ user.city }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'bank_account'|trans }}:</b>
+                        {{ user.bankAccount }}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'marketing_regulations'|trans }}:</b>
+                        {% if user.marketingRegulations == 1 %}
+                            Tak
+                        {% else %}
+                            Nie
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item">
+                        <b>{{ 'edit'|trans }}:</b>
+                        <a href="{{ path('admin_user_edit', {'id':user.id}) }}" class="btn btn-success">{{ 'edit'|trans }}</a>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+{% endblock %}

@@ -10,6 +10,7 @@
                 <div class="blog-lst col-md-12 pl0">
                     <h2><b>{{ 'make_an_offer_for_recruitment'|trans }}</b></h2>
 
+                    {% include 'front/addons/flashMessages.html.twig' %}
                     <div class="well">
                         <h3>{{ recruitment.0.name }}</h3>
                         <div class="row">
@@ -30,7 +31,7 @@
 
                     {{ form_start(form) }}
                     <div class="row">
-                        <div class="range-output">Kwota oferty: <span id="range-slider-value">1000</span> zł</div>
+                        <div class="range-output">Kwota oferty: <span id="range-slider-value">10000</span> zł</div>
                     </div>
                     <div class="row">
                         <div class="col-md-10">

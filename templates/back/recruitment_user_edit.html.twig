@@ -33,12 +33,19 @@
 
     <div class="card">
         <div class="card-body">
-            {% form_theme form 'form/default_admin.html.twig' %}
+            <div class="card card-body">
+                <h5>Użytkownik:</h5>
+                <a href="{{ path('admin_user_edit',{'id':recruitmentUser.user.id}) }}">{{ recruitmentUser.user.firstName }} {{ recruitmentUser.user.lastName }}</a><br/>
+            </div>
+            <div class="card card-body">
+                <h5>Dane oferty</h5>
+                {% form_theme form 'form/default_admin.html.twig' %}
 
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
 
-            {{ form_end(form) }}
+                {{ form_end(form) }}
+            </div>
         </div>
     </div>
     </div>

@@ -25,24 +25,32 @@ class RecruitmentUserStatus
     /**
      * @ORM\Column(type="boolean")
      */
+    private $isEndingOffer;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
     private $isFvMailed;
 
     /**
      * @ORM\Column(type="boolean")
      */
-
     private $isFvGenerated;
 
     /**
      * @ORM\Column(type="boolean")
      */
-
     private $isMailed;
 
     /**
      * @ORM\Column(type="string")
      */
     private $mailTemplate;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isDisabling;
 
     /**
      * @ORM\Column(type="boolean")
@@ -81,6 +89,22 @@ class RecruitmentUserStatus
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsEndingOffer()
+    {
+        return $this->isEndingOffer;
+    }
+
+    /**
+     * @param mixed $isEndingOffer
+     */
+    public function setIsEndingOffer($isEndingOffer): void
+    {
+        $this->isEndingOffer = $isEndingOffer;
     }
 
     /**
@@ -145,6 +169,22 @@ class RecruitmentUserStatus
     public function setMailTemplate($mailTemplate): void
     {
         $this->mailTemplate = $mailTemplate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsDisabling()
+    {
+        return $this->isDisabling;
+    }
+
+    /**
+     * @param mixed $isDisabling
+     */
+    public function setIsDisabling($isDisabling): void
+    {
+        $this->isDisabling = $isDisabling;
     }
 
     /**

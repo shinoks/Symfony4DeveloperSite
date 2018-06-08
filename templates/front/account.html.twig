@@ -38,14 +38,9 @@
                         </div>
                         <div id="menu4" class="tab-pane fade">
                             <div class="well">
-                                <div class="profile-header">
-                                    <h3>
-                                        <b>{{ 'recruitments'|trans }}</b><br/>
-                                    </h3>
-                                </div>
                                 <div class="">
                                     <table class="table table-bordered">
-                                        <thead>
+                                        <thead class="table-head">
                                         <tr>
                                             <th>{{ 'name'|trans }}</th>
                                             <th>{{ 'desired_amount'|trans }}</th>
@@ -57,7 +52,7 @@
                                             <th>{{ 'make_an_offer'|trans }}</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="table-content">
                                         {% for recruitment in recruitments %}
                                             <tr>
                                                 <td>{{ recruitment.0.name }}</td>
@@ -82,14 +77,9 @@
                         </div>
                         <div id="menu3" class="tab-pane fade">
                             <div class="well">
-                                <div class="profile-header">
-                                    <h3>
-                                        <b>{{ 'recruitments_user_offer'|trans }}</b><br/>
-                                    </h3>
-                                </div>
                                 <div class="">
                                     <table class="table table-bordered">
-                                        <thead>
+                                        <thead class="table-head">
                                         <tr>
                                             <th>{{ 'recruitment'|trans }}<br/><span style="font-size: 10px;">{{ 'click_for_detail'|trans }}</span> </th>
                                             <th>{{ 'status'|trans }}</th>
@@ -104,36 +94,30 @@
                                         </tr>
                                         </thead>
                                         {% for user in recruitmentUserOffers %}
-                                            <tr>
+                                            <tr class="table-content">
                                                 <td><a href="{{ path('front_user_recruitment_show',{'id':user.recruitment.id}) }}">{{ user.recruitment.name }}</a></td>
                                                 <td>{{ user.status.name }}</td>
                                                 <td>{{ user.declaredAmount }} zł</td>
                                                 <td>{% if user.payedAmount is empty %}0{% else %}{{ user.payedAmount }}{% endif %} zł</td>
                                                 <td>{{ user.investmentPeriod }} msc</td>
                                                 <td>{{ user.interest }} %</td>
-                                                <td>{% set difference = date("now").diff(date(user.payedDate)) %}
-                                                    {% set leftDays = difference.days %}
-                                                    {% if leftDays == 1 %}
-                                                        1 dni
-                                                    {% else %}
-                                                        {{ leftDays }} dni
-                                                    {% endif %}</td>
-                                                <td>
-                                                    {% set interestPerDay = ((user.interest/100)/365) * leftDays %}
-                                                    {% set inter = interestPerDay * user.payedAmount %}
-                                                    {{ inter|round(2) }} zł
-                                                </td>
+                                                <td>{% if user.status.isDisabling == 1 %}---{% else %}{{ user.daysOfInvestment }}{% endif %}</td>
+                                                <td>{% if user.status.isDisabling == 1 %}---{% else %}{{ user.amountOfInterest }} zł{% endif %}</td>
                                                 <td>{{ user.created|date('d-m-Y H:i:s') }}</td>
-                                                <td>
-                                                    {% if user.agreementPath is not null %}
-                                                        <a href="{{ path('admin_user_account_recruitment_user_get_agreement',{'id':user.id}) }}" class="btn btn-finish">{{ 'agreement.download_agreement'|trans }}</a>
-                                                    {% else %}
-                                                        {{ 'agreement.not_available'|trans }}
+                                                <td>{% if user.status.isDisabling == 1 %}---{% else %}
+                                                        {% if user.agreementPath is not null %}
+                                                            <a href="{{ path('admin_user_account_recruitment_user_get_agreement',{'id':user.id}) }}" class="btn btn-finish">{{ 'agreement.download_agreement'|trans }}</a>
+                                                        {% else %}
+                                                            {{ 'agreement.not_available'|trans }}
+                                                        {% endif %}
                                                     {% endif %}
                                                 </td>
                                             </tr>
                                         {% endfor %}
                                     </table>
+                                    <br/>
+                                    <a target="_blank" class="btn btn-default" href="{{ asset('attachement/Formularz_odstąpienia_od_umowy.pdf') }}">Formularz odstąpienia od umowy</a><br/>
+                                    <a target="_blank" class="btn btn-default" href="{{ asset('attachement/Pouczenie_o_możliwości_odstąpienia_od_umowy.pdf') }}">Pouczenie o możliwości odstąpienia od umowy</a>
                                 </div>
                             </div>
                         </div>

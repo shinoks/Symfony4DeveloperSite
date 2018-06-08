@@ -1,0 +1,164 @@
+{% set title = 'account'|trans %}
+{% extends 'front/base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script type="text/javascript">
+        var RecaptchaOptions = {
+            lang : 'pl'
+        };
+    </script>
+    <script language = "javascript"
+            src = "https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+    <script language = "javascript">
+        $(document).ready(function(){
+            $("#user_zipCode").change(function(){
+                var url = '{{ path("api_get_zip_code", {'zipCode': 'zip_code_get'}) }}';
+                var aa = url.replace("zip_code_get", this.value);
+                $.ajax({
+                    url:        aa,
+                    type:       'POST',
+                    dataType:   'json',
+                    async:      true,
+
+                    success: function(data) {
+                        $('#user_city').val(data.city)
+                    }
+                });
+            });
+        });
+    </script>
+    <script language = "javascript">
+        $(document).ready(function(){
+            $("#user_update_bankAccount").change(function(){
+                function NRBvalidatior(nrb) {
+                    nrb = nrb.replace(/[^0-9]+/g, '');
+                    var wagi = [1, 10, 3, 30, 9, 90, 27, 76, 81, 34, 49, 5, 50, 15, 53, 45, 62, 38, 89, 17, 73, 51, 25, 56, 75, 71, 31, 19, 93, 57];
+
+                    if (nrb.length == 26) {
+                        nrb = nrb + "2521";
+                        nrb = nrb.substr(2) + nrb.substr(0, 2);
+                        var Z = 0;
+                        for (var i = 0; i < 30; i++) {
+                            Z += nrb[29 - i] * wagi[i];
+                        }
+                        if (Z % 97 == 1) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+
+                    } else {
+                        return false;
+                    }
+                }
+
+                if (NRBvalidatior($(this).val())) {
+                    $(this).addClass('field_success');
+                    $(this).removeClass('field_error');
+                }
+                else {
+                    $(this).addClass('field_error');
+                    $(this).removeClass('field_success');
+                }
+            });
+        });
+    </script>
+    <script language = "javascript">
+
+        $(document).ready(function() {
+            $("#user_update_pesel").change(function() {
+                function PeselDecode(pesel)
+                {
+                    var rok=parseInt(pesel.substring(0,2),10);
+                    var miesiac = parseInt(pesel.substring(2,4),10)-1;
+                    var dzien = parseInt(pesel.substring(4,6),10);
+
+                    if(miesiac>80) {
+                        rok = rok + 1800;
+                        miesiac = miesiac - 80;
+                    }
+                    else if(miesiac > 60) {
+                        rok = rok + 2200;
+                        miesiac = miesiac - 60;
+                    }
+                    else if (miesiac > 40) {
+                        rok = rok + 2100;
+                        miesiac = miesiac - 40;
+                    }
+                    else if (miesiac > 20) {
+                        rok = rok + 2000;
+                        miesiac = miesiac - 20;
+                    }
+                    else
+                    {
+                        rok += 1900;
+                    }
+                    // Daty sa ok. Teraz ustawiamy.
+                    var urodzony=new Date();
+                    urodzony.setFullYear(rok, miesiac, dzien);
+
+                    // Teraz zweryfikujemy numer pesel
+                    // Metoda z wagami jest w sumie najszybsza do weryfikacji.
+                    var wagi = [9,7,3,1,9,7,3,1,9,7];
+                    var suma = 0;
+
+                    for(var i=0;i<wagi.length;i++) {
+                        suma+=(parseInt(pesel.substring(i,i+1),10) * wagi[i]);
+                    }
+                    suma=suma % 10;
+                    var valid=(suma===parseInt(pesel.substring(10,11),10));
+
+                    //plec
+                    var plec = '';
+                    if(parseInt(pesel.substring(9,10),10) % 2 === 1) {
+                        plec='m';
+                    } else {
+                        plec='k';
+                    }
+                    return {valid:valid,sex:plec,date:urodzony};
+                }
+                var wynik = PeselDecode(this.value);
+                if (!wynik.valid)
+                {
+                    $(this).addClass('field_error');
+                    $(this).removeClass('field_success');
+                }else {
+                    $(this).addClass('field_success');
+                    $(this).removeClass('field_error');
+                }
+            });
+        });
+    </script>
+{% endblock %}
+{% block body %}
+    {% include 'front/addons/top.html.twig' %}
+
+    <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
+        <div class="container">
+            <div class="row">
+                <div class="blog-lst col-md-12 pl0">
+
+                    {% include 'front/addons/flashMessages.html.twig' %}
+                    <div class="profile-header">
+                        <h3>
+                            <b>{{ 'yours_account'|trans }}</b><br/>
+                        </h3>
+                    </div>
+                    <div class="col-md-6">
+                        {% form_theme form 'form/default_user.html.twig' %}
+
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

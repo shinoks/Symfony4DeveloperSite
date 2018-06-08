@@ -35,4 +35,69 @@ class RecruitmentUsersRepository extends ServiceEntityRepository
             ;
     }
 
+    public function getRecruitmentUsersDeclaredAmountSumByRecruitmentAndIsActive($recruitmentId)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('sum(r.declaredAmount) as declaredAmount,recruitment.id')
+            ->leftJoin('r.recruitment','recruitment')
+            ->where('r.isActive = :is_active')->setParameter('is_active', $isActive)
+            ->andWhere('recruitment.id = :recruitmentId')->setParameter('recruitmentId', $recruitmentId)
+            ->orderBy('recruitment.id', 'DESC')
+            ->groupBy('recruitment.id')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function getRecruitmentUsersDeclaredAmountSumByIsActive($isActive)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('sum(r.declaredAmount) as declaredAmount,sum(r.payedAmount) as payedAmount,recruitment.id')
+            ->leftJoin('r.recruitment','recruitment')
+            ->where('r.isActive = :is_active')->setParameter('is_active', $isActive)
+            ->orderBy('recruitment.id', 'DESC')
+            ->groupBy('recruitment.id')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+    public function getRecruitmentSumDeclaredAndPayed($rId)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('sum(r.declaredAmount) as declaredAmount,sum(r.payedAmount) as payedAmount,recruitment.id')
+            ->leftJoin('r.recruitment','recruitment')
+            ->where('recruitment = :id')->setParameter('id', $rId)
+            ->orderBy('recruitment.id', 'DESC')
+            ->groupBy('recruitment.id')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function count(array $criteria = null)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('count(r.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
+    public function sumDeclaredAmount()
+    {
+        return $this->createQueryBuilder('z')
+            ->select('sum(z.declaredAmount)')
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
+    public function sumPayedAmount()
+    {
+        return $this->createQueryBuilder('z')
+            ->select('sum(z.payedAmount)')
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
 }

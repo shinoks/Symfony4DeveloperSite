@@ -70,16 +70,15 @@
                         <th>{{ 'amount_of_days'|trans }}</th>
                         <th>{{ 'amount_of_interest'|trans }}</th>
                         <th>{{ 'created'|trans }}</th>
-                        <th>{{ 'agreement'|trans }}</th>
-                        <th>Edytuj</th>
-                        <th>Wyłącz</th>
+                        <th>{{ 'agreement.agreement'|trans }}</th>
+                        <th>{{ 'edit'|trans }}</th>
                         <th>Usuń</th>
                     </tr>
                 </thead>
                 {% for user in recruitmentUsers %}
                     <tr>
                         <td>{{ user.id }}</td>
-                        <td><a href="{{ path('admin_recruitment_user_edit',{'id':user.id}) }}">{{ user.user.firstName }} {{ user.user.lastName }}</a></td>
+                        <td><a href="{{ path('admin_user_show',{'id':user.user.id}) }}">{{ user.user.firstName }} {{ user.user.lastName }}</a></td>
                         <td><form class="form" action="#">
                                 <select id="recruitment_user_status" name="{{ user.id }}">
                                     <option value="{{ user.status.id }}">{{ user.status.name }}</option>
@@ -93,30 +92,14 @@
                         <td>{{ user.payedAmount }} zł</td>
                         <td>{{ user.investmentPeriod }} msc</td>
                         <td>{{ user.interest }} %</td>
-                        <td>{% set difference = date("now").diff(date(user.payedDate)) %}
-                            {% set leftDays = difference.days %}
-                            {% if leftDays == 1 %}
-                                1 dni
-                            {% else %}
-                                {{ leftDays }} dni
-                            {% endif %}</td>
-                        <td>
-                            {% set interestPerDay = ((user.interest/100)/365) * leftDays %}
-                            {% set inter = interestPerDay * user.payedAmount %}
-                            {{ inter|round(2) }} zł
-                        </td>
-                        <td><a href="{{ path('admin_recruitment_user_edit', { 'id':user.id,'status':0 }) }}" class="btn btn-default">Edytuj</a></td>
+                        <td>{{ user.daysOfInvestment }}</td>
+                        <td>{{ user.amountOfInterest }} zł</td>
                         <td>{{ user.created|date('d-m-Y H:i:s') }}</td>
                         {% if user.agreementPath is not empty %}
                             <td><a target="_blank" href="{{ path('admin_recruitment_user_get_agreement', { 'id':user.id }) }}" class="btn btn-default">Pobierz</a></td>
                         {% else %}
                             <td>{{ 'agreement.not_available'|trans }}</td>
-                        {% endif %}
-                        {% if recruitment.isActive == 1 %}
-                            <td><a href="{{ path('admin_recruitment_user_disable', { 'id':user.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
-                        {% else %}
-                            <td><a href="{{ path('admin_recruitment_user_disable', { 'id':user.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
-                        {% endif %}
+                        {% endif %}<td><a href="{{ path('admin_recruitment_user_edit',{'id':user.id}) }}" class="btn btn-success">{{ 'recruitment_user_edit'|trans }}</a></td>
                         <td><a href="{{ path('admin_recruitment_user_delete', { 'id':user.id }) }}" class="btn btn-danger">Usuń</a></td>
                     </tr>
                 {% endfor %}

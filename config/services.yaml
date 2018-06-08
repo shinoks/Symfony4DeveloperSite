@@ -4,6 +4,8 @@ parameters:
     file_directory: '../%public_dir%/uploads/files'
     image_directory: 'uploads/files'
     number_of_latest_news: 3
+    recaptcha_secret_key: '6Lf7OFwUAAAAABAqOWl9M-tgRugPlO7vKPmm7W6T'
+    recaptcha_public_key: '6Lf7OFwUAAAAAFOa6v8rxkM_xvUWFVTVrt-quxR8'
 
 services:
     _defaults:
@@ -46,6 +48,11 @@ services:
 
     App\Utils\MailManager:
         arguments: ['@doctrine.orm.entity_manager']
+
+    App\Utils\RecaptchaUtils:
+        arguments:
+          $recaptchaSecretKey: '%recaptcha_secret_key%'
+          $recaptchaPublicKey: '%recaptcha_public_key%'
 
 artgris_file_manager:
     web_dir: "%public_dir%"

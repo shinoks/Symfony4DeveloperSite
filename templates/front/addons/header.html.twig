@@ -35,23 +35,23 @@
         <div class="collapse navbar-collapse yamm" id="navigation">
             <div class="button navbar-right">
                 {% if app.user %}
-                    <a class="navbar-btn nav-button-orange wow bounceInRight login" href="{{ path('front_user_account') }}" data-wow-delay="0.45s">{{ 'account'|trans }}</a>
-                    <a class="navbar-btn nav-button wow bounceInRight login" href="{{ path('logout') }}" data-wow-delay="0.45s">{{ 'logout'|trans }}</a>
+                    <a class="navbar-btn nav-button-orange login" href="{{ path('front_user_account') }}">{{ 'account'|trans }}</a>
+                    <a class="navbar-btn nav-button login" href="{{ path('logout') }}">{{ 'logout'|trans }}</a>
                 {% else %}
-                    <a class="navbar-btn nav-button wow bounceInRight login" href="{{ path('login') }}" data-wow-delay="0.45s">{{ 'login'|trans }}</a>
+                    <a class="navbar-btn nav-button login" href="{{ path('login') }}">{{ 'login'|trans }}</a>
                 {% endif %}
             </div>
             <ul class="main-nav nav navbar-nav navbar-right">
                 {% if menu.getActiveMainMenu is not empty %}{% set activeMenu = menu.getActiveMainMenu.getId %}{% endif %}
                 {% if menu.getMainMenu is not empty %}
-                    {% for menuItem in menu.getMenu %}
+                    {% for menuItem in menu.getMainMenu %}
                         {% set caret = '' %}
                         {% set attr = '' %}
                         {% if menuItem.childrens is not empty %}
                             {% set caret = '<b class="caret"></b>' %}
                             {% set attr = ' class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0.6s" ' %}
                         {% endif %}
-                         <li class="{% if menu.getActiveMainMenu is not empty %}{% if menuItem.id == activeMenu %}active{% endif %}{% endif %} wow fadeInDown" data-wow-delay="0.3s">
+                         <li class="{% if menu.getActiveMainMenu is not empty %}{% if menuItem.id == activeMenu %}active{% endif %}{% endif %} ">
                             <a {{ attr|raw }} href="{{ menuItem.href }}">{{ menuItem.name }}{{ caret|raw }}</a>
                                 {% if menuItem.childrens is not empty %}
                                     <ul class="dropdown-menu navbar-nav">

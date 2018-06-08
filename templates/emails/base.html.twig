@@ -65,8 +65,7 @@
         <div class="container">
             <div class="row">
                 <div class="pull-left">
-                    {{ config.config.title }}<br/>
-                    {{ config.config.footer }}
+                    {{ config.config.footer|striptags }}
                 </div>
             </div>
         </div>
