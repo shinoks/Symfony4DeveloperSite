@@ -16,4 +16,13 @@ class SubscriberRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Subscriber::class);
     }
+
+    public function count(array $criteria = null)
+    {
+        return $this->createQueryBuilder('z')
+            ->select('count(z.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
 }

@@ -2,7 +2,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\RecruitmentUsers;
+use App\Entity\Subscriber;
 use App\Entity\User;
+use App\Repository\SubscriberRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -35,11 +37,16 @@ class DefaultController extends Controller
             ->getRepository(RecruitmentUsers::class)
             ->sumPayedAmount();
 
+        $subscriberCount = $this->getDoctrine()
+            ->getRepository(Subscriber::class)
+            ->count();
+
         return $this->render('back/start.html.twig',[
             'usersCount' => $usersCount,
             'recruitmentUsersCount' => $recruitmentUsersCount,
             'recruitmentUsersSumDeclaredAmount' => $recruitmentUsersSumDeclaredAmount,
             'recruitmentUsersSumPayedAmount' => $recruitmentUsersSumPayedAmount,
+            'subscriberCount' => $subscriberCount
         ]);
     }
 
