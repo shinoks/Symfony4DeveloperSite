@@ -3235,3 +3235,11 @@ input[type=range]:focus::-ms-fill-lower {
 input[type=range]:focus::-ms-fill-upper {
     background: #50555C;
 }
+.field_success{
+    border: 1px solid #7ab800;
+    background: #DFF0D8;
+}
+.field_error{
+    border: 1px solid #8b0000;
+    background: #f9dadd;
+}

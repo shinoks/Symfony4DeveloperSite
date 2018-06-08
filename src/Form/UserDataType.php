@@ -15,6 +15,7 @@ class UserDataType extends AbstractType
         $builder
         ->add('phone',TelType::class,['label'=>'phone','required' => true])
         ->add('pesel',NumberType::class,['label'=>'pesel'])
+        ->add('idNumber',NumberType::class,['label'=>'id_number'])
         ->add('zipCode',TextType::class,['label'=>'zip_code'])
         ->add('address',TextType::class,['label'=>'address'])
         ->add('city',TextType::class,['label'=>'city'])

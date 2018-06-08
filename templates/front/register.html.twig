@@ -18,86 +18,27 @@
 
     <script language = "javascript">
         $(document).ready(function(){
-            $("#user_zipCode").change(function(){
-                var url = '{{ path("api_get_zip_code", {'zipCode': 'zip_code_get'}) }}';
-                var aa = url.replace("zip_code_get", this.value);
-                $.ajax({
-                    url:        aa,
-                    type:       'POST',
-                    dataType:   'json',
-                    async:      true,
-
-                    success: function(data, status) {
-                        $('#user_city').val(data.city)
-                    },
-                    error : function(xhr, textStatus, errorThrown) {
-                        alert('Ajax request failed.'+aa);
+            $("#user_email").change(function(){
+                    var email = /[a-zA-Z_0-9\.]+@[a-zA-Z_0-9\.]+\.[a-zA-Z][a-zA-Z]+/
+                    if (email.test($(this).val())){
+                        $(this).addClass('field_success');
+                        $(this).removeClass('field_error');
                     }
-                });
+                    else {
+                        $(this).addClass('field_error');
+                        $(this).removeClass('field_success');
+                    }
             });
-        });
-    </script>
-    <script language = "javascript">
 
-        $(document).ready(function() {
-            $("#user_pesel").change(function() {
-                function PeselDecode(pesel)
-                {
-                    var rok=parseInt(pesel.substring(0,2),10);
-                    var miesiac = parseInt(pesel.substring(2,4),10)-1;
-                    var dzien = parseInt(pesel.substring(4,6),10);
-
-                    if(miesiac>80) {
-                        rok = rok + 1800;
-                        miesiac = miesiac - 80;
+            $("#user_password").change(function(){
+                    if ($(this).val().length > 7){
+                        $(this).addClass('field_success');
+                        $(this).removeClass('field_error');
                     }
-                    else if(miesiac > 60) {
-                        rok = rok + 2200;
-                        miesiac = miesiac - 60;
+                    else {
+                        $(this).addClass('field_error');
+                        $(this).removeClass('field_success');
                     }
-                    else if (miesiac > 40) {
-                        rok = rok + 2100;
-                        miesiac = miesiac - 40;
-                    }
-                    else if (miesiac > 20) {
-                        rok = rok + 2000;
-                        miesiac = miesiac - 20;
-                    }
-                    else
-                    {
-                        rok += 1900;
-                    }
-                    // Daty sa ok. Teraz ustawiamy.
-                    var urodzony=new Date();
-                    urodzony.setFullYear(rok, miesiac, dzien);
-
-                    // Teraz zweryfikujemy numer pesel
-                    // Metoda z wagami jest w sumie najszybsza do weryfikacji.
-                    var wagi = [9,7,3,1,9,7,3,1,9,7];
-                    var suma = 0;
-
-                    for(var i=0;i<wagi.length;i++) {
-                        suma+=(parseInt(pesel.substring(i,i+1),10) * wagi[i]);
-                    }
-                    suma=suma % 10;
-                    var valid=(suma===parseInt(pesel.substring(10,11),10));
-
-                    //plec
-                    var plec = '';
-                    if(parseInt(pesel.substring(9,10),10) % 2 === 1) {
-                        plec='m';
-                    } else {
-                        plec='k';
-                    }
-                    return {valid:valid,sex:plec,date:urodzony};
-                }
-                var wynik = PeselDecode(this.value);
-                if (!wynik.valid)
-                {
-                    // alert('Błędny pesel');
-                }else {
-                    //  alert('Poprawny pesel');
-                }
             });
         });
     </script>
