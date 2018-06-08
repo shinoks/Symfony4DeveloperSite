@@ -45,3 +45,5 @@ App\Entity\User:
             - App\Validator\Constraints\Pesel: ~
         idNumber:
             - App\Validator\Constraints\IdNumber: ~
+        bankAccount:
+            - App\Validator\Constraints\BankAccount: ~
