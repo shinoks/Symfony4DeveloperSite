@@ -52,6 +52,7 @@
                             <th>{{ 'amount_of_interest'|trans }}</th>
                             <th>{{ 'created'|trans }}</th>
                             <th>{{ 'agreement.agreement'|trans }}</th>
+                            <th>{{ 'edit'|trans }}</th>
                             <th>Usuń</th>
                         </tr>
                     </thead>
@@ -60,7 +61,7 @@
                             <tr>
                                 <td>{{ recruitment.id }}</td>
                                 <td><a href="{{ path('admin_recruitment_show',{'id':recruitment.recruitment.id}) }}">{{ recruitment.recruitment.name }}</a></td>
-                                <td><a href="{{ path('admin_recruitment_user_edit',{'id':recruitment.id}) }}">{{ recruitment.user.firstName }} {{ recruitment.user.lastName }} </a></td>
+                                <td><a href="{{ path('admin_user_show',{'id':recruitment.user.id}) }}">{{ recruitment.user.firstName }} {{ recruitment.user.lastName }} </a></td>
                                 <td><form class="form" action="#">
                                         <select id="recruitment_user_status" name="{{ recruitment.id }}">
                                             <option value="{{ recruitment.status.id }}">{{ recruitment.status.name }}</option>
@@ -82,6 +83,7 @@
                                 {% else %}
                                     <td>{{ 'agreement.not_available'|trans }}</td>
                                 {% endif %}
+                                <td><a href="{{ path('admin_recruitment_user_edit', { 'id':recruitment.id }) }}" class="btn btn-success">{{ 'edit'|trans }}</a></td>
                                 <td><a href="{{ path('admin_recruitment_user_delete', { 'id':recruitment.id }) }}" class="btn btn-danger">Usuń</a></td>
                             </tr>
                         {% endfor %}

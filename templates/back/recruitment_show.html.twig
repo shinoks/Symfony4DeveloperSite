@@ -70,15 +70,15 @@
                         <th>{{ 'amount_of_days'|trans }}</th>
                         <th>{{ 'amount_of_interest'|trans }}</th>
                         <th>{{ 'created'|trans }}</th>
-                        <th>{{ 'agreement'|trans }}</th>
-                        <th>Edytuj</th>
+                        <th>{{ 'agreement.agreement'|trans }}</th>
+                        <th>{{ 'edit'|trans }}</th>
                         <th>Usuń</th>
                     </tr>
                 </thead>
                 {% for user in recruitmentUsers %}
                     <tr>
                         <td>{{ user.id }}</td>
-                        <td><a href="{{ path('admin_recruitment_user_edit',{'id':user.id}) }}">{{ user.user.firstName }} {{ user.user.lastName }}</a></td>
+                        <td><a href="{{ path('admin_user_show',{'id':user.user.id}) }}">{{ user.user.firstName }} {{ user.user.lastName }}</a></td>
                         <td><form class="form" action="#">
                                 <select id="recruitment_user_status" name="{{ user.id }}">
                                     <option value="{{ user.status.id }}">{{ user.status.name }}</option>
@@ -94,8 +94,8 @@
                         <td>{{ user.interest }} %</td>
                         <td>{{ user.daysOfInvestment }}</td>
                         <td>{{ user.amountOfInterest }} zł</td>
-                        <td><a href="{{ path('admin_recruitment_user_edit', { 'id':user.id,'status':0 }) }}" class="btn btn-default">Edytuj</a></td>
                         <td>{{ user.created|date('d-m-Y H:i:s') }}</td>
+                        <td><a href="{{ path('admin_recruitment_user_edit',{'id':user.id}) }}" class="btn btn-success">{{ 'recruitment_user_edit'|trans }}</a></td>
                         {% if user.agreementPath is not empty %}
                             <td><a target="_blank" href="{{ path('admin_recruitment_user_get_agreement', { 'id':user.id }) }}" class="btn btn-default">Pobierz</a></td>
                         {% else %}

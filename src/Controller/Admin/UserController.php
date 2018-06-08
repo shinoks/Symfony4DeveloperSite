@@ -29,6 +29,20 @@ class UserController extends Controller
     /**
      * @return Response
      */
+    public function show($id)
+    {
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->find($id);
+
+        return $this->render('back/user_show.html.twig',array(
+            'user'=> $user
+        ));
+    }
+
+    /**
+     * @return Response
+     */
     public function users()
     {
         $users = $this->getDoctrine()
