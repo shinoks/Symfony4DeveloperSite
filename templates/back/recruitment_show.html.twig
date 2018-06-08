@@ -95,12 +95,11 @@
                         <td>{{ user.daysOfInvestment }}</td>
                         <td>{{ user.amountOfInterest }} zł</td>
                         <td>{{ user.created|date('d-m-Y H:i:s') }}</td>
-                        <td><a href="{{ path('admin_recruitment_user_edit',{'id':user.id}) }}" class="btn btn-success">{{ 'recruitment_user_edit'|trans }}</a></td>
                         {% if user.agreementPath is not empty %}
                             <td><a target="_blank" href="{{ path('admin_recruitment_user_get_agreement', { 'id':user.id }) }}" class="btn btn-default">Pobierz</a></td>
                         {% else %}
                             <td>{{ 'agreement.not_available'|trans }}</td>
-                        {% endif %}
+                        {% endif %}<td><a href="{{ path('admin_recruitment_user_edit',{'id':user.id}) }}" class="btn btn-success">{{ 'recruitment_user_edit'|trans }}</a></td>
                         <td><a href="{{ path('admin_recruitment_user_delete', { 'id':user.id }) }}" class="btn btn-danger">Usuń</a></td>
                     </tr>
                 {% endfor %}
