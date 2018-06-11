@@ -137,6 +137,7 @@ class UserController extends Controller
             ->findRecruitmentsForUsers();
 
         return $this->render('front/account.html.twig',array(
+            'user' => $user,
             'recruitments' => $recruitments,
             'recruitmentUserOffers' => $recruitmentUserOffers
         ));

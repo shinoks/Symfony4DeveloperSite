@@ -20,19 +20,24 @@
                     <div class="tab-content">
                         <div id="home" class="tab-pane fade in active">
                             <div class="well">
-                                <div class="profile-header">
-                                    <h3>
-                                        <b>{{ 'yours_account'|trans }}</b><br/>
-                                    </h3>
-                                </div>
-                                <div class="">
-                                    <label>{{ 'first_name'|trans }}:</label>
-                                    {{ app.user.firstName }}<br/>
-                                    <label>{{ 'last_name'|trans }}:</label>
-                                    {{ app.user.lastName }}<br/>
-                                    <label>{{ 'email'|trans }}:</label>
-                                    {{ app.user.email }}<br/>
-                                </div>
+                                <table class="table table-bordered">
+                                    <thead class="table-head">
+                                    <tr>
+                                        <th>{{ 'first_name'|trans }}</th>
+                                        <th>{{ 'last_name'|trans }}</th>
+                                        <th>{{ 'birth_date'|trans }}</th>
+                                        <th>{{ 'phone'|trans }}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="table-content">
+                                        <tr>
+                                            <td>{{ user.firstName }} </td>
+                                            <td>{{ user.lastName }} </td>
+                                            <td>{{ user.birthDate|date('d-m-Y') }} </td>
+                                            <td>{{ user.phone }} </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 <a class="btn btn-default btn-border" href="{{ path('front_user_account_edit') }}">{{ 'edit'|trans }}</a>
                             </div>
                         </div>
