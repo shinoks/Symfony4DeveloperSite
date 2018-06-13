@@ -159,7 +159,7 @@ recruitment_user_status_edit: Edycja statusu oferty do naboru
 agreement:
     agreement: Umowa
     download_agreement: Pobierz umowę
-    not_available: Umowa nie dostępna
+    not_available: Umowa niedostępna
 is_fv_generated: Czy fv ma być generowana
 is_fv_mailed: Czy fv na email
 recruitment_user: Oferta naboru
