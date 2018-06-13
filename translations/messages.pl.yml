@@ -84,7 +84,6 @@ looking_for_investor: Szukasz inwestora
 questions: Pytania
 call_us: Zadzwoń do Nas
 links: Linki
-newsletter: Newsletter
 selling_price: Kwota sprzedaży
 currency: Waluta
 volume: Rynek
@@ -191,6 +190,7 @@ mail_admin_template: Szablon maila do adminów
 mail_users_template: Szablon maila do użytkowników
 footer: Stopka
 gender: Pan/Pani
+send_date: Data wysłania
 password:
     password: Hasło
     dont_remember: Nie pamiętasz hasła?
@@ -222,3 +222,10 @@ button:
     delete:
         selected: Usuń wybrane
         action: Akcje
+newsletter:
+    newsletter: Newsletter
+    newsletters: Newslettery
+    new: Nowy newsletter
+    list: Lista newsletterów
+email_queue:
+    emails_queue: Kolejka maili do wysłania

@@ -100,4 +100,14 @@ class RecruitmentUsersRepository extends ServiceEntityRepository
             ->getSingleScalarResult()
             ;
     }
+
+    public function distinctUserFromRecruitment($recruitmentId)
+    {
+        return $this->createQueryBuilder('z')
+            ->select('DISTINCT(z.user)')
+            ->where('z.recruitment = :id')->setParameter('id',$recruitmentId)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

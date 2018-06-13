@@ -37,6 +37,16 @@ class Newsletter
     private $isActive;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\EmailQueue", mappedBy="newsletter")
+     */
+    private $emails;
+
+    public function __construct()
+    {
+        $this->created = new \DateTime('now');
+    }
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -107,4 +117,21 @@ class Newsletter
     {
         $this->isActive = $isActive;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEmails()
+    {
+        return $this->emails;
+    }
+
+    /**
+     * @param mixed $emails
+     */
+    public function setEmails($emails): void
+    {
+        $this->emails = $emails;
+    }
+
 }

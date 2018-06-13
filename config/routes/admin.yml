@@ -98,3 +98,11 @@ admin_module_genus:
     resource: "admin/module_genus.yml"
     prefix: /module_genus
 
+admin_newsletter:
+    resource: "admin/newsletter.yml"
+    prefix: /newsletter
+
+admin_email_queue:
+    resource: "admin/email_queue.yml"
+    prefix: /email_queue
+

@@ -34,4 +34,14 @@ class UserRepository extends ServiceEntityRepository
             ->getSingleScalarResult()
             ;
     }
+
+    public function findAllActive()
+    {
+        return $this->createQueryBuilder('z')
+            ->select('DISTINCT(z.email),z')
+            ->where('z.isActive = :id')->setParameter('id',1)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

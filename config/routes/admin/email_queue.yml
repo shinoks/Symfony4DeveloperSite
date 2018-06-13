@@ -1,0 +1,15 @@
+admin_emails_queue:
+    path: /
+    controller: App\Controller\Admin\EmailQueueController::emailsQueue
+
+admin_emails_queue_index:
+    path: /paginator
+    controller: App\Controller\Admin\EmailQueueController::emailsQueue
+
+admin_email_queue_new:
+    path: /new
+    controller: App\Controller\Admin\EmailQueueController::new
+
+admin_email_queue_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\EmailQueueController::delete

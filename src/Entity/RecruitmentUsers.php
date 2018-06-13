@@ -196,8 +196,7 @@ class RecruitmentUsers
 
     public function getCashBackDate()
     {
-        return $this->payedDate->modify('+' . $this->investmentPeriod . ' month');
-        //return date_add($this->payedDate,new \DateInterval('P' . $this->investmentPeriod . 'M'));
+        return $this->acceptedDate->modify('+' . $this->investmentPeriod . ' month');
     }
     /**
      * @return mixed

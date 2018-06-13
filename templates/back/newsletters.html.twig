@@ -1,0 +1,80 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/leftPanel.html.twig' %}
+
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        {% include 'back/header.html.twig' %}
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>{{ 'newsletter.newsletters_list'|trans }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">{{ 'newsletter.newsletter'|trans }} > {{ 'newsletter.newsletters_list'|trans }}</li>
+                        </ol>
+                        <div class="page-header float-right">
+                            <a href="{{ path('admin_newsletter_new') }}"><i class="fa fa-plus text-dark"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'back/flashMessages.html.twig' %}
+
+        <div class="content mt-3">
+            <div class="animated fade-in">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>{{ knp_pagination_sortable(pagination, 'Id', 'id') }}</th>
+                            <th{% if pagination.isSorted('title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'title'|trans, 'name') }}</th>
+                            <th{% if pagination.isSorted('isActive') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Wyłącz', 'isActive') }}</th>
+                            <th>{{ 'edit'|trans }}</th>
+                            <th>Usuń</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for newsletter in pagination %}
+                            <tr>
+                                <td>{{ newsletter.id }}</td>
+                                <td>{{ newsletter.title }}</td>
+                                {% if newsletter.isActive == 1 %}
+                                    <td><a href="{{ path('admin_newsletter_disable', { 'id':newsletter.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                                {% else %}
+                                    <td><a href="{{ path('admin_newsletter_disable', { 'id':newsletter.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                                {% endif %}
+                                <td><a href="{{ path('admin_newsletter_edit', { 'id':newsletter.id }) }}" class="btn btn-success">{{ 'edit'|trans }}</a></td>
+                                <td><a href="{{ path('admin_newsletter_delete', { 'id':newsletter.id }) }}" class="btn btn-danger">Usuń</a></td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation">
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </nav>
+            </div>
+        </div>
+        </div>
+        <!--/.col-->
+
+{% endblock %}
+

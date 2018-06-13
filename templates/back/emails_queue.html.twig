@@ -1,0 +1,115 @@
+{% extends 'back/base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+
+    <script language = "javascript"
+            src = "https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+    <script language = "javascript">
+        $(document).ready(function(){
+            $("#user_zipCode").change(function(){
+                var url = '';
+                var aa = url.replace("zip_code_get", this.value);
+                $.ajax({
+                    url:        aa,
+                    type:       'POST',
+                    dataType:   'json',
+                    async:      true,
+
+                    success: function(data) {
+                        $('#user_city').val(data.city)
+                    }
+                });
+            });
+        });
+    </script>
+
+{% endblock %}
+
+{% block body %}
+
+    {% include 'back/leftPanel.html.twig' %}
+
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        {% include 'back/header.html.twig' %}
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>{{ 'email_queue.emails_queue'|trans }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">{{ 'email_queue.emails_queue'|trans }} </li>
+                        </ol>
+                        <div class="page-header float-right">
+                            <a href="{{ path('admin_email_queue_new') }}"><i class="fa fa-plus text-dark"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'back/flashMessages.html.twig' %}
+
+        <div class="content mt-3">
+            <div class="animated fade-in">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>{{ knp_pagination_sortable(pagination, 'Id', 'id') }}</th>
+                            <th{% if pagination.isSorted('newsletter') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'newsletter'|trans, 'newsletter') }}</th>
+                            <th{% if pagination.isSorted('name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'name'|trans, 'name') }}</th>
+                            <th{% if pagination.isSorted('email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'email'|trans, 'email') }}</th>
+                            <th{% if pagination.isSorted('send') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'send'|trans, 'send') }}</th>
+                            <th>{{ 'created'|trans }}</th>
+                            <th>{{ 'send_date'|trans }}</th>
+                            <th>{{ 'edit'|trans }}</th>
+                            <th>Usuń</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for emails_queue in pagination %}
+                            <tr>
+                                <td>{{ emails_queue.id }}</td>
+                                <td><a href="{{ path('admin_newsletter_edit',{'id':emails_queue.newsletter.id}) }}">{{ emails_queue.newsletter.title }}</a></td>
+                                <td>{{ emails_queue.name }}</td>
+                                <td>{{ emails_queue.email }}</td>
+                                {% if emails_queue.send == 1 %}
+                                    <td>Tak</td>
+                                {% else %}
+                                    <td>Nie</td>
+                                {% endif %}
+                                <td>{{ emails_queue.createdDate|date('d-m-Y') }}</td>
+                                <td>{% if emails_queue.sendDate is not empty %}{{ emails_queue.sendDate|date('d-m-Y') }}{% endif %}</td>
+
+                            </tr>
+                        {% endfor %}
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation">
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </nav>
+            </div>
+        </div>
+        </div>
+        <!--/.col-->
+
+{% endblock %}
+

@@ -108,9 +108,18 @@
                     </ul>
                 </li>
 
+                <h3 class="menu-title">{{ 'newsletter.newsletter'|trans }}</h3>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ 'newsletter.newsletter'|trans }}
+                    </a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-bars"></i><a href="{{ path('admin_newsletters') }}">{{ 'newsletter.newsletters'|trans }}</a></li>
+                        <li><i class="fa fa-bars"></i><a href="{{ path('admin_newsletter_new') }}">{{ 'newsletter.new'|trans }}</a></li>
+                        <li><i class="fa fa-bars"></i><a href="{{ path('admin_emails_queue') }}">{{ 'email_queue.emails_queue'|trans }}</a></li>
+                    </ul>
+                </li>
             </ul>
-        </div><!-- /.navbar-collapse -->
+        </div>
     </nav>
-</aside><!-- /#left-panel -->
-
-<!-- Left Panel -->
+</aside>

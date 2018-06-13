@@ -1,0 +1,31 @@
+admin_newsletters:
+    path: /
+    controller: App\Controller\Admin\NewsletterController::newsletters
+
+admin_newsletters_index:
+    path: /paginator
+    controller: App\Controller\Admin\NewsletterController::newsletters
+
+admin_newsletter_new:
+    path: /new
+    controller: App\Controller\Admin\NewsletterController::new
+
+admin_newsletter_edit:
+    path: /edit/{id}
+    controller: App\Controller\Admin\NewsletterController::edit
+
+admin_newsletter_disable:
+    path: /disable/{id}/{status}
+    controller: App\Controller\Admin\NewsletterController::disable
+
+admin_newsletter_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\NewsletterController::delete
+
+admin_newsletter_add_to_queue:
+    path: /add_to_queue
+    controller: App\Controller\Admin\NewsletterController::addToQueue
+
+admin_newsletter_show:
+    path: /{id}
+    controller: App\Controller\Admin\NewsletterController::show
