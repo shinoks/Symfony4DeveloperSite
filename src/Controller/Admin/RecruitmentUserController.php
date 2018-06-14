@@ -223,7 +223,7 @@ class RecruitmentUserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $query = $em->getRepository(RecruitmentUsers::class)->findBy([],[
-            $request->query->get('sort','id')=>$request->query->get('direction','asc')
+            $request->query->get('sort','id')=>$request->query->get('direction','desc')
         ]);
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
