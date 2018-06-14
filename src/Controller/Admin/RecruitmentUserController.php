@@ -250,6 +250,24 @@ class RecruitmentUserController extends Controller
         return $this->file($recruitmentUser->getAbsoluteAgreementPath(),$recruitmentUser->getNumber());
     }
 
+    public function regenerateAgreement($recruitmentUserId)
+    {
+        $recruitmentUser = $this->getDoctrine()
+            ->getRepository(RecruitmentUsers::class)
+            ->find($recruitmentUserId);
+        if($recruitmentUser){
+            $this->generateAgreement($recruitmentUserId);
+            $this->session->getFlashBag()->add('success', 'Umowa została wygenerowana ponownie');
+
+            return $this->redirectToRoute('admin_recruitment_show',['id' => $recruitmentUser->getRecruitment()->getId()]);
+        }else {
+
+            $this->session->getFlashBag()->add('danger', 'Umowa nie została wygenerowana ponownie');
+        }
+
+        return $this->redirectToRoute('admin_recruitment_users');
+    }
+
     private function generateAgreement($recruitmentUserId)
     {
         $tcpdf = new TcpdfUtils();

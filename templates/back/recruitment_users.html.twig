@@ -79,7 +79,10 @@
                                 <td>{{ recruitment.amountOfInterest }} zł</td>
                                 <td>{{ recruitment.created|date('d-m-Y H:i:s') }}</td>
                                 {% if recruitment.agreementPath is not empty %}
-                                    <td><a target="_blank" href="{{ path('admin_recruitment_user_get_agreement', { 'id':recruitment.id }) }}" class="btn btn-default">Pobierz</a></td>
+                                    <td>
+                                        <a target="_blank" href="{{ path('admin_recruitment_user_get_agreement', { 'id':recruitment.id }) }}" class="btn btn-default">Pobierz</a><br/>
+                                        <a href="{{ path('admin_recruitment_user_regenerate_agreement', {'recruitment_user_id' : recruitment.id }) }}"><i class="ti ti-reload"></i><span class="small"> ponownie wygeneruj</span></a>
+                                    </td>
                                 {% else %}
                                     <td>{{ 'agreement.not_available'|trans }}</td>
                                 {% endif %}

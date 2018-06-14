@@ -1,0 +1,3 @@
+api_send_emails:
+    path: /send_email_queue
+    controller: App\Controller\Admin\EmailQueueController::sendEmails

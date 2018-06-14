@@ -2,7 +2,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\EmailQueue;
+use App\Utils\MailManagerUtils;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -84,5 +87,34 @@ class EmailQueueController extends Controller
         return $this->render('back/emails_queue.html.twig',array(
             'pagination'=> $pagination
         ));
+    }
+
+    public function sendEmails(\Swift_Mailer $mailer,EntityManagerInterface $emi)
+    {
+        $emails = $this->getDoctrine()
+            ->getRepository(EmailQueue::class)
+            ->findBy(['send' => 0],['id' => 'asc'],5);
+        $emailAddresses = 0;
+        if($emails){
+            $mailManager = new MailManagerUtils($emi);
+            foreach($emails as $email){
+                $mailBody = $email->getNewsletter()->getText();
+                $parameters['subject'] = $email->getNewsletter()->getTitle();
+                $to = $email->getEmail();
+
+                if($mailManager->sendEmail($mailBody, $parameters, $to, $mailer)){
+                    $email->setSend(1);
+                    $email->setSendDate(new \DateTime('now'));
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($email);
+                    $em->flush();
+                }
+
+                $emailAddresses = $emailAddresses +1;
+            }
+        }
+
+        return new JsonResponse($emailAddresses);
     }
 }

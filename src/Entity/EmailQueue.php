@@ -27,7 +27,7 @@ class EmailQueue
     private $email;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $send;
 

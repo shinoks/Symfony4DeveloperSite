@@ -13,10 +13,7 @@ class MailManagerUtils
 
     public function __construct(EntityManagerInterface $em)
     {
-        //$this->mailer = $mailer;
-        //$this->twig = $twig;
         $this->em = $em;
-        //$this->config = $this->em->getRepository(Config::class)->findOneBy(['id'=>'1']);
     }
 
     /**
