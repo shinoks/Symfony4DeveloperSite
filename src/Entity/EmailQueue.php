@@ -50,6 +50,7 @@ class EmailQueue
     public function __construct()
     {
         $this->createdDate = new \DateTime('now');
+        $this->send = 0;
     }
 
     /**

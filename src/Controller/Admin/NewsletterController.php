@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 use App\Entity\EmailQueue;
 use App\Entity\Newsletter;
 use App\Entity\RecruitmentUsers;
+use App\Entity\Subscriber;
 use App\Entity\User;
 use App\Form\NewsletterSendType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -208,19 +209,31 @@ class NewsletterController extends Controller
                         $users = $this->getDoctrine()
                             ->getRepository(User::class)
                             ->findAllActive();
-                        ;
 
                         foreach($users as $user){
-                        $emailQueue = new EmailQueue();
-                        $emailQueue->setName($user[0]->getFirstName() . ' ' . $user[0]->getFirstName());
-                        $emailQueue->setEmail($user[0]->getEmail());
-                        $emailQueue->setNewsletter($newsletter);
-                        $em->persist($emailQueue);
-                    }
+                            $emailQueue = new EmailQueue();
+                            $emailQueue->setName($user[0]->getFirstName() . ' ' . $user[0]->getFirstName());
+                            $emailQueue->setEmail($user[0]->getEmail());
+                            $emailQueue->setNewsletter($newsletter);
+                            $em->persist($emailQueue);
+                        }
+
+                        break;
+                    case 'newsletter_users':
+                        $users = $this->getDoctrine()
+                            ->getRepository(Subscriber::class)
+                            ->findAll();
+
+                        foreach($users as $user){
+                            $emailQueue = new EmailQueue();
+                            $emailQueue->setName($user->getName());
+                            $emailQueue->setEmail($user->getEmail());
+                            $emailQueue->setNewsletter($newsletter);
+                            $em->persist($emailQueue);
+                        }
 
                         break;
                 }
-
 
                 $em->flush();
 

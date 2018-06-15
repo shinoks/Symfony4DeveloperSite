@@ -27,7 +27,8 @@ class NewsletterSendType extends AbstractType
                 'expanded' => true,
                 'choices' => [
                     'Dla użytkowników z naboru' => 'recruitment',
-                    'Dla wszystkich użytkowników' => 'all_users'
+                    'Dla wszystkich użytkowników' => 'all_users',
+                    'Dla użytkowników newslettera' => 'newsletter_users'
                 ]
         ])
         ->add('recruitment', EntityType::class, array(

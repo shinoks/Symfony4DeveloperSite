@@ -227,5 +227,7 @@ newsletter:
     newsletters: Newslettery
     new: Nowy newsletter
     list: Lista newsletterów
+    send: Wyślij newsletter
+    add_to_queue: Dodaj do kolejki wysyłki
 email_queue:
     emails_queue: Kolejka maili do wysłania
