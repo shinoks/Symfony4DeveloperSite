@@ -99,10 +99,13 @@ class EmailQueueController extends Controller
             $mailManager = new MailManagerUtils($emi);
             foreach($emails as $email){
                 $mailBody = $email->getNewsletter()->getText();
+                $template = $this->renderView('emails/newsletter_base.html.twig',array(
+                    'mailBody'=> $mailBody
+                ));
                 $parameters['subject'] = $email->getNewsletter()->getTitle();
                 $to = $email->getEmail();
 
-                if($mailManager->sendEmail($mailBody, $parameters, $to, $mailer)){
+                if($mailManager->sendEmail($template, $parameters, $to, $mailer)){
                     $email->setSend(1);
                     $email->setSendDate(new \DateTime('now'));
 
