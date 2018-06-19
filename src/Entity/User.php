@@ -97,6 +97,16 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\Column(type="boolean")
      */
+    private $regulationFromOffer;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $regulationFromRegister;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
     private $marketingRegulations;
 
     /**
@@ -414,6 +424,38 @@ class User implements AdvancedUserInterface, \Serializable
     public function setRegulations($regulations)
     {
         $this->regulations = $regulations;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegulationFromRegister()
+    {
+        return $this->regulationFromRegister;
+    }
+
+    /**
+     * @param mixed $regulationFromRegister
+     */
+    public function setRegulationFromRegister($regulationFromRegister)
+    {
+        $this->regulationFromRegister = $regulationFromRegister;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegulationFromOffer()
+    {
+        return $this->regulationFromOffer;
+    }
+
+    /**
+     * @param mixed $regulationFromOffer
+     */
+    public function setRegulationFromOffer($regulationFromOffer)
+    {
+        $this->regulationFromOffer = $regulationFromOffer;
     }
 
     /**

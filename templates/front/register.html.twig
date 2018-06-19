@@ -143,14 +143,21 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        {{ form_errors(form.regulationFromRegister) }}
+                                        <div class="col-md-1">
+                                            {{ form_widget(form.regulationFromRegister) }}
+                                        </div>
+                                        <div class="col-md-11">
+                                            {{ form_label(form.regulationFromRegister) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         {{ form_errors(form.marketingRegulations) }}
-                                        <div class="col-md-4">
+                                        <div class="col-md-1">
                                             {{ form_widget(form.marketingRegulations) }}
                                         </div>
-                                        <div class="col-md-8">
-                                            <span style="font-size: small">
-                                                Wyrażam zgodę na przetwarzanie moich danych osobowych w rozumieniu ustawy z dnia 29 sierpnia 1997 roku o ochronie danych osobowych oraz ustawy z dnia 16 lipca 2004 roku Prawo telekomunikacyjne w celach marketingowych przez {{ config.config.title }} {{ config.config.address }} i oświadczam, iż podanie przeze mnie danych osobowych jest dobrowolne oraz iż zostałem poinformowany o prawie żądania dostępu do moich danych osobowych, ich zmiany oraz usunięcia.
-                                            </span>
+                                        <div class="col-md-11">
+                                            {{ form_label(form.marketingRegulations) }}
                                         </div>
                                     </div>
                                     <div class="row">
