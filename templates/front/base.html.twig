@@ -58,6 +58,19 @@
 {% endfor %}
 
 {% include 'front/addons/footer.html.twig' %}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                Nasza Polityka Prywatności oraz Regulamin są zgodne z aktualnymi przepisami o ochronie danych osobowych. W celu poprawy jakości naszych usług, korzystamy z plików cookies. Jeśli nie zmienisz ustawień pliki cookies będą zapisywane na Twoim urządzeniu.<br/>Czytaj więcej <a href="#">Regulamin</a>, <a href="#">Polityka Prywatności</a>
+            </div>
+            <div class="modal-footer">
+                <button id="modal_button_cookies" type="button" class="btn btn-primary">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {% block javascripts %}
     <script src="{{ asset('js/modernizr-2.6.2.min.js') }}"></script>
@@ -110,6 +123,20 @@
     </script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqAY5JVppReppK5gRNjFzDNV9PCjRiMUk&callback=initMap">
+    </script>
+    <script>
+        $(function() {
+            if( document.cookie.indexOf( "runOnce" ) < 0 ) {
+                $( "#myModal" ).fadeIn();
+                $( "#myModal" ).addClass('in');
+            }
+            $("#modal_button_cookies").click(function(){
+                    $( "#myModal" ).removeClass('in');
+                    $( "#myModal" ).fadeOut();
+                    document.cookie = "runOnce=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+                }
+            );
+        })
     </script>
 {% endblock %}
 
