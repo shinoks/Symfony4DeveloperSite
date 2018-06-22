@@ -2,6 +2,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -13,8 +14,8 @@ class PasswordResetType extends AbstractType
     {
         $builder
         ->add('email',EmailType::class,['label'=>'email'])
-        ->add('pesel',TextType::class,['label'=>'pesel'])
+        ->add('birthDate',BirthdayType::class,['label'=>'birth_date'])
 
-        ->add('save', SubmitType::class);
+        ->add('save', SubmitType::class,['label' => 'send']);
     }
 }

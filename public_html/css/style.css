@@ -3127,7 +3127,7 @@ ul.ul-blue-dots li::before {
     content: "• ";
     color: #242a6d;
 }
-#user_birthDate_year,#user_birthDate_day,#user_birthDate_month{
+#password_reset_birthDate_year,#password_reset_birthDate_day,#password_reset_birthDate_month,#user_birthDate_year,#user_birthDate_day,#user_birthDate_month{
     width: 32.4%;
     display: inline;
     margin-bottom: 15px;

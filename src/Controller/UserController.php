@@ -156,7 +156,7 @@ class UserController extends Controller
             try{
                 $userFound = $this->getDoctrine()
                     ->getRepository(User::class)
-                    ->findOneBy((['email' => $user['email'], 'pesel' => $user['pesel']]));
+                    ->findOneBy((['email' => $user['email'], 'birthDate' => $user['birthDate']]));
             }catch(UsernameNotFoundException $exception)
             {
                 $this->session->getFlashBag()->add('success', 'Link do zmiany hasła został wysłany');
