@@ -26,7 +26,7 @@ class NewsletterSendType extends AbstractType
                 'multiple' => false,
                 'expanded' => true,
                 'choices' => [
-                    'Dla użytkowników z naboru' => 'recruitment',
+                    'Dla użytkowników z inwestycji' => 'recruitment',
                     'Dla wszystkich użytkowników' => 'all_users',
                     'Dla użytkowników newslettera' => 'newsletter_users'
                 ]

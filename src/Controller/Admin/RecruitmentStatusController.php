@@ -68,7 +68,7 @@ class RecruitmentStatusController extends Controller
             $em->persist($recruitmentStatus);
             $em->flush();
 
-            $this->session->getFlashBag()->add('success', 'Status naboru został zmieniony');
+            $this->session->getFlashBag()->add('success', 'Status inwestycji został zmieniony');
 
             return $this->redirectToRoute('admin_recruitment_status_edit',array('id'=>$recruitmentStatus->getId()));
         }
@@ -98,7 +98,7 @@ class RecruitmentStatusController extends Controller
                 $em->persist($recruitmentStatus);
                 $em->flush();
 
-                $this->session->getFlashBag()->add('success', 'Status naboru został zmieniony');
+                $this->session->getFlashBag()->add('success', 'Status inwestycji został zmieniony');
 
                 return $this->render('back/recruitment_status_edit.html.twig',array(
                     'recruitmentStatus'=> $recruitmentStatus,
@@ -112,7 +112,7 @@ class RecruitmentStatusController extends Controller
             ));
         }else {
 
-            $this->session->getFlashBag()->add('danger', 'Status naboru nie został znaleziony');
+            $this->session->getFlashBag()->add('danger', 'Status inwestycji nie został znaleziony');
 
             return $this->redirectToRoute('admin_recruitmentStatuses');
         }
@@ -133,7 +133,7 @@ class RecruitmentStatusController extends Controller
         $em->persist($recruitmentStatus);
         $em->flush();
 
-        $this->session->getFlashBag()->add('success', 'Status naboru został wyłączony');
+        $this->session->getFlashBag()->add('success', 'Status inwestycji został wyłączony');
 
         return $this->redirectToRoute('admin_recruitmentStatuses');
     }
@@ -151,7 +151,7 @@ class RecruitmentStatusController extends Controller
         $em->remove($recruitmentStatus);
         $em->flush();
 
-        $this->session->getFlashBag()->add('success', 'Status naboru został usunięty');
+        $this->session->getFlashBag()->add('success', 'Status inwestycji został usunięty');
 
         return $this->redirectToRoute('admin_recruitmentStatuses');
     }

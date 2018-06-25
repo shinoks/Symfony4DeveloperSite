@@ -83,7 +83,7 @@ class RecruitmentController extends Controller
                 $em->persist($recruitment);
                 $em->flush();
 
-                $this->session->getFlashBag()->add('success', 'Nabór został zmieniony');
+                $this->session->getFlashBag()->add('success', 'Inwestycja została zmieniony');
 
                 return $this->redirectToRoute('admin_recruitment_edit',['id'=> $id]);
             }
@@ -93,7 +93,7 @@ class RecruitmentController extends Controller
                 'form'=> $form->createView()
             ));
         }else {
-            $this->session->getFlashBag()->add('danger', 'Nabór nie została znaleziona');
+            $this->session->getFlashBag()->add('danger', 'inwestycja nie została znaleziona');
 
             return $this->redirectToRoute('admin_recruitments');
         }
@@ -136,7 +136,7 @@ class RecruitmentController extends Controller
                     foreach($admins as $admin){
                         $name = $admin->getFirstName() . ' ' .$admin->getLastName();
                         $mailBodyPersonalized = str_replace('user',$name, $mailBody);
-                        $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status naboru uległ zmianie'],$admin->getEmail(),$mailer,NULL);
+                        $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status inwestycji uległ zmianie'],$admin->getEmail(),$mailer,NULL);
                     }
                 }
                 if($recruitmentStatus->getIsMailedToUsers() == 1){
@@ -158,18 +158,18 @@ class RecruitmentController extends Controller
                     foreach($users as $user){
                         $name = $user->getFirstName() . ' ' .$user->getLastName();
                         $mailBodyPersonalized = str_replace('user',$name, $mailBody);
-                        $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status naboru uległ zmianie'],$user->getEmail(),$mailer,NULL);
+                        $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Status inwestycji uległ zmianie'],$user->getEmail(),$mailer,NULL);
                     }
                 }
-                $this->session->getFlashBag()->add('success', 'Status naboru został zmieniony');
+                $this->session->getFlashBag()->add('success', 'Status inwestycja został zmieniony');
 
                 return $this->redirectToRoute('admin_recruitment_show',['id' => $recruitment->getId()]);
 
             }else {
-                $this->session->getFlashBag()->add('danger', 'Status naboru nie został zmieniony');
+                $this->session->getFlashBag()->add('danger', 'Status inwestycji nie został zmieniony');
             }
         }else {
-            $this->session->getFlashBag()->add('danger', 'Status naboru nie został zmieniony');
+            $this->session->getFlashBag()->add('danger', 'Status inwestycji nie został zmieniony');
         }
 
         return $this->redirectToRoute('admin_recruitment');
@@ -214,7 +214,7 @@ class RecruitmentController extends Controller
                     $name = $user->getFirstName() . ' ' .$user->getLastName();
                     $mailBodyPersonalized = str_replace('user',$name, $mailBody);
 
-                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Nowy nabór'],$user->getEmail(),$mailer);
+                    $mailManager->sendEmail($mailBodyPersonalized,['subject' => '4eliteinvestments - Nowa inwestycja'],$user->getEmail(),$mailer);
                 }
             }
 
@@ -259,7 +259,7 @@ class RecruitmentController extends Controller
         $em->remove($recruitment);
         $em->flush();
 
-        $this->session->getFlashBag()->add('success', 'Nabór został usunięta');
+        $this->session->getFlashBag()->add('success', 'Inwestycja został usunięta');
 
         return $this->redirectToRoute('admin_recruitments');
     }

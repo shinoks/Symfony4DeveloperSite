@@ -77,7 +77,7 @@ class RecruitmentUserController extends Controller
                 $em->persist($recruitmentUser);
                 $em->flush();
 
-                $this->session->getFlashBag()->add('success', 'Nabór został zmieniony');
+                $this->session->getFlashBag()->add('success', 'Inwestycja została zmieniony');
 
                 return $this->redirectToRoute('admin_recruitment_user_edit',['id'=> $id]);
             }
@@ -87,7 +87,7 @@ class RecruitmentUserController extends Controller
                 'form'=> $form->createView()
             ));
         }else {
-            $this->session->getFlashBag()->add('danger', 'Nabór nie została znaleziona');
+            $this->session->getFlashBag()->add('danger', 'Inwestycja nie została znaleziona');
 
             return $this->redirectToRoute('admin_recruitment_users');
         }
@@ -211,7 +211,7 @@ class RecruitmentUserController extends Controller
         $em->remove($recruitmentUser);
         $em->flush();
 
-        $this->session->getFlashBag()->add('success', 'Nabór został usunięty');
+        $this->session->getFlashBag()->add('success', 'Inwestycja została usunięty');
 
         return $this->redirectToRoute('admin_recruitment_users');
     }

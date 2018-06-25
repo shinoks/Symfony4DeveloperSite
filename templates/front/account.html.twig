@@ -47,14 +47,13 @@
                                     <table class="table table-bordered">
                                         <thead class="table-head">
                                         <tr>
-                                            <th>{{ 'name'|trans }}</th>
+                                            <th>{{ 'recruitment_name'|trans }}</th>
                                             <th>{{ 'desired_amount'|trans }}</th>
-                                            <th>{{ 'investment_period'|trans }}</th>
+                                            <th>{{ 'investment_period_max'|trans }}</th>
                                             <th>{{ 'interest'|trans }}</th>
-                                            <th>{{ 'investment_type'|trans }}</th>
                                             <th>{{ 'rooms'|trans }}</th>
-                                            <th>{{ 'city'|trans }}</th>
-                                            <th>{{ 'make_an_offer'|trans }}</th>
+                                            <th>{{ 'recruitment_localization'|trans }}</th>
+                                            <th>{{ 'make_an_loan_offer'|trans }}</th>
                                         </tr>
                                         </thead>
                                         <tbody class="table-content">
@@ -64,11 +63,10 @@
                                                 <td>{{ recruitment.0.desiredAmount - recruitment['declaredSum'] }} zł</td>
                                                 <td>{{ recruitment.0.investmentPeriod }} msc</td>
                                                 <td>{{ recruitment.0.interest }} %</td>
-                                                <td>{{ recruitment.0.investmentType }}</td>
                                                 <td>{{ recruitment.0.rooms }}</td>
                                                 <td>{{ recruitment.0.city }}</td>
                                                 <td>{%  if recruitment['declaredSum'] < recruitment.0.desiredAmount %}
-                                                    <a class="btn btn-warning" href="{{ path('front_user_recruitment_user_new',{'recruitmentId': recruitment.0.id }) }}">{{ 'proposal'|trans }}</a>
+                                                    <a class="btn btn-warning" href="{{ path('front_user_recruitment_user_new',{'recruitmentId': recruitment.0.id }) }}">{{ 'make_an_offer'|trans }}</a>
                                                     {% else %}
                                                     Kwota zebrana
                                                     {% endif %}
@@ -88,14 +86,15 @@
                                         <tr>
                                             <th>{{ 'recruitment'|trans }}<br/><span style="font-size: 10px;">{{ 'click_for_detail'|trans }}</span> </th>
                                             <th>{{ 'status'|trans }}</th>
-                                            <th>{{ 'declared_amount'|trans }}</th>
+                                            <th>{{ 'loan.ammount'|trans }}</th>
                                             <th>{{ 'payed_amount'|trans }}</th>
-                                            <th>{{ 'investment_period'|trans }}</th>
+                                            <th>{{ 'investment_period_max'|trans }}</th>
                                             <th>{{ 'interest'|trans }}</th>
                                             <th>{{ 'amount_of_days'|trans }}</th>
                                             <th>{{ 'amount_of_interest'|trans }}</th>
-                                            <th>{{ 'created'|trans }}</th>
-                                            <th>{{ 'agreement.agreement'|trans }}</th>
+                                            <th>{{ 'recruitment_user_created'|trans }}</th>
+                                            <th>{{ 'recruitment_user_accepted'|trans }}</th>
+                                            <th>{{ 'agreement.conditions'|trans }}</th>
                                         </tr>
                                         </thead>
                                         {% for user in recruitmentUserOffers %}
@@ -109,6 +108,7 @@
                                                 <td>{% if user.status.isDisabling == 1 %}---{% else %}{{ user.daysOfInvestment }}{% endif %}</td>
                                                 <td>{% if user.status.isDisabling == 1 %}---{% else %}{{ user.amountOfInterest }} zł{% endif %}</td>
                                                 <td>{{ user.created|date('d-m-Y H:i:s') }}</td>
+                                                <td>{% if user.acceptedDate is empty %}{{ 'recruitment_user_not_accepted'|trans }}{% else %}{{ user.acceptedDate|date('d-m-Y H:i:s') }}{% endif %}</td>
                                                 <td>{% if user.status.isDisabling == 1 %}---{% else %}
                                                         {% if user.agreementPath is not null %}
                                                             <a href="{{ path('admin_user_account_recruitment_user_get_agreement',{'id':user.id}) }}" class="btn btn-finish">{{ 'agreement.download_agreement'|trans }}</a>

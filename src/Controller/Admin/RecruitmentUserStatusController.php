@@ -68,7 +68,7 @@ class RecruitmentUserStatusController extends Controller
             $em->persist($recruitmentUserStatus);
             $em->flush();
 
-            $this->session->getFlashBag()->add('success', 'Status uczestnika naboru został zmieniony');
+            $this->session->getFlashBag()->add('success', 'Status uczestnika inwestycji został zmieniony');
 
             return $this->redirectToRoute('admin_recruitment_user_status_edit',array('id'=>$recruitmentUserStatus->getId()));
         }
@@ -98,7 +98,7 @@ class RecruitmentUserStatusController extends Controller
                 $em->persist($recruitmentUserStatus);
                 $em->flush();
 
-                $this->session->getFlashBag()->add('success', 'Status uczestnika naboru został zmieniony');
+                $this->session->getFlashBag()->add('success', 'Status uczestnika inwestycji został zmieniony');
 
                 return $this->render('back/recruitment_user_status_edit.html.twig',array(
                     'recruitmentUserStatus'=> $recruitmentUserStatus,
@@ -112,7 +112,7 @@ class RecruitmentUserStatusController extends Controller
             ));
         }else {
 
-            $this->session->getFlashBag()->add('danger', 'Status uczestnika naboru nie został znaleziony');
+            $this->session->getFlashBag()->add('danger', 'Status uczestnika inwestycji nie został znaleziony');
 
             return $this->redirectToRoute('admin_recruitment_user_statuses');
         }
@@ -133,7 +133,7 @@ class RecruitmentUserStatusController extends Controller
         $em->persist($recruitmentUserStatus);
         $em->flush();
 
-        $this->session->getFlashBag()->add('success', 'Status uczestnika naboru został wyłączony');
+        $this->session->getFlashBag()->add('success', 'Status uczestnika inwestycji został wyłączony');
 
         return $this->redirectToRoute('admin_recruitment_user_statuses');
     }
@@ -151,7 +151,7 @@ class RecruitmentUserStatusController extends Controller
         $em->remove($recruitmentUserStatus);
         $em->flush();
 
-        $this->session->getFlashBag()->add('success', 'Status uczestnika naboru został usunięty');
+        $this->session->getFlashBag()->add('success', 'Status uczestnika inwestycji został usunięty');
 
         return $this->redirectToRoute('admin_recruitmentUserStatuses');
     }

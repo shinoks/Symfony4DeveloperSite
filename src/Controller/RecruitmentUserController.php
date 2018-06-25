@@ -65,7 +65,7 @@ class RecruitmentUserController extends Controller
                 $recruitmentUsers->setInterest($recruitment[0]->getInterest());
                 $recruitmentUsers->setInvestmentPeriod($recruitment[0]->getInvestmentPeriod());
                 if($maxOfferAmount<$recruitmentUsers->getDeclaredAmount()){
-                    throw new \ErrorException('Zadeklarowana kwota jest większa od pozostałej wolnej kwoty w naborze');
+                    throw new \ErrorException('Zadeklarowana kwota jest większa od pozostałej wolnej kwoty w inwestycji');
                 }
 
                 $mailManager = new MailManagerUtils($emi);
@@ -92,10 +92,10 @@ class RecruitmentUserController extends Controller
                     $mailBody = $this->renderView('emails/recruitment_declared_amount_reached.html.twig',[
                         'recruitment' => $recruitment,
                     ]);
-                    $mailManager->sendEmail($mailBody,['subject' => 'Kwota naboru ' . $recruitment[0]->getNumber() . 'została zebrana - '.$config->getTitle()],$config->getEmail(),$mailer);
+                    $mailManager->sendEmail($mailBody,['subject' => 'Kwota inwestycji ' . $recruitment[0]->getNumber() . 'została zebrana - '.$config->getTitle()],$config->getEmail(),$mailer);
                 }
 
-                $this->session->getFlashBag()->add('success', 'Oferta na nabór została dodana');
+                $this->session->getFlashBag()->add('success', 'Oferta na inwestycje została dodana');
 
                 return $this->redirectToRoute('front_user_account');
             }

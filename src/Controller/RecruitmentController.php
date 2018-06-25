@@ -44,10 +44,10 @@ class RecruitmentController extends Controller
             ->getRecruitmentUsersOfferByUserAndRecruitment($this->getUser(),$id);
 
         if(empty($recruitment) || $recruitment->getIsActive() == 0){
-            throw new NotFoundResourceException('Brak dostępu do wybranego naboru');
+            throw new NotFoundResourceException('Brak dostępu do wybraneej inwestycji');
         }
         if(count($recruitmentUsers)<1){
-            throw new NotFoundResourceException('Nie bierzesz udziału w danym naborze naboru');
+            throw new NotFoundResourceException('Nie bierzesz udziału w danej inwestycji');
         }
 
         return $this->render('front/recruitment_show.html.twig',array(
