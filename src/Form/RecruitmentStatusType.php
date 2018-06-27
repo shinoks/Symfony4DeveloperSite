@@ -14,9 +14,9 @@ class RecruitmentStatusType extends AbstractType
         $builder
             ->add('name',TextType::class,['label'=>'name'])
             ->add('isMailedToAdmin',CheckboxType::class, ['label'=>'is_mailed_to_admin','required' => false ])
-            ->add('mailAdminTemplate',TextType::class,['label'=>'mail_admin_template'])
+            ->add('mailAdminTemplate',TextType::class,['label'=>'mail_admin_template'],'required' => false )
             ->add('isMailedToUsers',CheckboxType::class, ['label'=>'is_mailed_to_users','required' => false ])
-            ->add('mailUsersTemplate',TextType::class,['label'=>'mail_users_template'])
+            ->add('mailUsersTemplate',TextType::class,['label'=>'mail_users_template'],'required' => false )
             ->add('isVisibleToUsers',CheckboxType::class, ['label'=>'is_visible_to_users','required' => false ])
             ->add('isActive',CheckboxType::class, ['label'=>'is_active','required' => false ])
 
