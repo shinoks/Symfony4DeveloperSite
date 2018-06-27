@@ -159,6 +159,75 @@ class DefaultControllerTest extends WebTestCase
         $this->assertSame('Typy modułów', $crawler->filter('h1')->text());
     }
 
+    public function testAdminRecruitmentPage()
+    {
+        $this->logIn();
+        $this->client->request('GET', '/admin/recruitment');
+        $crawler = $this->client->followRedirect();
+        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertSame('Inwestycje', $crawler->filter('h1')->text());
+    }
+
+    public function testAdminRecruitmentNewPage()
+    {
+        $this->logIn();
+        $crawler = $this->client->request('GET', '/admin/recruitment/new');
+        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertSame('Inwestycja', $crawler->filter('h1')->text());
+    }
+
+    public function testAdminRecruitmentStatusPage()
+    {
+        $this->logIn();
+        $this->client->request('GET', '/admin/recruitment_status');
+        $crawler = $this->client->followRedirect();
+        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertSame('Statusy inwestycji', $crawler->filter('h1')->text());
+    }
+
+    public function testAdminRecruitmentStatusNewPage()
+    {
+        $this->logIn();
+        $crawler =$this->client->request('GET', '/admin/recruitment_status/new');
+        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertSame('Status inwestycji', $crawler->filter('h1')->text());
+    }
+
+    public function testAdminRecruitmentUserPage()
+    {
+        $this->logIn();
+        $this->client->request('GET', '/admin/recruitment_user');
+        $crawler = $this->client->followRedirect();
+        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertSame('Oferty inwestycji', $crawler->filter('h1')->text());
+    }
+
+    public function testAdminRecruitmentUserStatusPage()
+    {
+        $this->logIn();
+        $this->client->request('GET', '/admin/recruitment_user_status');
+        $crawler = $this->client->followRedirect();
+        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertSame('Statusy dla ofert', $crawler->filter('h1')->text());
+    }
+
+    public function testAdminRecruitmentUserStatusNewPage()
+    {
+        $this->logIn();
+        $crawler =$this->client->request('GET', '/admin/recruitment_user_status/new');
+        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertSame('Status ofert', $crawler->filter('h1')->text());
+    }
+
+    public function testAdminNewsletterPage()
+    {
+        $this->logIn();
+        $this->client->request('GET', '/admin/newsletter');
+        $crawler = $this->client->followRedirect();
+        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertSame('Lista newsletterów', $crawler->filter('h1')->text());
+    }
+
     private function logIn()
     {
         $session = $this->client->getContainer()->get('session');

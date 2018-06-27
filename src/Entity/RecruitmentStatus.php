@@ -62,7 +62,6 @@ class RecruitmentStatus
     public function __construct()
     {
         $this->recruitments = new ArrayCollection();
-        $this->isVisibleToUsers = 1;
     }
 
     /**

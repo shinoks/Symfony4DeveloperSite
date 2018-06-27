@@ -164,6 +164,7 @@ recruitment_user_status_edit: Edycja statusu oferty do inwestycji
 recruitment_user_created: Data złożenia oferty
 recruitment_user_not_accepted: Oferta nie zaakceptowana
 recruitment_user_accepted: Oferta zaakceptowana
+recruitment_user_status: Status ofert
 agreement:
     agreement: Umowa
     conditions: Warunki oferty pożyczki
