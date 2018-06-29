@@ -15,7 +15,7 @@
             {%  else %}
             <div class="col-md-12">
                 <div class="box-for overflow">
-                    <div class="col-md-12 col-xs-12 login-blocks">
+                    <div class="col-md-6 col-xs-6 login-blocks well grey">
                         <h2>{{ 'login'|trans }} : </h2>
                         {% if error %}
                             <div   class="bg-warning">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -37,6 +37,9 @@
                         {{ 'do_not_have_an_account'|trans }}<br/> <a href="{{ path('register') }}" class="btn btn-success">{{ 'register'|trans }}</a>
                         <br/>
                             <a href="{{ path('reset_password') }}">{{ 'password.dont_remember'|trans }}</a>
+                    </div>
+                    <div class="col-md-6 col-xs-6">
+
                     </div>
                 </div>
             </div>

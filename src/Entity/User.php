@@ -95,7 +95,7 @@ class User implements AdvancedUserInterface, \Serializable
     private $regulations;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $regulationFromOffer;
 
