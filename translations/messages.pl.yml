@@ -192,6 +192,7 @@ investment_period: Czas inwestycji
 investment_period_max: Maksymalny czas zwrotu pożyczki
 investment_type: Typ inwestycji
 bank_account: Nr konta
+bank_account_number: Numer konta bankowego
 click_for_detail: Wejdź w szczegóły
 is_visible_to_users: Widoczny dla użytkowników
 is_mailed_to_admin: Wysyłany do adminów ?

@@ -45,6 +45,12 @@
                                 {{ config.config.email }}
                             </div>
                         </div>
+                        {% if config.config.bankAccount is not empty %}
+                            <div class="row">
+                                <h4>{{ 'bank_account_number'|trans }}:</h4>
+                                {{ config.config.bankAccount }}
+                            </div>
+                        {% endif %}
                         <hr>
 
                         <hr>

@@ -61,6 +61,11 @@ class Config
     private $description;
 
     /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $bankAccount;
+
+    /**
      * @ORM\Column(type="string", length=200)
      */
     private $keywords;
@@ -196,6 +201,22 @@ class Config
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBankAccount()
+    {
+        return $this->bankAccount;
+    }
+
+    /**
+     * @param mixed $bankAccount
+     */
+    public function setBankAccount($bankAccount): void
+    {
+        $this->bankAccount = $bankAccount;
     }
 
     /**
