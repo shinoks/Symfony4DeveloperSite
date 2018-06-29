@@ -61,7 +61,7 @@ class Config
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=30, nullable=true)
      */
     private $bankAccount;
 

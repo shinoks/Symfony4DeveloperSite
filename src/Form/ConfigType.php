@@ -22,7 +22,7 @@ class ConfigType extends AbstractType
         ->add('logoAdmin',TextType::class,['label'=>'logo_for_admin_site'])
         ->add('regulationsUrl',TextType::class,['label'=>'regulations_url'])
         ->add('privacyPolicyUrl',TextType::class,['label'=>'privacy_policy_url'])
-        ->add('bankAccount',TextType::class,['label'=>'bank_account'])
+        ->add('bankAccount',TextType::class,['label'=>'bank_account', 'required' => false])
         ->add('description',TextareaType::class,['label'=>'description'])
         ->add('keywords',TextareaType::class,['label'=>'keywords'])
         ->add('footer',TextType::class,['label'=>'footer'])
