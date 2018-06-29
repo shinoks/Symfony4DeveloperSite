@@ -2458,7 +2458,7 @@ count-area
     color: #D27E04;  
 }
 .box-for{
-    padding: 10px 0px;
+    padding: 10px 10px;
     border: 1px solid #EEE;
     transition: all 0.2s ease 0s;
     box-shadow: none;

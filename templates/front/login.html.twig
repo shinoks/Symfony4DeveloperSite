@@ -38,8 +38,9 @@
                         <br/>
                             <a href="{{ path('reset_password') }}">{{ 'password.dont_remember'|trans }}</a>
                     </div>
-                    <div class="col-md-6 col-xs-6">
-
+                    <div class="col-md-6 col-xs-6 login-blocks well grey center">
+                        <h2>{{ 'do_not_have_an_account'|trans }}</h2><br/>
+                        <a href="{{ path('register') }}" class="btn btn-success">{{ 'register'|trans }}</a>
                     </div>
                 </div>
             </div>
