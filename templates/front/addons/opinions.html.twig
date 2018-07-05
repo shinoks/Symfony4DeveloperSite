@@ -9,7 +9,6 @@
             <div class="col-md-12 col-xs-12 percent-blocks m-main" data-waypoint-scroll="true">
                 <div class="row">
                     <div class="row">
-                        <div class="well">
                             {% for opinion in latestOpinions %}
                                 <div class="opinion well">
                                     <b>{{ opinion.title }}</b><br/>
@@ -19,7 +18,6 @@
                                     </div>
                                 </div>
                             {% endfor %}
-                        </div>
                     </div>
                         <div class="row">
                             {% form_theme form 'form/default_user.html.twig' %}
