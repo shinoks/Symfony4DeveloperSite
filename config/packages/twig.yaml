@@ -7,3 +7,4 @@ twig:
         news: '@App\Service\News'
         menu: '@App\Service\Menu'
         social: '@App\Service\Social'
+        infoCount: '@App\Utils\InfoCountUtils'

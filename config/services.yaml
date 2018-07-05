@@ -49,6 +49,9 @@ services:
     App\Utils\MailManager:
         arguments: ['@doctrine.orm.entity_manager']
 
+    App\Utils\InfoCount:
+        arguments: ['@doctrine.orm.entity_manager']
+
     App\Utils\RecaptchaUtils:
         arguments:
           $recaptchaSecretKey: '%recaptcha_secret_key%'
