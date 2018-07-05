@@ -223,7 +223,7 @@ class UserController extends Controller
                 return $this->redirectToRoute('login');
             }
 
-            return $this->render('front/password_reset.html.twig',array(
+            return $this->render('front/password_new.html.twig',array(
                 'form'=> $form->createView(),
                 'user' => $user
             ));

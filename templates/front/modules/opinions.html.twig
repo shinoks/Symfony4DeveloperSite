@@ -1,0 +1,3 @@
+{% set currentPath = app.request.attributes.get('_route') %}
+{{ render(controller('App\\Controller\\OpinionsController::getLatestOpinions',{'limit':7,'route':currentPath})) }}
+{{ content|raw }}

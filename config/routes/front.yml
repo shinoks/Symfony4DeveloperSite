@@ -34,10 +34,6 @@ enable_subscriber:
     path: /enable_subscriber/{h}
     controller: App\Controller\SubscriberController::enable
 
-front_article_resource:
-    resource: "front/article.yml"
-    prefix: /article
-
 front_user_resource:
     resource: "front/user.yml"
     prefix: /user
@@ -71,5 +67,13 @@ front_subscribe:
     resource: "front/subscriber.yml"
     prefix: /subscriber
 
+front_opinions:
+    resource: "front/opinions.yml"
+    prefix: /opinions
+
 front_menu_resource:
     resource: "front/menu.yml"
+
+front_article_resource:
+    resource: "front/article.yml"
+    prefix: /article

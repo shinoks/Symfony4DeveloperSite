@@ -1,0 +1,19 @@
+admin_opinions:
+    path: /
+    controller: App\Controller\Admin\OpinionsController::opinions
+
+admin_opinions_index:
+    path: /paginator
+    controller: App\Controller\Admin\OpinionsController::opinions
+
+admin_opinions_edit:
+    path: /{id}
+    controller: App\Controller\Admin\OpinionsController::edit
+
+admin_opinions_disable:
+    path: /disable/{id}/{status}
+    controller: App\Controller\Admin\OpinionsController::disable
+
+admin_opinions_delete:
+    path: /delete/{id}
+    controller: App\Controller\Admin\OpinionsController::delete

@@ -140,6 +140,11 @@ class User implements AdvancedUserInterface, \Serializable
     private $comments;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Opinions", mappedBy="user")
+     */
+    private $opinions;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\RecruitmentUsers", mappedBy="user")
      */
     private $recruitmentUsers;
@@ -528,17 +533,17 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getRecruitment()
+    public function getOpinions()
     {
-        return $this->recruitment;
+        return $this->opinions;
     }
 
     /**
-     * @param mixed $recruitment
+     * @param mixed $opinions
      */
-    public function setRecruitment($recruitment)
+    public function setOpinions($opinions): void
     {
-        $this->recruitment = $recruitment;
+        $this->opinions = $opinions;
     }
 
     /**

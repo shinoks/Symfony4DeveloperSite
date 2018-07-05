@@ -1,0 +1,78 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/leftPanel.html.twig' %}
+
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        {% include 'back/header.html.twig' %}
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>{{ 'opinions.list'|trans }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active"><a href="{{ path('admin_opinions') }}">{{ 'opinions.opinions'|trans }}</a> > {{ 'opinions.list'|trans }}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'back/flashMessages.html.twig' %}
+
+        <div class="content mt-3">
+            <div class="animated fade-in">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>{{ knp_pagination_sortable(pagination, 'Id', 'id') }}</th>
+                            <th{% if pagination.isSorted('title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nazwa', 'name') }}</th>
+                            <th{% if pagination.isSorted('text') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Treść', 'text') }}</th>
+                            <th{% if pagination.isSorted('created') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Data utworzenia', 'created') }}</th>
+                            <th{% if pagination.isSorted('isActive') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'is_active'|trans, 'isActive') }}</th>
+                            <th>Usuń</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for opinion in pagination %}
+                            <tr>
+                                <td>{{ opinion.id }}</td>
+                                <td><a href="{{ path('admin_opinions_edit',{'id':opinion.id}) }}">{{ opinion.text[:50] }} ...</a></td>
+                                <td>{{ opinion.created|date('d-m-Y H:i:s') }}</td>
+                                {% if opinion.isActive == 1 %}
+                                    <td><a href="{{ path('admin_opinions_disable', { 'id':opinion.id,'status':0 }) }}" class="btn btn-warning">Wyłącz</a></td>
+                                {% else %}
+                                    <td><a href="{{ path('admin_opinions_disable', { 'id':opinion.id,'status':1 }) }}" class="btn btn-success">Włącz</a></td>
+                                {% endif %}
+                                <td><a href="{{ path('admin_opinions_delete', { 'id':opinion.id }) }}" class="btn btn-danger">Usuń</a></td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation">
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+                </nav>
+            </div>
+        </div>
+        </div>
+        <!--/.col-->
+
+{% endblock %}
+

@@ -1,0 +1,10 @@
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        {% include 'front/addons/flashMessages.html.twig' %}
+    </div>
+    {% for opinions as opinion %}
+        <div class="well">{{ opinion.nick }}<br/>>{{ opinion.title }}</div>
+    {% endfor %}
+{% endblock %}

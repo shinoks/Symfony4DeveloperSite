@@ -120,6 +120,15 @@
                         <li><i class="fa fa-bars"></i><a href="{{ path('admin_emails_queue') }}">{{ 'email_queue.emails_queue'|trans }}</a></li>
                     </ul>
                 </li>
+                <h3 class="menu-title">{{ 'opinions.opinions'|trans }}</h3>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ 'opinions.opinions'|trans }}
+                    </a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-bars"></i><a href="{{ path('admin_opinions') }}">{{ 'opinions.opinions'|trans }}</a></li>
+                        </ul>
+                </li>
             </ul>
         </div>
     </nav>

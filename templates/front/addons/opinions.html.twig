@@ -1,0 +1,55 @@
+<div class="count-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                <h2>{{ 'opinions.opinions'|trans }}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-xs-12 percent-blocks m-main" data-waypoint-scroll="true">
+                <div class="row">
+                    <div class="row">
+                        <div class="well">
+                            {% for opinion in latestOpinions %}
+                                <div class="opinion well">
+                                    <b>{{ opinion.title }}</b><br/>
+                                    <i>{{ opinion.nickname }}</i><br/>
+                                    <div class="opinion_text">
+                                        {{ opinion.text }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                        <div class="row">
+                            {% form_theme form 'form/default_user.html.twig' %}
+                            {{ form_start(form, {'action': path('front_opinions', {'route':route})}) }}
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    {{ form_label(form.nickname) }}
+                                    {{ form_widget(form.nickname) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    {{ form_label(form.title) }}
+                                    {{ form_widget(form.title) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    {{ form_label(form.text) }}
+                                    {{ form_widget(form.text) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-12 text-center">
+                                {{ form_widget(form.save) }}
+                            </div>
+                        </div>
+                        <input type="hidden" name="route" value="{{ route }}"/>
+                        {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

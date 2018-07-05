@@ -106,3 +106,7 @@ admin_email_queue:
     resource: "admin/email_queue.yml"
     prefix: /email_queue
 
+admin_opinions:
+    resource: "admin/opinions.yml"
+    prefix: /opinions
+
