@@ -282,7 +282,7 @@ class Menu
      */
     public function getInMain()
     {
-        return $this->isMain;
+        return $this->inMain;
     }
 
     /**

@@ -122,6 +122,8 @@ class MenuController extends Controller
             default:
                 $href = false;
         }
+        $href = str_replace('','_',$href);
+        $href = str_replace('%20','_',$href);
 
         return $href;
     }
